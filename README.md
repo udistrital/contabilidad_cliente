@@ -1,4 +1,4 @@
-# :ledger: Cliente Subsistema de Presupuesto
+# :ledger: Cliente Subsistema de Contabilidad
 
  En este repositorio se define la tecnología que se renderizara del lado del cliente para el subsistema de Presupuesto del Sistema Financiero KRONOS.
 
