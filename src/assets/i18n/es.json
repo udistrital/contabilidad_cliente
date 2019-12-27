@@ -194,6 +194,14 @@
     "saldo_rubro": "Saldo del rubro",
     "relacionado": "relacionado"
   },
+  "COMPROBANTE":{
+    "descripcion_tipo": "En esta sección podrá agregar, modificar, eliminar tipos de comprobante",
+    "descripcion": "En esta sección podrá agregar, modificar, eliminar comprobantes, asi como asignarle parametros a este mismo",
+    "tipo_comprobante":"Tipos de Comprobante",
+    "comprobante":"Comprobante",
+    "select_tipo_comprobante": "Seleccione un tipo de comprobante",
+    "select_comprobante": "Seleccione un comprobante"
+  },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
     "rubro_registrado_success": "Rubro Registrado Correctamente",

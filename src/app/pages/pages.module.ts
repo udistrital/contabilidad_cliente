@@ -12,6 +12,8 @@ import { MenuService } from '../@core/data/menu.service';
 import { SharedModule } from '../shared/shared.module';
 import { NbIconModule } from '@nebular/theme';
 import { PlanCuentasModule } from './plan-cuentas/plan-cuentas.module';
+import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comprobante/list-tipo-comprobante.component';
+import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 
 
 
@@ -29,6 +31,8 @@ import { PlanCuentasModule } from './plan-cuentas/plan-cuentas.module';
   ],
   declarations: [
     PagesComponent,
+    ListTipoComprobanteComponent,
+    ListComprobanteComponent,
   ],
   providers: [
     ConfiguracionService,
