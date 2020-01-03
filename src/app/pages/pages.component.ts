@@ -38,7 +38,7 @@ export class PagesComponent implements OnInit {
     if (this.autenticacion.live()) {
       this.roles = (JSON.parse(atob(localStorage.getItem('id_token').split('.')[1])).role)
         .filter((data: any) => (data.indexOf('/') === -1));
-      this.menuws.get(this.roles + '/presupuesto_kronos').subscribe(
+      this.menuws.get(this.roles + '/contabilidad_kronos').subscribe(
         data => {
           this.dataMenu = <any>data;
           for (let i = 0; i < this.dataMenu.length; i++) {
