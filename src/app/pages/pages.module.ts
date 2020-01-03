@@ -1,6 +1,20 @@
 import { NgModule } from '@angular/core';
 import { NbMenuModule } from '@nebular/theme';
-
+import { CommonModule } from '@angular/common';
+import {
+  NbTreeGridModule,
+  NbSelectModule,
+  NbAlertModule,
+  NbTabsetModule,
+  NbStepperModule,
+  NbCardModule,
+  NbTooltipModule,
+  NbRadioModule,
+  NbCheckboxModule } from '@nebular/theme';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { MatStepperModule } from '@angular/material';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
@@ -28,6 +42,23 @@ import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-c
     ECommerceModule,
     MiscellaneousModule,
     PlanCuentasModule,
+    ThemeModule,
+    SharedModule,
+    CommonModule,
+    NbTreeGridModule,
+    NbTooltipModule,
+    NbSelectModule,
+    NbRadioModule,
+    NbAlertModule,
+    NbCheckboxModule,
+    NbTabsetModule,
+    NbStepperModule,
+    NbCardModule,
+    Ng2SmartTableModule,
+    ToasterModule,
+    MatStepperModule,
+    CurrencyMaskModule,    
+    
   ],
   declarations: [
     PagesComponent,
@@ -38,6 +69,7 @@ import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-c
     ConfiguracionService,
     MenuService,
   ],
+  entryComponents: [ListTipoComprobanteComponent,ListComprobanteComponent],
 })
 export class PagesModule {
 }

@@ -2,17 +2,17 @@
     <nb-card status="warning">
       <nb-card-header>
           <div *ngIf="!viewItemSelected">
-            {{ 'COMPROBANTE.tipo_comprobante' | translate }}
+            {{ 'TIPO_COMPROBANTE.tipo_comprobante' | translate }}
           </div>
           <div *ngIf="viewItemSelected">
-            {{ 'COMPROBANTE.select_tipo_comprobante' | translate }}
+            {{ 'TIPO_COMPROBANTE.select' | translate }}
           </div>
         </nb-card-header>
         <nb-card-body>
         <div *ngIf="!disabledVigencia && !viewItemSelected">
-            {{ 'COMPROBANTE.descripcion_tipo' | translate }}
+            {{ 'TIPO_COMPROBANTE.descripcion' | translate }}
           </div>
-          
+          <br/>
               <ngx-list-entity *ngIf="!auxcambiotab && !viewTab"
               [listSettings]="listSettings"
               [isOnlyCrud]="isOnlyCrud" 

@@ -2,10 +2,8 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import 'style-loader!angular2-toaster/toaster.css';
-import { FuenteHelper } from '../../../../@core/helpers/fuentes/fuenteHelper';
-import { ApropiacionHelper } from '../../../../@core/helpers/apropiaciones/apropiacionHelper';
-import { CommonHelper } from '../../../../@core/helpers/commonHelper';
-import { FORM_FUENTE } from '../form-fuente';
+import { TipoComprobanteHelper } from '../../../@core/helpers/comprobantes/tipoComprobanteHelper';
+import { FORM_TIPO_COMPROBANTE } from './form-tipo-comprobante';
 
 
 @Component({
@@ -15,7 +13,7 @@ import { FORM_FUENTE } from '../form-fuente';
 })
 export class ListTipoComprobanteComponent implements OnInit {
 
-  @Output() fuenteSeleccionada = new EventEmitter();
+  @Output() tipoComprobanteSeleccionado = new EventEmitter();
   @Input() viewItemSelected: boolean;
   uuidReadFieldName: string;
   paramsFieldsName: object;
@@ -44,63 +42,51 @@ export class ListTipoComprobanteComponent implements OnInit {
 
   
   listColumns: object;
-  fuenteInfo: any;
+  tipoComprobanteInfo: any;
   disabledVigencia: boolean = false;
 
   constructor(
     private translate: TranslateService,
-    private fuenteHelper: FuenteHelper,
-    private apHelper: ApropiacionHelper,
-    private commonHelper: CommonHelper,) {   }
+    private tipoComprobanteHelper: TipoComprobanteHelper) {   }
 
    ngOnInit() {
-    this.apHelper.getVigenciasList().subscribe(res => {
-      if (res) {
-        this.vigencias = res;
-      }
-    });
-    this.commonHelper.geCurrentVigencia().subscribe(res => {
-      if (res) {
-        this.vigenciaSel = res + '';
-      }
-      this.paramsFieldsName = { Vigencia: this.vigenciaSel, UnidadEjecutora: 1 };
-      this.loadFormDataFunction = this.fuenteHelper.getFuentes;
-    });
+    //this.paramsFieldsName = { Vigencia: this.vigenciaSel, UnidadEjecutora: 1 };
+    this.loadFormDataFunction = this.tipoComprobanteHelper.getTiposComprobante;
     this.isOnlyCrud = false;
     this.uuidReadFieldName = 'Codigo';
     this.uuidDeleteFieldName = 'Codigo';
-    this.deleteConfirmMessage = 'FUENTE_FINANCIAMIENTO.confirmacion_actualizacion';
-    this.deleteMessage = 'FUENTE_FINANCIAMIENTO.mensaje_eliminar';
-    this.deleteDataFunction = this.fuenteHelper.fuenteDelete;
-    this.loadDataFunction = this.fuenteHelper.getFuentes;
-    this.formEntity = FORM_FUENTE;
-    this.formTittle = 'FUENTE_FINANCIAMIENTO.guardar_fuente';
-    this.updateMessage = 'FUENTE_FINANCIAMIENTO.mensaje_actualizar';
-    this.createMessage = 'FUENTE_FINANCIAMIENTO.mensaje_registrar';
-    this.updateConfirmMessage = 'FUENTE_FINANCIAMIENTO.confirmacion_actualizacion';
-    this.createConfirmMessage = 'FUENTE_FINANCIAMIENTO.confirmacion_creacion';
-    this.updateEntityFunction = this.fuenteHelper.fuenteUpdate;
-    this.createEntityFunction = this.fuenteHelper.fuenteRegister;
+    this.deleteConfirmMessage = 'TIPO_COMPROBANTE.confirmacion_actualizacion';
+    this.deleteMessage = 'TIPO_COMPROBANTE.mensaje_eliminar';
+    this.deleteDataFunction = this.tipoComprobanteHelper.tipoComprobanteDelete;
+    this.loadDataFunction = this.tipoComprobanteHelper.getTiposComprobante;
+    this.formEntity = FORM_TIPO_COMPROBANTE;
+    this.formTittle = 'TIPO_COMPROBANTE.guardar_title';
+    this.updateMessage = 'TIPO_COMPROBANTE.mensaje_actualizar';
+    this.createMessage = 'TIPO_COMPROBANTE.mensaje_registrar';
+    this.updateConfirmMessage = 'TIPO_COMPROBANTE.confirmacion_actualizacion';
+    this.createConfirmMessage = 'TIPO_COMPROBANTE.confirmacion_creacion';
+    this.updateEntityFunction = this.tipoComprobanteHelper.tipoComprobanteUpdate;
+    this.createEntityFunction = this.tipoComprobanteHelper.tipoComprobanteRegister;
     this.listColumns = {
-      Nombre: {
-        title: this.translate.instant('GLOBAL.nombre'),
+      TipoDocumento: {
+        title: this.translate.instant('GLOBAL.tipo_documento'),
         // type: 'string;',
         valuePrepareFunction: value => {
           return value;
         }
       },
-      Codigo: {
-        title: this.translate.instant('GLOBAL.codigo'),
+      Descripcion: {
+        title: this.translate.instant('GLOBAL.descripcion'),
         // type: 'string;',
         valuePrepareFunction: value => {
           return value;
         }
       },
-      Vigencia: {
-        title: this.translate.instant('GLOBAL.vigencia'),
-        // type: 'string;',
-        valuePrepareFunction: value => {
-          return value;
+      FechaModificacion: {
+        title: this.translate.instant('GLOBAL.fecha_modificacion'),
+        valuePrepareFunction: (value) => {
+          const date = new Date(value);
+          return `${date.getFullYear()}-${date.getMonth() + 1}-${('0' + date.getDate()).slice(-2)}`;
         }
       }
     };
@@ -123,14 +109,12 @@ export class ListTipoComprobanteComponent implements OnInit {
           edit: false,
           delete: false,
           custom: [
-            { name: 'edit', title: '<i title="editar" class="nb-edit"></i>' },
-            { name: 'delete', title: '<i title="eliminar" class="nb-trash"></i>' },
-            { name: 'other', title: '<i title="Agregar Vigencia" class="nb-tables"></i>' },
-            { name: 'rubros-fuente', title: '<i title="Ver distribución" class="ion ion-eye" ></i>' }],
+            { name: 'edit', title: '<i title="Editar" class="nb-edit"></i>' },
+            { name: 'delete', title: '<i title="Eliminar" class="nb-trash"></i>' },],
           position: 'right'
         },
         add: {
-          addButtonContent: '<i title="Nueva Fuente" class="nb-plus"></i>',
+          addButtonContent: '<i title="Nuevo Tipo de Comprobante" class="nb-plus"></i>',
           createButtonContent: '<i class="nb-checkmark"></i>',
           cancelButtonContent: '<i class="nb-close"></i>'
         },
@@ -138,12 +122,6 @@ export class ListTipoComprobanteComponent implements OnInit {
         columns: this.listColumns,
       };
     }
-    this.loadOptionsVigencia();
-  }
-
-  loadOptionsVigencia(): void {
-    let aplicacion = this.vigencias;
-    this.formEntity.campos[this.getIndexForm('Vigencia')].opciones = aplicacion;
   }
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formEntity.campos.length; index++) {
@@ -162,9 +140,9 @@ export class ListTipoComprobanteComponent implements OnInit {
     this.disabledVigencia = estado;
   }
   receiveMessage(event) {
-    this.fuenteInfo = event;
+    this.tipoComprobanteInfo = event;
     if (this.viewItemSelected) {
-      this.fuenteSeleccionada.emit(this.fuenteInfo);
+      this.tipoComprobanteSeleccionado.emit(this.tipoComprobanteInfo);
     }
   }
 
