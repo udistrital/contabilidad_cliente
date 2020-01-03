@@ -222,6 +222,8 @@ export class DinamicformComponent implements OnInit, OnChanges {
     switch (pattern) {
       case '^[1-9]{1,9}':
         return '** Formato Incorrecto: Solo se permite ingresar números';
+      case '^[a-zA-Z]{1}':
+        return '** Formato Incorrecto: Solo se permite ingresar una letra';
       default:
         return '** Formato Incorrecto';
     }

@@ -1,0 +1,51 @@
+<div class="col-md-12 col-lg-12 ">
+    <nb-card status="warning">
+      <nb-card-header>
+          <div *ngIf="!viewItemSelected">
+            {{ 'TIPO_COMPROBANTE.tipo_comprobante' | translate }}
+          </div>
+          <div *ngIf="viewItemSelected">
+            {{ 'TIPO_COMPROBANTE.select' | translate }}
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+        <div *ngIf="!disabledVigencia && !viewItemSelected">
+            {{ 'TIPO_COMPROBANTE.descripcion' | translate }}
+          </div>
+          <br/>
+              <ngx-list-entity *ngIf="!auxcambiotab && !viewTab"
+              [listSettings]="listSettings"
+              [isOnlyCrud]="isOnlyCrud" 
+              [uuidReadFieldName]="uuidReadFieldName"
+              [paramsFieldsName] ="paramsFieldsName"
+              [uuidDeleteFieldName]="uuidDeleteFieldName"
+              [listColumns]="listColumns"
+              [deleteConfirmMessage]="deleteConfirmMessage"
+              [deleteMessage]="deleteMessage"
+              [loadDataFunction]="loadDataFunction"
+              [deleteDataFunction]="deleteDataFunction"
+              [formEntity]="formEntity"
+              [formTittle]="formTittle"
+              [updateMessage]="updateMessage"
+              [createMessage]="createMessage"
+              [updateConfirmMessage]="updateConfirmMessage"
+              [createConfirmMessage]="createConfirmMessage"
+              [loadFormDataFunction]="loadFormDataFunction"
+              [updateEntityFunction]="updateEntityFunction"
+              [createEntityFunction]="createEntityFunction"
+              [viewItemSelected]="viewItemSelected"
+              (infooutput)="receiveMessage($event)"
+              (eventChange)="onChange($event)"
+              (crudcambiotab)="onFirstTab($event)"
+              (auxcambiotab)="onChangeTab($event)"
+              (externalTabActive)="onChangeExternalTab($event)"
+              (externalTabActivator)="onExternalTabActivator($event)"
+              >
+            </ngx-list-entity>
+            <button *ngIf="localtabActived" (click)="returnToList()" class="btn btn-info btn-sm"> <i class="nb-arrow-dropleft"></i>
+              {{
+                "GLOBAL.regresar" | translate
+              }}</button>
+      </nb-card-body>
+    </nb-card>
+  </div>

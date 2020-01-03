@@ -143,6 +143,7 @@
     "placeholder_resumen": "Ej: Resumen",
     "nombre": "Nombre",
     "tipo_documento": "Tipo de documento",
+    "tipo_comprobante": "Tipo de comprobante",
     "fecha_documento": "Fecha de documento",
     "numero_documento": "Numero documento",
     "area_funcional": "Área funcional",
@@ -160,6 +161,7 @@
     "siguiente": "Siguiente",
     "previo_abr": "Prev.",
     "numero_oficio": "N° Oficio",
+    "numero": "Número",
     "registro": "Registro",
     "seleccionar": "Seleccionar",
     "tipo": "Tipo",
@@ -173,6 +175,7 @@
     "asignar-nueva-apropiacion-inicial": "Asignar Nueva Apropiación",
     "regresar-consulta-apropiacion": "Consulta apropiación actual",
     "fecha_registro": "Fecha de registro",
+    "fecha_modificacion": "Fecha de Modificacion",
     "traslado": "Traslado",
     "traslado_destino": "Traslado",
     "reduccion": "Reducción",
@@ -192,7 +195,36 @@
     "lista_anulaciones": "Lista anulaciones",
     "consecutivo": "Consecutivo",
     "saldo_rubro": "Saldo del rubro",
-    "relacionado": "relacionado"
+    "relacionado": "relacionado",
+    "placeholder_tipo_comprobante": "Tipo Comprobante",
+    "placeholder_comprobante": "Comprobante",
+    "comprobante": "Comprobante",
+    "placeholder_numero": "Número"
+
+  },
+  "COMPROBANTE":{
+    "descripcion": "En esta sección podrá agregar, modificar, eliminar comprobantes, asi como asignarle parametros a este mismo",
+    "comprobante":"Comprobantes",
+    "select": "Seleccione un comprobante",
+    "guardar_title": "Editar Comprobante",
+    "mensaje_actualizar": "¿ Actualizar Comprobante ?",
+    "confirmacion_actualizacion": "Comprobante actualizado",
+    "mensaje_registrar": "¿ Crear Comprobante ?",
+    "confirmacion_creacion": "Comprobante registrado",
+    "mensaje_eliminar": "¿ Eliminar Comprobante ?",
+    "confirmacion_eliminar": "Comprobante eliminado"
+  },
+  "TIPO_COMPROBANTE": {
+    "descripcion": "En esta sección podrá agregar, modificar, eliminar los diferentes tipos de comprobante",
+    "select": "Seleccione un tipo de comprobante",
+    "tipo_comprobante":"Tipos de Comprobante",
+    "guardar_title": "Editar Tipo de Comprobante",
+    "mensaje_actualizar": "¿ Actualizar Tipo de Comprobante ?",
+    "confirmacion_actualizacion": "Tipo de comprobante actualizado",
+    "mensaje_registrar": "¿ Crear Tipo de Comprobante ?",
+    "confirmacion_creacion": "Tipo de comprobante registrado",
+    "mensaje_eliminar": "¿ Eliminar Tipo de Comprobante ?",
+    "confirmacion_eliminar": "Tipo de comprobante eliminado"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
