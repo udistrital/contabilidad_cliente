@@ -25,10 +25,7 @@ export let FORM_COMPROBANTE = {
             placeholder_i18n: 'comprobante',
             requerido: true,
             length: '5',
-            tipo: 'text',
-            prefix: {
-                value: '',
-            },
+            tipo: 'text'
         },
         {
             etiqueta: 'textarea',
