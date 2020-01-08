@@ -28,6 +28,7 @@ import { NbIconModule } from '@nebular/theme';
 import { PlanCuentasModule } from './plan-cuentas/plan-cuentas.module';
 import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comprobante/list-tipo-comprobante.component';
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
+import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
 
 
 
@@ -64,6 +65,7 @@ import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-c
     PagesComponent,
     ListTipoComprobanteComponent,
     ListComprobanteComponent,
+    ParametrosComprobanteComponent,
   ],
   providers: [
     ConfiguracionService,

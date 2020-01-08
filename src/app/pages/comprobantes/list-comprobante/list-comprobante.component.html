@@ -9,11 +9,11 @@
           </div>
         </nb-card-header>
         <nb-card-body>
-        <div *ngIf="!disabledVigencia && !viewItemSelected">
+        <div *ngIf="!disabledVigencia && !viewItemSelected  && !paramsTab">
             {{ 'COMPROBANTE.descripcion' | translate }}
           </div>
           <br/>
-              <ngx-list-entity *ngIf="!auxcambiotab && !viewTab"
+              <ngx-list-entity *ngIf="!auxcambiotab && !paramsTab"
               [listSettings]="listSettings"
               [isOnlyCrud]="isOnlyCrud" 
               [uuidReadFieldName]="uuidReadFieldName"
@@ -37,7 +37,6 @@
               (infooutput)="receiveMessage($event)"
               (eventChange)="onChange($event)"
               (crudcambiotab)="onFirstTab($event)"
-              (auxcambiotab)="onChangeTab($event)"
               (externalTabActive)="onChangeExternalTab($event)"
               (externalTabActivator)="onExternalTabActivator($event)"
               >
@@ -46,6 +45,7 @@
               {{
                 "GLOBAL.regresar" | translate
               }}</button>
+              <ngx-parametros-comprobante (auxcambiotab)="returnToList()" *ngIf="paramsTab" [infoinput]="comprobanteInfo" ></ngx-parametros-comprobante>
       </nb-card-body>
     </nb-card>
   </div>
