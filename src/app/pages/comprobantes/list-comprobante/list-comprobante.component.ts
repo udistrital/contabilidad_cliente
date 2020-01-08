@@ -36,11 +36,11 @@ export class ListComprobanteComponent implements OnInit {
   auxcambiotab: boolean = false;
   createTab: boolean = false;
   localtabActived: boolean = false;
-  viewTab: boolean = false;
+  paramsTab: boolean = false;
 
   
   listColumns: object;
-  tipoComprobanteInfo: any;
+  comprobanteInfo: any;
   disabledVigencia: boolean = false;
   tiposComprobante: any;
   constructor(
@@ -68,11 +68,11 @@ export class ListComprobanteComponent implements OnInit {
   this.updateEntityFunction = this.comprobanteHelper.comprobanteUpdate;
   this.createEntityFunction = this.comprobanteHelper.comprobanteRegister;
   this.listColumns = {
-    TipoDocumento: {
+    TipoComprobante: {
       title: this.translate.instant('GLOBAL.tipo_comprobante'),
       // type: 'string;',
       valuePrepareFunction: value => {
-        return value;
+        return value.TipoDocumento;
       }
     },
     Codigo: {
@@ -125,7 +125,7 @@ export class ListComprobanteComponent implements OnInit {
         custom: [
           { name: 'edit', title: '<i title="Editar" class="nb-edit"></i>' },
           { name: 'delete', title: '<i title="Eliminar" class="nb-trash"></i>' },
-          { name: 'other', title: '<i title="Agregar Parámetros" class="nb-tables"></i>' }],
+          { name: 'param', title: '<i title="Agregar Parámetros" class="nb-tables"></i>' }],
         position: 'right'
       },
       add: {
@@ -146,6 +146,12 @@ export class ListComprobanteComponent implements OnInit {
 
   }
 
+  receiveMessage(event) {
+    this.comprobanteInfo = event;
+    if (this.viewItemSelected) {
+      this.comprobanteSeleccionado.emit(this.comprobanteInfo);
+    }
+  }
   loadOptionsTipoComprobante(): void {
     let aplicacion = this.tiposComprobante;
     console.info(aplicacion);
@@ -163,5 +169,27 @@ export class ListComprobanteComponent implements OnInit {
   onFirstTab(estado) {
     this.disabledVigencia = estado;
   }
+  onExternalTabActivator($event: string) {
+    if ($event === 'external-create') {
+      this.auxcambiotab = true;
+      this.createTab = true;
+      this.localtabActived = true;
+    }if ($event === 'param') {
+      this.paramsTab = true;
+      this.localtabActived = true;
+    } else {
+      this.disabledVigencia = true;
+      this.localtabActived = true;
+      this.paramsTab = false;
+    }
 
+  }
+
+  returnToList() {
+    this.disabledVigencia = false;
+    this.auxcambiotab = false;
+    this.localtabActived = false;
+    this.createTab = false;
+    this.paramsTab = false
+  }
 }

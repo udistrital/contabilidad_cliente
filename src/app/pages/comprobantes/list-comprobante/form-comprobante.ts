@@ -6,7 +6,7 @@ export let FORM_COMPROBANTE = {
     alertas: true,
     modelo: 'Comprobante',
     campos: [
-        { //TODO: generate serial in field Codigo
+        {
             etiqueta: 'select',
             claseGrid: 'col-lg-4 col-md-4 col-sm-4 col-xs-4',
             nombre: 'TipoComprobante',

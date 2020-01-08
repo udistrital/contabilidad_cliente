@@ -1,0 +1,17 @@
+<div class="d-flex">
+  <div>
+    <label for="valorfuente" class="form-control-label">
+      <h6>
+        {{ "GLOBAL.comprobante" | translate }}: {{ infoinput.TipoComprobante.TipoDocumento }} - {{ infoinput.Numero }} -
+        {{ infoinput.Comprobante }}
+      </h6>
+    </label>
+  </div>
+</div>
+<ngx-dinamicform
+  [normalform]="formEntity"
+  [modeloData]="entityInfo"
+  (result)="validarForm($event)"
+  [clean]="clean"
+>
+</ngx-dinamicform>
