@@ -145,7 +145,7 @@ export class ListEntityComponent implements OnInit {
     }
   }
   onEdit(event): void {
-    console.info(event);
+    // console.info(event);
     this.uid = event.data[this.uuidReadField];
     this.IsFuente(event);
     this.activetab('crud');
@@ -156,7 +156,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   onAddOther(event): void {
-    console.info(event);
+    // console.info(event);
     this.infooutput.emit(event.data);
     this.activetab(event.action);
   }

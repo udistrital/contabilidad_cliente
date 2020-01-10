@@ -21,6 +21,9 @@ export class ParametrosComprobanteComponent implements OnInit {
   updateMessage: string;
   updateConfirmMessage: string | string[];
   clean: boolean;
+  TipoImpresion: any;
+  FormatoImpresion: any;
+  NumeracionAutomatica: any;
 
   constructor(
     private translate: TranslateService,
@@ -35,6 +38,7 @@ export class ParametrosComprobanteComponent implements OnInit {
     this.formTittle = "COMPROBANTE.add_param";
     this.updateMessage = "COMPROBANTE.mensaje_actualizar_param";
     this.updateConfirmMessage = "COMPROBANTE.confirm_actualizar_param"
+    this.loadData();
     this.formEntity = FormManager.ConstruirForm(
       this.formEntity,
       this.translate,
@@ -47,7 +51,7 @@ export class ParametrosComprobanteComponent implements OnInit {
         this.formTittle
       );
     });
-    this.loadData();
+
   }
 
   validarForm(event) {
@@ -71,8 +75,8 @@ export class ParametrosComprobanteComponent implements OnInit {
     Swal.fire(opt).then(willDelete => {
       if (willDelete.value) {
         this.entityInfo = entityData;
-        this.entityInfo.FormatoImpresion = this.entityInfo.FormatoImpresion.valor;
-        this.entityInfo.TipoImpresion = this.entityInfo.TipoImpresion.valor;
+        this.entityInfo.FormatoImpresion = this.entityInfo.FormatoImpresion.Valor;
+        this.entityInfo.TipoImpresion = this.entityInfo.TipoImpresion.Valor;
         this.entityInfo.NumeracionAutomatica = this.entityInfo.NumeracionAutomatica.valorBool;
         this.comprobanteHelper.comprobanteUpdate(this.entityInfo).subscribe(res => {
           if (res["Type"] === "error") {
@@ -94,6 +98,24 @@ export class ParametrosComprobanteComponent implements OnInit {
       this.comprobanteHelper.getComprobantes(this.entityId).subscribe(res => {
         if (res !== null) {
           this.entityInfo = res;
+          this.TipoImpresion = [
+            {Valor: "Forma continua" },
+            {Valor: "Hojas normales" },
+            {Valor: this.entityInfo.TipoImpresion}
+          ];
+          this.FormatoImpresion = [
+            {Valor: "Egreso Generico" },
+            {Valor: "Formato Adicional" },
+            {Valor: this.entityInfo.FormatoImpresion}
+          ];
+          this.NumeracionAutomatica = [
+            {Valor: "Si", valorBool: true },
+            {Valor: "No", valorBool: false },
+            {Valor: this.entityInfo.NumeracionAutomatica?"Si":"No", valorBool: this.entityInfo.NumeracionAutomatica}
+          ];
+          this.loadOptionsSelect('TipoImpresion', this.TipoImpresion);
+          this.loadOptionsSelect('FormatoImpresion', this.FormatoImpresion);
+          this.loadOptionsSelect('NumeracionAutomatica', this.NumeracionAutomatica);                    
         }
       });
     } else {
@@ -101,4 +123,27 @@ export class ParametrosComprobanteComponent implements OnInit {
       this.clean = !this.clean;
     }
   }
+  loadOptionsSelect(selectForm:string , obj:any): void {
+    const newObj = this.getUnique(obj, 'Valor');
+    this.formEntity.campos[this.getIndexForm(selectForm)].opciones = newObj;
+  }
+
+  getUnique(arr, comp) {
+    const unique = arr
+         .map(e => e[comp])
+       // store the keys of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+      // eliminate the dead keys & store unique objects
+      .filter(e => arr[e]).map(e => arr[e]);
+     return unique;
+  }
+  getIndexForm(nombre: String): number {
+    for (let index = 0; index < this.formEntity.campos.length; index++) {
+      const element = this.formEntity.campos[index];
+      if (element.nombre === nombre) {
+        return index
+      }
+    }
+    return 0;
+  }  
 }
