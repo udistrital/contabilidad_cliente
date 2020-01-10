@@ -10,40 +10,8 @@
   },
   "MENU": {
     "dashboard": "Inicio",
-    "gestion_rubros": {
-      "rubros": "Gestión de Rubros",
-      "consulta-rubros": "Consulta de Rubros"
-    },
-    "apropiaciones": {
-      "apropiaciones": "APROPIACIONES",
-      "consulta-apropiaciones-iniciales": "Consulta de Apropiaciones I.",
-      "registro-apropiaciones-iniciales": "Registro de Apropiaciones I."
-    },
-    "gestion_plan_cuentas": {
-      "gestion_plan_cuentas": "Gestión Plan de Cuentas",
-      "arbol": "Arbol",
-      "consulta": "Consulta",
-      "registro": "Registro",
-      "comprobacion-apropiacion-inicial": "Comprobacion AI",
-      "gestion_rubros": "Rubros Presupuestales",
-      "gestion_apropiaciones": "Preasignación Inicial",
-      "gestion_fuentes": "Fuentes de Financiamiento",
-      "gestion_productos": "Productos",
-      "gestion_modificaciones_apropiaciones":  "Modificaciones Presupuestales"
-    },
-    "gestion_crp": {
-      "gestion_crp": "Gestión de CRP",
-      "solicitud_crp": "Solicitudes de CRP",
-      "solicitar_crp": "Solicitar CRP",
-      "crp": "Certificados de Registro Presupuestal"
-    },
-
-    "gestion_cdp": {
-      "gestion_cdp": "Gestión de CDP",
-      "solicitud_cdp": "Solicitud CDP",
-      "cdp": "Certificado Disponibilidad Presupuestal",
-      "cdp_acronimo": "CDP"
-    },
+    "comprobantes": "Comprobantes",
+    "tipos_comprobante": "Tipos de comprobantes",
     "auth": {
       "auth": "Autenticación",
       "login": "Iniciar sesión",
