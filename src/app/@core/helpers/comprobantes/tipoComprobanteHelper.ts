@@ -73,10 +73,6 @@ export class TipoComprobanteHelper {
         return this.rqManager.put('tipo_comprobante/', data, id).pipe(
             map(
                 (res) => {
-                    if (res['Type'] === 'error') {
-                        this.pUpManager.showErrorAlert('No se pudo actualizar el tipo de comprobante');
-                        return undefined;
-                    }
                     return res;
                 },
             ),
