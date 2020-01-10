@@ -30,6 +30,8 @@ import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comproban
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
 
+
+
 @NgModule({
   imports: [
     PagesRoutingModule,
@@ -56,7 +58,8 @@ import { ParametrosComprobanteComponent } from './comprobantes/parametros-compro
     Ng2SmartTableModule,
     ToasterModule,
     MatStepperModule,
-    CurrencyMaskModule,
+    CurrencyMaskModule,    
+    
   ],
   declarations: [
     PagesComponent,
