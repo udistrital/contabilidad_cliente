@@ -154,7 +154,6 @@ export class ListComprobanteComponent implements OnInit {
   }
   loadOptionsTipoComprobante(): void {
     let aplicacion = this.tiposComprobante;
-    console.info(aplicacion);
     this.formEntity.campos[this.getIndexForm('TipoComprobante')].opciones = aplicacion;
   }
   getIndexForm(nombre: String): number {

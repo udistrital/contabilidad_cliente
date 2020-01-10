@@ -50,11 +50,8 @@ export let FORM_PARAM_COMPROBANTES = {
       placeholder_i18n: "tipo_impresion",
       requerido: true,
       tipo: "text",
-      key: "valor",
-      opciones: [
-        { Id: 1, valor: "Forma continua" },
-        { Id: 2, valor: "Hojas normales" }
-      ]
+      key: "Valor",
+      opciones: []
     },
     {
       etiqueta: "select",
@@ -64,11 +61,8 @@ export let FORM_PARAM_COMPROBANTES = {
       placeholder_i18n: "formato_impresion",
       requerido: true,
       tipo: "text",
-      key: "valor",
-      opciones: [
-        { Id: 1, valor: "Egreso Generico" },
-        { Id: 2, valor: "Formato Adicional" }
-      ]
+      key: "Valor",
+      opciones: []
     },
     {
       etiqueta: "input",
@@ -101,11 +95,8 @@ export let FORM_PARAM_COMPROBANTES = {
       placeholder_i18n: "numeracion_automatica",
       requerido: true,
       tipo: "text",
-      key: "valor",
-      opciones: [
-        { Id: 1, valor: "Si", valorBool: true },
-        { Id: 2, valor: "No", valorBool: false }
-      ]
+      key: "Valor",
+      opciones: []
     }
   ]
 };
