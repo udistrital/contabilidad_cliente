@@ -88,8 +88,7 @@ const routes: Routes = [{
 {
   path: 'cierre-vigencia',
   component: CierreVigenciaComponent,
-},
-
+}
 ];
 
 @NgModule({
