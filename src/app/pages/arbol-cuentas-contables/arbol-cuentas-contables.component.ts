@@ -103,7 +103,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     this.customColumn = 'Codigo';
     this.defaultColumns = ['Nombre', 'Activo'];
     this.allColumns = [this.customColumn, ...this.defaultColumns];
-    this.treeHelper.getTree().subscribe(res => {
+    this.treeHelper.getTree(true).subscribe(res => {
       this.data = res;
       this.dataSource = this.dataSourceBuilder.create(this.data, getters);
     });
@@ -144,7 +144,6 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   }
 
   validHighlight(selectedItem: any, treegrid) {
-    console.log('selected', selectedItem);
     
     if (selectedItem.data.Codigo === this.idHighlight) {
       this.updateHighlight(treegrid.elementRef, selectedItem.data);
