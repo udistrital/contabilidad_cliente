@@ -1,12 +1,17 @@
 import { RequestManager } from '../../managers/requestManager';
 import { Injectable } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { PopUpManager } from '../../managers/popUpManager';
 
 @Injectable({
     providedIn: 'root',
 })
 export class ArbolHelper {
 
-    constructor(private rqManager: RequestManager) { }
+    constructor(
+      private rqManager: RequestManager,
+      private pUpManager: PopUpManager,
+      ) { }
 
 
     /**
@@ -23,6 +28,31 @@ export class ArbolHelper {
         // call request manager for the tree's data.
         return this.rqManager.get(`arbol_rubro_apropiacion/arbol_apropiacion_valores/${unidadEjecutora}/${vigencia}`);
     }
+
+    /**
+      * Gets full arbol
+      *  returns full rubro's tree information (all nodes and branches).
+      * @returns  data with tree structure for the ndTree module.
+      */
+     public getTree(withDisabledNodes = false) {
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+      // this.rqManager.setPath('DUMMY_SERVICE');
+      // Set the optional branch for the API request.
+      // const raiz = 3;
+      // call request manager for the tree's data.
+      return this.rqManager.get(`nodo_cuenta_contable?fullTree=${withDisabledNodes}`).pipe(
+        map(
+            (res) => {
+                if (res === 'error') {
+                    this.pUpManager.showErrorAlert('No se pudo consultar la informacion del arbol');
+                    return undefined;
+                }
+
+                return res;
+            },
+        ),
+    );
+  }
 
     /**
       * Gets full arbol by Estado
