@@ -13,6 +13,11 @@ import { Observable, forkJoin } from 'rxjs';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-CO';
 import { ArbolHelper } from '../../@core/helpers/arbol/arbolHelper';
+import { FormGroup } from '@angular/forms';
+import { FormManager } from '../../@core/managers/formManager';
+import { FORM_NODO_CUENTA_CONTABLE } from './form_nodo_cuenta_contable';
+import { TranslateService } from '@ngx-translate/core';
+import { PopUpManager } from '../../@core/managers/popUpManager';
 
 registerLocaleData(locales, 'co');
 
@@ -63,18 +68,53 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   idHighlight: any;
   isSelected: boolean;
   searchValue: string;
+  formData: any;
+  nodeData: any;
+  selectedNodeData: any;
+
+  cleanForm: boolean;
 
   constructor(
     private renderer: Renderer2,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
     private dataSourceBuilder2: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
     private treeHelper: ArbolHelper,
+    private translate: TranslateService,
+    private pUpManager: PopUpManager,
     // private rubroHelper: RubroHelper,
-    ) {
+  ) {
 
   }
-  ngOnInit(){
+  ngOnInit() {
     this.loadTree();
+
+    this.formData = FORM_NODO_CUENTA_CONTABLE
+    this.construirForm()
+  }
+  construirForm() {
+    this.formData.btn = this.translate.instant('GLOBAL.guardar');
+    for (let i = 0; i < this.formData.campos.length; i++) {
+      this.formData.campos[i].label = this.formData.campos[i].label_i18n;
+      this.formData.campos[i].placeholder = this.formData.campos[i].label_i18n;
+    }
+
+    const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID')
+    const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
+    const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
+
+    this.treeHelper.getNaturalezaCuenta().subscribe(res => {
+      this.formData.campos[naturalezaIndex].opciones = res;
+    });
+
+    this.treeHelper.getTipoMoneda().subscribe(res => {
+      this.formData.campos[tipoMonedaIndex].opciones = res;
+    });
+
+    this.treeHelper.getDetalleCuenta().subscribe(res => {
+      this.formData.campos[detalleCuentaIndex].opciones = res;
+    });
+
+
   }
   ngOnChanges(changes) {
     if (changes['updateSignal'] && this.updateSignal) {
@@ -87,7 +127,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     }
     if (changes['paramsFieldsName'] && changes['paramsFieldsName'].currentValue) {
       this.paramsFieldsName = changes['paramsFieldsName'].currentValue;
-    }    
+    }
   }
 
   // private data: TreeNode<EstructuraArbolRubrosApropiaciones>[] | TreeNode<EstructuraArbolRubros>[];
@@ -127,6 +167,16 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   async onSelect(selectedItem: any, treegrid) {
     this.idHighlight = treegrid.elementRef.nativeElement.getAttribute('data-picker');
     this.rubroSeleccionado.emit(selectedItem.data);
+    this.selectedNodeData = selectedItem.data;
+    this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = selectedItem.data.Codigo + '-';
+  }
+
+  cleanInterface() {
+    this.loadTree();
+    this.cleanForm = !this.cleanForm;
+    this.selectedNodeData = undefined;
+    this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = '';
+    this.nodeData = {};
   }
 
   getShowOn(index: number) {
@@ -144,12 +194,35 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   }
 
   validHighlight(selectedItem: any, treegrid) {
-    
+
     if (selectedItem.data.Codigo === this.idHighlight) {
       this.updateHighlight(treegrid.elementRef, selectedItem.data);
       return true;
     }
     return false;
+  }
+
+  validarForm($event) {
+    console.log('event', $event);
+    const nodeData = $event.data.NodoCuentaContable;
+    nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['ID'];
+    nodeData['MonedaID'] = nodeData['MonedaID']['ID'];
+    nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['ID'];
+    nodeData['CentroCostosID'] = nodeData['CentroCostosID']['Label'];
+    nodeData['Ajustable'] = nodeData['Ajustable']['value'];
+    nodeData['RequiereTercero'] = nodeData['RequiereTercero']['value'];
+    nodeData['Nmnc'] = nodeData['Nmnc']['value'];
+    nodeData['CodigoCuentaAlterna'] = nodeData['CodigoCuentaAlterna'] + '';
+    nodeData['Codigo'] = nodeData['Codigo'] + '';
+    if (this.selectedNodeData) {
+      nodeData['Padre'] = this.selectedNodeData['Codigo']
+    }
+    this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
+      if (res) {
+        this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
+        this.cleanInterface();
+      }
+    });
   }
 
 }

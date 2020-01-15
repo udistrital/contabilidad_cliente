@@ -43,7 +43,7 @@ export class ArbolHelper {
       return this.rqManager.get(`nodo_cuenta_contable?fullTree=${withDisabledNodes}`).pipe(
         map(
             (res) => {
-                if (res === 'error') {
+                if (res && res['Type'] === 'error') {
                     this.pUpManager.showErrorAlert('No se pudo consultar la informacion del arbol');
                     return undefined;
                 }
@@ -73,6 +73,77 @@ export class ArbolHelper {
         // const raiz = 3;
         // call request manager for the tree's data.
         return this.rqManager.get(`arbol_rubro_apropiacion/arbol_por_estado/${unidadEjecutora}/${vigencia}/${estado}/${query}`);
+    }
+
+
+    public getNaturalezaCuenta(){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+       
+        return this.rqManager.get(`naturaleza_cuenta_contable`).pipe(
+          map(
+              (res) => {
+                  if (res && res['Type'] === 'error') {
+                      this.pUpManager.showErrorAlert('No se pudo consultar la información de las naturalezas');
+                      return undefined;
+                  }
+  
+                  return res;
+              },
+          ),
+      );
+   
+    }
+
+    public getTipoMoneda(){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+       
+        return this.rqManager.get(`tipo_moneda`).pipe(
+          map(
+              (res) => {
+                  if (res && res['Type'] === 'error') {
+                      this.pUpManager.showErrorAlert('No se pudo consultar la información de tipo moneda');
+                      return undefined;
+                  }
+  
+                  return res;
+              },
+          ),
+      );
+   
+    }
+
+    public getDetalleCuenta(){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+       
+        return this.rqManager.get(`detalle_cuenta_contable`).pipe(
+          map(
+              (res) => {
+                  if (res && res['Type'] === 'error') {
+                      this.pUpManager.showErrorAlert('No se pudo consultar la información de detalle cuenta');
+                      return undefined;
+                  }
+  
+                  return res;
+              },
+          ),
+      );
+   
+    }
+
+    public addNode(nodeData: any){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+      return this.rqManager.post(`nodo_cuenta_contable`, nodeData).pipe(
+        map(
+            (res) => {
+                if (res && res['Type'] === 'error') {
+                    this.pUpManager.showErrorAlert('No se pudo registrar la cuenta');
+                    return undefined;
+                }
+
+                return res;
+            },
+        ),
+    );
     }
 
 }

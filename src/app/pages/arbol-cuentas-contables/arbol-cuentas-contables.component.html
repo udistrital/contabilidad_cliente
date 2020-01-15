@@ -30,5 +30,9 @@
         </td>
       </ng-container>
     </table>
+
+    <ngx-dinamicform [normalform]="formData" [modeloData]="nodeData"
+                      (result)="validarForm($event)" [clean]="cleanForm">
+                    </ngx-dinamicform>
   </nb-card-body>
 </nb-card>
