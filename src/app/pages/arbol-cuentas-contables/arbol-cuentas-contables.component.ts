@@ -173,7 +173,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     this.idHighlight = treegrid.elementRef.nativeElement.getAttribute('data-picker');
     this.rubroSeleccionado.emit(selectedItem.data);
     this.selectedNodeData = selectedItem.data;
-    
+
   }
 
   cleanInterface() {
@@ -209,35 +209,37 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
   validarForm($event) {
     const nodeData = $event.data.NodoCuentaContable;
-    nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['ID'];
-    nodeData['MonedaID'] = nodeData['MonedaID']['ID'];
-    nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['ID'];
+    nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['Id'];
+    nodeData['MonedaID'] = nodeData['MonedaID']['Id'];
+    nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['Id'];
     nodeData['CentroCostosID'] = nodeData['CentroCostosID']['Label'];
-    nodeData['Ajustable'] = nodeData['Ajustable']['value'];
-    nodeData['RequiereTercero'] = nodeData['RequiereTercero']['value'];
-    nodeData['Nmnc'] = nodeData['Nmnc']['value'];
+    nodeData['Ajustable'] = nodeData['Ajustable']['Id'];
+    nodeData['RequiereTercero'] = nodeData['RequiereTercero']['Id'];
+    nodeData['Nmnc'] = nodeData['Nmnc']['Id'];
     nodeData['CodigoCuentaAlterna'] = nodeData['CodigoCuentaAlterna'] + '';
     nodeData['Codigo'] = nodeData['Codigo'] + '';
     if (this.selectedNodeData) {
       nodeData['Padre'] = this.selectedNodeData['Codigo']
     }
-    if(this.nodeData){
-      nodeData['Padre'] = undefined;
+    if (this.nodeData) {
       this.treeHelper.updateNode($event.data.NodoCuentaContable.Codigo, $event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
           this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente')
+          this.cleanInterface();
+          this.showTreeTab();
         }
       });
     } else {
-      
+
       this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
           this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
+          this.cleanInterface();
+          this.showTreeTab();
         }
       });
     }
 
-    this.cleanInterface();
 
   }
 
@@ -275,6 +277,15 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   getTreeInfo() {
     this.treeHelper.getInfoCuenta(this.selectedNodeData.Codigo).subscribe(res => {
       this.nodeData = res;
+      const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID')
+      const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
+      const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
+      this.nodeData['DetalleCuentaID'] = this.formData.campos[detalleCuentaIndex].opciones.find(element => element.Id === this.nodeData['DetalleCuentaID']);
+      this.nodeData['MonedaID'] = this.formData.campos[tipoMonedaIndex].opciones.find(element => element.Id === this.nodeData['MonedaID']);
+      this.nodeData['NaturalezaCuentaID'] = this.formData.campos[naturalezaIndex].opciones.find(element => element.Id === this.nodeData['NaturalezaCuentaID']);
+      this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
+      this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
+      this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
     });
   }
 

@@ -1,5 +1,5 @@
-const activeData =  { Label: "Si", value: true };
-const unActiveData =  { Label: "No", value: false };
+const activeData =  { Label: "Si", Id: true };
+const unActiveData =  { Label: "No", Id: false };
 export let FORM_NODO_CUENTA_CONTABLE = {
 
     tipo_formulario: 'mini',
@@ -14,7 +14,7 @@ export let FORM_NODO_CUENTA_CONTABLE = {
             placeholder_i18n: 'Código',
             requerido: true,
             pattern: '^[1-9]{1,9}',
-            tipo: 'number',
+            tipo: 'text',
             prefix: {
                 value: '',
             },

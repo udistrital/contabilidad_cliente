@@ -1,5 +1,9 @@
-<nb-card>
+<nb-card status="warning">
+  <nb-card-header>
+      {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
+  </nb-card-header>
   <nb-card-body>
+    
     <div *ngIf="showTree">
       <div class="row">
         <div class="col">
@@ -15,13 +19,13 @@
         </div>
         <div class="col">
           <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
-            (click)="getTreeInfo(); makeFormEditable(true); showViewTab();">
+            (click)="getTreeInfo(); makeFormEditable(true); showViewTab('group');">
             {{'GLOBAL.ver' | translate }}
           </button>
         </div>
         <div class="col">
           <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
-            (click)="getTreeInfo(); makeFormEditable(false, true); showViewTab();">
+            (click)="getTreeInfo(); makeFormEditable(false, true); showViewTab('group');">
             {{'GLOBAL.editar' | translate }}
           </button>
         </div>
