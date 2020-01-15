@@ -130,6 +130,42 @@ export class ArbolHelper {
    
     }
 
+    public getInfoCuenta(UUID: string){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+       
+        return this.rqManager.get(`nodo_cuenta_contable/${UUID}`).pipe(
+          map(
+              (res) => {
+                  if (res && res['Type'] === 'error') {
+                      this.pUpManager.showErrorAlert('No se pudo consultar la información de la cuenta');
+                      return undefined;
+                  }
+  
+                  return res;
+              },
+          ),
+      );
+   
+    }
+
+    public updateNode(UUID: string, nodeData: any){
+      this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+       
+        return this.rqManager.put(`nodo_cuenta_contable/`,nodeData, UUID).pipe(
+          map(
+              (res) => {
+                  if (res && res['Type'] === 'error') {
+                      this.pUpManager.showErrorAlert('No se pudo Actualizar la información de la cuenta');
+                      return undefined;
+                  }
+  
+                  return res;
+              },
+          ),
+      );
+   
+    }
+
     public addNode(nodeData: any){
       this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
       return this.rqManager.post(`nodo_cuenta_contable`, nodeData).pipe(

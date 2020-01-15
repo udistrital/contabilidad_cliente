@@ -74,6 +74,9 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
   cleanForm: boolean;
 
+  showTree: boolean = true;
+  viewTab: boolean = false;
+
   constructor(
     private renderer: Renderer2,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
@@ -86,9 +89,11 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
   }
   ngOnInit() {
+
     this.loadTree();
 
     this.formData = FORM_NODO_CUENTA_CONTABLE
+    this.nodeData = undefined;
     this.construirForm()
   }
   construirForm() {
@@ -168,15 +173,15 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     this.idHighlight = treegrid.elementRef.nativeElement.getAttribute('data-picker');
     this.rubroSeleccionado.emit(selectedItem.data);
     this.selectedNodeData = selectedItem.data;
-    this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = selectedItem.data.Codigo + '-';
+    
   }
 
   cleanInterface() {
     this.loadTree();
     this.cleanForm = !this.cleanForm;
-    this.selectedNodeData = undefined;
+    // this.selectedNodeData = undefined;
     this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = '';
-    this.nodeData = {};
+    this.nodeData = undefined;
   }
 
   getShowOn(index: number) {
@@ -203,7 +208,6 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   }
 
   validarForm($event) {
-    console.log('event', $event);
     const nodeData = $event.data.NodoCuentaContable;
     nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['ID'];
     nodeData['MonedaID'] = nodeData['MonedaID']['ID'];
@@ -217,11 +221,60 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     if (this.selectedNodeData) {
       nodeData['Padre'] = this.selectedNodeData['Codigo']
     }
-    this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
-      if (res) {
-        this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
-        this.cleanInterface();
-      }
+    if(this.nodeData){
+      nodeData['Padre'] = undefined;
+      this.treeHelper.updateNode($event.data.NodoCuentaContable.Codigo, $event.data.NodoCuentaContable).subscribe(res => {
+        if (res) {
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente')
+        }
+      });
+    } else {
+      
+      this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
+        if (res) {
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
+        }
+      });
+    }
+
+    this.cleanInterface();
+
+  }
+
+  showViewTab(option = '') {
+    this.showTree = false;
+    this.viewTab = true;
+    this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = this.selectedNodeData ? this.selectedNodeData.Codigo + '-' : '';
+    switch (option) {
+      case 'group':
+        this.selectedNodeData = undefined;
+        this.formData.campos[FormManager.getIndexForm(this.formData, 'Codigo')].prefix.value = '';
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  makeFormEditable(editable: boolean, update = false) {
+    for (let i = 0; i < this.formData.campos.length; i++) {
+      this.formData.campos[i].deshabilitar = editable;
+    }
+    // always "Codigo" field is disabled.
+    if (update === true) {
+      const codigoIndex = FormManager.getIndexForm(this.formData, 'Codigo')
+      this.formData.campos[codigoIndex].deshabilitar = true;
+    }
+  }
+
+  showTreeTab() {
+    this.showTree = true;
+    this.viewTab = false;
+  }
+
+  getTreeInfo() {
+    this.treeHelper.getInfoCuenta(this.selectedNodeData.Codigo).subscribe(res => {
+      this.nodeData = res;
     });
   }
 
