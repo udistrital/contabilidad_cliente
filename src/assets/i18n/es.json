@@ -183,7 +183,8 @@
     "tipo_impresion":"Tipo de impresión",
     "num_copias":"Número de copias",
     "titulo":"Titulo",
-    "numeracion_automatica":"Numeración Automatica"
+    "numeracion_automatica":"Numeración Automatica",
+    "ver": "Ver"
   },
   "COMPROBANTE":{
     "descripcion": "En esta sección podrá agregar, modificar, eliminar comprobantes, asi como asignarle parametros a este mismo",
@@ -211,6 +212,9 @@
     "confirmacion_creacion": "Tipo de comprobante registrado",
     "mensaje_eliminar": "¿ Eliminar Tipo de Comprobante ?",
     "confirmacion_eliminar": "Tipo de comprobante eliminado"
+  },
+  "CUENTAS_CONTABLES": {
+    "arbol_cuentas_contables": "Cuentas Contables"
   },
   "RUBRO": {
     "asignar_rubro": "Asignar Rubro",
