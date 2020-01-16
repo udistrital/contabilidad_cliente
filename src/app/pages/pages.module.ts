@@ -29,6 +29,7 @@ import { PlanCuentasModule } from './plan-cuentas/plan-cuentas.module';
 import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comprobante/list-tipo-comprobante.component';
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
+import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 
 @NgModule({
   imports: [
@@ -63,6 +64,9 @@ import { ParametrosComprobanteComponent } from './comprobantes/parametros-compro
     ListTipoComprobanteComponent,
     ListComprobanteComponent,
     ParametrosComprobanteComponent,
+    ArbolCuentasContablesComponent,
+    FsIconAComponent,
+
   ],
   providers: [
     ConfiguracionService,

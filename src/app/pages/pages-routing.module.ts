@@ -7,6 +7,7 @@ import { ECommerceComponent } from "./e-commerce/e-commerce.component";
 import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component";
 import { ListTipoComprobanteComponent } from "./comprobantes/list-tipo-comprobante/list-tipo-comprobante.component";
 import { ListComprobanteComponent } from "./comprobantes/list-comprobante/list-comprobante.component";
+import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
         path: "",
         redirectTo: "tipos_comprobante",
         pathMatch: "full"
+      },
+      {
+        path: "arbol_cuentas_contables",
+        component: ArbolCuentasContablesComponent
       },
       {
         path: "**",

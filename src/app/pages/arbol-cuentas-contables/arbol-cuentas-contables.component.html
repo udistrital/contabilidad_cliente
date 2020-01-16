@@ -1,0 +1,74 @@
+<nb-card status="warning">
+  <nb-card-header>
+      {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+    
+    <div *ngIf="showTree">
+      <div class="row">
+        <div class="col">
+          <button type="submit" class="btn btn-success btn-block" (click)="cleanInterface();makeFormEditable(false);  showViewTab('group');">
+            {{'GLOBAL.add-grupo' | translate }}
+          </button>
+        </div>
+        <div class="col">
+          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
+            (click)="cleanInterface();makeFormEditable(false);  showViewTab();">
+            {{'GLOBAL.add-nodo' | translate }}
+          </button>
+        </div>
+        <div class="col">
+          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
+            (click)="getTreeInfo(); makeFormEditable(true); showViewTab('group');">
+            {{'GLOBAL.ver' | translate }}
+          </button>
+        </div>
+        <div class="col">
+          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
+            (click)="getTreeInfo(); makeFormEditable(false, true); showViewTab('group');">
+            {{'GLOBAL.editar' | translate }}
+          </button>
+        </div>
+      </div>
+      <br>
+      <label class="search-label" for="search">{{
+      "GLOBAL.buscar" | translate
+    }}</label>
+
+      <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input" [(ngModel)]="searchValue" />
+      <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+        <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+        <tr #nebularTree class="table-row" [class.highlight]="validHighlight(row, nebularTree)"
+          (click)="onSelect(row, nebularTree);" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"
+          [attr.data-picker]="row.data.Codigo"></tr>
+        <ng-container [nbTreeGridColumnDef]="customColumn">
+          <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+            {{ customColumn }}
+          </th>
+          <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
+            <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
+            <span [ngClass]="{
+                'nb-chevron-down': row.expanded,
+                'nb-chevron-right': !row.expanded
+              }" aria-hidden="true">
+            </span>{{ row.data[customColumn] }}
+          </td>
+        </ng-container>
+        <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
+          [showOn]="getShowOn(index)">
+          <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+            {{ column }}
+          </th>
+          <td nbTreeGridCell *nbTreeGridCellDef="let row">
+            {{ column === "Activo" ? (row.data[column] ? "Si" : "No" ): (row.data[column] || "-") }}
+          </td>
+        </ng-container>
+      </table>
+    </div>
+    <button *ngIf="viewTab" (click)="cleanInterface(); showTreeTab();" class="btn btn-info btn-sm"> <i class="nb-arrow-dropleft"></i>
+      Regresar</button>
+    <ngx-dinamicform *ngIf="viewTab" [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
+      [clean]="cleanForm">
+    </ngx-dinamicform>
+  </nb-card-body>
+</nb-card>
