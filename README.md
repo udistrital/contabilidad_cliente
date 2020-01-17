@@ -1,6 +1,8 @@
 # :ledger: Cliente Subsistema de Contabilidad
 
- En este repositorio se define la tecnología que se renderizara del lado del cliente para el subsistema de Presupuesto del Sistema Financiero KRONOS.
+ En este repositorio se define la tecnología que se renderizara del lado del cliente para el subsistema de Contabilidad.
+ 
+ El cliente de contabilidad es un submódulo de KRONOS, el cual busca otorgar una interfaz para la gestión del plan único de cuentas, soportes de transacciones de los elementos contables, gestión de interoperabilidad de los sistemas internos y externos. 
 
  La plantilla cuenta con los componentes :
  * **Plantilla ngxAdmin** ~ [link_documentación](https://github.com/akveo/ngx-admin)
@@ -18,10 +20,10 @@
   - Clonar el proyecto del repositorio de git
   ```bash
   # clone the project
-  git clone https://github.com/udistrital/presupuesto_cliente.git
+  git clone https://github.com/udistrital/contabilidad_cliente.git
 
   # enter the project directory
-  cd presupuesto_cliente
+  cd contabilidad_cliente
   ```
 
   - Iniciar el servidor en local
@@ -78,3 +80,12 @@
 
   ### Herramientas usadas
   - **ngx-admin:** este [template](https://github.com/akveo/ngx-admin) es el que utiliza ngxGenerator, esta basado en Angular 8+, Bootstrap 4 y Nebular.
+
+
+## LICENCIA
+
+[Licencia](LICENSE)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
