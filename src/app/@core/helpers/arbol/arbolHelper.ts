@@ -130,6 +130,23 @@ export class ArbolHelper {
 
   }
 
+  public getCentroCostos(){
+    this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+
+    return this.rqManager.get(`centro_costos`).pipe(
+      map(
+        (res) => {
+          if (res && res['Type'] === 'error') {
+            this.pUpManager.showErrorAlert('No se pudo consultar la información de detalle cuenta');
+            return undefined;
+          }
+
+          return res;
+        },
+      ),
+    );
+  }
+
   public getInfoCuenta(UUID: string) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
 

@@ -117,11 +117,11 @@ export let FORM_NODO_CUENTA_CONTABLE = {
         {
             etiqueta: 'select',
             claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'CentroCostosID',
+            nombre: 'CentroDecostosID',
             label_i18n: 'Centro de costos',
             placeholder_i18n: 'Centro de costos',
             requerido: true,
-            tipo: 'CentroCostosID',
+            tipo: 'CentroDecostosID',
             key: 'Label',
             opciones: [
                 { Label: 1 },
