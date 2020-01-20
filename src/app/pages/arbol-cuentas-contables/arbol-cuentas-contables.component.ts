@@ -103,9 +103,10 @@ export class ArbolCuentasContablesComponent implements OnChanges {
       this.formData.campos[i].placeholder = this.formData.campos[i].label_i18n;
     }
 
-    const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID')
+    const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID');
     const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
     const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
+    const centroCostosIndex = FormManager.getIndexForm(this.formData, 'CentroDecostosID');
 
     this.treeHelper.getNaturalezaCuenta().subscribe(res => {
       this.formData.campos[naturalezaIndex].opciones = res;
@@ -117,6 +118,10 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
     this.treeHelper.getDetalleCuenta().subscribe(res => {
       this.formData.campos[detalleCuentaIndex].opciones = res;
+    });
+
+    this.treeHelper.getCentroCostos().subscribe(res => {
+      this.formData.campos[centroCostosIndex].opciones = res;
     });
 
 
@@ -209,10 +214,11 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
   validarForm($event) {
     const nodeData = $event.data.NodoCuentaContable;
+    
     nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['Id'];
     nodeData['MonedaID'] = nodeData['MonedaID']['Id'];
     nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['Id'];
-    nodeData['CentroCostosID'] = nodeData['CentroCostosID']['Label'];
+    nodeData['CentroDecostosID'] = nodeData['CentroDecostosID']['Id'];
     nodeData['Ajustable'] = nodeData['Ajustable']['Id'];
     nodeData['RequiereTercero'] = nodeData['RequiereTercero']['Id'];
     nodeData['Nmnc'] = nodeData['Nmnc']['Id'];
@@ -264,7 +270,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     }
     // always "Codigo" field is disabled.
     if (update === true) {
-      const codigoIndex = FormManager.getIndexForm(this.formData, 'Codigo')
+      const codigoIndex = FormManager.getIndexForm(this.formData, 'Codigo');
       this.formData.campos[codigoIndex].deshabilitar = true;
     }
   }
@@ -277,10 +283,12 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   getTreeInfo() {
     this.treeHelper.getInfoCuenta(this.selectedNodeData.Codigo).subscribe(res => {
       this.nodeData = res;
-      const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID')
+      const naturalezaIndex = FormManager.getIndexForm(this.formData, 'NaturalezaCuentaID');
       const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
       const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
+      const centroCostosIndex = FormManager.getIndexForm(this.formData, 'CentroDecostosID');
       this.nodeData['DetalleCuentaID'] = this.formData.campos[detalleCuentaIndex].opciones.find(element => element.Id === this.nodeData['DetalleCuentaID']);
+      this.nodeData['CentroDecostosID'] = this.formData.campos[centroCostosIndex].opciones.find(element => element.Id === this.nodeData['CentroDecostosID']);
       this.nodeData['MonedaID'] = this.formData.campos[tipoMonedaIndex].opciones.find(element => element.Id === this.nodeData['MonedaID']);
       this.nodeData['NaturalezaCuentaID'] = this.formData.campos[naturalezaIndex].opciones.find(element => element.Id === this.nodeData['NaturalezaCuentaID']);
       this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
