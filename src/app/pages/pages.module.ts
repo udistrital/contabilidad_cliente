@@ -10,7 +10,8 @@ import {
   NbCardModule,
   NbTooltipModule,
   NbRadioModule,
-  NbCheckboxModule } from '@nebular/theme';
+  NbCheckboxModule,
+  NbButtonModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { MatStepperModule } from '@angular/material';
@@ -30,12 +31,15 @@ import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comproban
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
 import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
+import { ConceptosComponent } from './conceptos/conceptos.component';
+import { WizardComponent } from './conceptos/wizard/wizard.component';
 
 @NgModule({
   imports: [
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
+    NbButtonModule,
     NbIconModule,
     DashboardModule,
     SharedModule,
@@ -66,6 +70,8 @@ import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuenta
     ParametrosComprobanteComponent,
     ArbolCuentasContablesComponent,
     FsIconAComponent,
+    ConceptosComponent,
+    WizardComponent,
 
   ],
   providers: [
