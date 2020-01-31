@@ -2,6 +2,15 @@
   position: absolute;
   right: 0;
 }
+:host ::ng-deep .input-create-concept {
+  position: relative;
+
+  .nbButton-inline-button {
+    position: absolute;
+    right: -8px;
+    top: -7px;
+  }
+}
 :host ::ng-deep nb-stepper .header {
   margin-top: 50px;
 }
@@ -13,3 +22,31 @@
     margin: 0.5rem;
   }
 }
+:host ::ng-deep .nbCard-resumen {
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+
+  .nbCard-columm:nth-child(1){
+    margin-right: 2%;
+    margin-top: 4%;
+  }
+  .nbCard-columm:nth-child(2){
+    margin-top: 2%;
+
+    p strong:nth-child(1) {
+      margin-right: 52px;
+    }
+    p strong:nth-child(2) {
+      margin-right: 3px;
+    }
+  }
+  nb-icon {
+    width: 60px;
+  }
+
+  h4 {
+    font-size: 1.1 rem;
+    color: #28a745;
+  }
+};

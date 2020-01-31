@@ -6,18 +6,37 @@
       <nb-step [label]="firstStep">
         <ng-template #firstStep >{{'CONCEPTOS.crear-concepto' | translate }}</ng-template>
         <h3>{{'CONCEPTOS.crear-concepto' | translate }}</h3>
-        <button nbButton outline disabled nbStepperNext>{{'CONCEPTOS.anterior' | translate }}</button>
-        <button nbButton outline nbStepperNext>{{'CONCEPTOS.siguiente' | translate }}</button>
+        <div class="input-create-concept">
+          <input type="text" nbInput fullWidth shape="round" placeholder="Escribir el nombre del concepto" nbStepperNext>
+          <button class="nbButton-inline-button" nbButton shape="round" nbStepperNext>{{'CONCEPTOS.siguiente' | translate }}</button>
+        </div>
       </nb-step>
       <nb-step [label]="secondStep">
         <ng-template #secondStep>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</ng-template>
         <h3>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</h3>
+        <ngx-cuentas-contables></ngx-cuentas-contables>
         <button nbButton outline nbStepperPrevious>{{'CONCEPTOS.anterior' | translate }}</button>
         <button nbButton outline nbStepperNext>{{'CONCEPTOS.guardar' | translate }}</button>
       </nb-step>
       <nb-step [label]="thirdStep">
         <ng-template #thirdStep>{{'CONCEPTOS.concepto-creado' | translate }}</ng-template>
-        <h3>{{'CONCEPTOS.concepto-creado' | translate }}</h3>
+        <nb-card class="nbCard-resumen" accent="success">
+          <div class="nbCard-columm">
+            <nb-icon status="success" icon="checkmark-circle-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+          </div>
+          <div class="nbCard-columm">
+            <h4 status="success" >{{'CONCEPTOS.concepto-creado' | translate }}</h4>
+            <p>
+              <strong>Nombre:</strong><span>Lorem ipsum</span>
+            </p>
+            <p>
+              <strong>Cuenta crédito:</strong><span>Lorem ipsum</span>
+            </p>
+            <p>
+              <strong>Cuenta débito:</strong><span>Lorem ipsum</span>
+            </p>
+          </div>
+        </nb-card>
         <button nbButton outline disabled nbStepperNext>Cerrar wizard</button>
       </nb-step>
     </nb-stepper>
