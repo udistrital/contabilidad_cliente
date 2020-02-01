@@ -12,7 +12,8 @@ import {
   NbRadioModule,
   NbCheckboxModule,
   NbButtonModule,
-  NbInputModule } from '@nebular/theme';
+  NbInputModule,
+  NbListModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { MatStepperModule } from '@angular/material';
@@ -64,7 +65,8 @@ import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas
     ToasterModule,
     MatStepperModule,
     CurrencyMaskModule,
-    NbInputModule
+    NbInputModule,
+    NbListModule
   ],
   declarations: [
     PagesComponent,

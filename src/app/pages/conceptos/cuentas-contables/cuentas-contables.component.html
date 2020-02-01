@@ -1,1 +1,37 @@
-<p>cuentas-contables works!</p>
+<nb-card>
+  <nb-card-body>
+    <button nbButton outline nbStepperPrevious>
+      <span class="text">{{'CONCEPTOS.anterior' | translate }}</span>
+      <span class="icon"><nb-icon status="primary" icon="arrow-ios-back-outline"></nb-icon></span>
+    </button>
+    <button nbButton outline nbStepperNext status="info">
+      <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
+      <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
+    </button>
+    <h3>{{'CUENTAS_CONTABLES.cuentas-contables' | translate }}</h3>
+    <div class="resumen-cuentas">
+      <div class="nbCard-columm">
+        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>1-1-11-14</span>
+      </div>
+      <div class="nbCard-columm">
+        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>N/A</span>
+      </div>
+    </div>
+    <nb-card class="arbol-cuentas">
+      <div class="nbCard-columm">
+        <nb-list>
+          <nb-list-item *ngFor="let fruit of fruits">
+            {{ fruit }}
+          </nb-list-item>
+        </nb-list>
+      </div>
+      <div class="nbCard-columm">
+        <nb-list>
+          <nb-list-item *ngFor="let fruit of fruits">
+            {{ fruit }}
+          </nb-list-item>
+        </nb-list>
+      </div>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

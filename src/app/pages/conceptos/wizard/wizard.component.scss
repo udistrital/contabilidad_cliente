@@ -34,11 +34,20 @@
   .nbCard-columm:nth-child(2){
     margin-top: 2%;
 
-    p strong:nth-child(1) {
-      margin-right: 52px;
+    p:nth-child(2) {
+      strong{
+        margin-right: 52px;
+      }
     }
-    p strong:nth-child(2) {
-      margin-right: 3px;
+    p:nth-child(3) {
+      strong {
+        margin-right: 3px;
+      }
+    }
+    p:nth-child(4) {
+      strong {
+        margin-right: 8px;
+      }
     }
   }
   nb-icon {

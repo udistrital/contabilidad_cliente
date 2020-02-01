@@ -216,15 +216,19 @@
     "confirmacion_eliminar": "Tipo de comprobante eliminado"
   },
   "CUENTAS_CONTABLES": {
-    "arbol_cuentas_contables": "Cuentas Contables"
+    "arbol_cuentas_contables": "Cuentas Contables",
+    "cuentas-contables": "Cuentas-contables"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",
-    "asociar-cuentas-contables":"Asociar cuenta(s) contables",
+    "asociar-cuentas-contables":"Asociar cuenta(s) contable(s)",
     "concepto-creado":"Concepto creado !",
     "anterior": "Anterior",
     "siguiente": "Siguiente",
-    "guardar": "guardar"
+    "guardar": "guardar",
+    "nombre": "Nombre:",
+    "cuenta-credito": "Cuenta crédito:",
+    "cuenta-debito": "Cuenta dédito:"
   },
   "FOOTER": {
     "dias_disponibilidad": "Lunes a Viernes",
