@@ -24,12 +24,28 @@
   .arbol-cuentas {
     border-top: 2px solid #7f7f7f;
   }
+  .resumen-cuentas {
+    font-size: 1.1rem;
+
+    .nbCard-columm {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    strong {
+      margin-right: 10px;
+    }
+  }
   .nbCard-columm {
     width: 40%;
     margin-left: 10%;
   }
   nb-list {
     text-align: left;
+  }
+  nb-list-item {
+    display: flex;
+    flex-direction: column;
   }
   nb-list-item:hover {
     color: white;

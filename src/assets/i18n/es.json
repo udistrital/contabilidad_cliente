@@ -228,7 +228,8 @@
     "guardar": "guardar",
     "nombre": "Nombre:",
     "cuenta-credito": "Cuenta crédito:",
-    "cuenta-debito": "Cuenta dédito:"
+    "cuenta-debito": "Cuenta dédito:",
+    "escribir-nombre-concepto": "Escribir el nombre del concepto"
   },
   "FOOTER": {
     "dias_disponibilidad": "Lunes a Viernes",

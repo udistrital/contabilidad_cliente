@@ -11,24 +11,26 @@
     <h3>{{'CUENTAS_CONTABLES.cuentas-contables' | translate }}</h3>
     <div class="resumen-cuentas">
       <div class="nbCard-columm">
-        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>1-1-11-14</span>
+        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>{{selectionCredito}}</span>
       </div>
       <div class="nbCard-columm">
-        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>N/A</span>
+        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>{{ selectionDebito }}</span>
       </div>
     </div>
     <nb-card class="arbol-cuentas">
       <div class="nbCard-columm">
         <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits">
-            {{ fruit }}
+          <nb-list-item *ngFor="let fruit of fruits" (click)="updateCredito(fruit)">
+            <span>{{ fruit }}</span>
+            <span>Nombre de cuenta contables</span>
           </nb-list-item>
         </nb-list>
       </div>
       <div class="nbCard-columm">
         <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits">
-            {{ fruit }}
+          <nb-list-item *ngFor="let fruit of fruits" (click)="updateDedito(fruit)">
+            <span>{{ fruit }}</span>
+            <span>Nombre de cuenta contables</span>
           </nb-list-item>
         </nb-list>
       </div>

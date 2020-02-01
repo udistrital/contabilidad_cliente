@@ -1,13 +1,25 @@
-<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12" [@openDivWizard]=stateWizard>
   <nb-card-body>
-    <button nbButton nbTooltip="Cerrar Wizard" nbTooltipStatus="primary" ghost status="primary" class="nbButton-close"><nb-icon icon="close-outline"></nb-icon></button>
-    <nb-stepper orientation="horizontal">
+    <button
+      nbButton ghost
+      nbTooltip="Cerrar Wizard"
+      nbTooltipStatus="primary"
+      status="primary"
+      class="nbButton-close"
+      (click)="cerrarWizard()"><nb-icon icon="close-outline"></nb-icon>
+    </button>
+    <nb-stepper orientation="horizontal" #nbStepperWizard>
       <h2>{{'CONCEPTOS.crear-concepto' | translate }}</h2>
       <nb-step [label]="firstStep">
         <ng-template #firstStep >{{'CONCEPTOS.crear-concepto' | translate }}</ng-template>
         <h3>{{'CONCEPTOS.crear-concepto' | translate }}</h3>
         <div class="input-create-concept">
-          <input type="text" nbInput fullWidth shape="round" placeholder="Escribir el nombre del concepto" nbStepperNext>
+          <input
+            type="text"
+            shape="round"
+            placeholder="{{'CONCEPTOS.escribir-nombre-concepto' | translate }}"
+            (keyup.enter)="validateName()"
+            nbInput fullWidth nbStepperNext >
           <button class="nbButton-inline-button" nbButton shape="round" nbStepperNext>{{'CONCEPTOS.siguiente' | translate }}</button>
         </div>
       </nb-step>
@@ -35,7 +47,7 @@
             </p>
           </div>
         </nb-card>
-        <button nbButton outline disabled nbStepperNext>Cerrar wizard</button>
+        <button nbButton outline nbStepperNext (click)="resetWizard()">Cerrar wizard</button>
       </nb-step>
     </nb-stepper>
   </nb-card-body>
