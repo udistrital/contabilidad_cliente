@@ -1,3 +1,6 @@
+.hidden {
+  display: none !important;
+}
 .nbButton-close {
   position: absolute;
   right: 0;
@@ -10,12 +13,19 @@ input.ng-invalid.ng-dirty:not(form)  {
   border: 1px solid #a94442; /* red */
 }
 :host ::ng-deep .input-create-concept {
+  display: flex;
+  flex-direction: column;
   position: relative;
 
   .nbButton-inline-button {
     position: absolute;
     right: -6px;
     top: -7px;
+  }
+  span {
+    color: #a94442;
+    align-self: center;
+    font-size: 0.8rem;
   }
 }
 :host ::ng-deep nb-stepper .header {

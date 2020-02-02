@@ -31,25 +31,34 @@ export class WizardComponent implements OnInit {
 
   @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard;
   @Input("stateWizard") stateWizard: any;
+
   @Output() closedWizard = new EventEmitter<boolean>();
 
-  addWizardForm : FormGroup;
+  addWizardForm :   FormGroup;
   ayudacontrolForm: FormControl;
   nombreConcepto: any;
-  nextBtnValidateName: boolean = true;
+  nextBtnValidateName:    boolean = true;
+  touchedBtnValidateName: boolean = false;
+  numeroCuentaCredito: string = 'N/A';
+  numeroCuentaDebito:  string = 'N/A';
+
+  conceptoCreado = <any>{ "nombre":"","cuentaCredito":"","cuentaDebito":"" };
 
   constructor( private fb: FormBuilder) { }
 
   ngOnInit() {
     this.addWizardForm = this.fb.group({
-      nombreConcepto: new FormControl('',[Validators.required,Validators.minLength(4)]),
+      nombreConcepto:      new FormControl('',[Validators.required,Validators.minLength(4)]),
+      numeroCuentaCredito: new FormControl(this.numeroCuentaCredito),
+      numeroCuentaDebito:  new FormControl(this.numeroCuentaDebito)
     });
     this.nombreConcepto = this.addWizardForm.controls.nombreConcepto;
   }
 
   validateName(){
+    this.touchedBtnValidateName = true;
     if('VALID' === this.nombreConcepto.status){
-      this.nextBtnValidateName = false;
+      this.nextBtnValidateName   = false;
     }else{
       this.nextBtnValidateName = true;
     }
@@ -61,7 +70,21 @@ export class WizardComponent implements OnInit {
     }
   }
 
+  updateCuentaCredito(newCuenta: string) {
+    this.numeroCuentaCredito = newCuenta;
+    this.addWizardForm.value.numeroCuentaCredito = this.numeroCuentaCredito;
+  }
+
+  updateCuentaDebito(newCuenta: string) {
+    this.numeroCuentaDebito = newCuenta;
+    this.addWizardForm.value.numeroCuentaDebito = this.numeroCuentaDebito;
+  }
+
   resetWizard() {
+    this.numeroCuentaCredito = 'N/A';
+    this.numeroCuentaDebito  = 'N/A';
+    this.addWizardForm.value.numeroCuentaDebito  = this.numeroCuentaDebito;
+    this.addWizardForm.value.numeroCuentaCredito = this.numeroCuentaCredito;
     this.nbStepperWizard.reset();
   }
 
@@ -71,8 +94,14 @@ export class WizardComponent implements OnInit {
   }
 
   crearConcepto(){
-    this.addWizardForm.markAsDirty();
-    console.log('submit');
+    this.updateResumen();
+    console.log('submit',this.addWizardForm.value);
+  }
+
+  updateResumen(){
+    this.conceptoCreado.nombre        = this.addWizardForm.value.nombreConcepto;
+    this.conceptoCreado.cuentaDebito  = this.addWizardForm.value.numeroCuentaDebito;
+    this.conceptoCreado.cuentaCredito = this.addWizardForm.value.numeroCuentaCredito;
   }
 
 }

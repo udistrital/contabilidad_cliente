@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { fruits } from '../../layout/list/fruits-list';
 
 @Component({
@@ -8,8 +8,12 @@ import { fruits } from '../../layout/list/fruits-list';
 })
 export class CuentasContablesComponent implements OnInit {
   fruits = fruits;
-  selectionDebito:  String = 'N/A';
-  selectionCredito: String = 'N/A';
+  @Input("selectionDebito")  selectionDebito: string ;
+  @Input("selectionCredito") selectionCredito: string ;
+
+  @Output() updateCuentaDebito  = new EventEmitter<string>();
+  @Output() updateCuentaCredito = new EventEmitter<string>();
+  @Output() guardarCuentas = new EventEmitter<boolean>();
 
   constructor() { }
 
@@ -17,8 +21,13 @@ export class CuentasContablesComponent implements OnInit {
   }
   updateCredito(cuenta) {
     this.selectionCredito  = cuenta;
+    this.updateCuentaCredito.emit(this.selectionCredito);
   }
-  updateDedito(cuenta) {
-    this.selectionDebito = cuenta;
+  updateDebito(cuenta) {
+    this.selectionDebito   = cuenta;
+    this.updateCuentaDebito.emit(this.selectionDebito);
+  }
+  enviarGuardado(){
+    this.guardarCuentas.emit(true);
   }
 }

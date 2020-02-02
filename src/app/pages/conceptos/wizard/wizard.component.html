@@ -23,7 +23,8 @@
               (keyup)="validateName()"
               (keyup.enter)="nameValidatedNextStep()"
               formControlName="nombreConcepto"
-              nbInput fullWidth nbStepperNext >
+              nbInput fullWidth nbStepperNext autofocus >
+            <span *ngIf="nextBtnValidateName && touchedBtnValidateName" status="danger" >{{'CONCEPTOS.error-nombre-concepto' | translate }}</span>
             <button
               class="nbButton-inline-button"
               shape="round"
@@ -34,7 +35,15 @@
         <nb-step [label]="secondStep">
           <ng-template #secondStep>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</ng-template>
           <h3>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</h3>
-          <ngx-cuentas-contables></ngx-cuentas-contables>
+          <input type="text" name="cuenta-credito" class="hidden" formControlName="numeroCuentaCredito">
+          <input type="text" name="cuenta-dedito"  class="hidden" formControlName="numeroCuentaDebito">
+          <ngx-cuentas-contables
+            [selectionDebito]="numeroCuentaDebito"
+            [selectionCredito]="numeroCuentaCredito"
+            (updateCuentaDebito)="updateCuentaDebito($event)"
+            (updateCuentaCredito)="updateCuentaCredito($event)"
+            (guardarCuentas)="crearConcepto()"
+          ></ngx-cuentas-contables>
         </nb-step>
         <nb-step [label]="thirdStep">
           <ng-template #thirdStep>{{'CONCEPTOS.concepto-creado' | translate }}</ng-template>
@@ -45,13 +54,13 @@
             <div class="nbCard-columm">
               <h4 status="success" >{{'CONCEPTOS.concepto-creado' | translate }}</h4>
               <p>
-                <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>Lorem ipsum</span>
+                <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>{{ conceptoCreado.nombre }}</span>
               </p>
               <p>
-                <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>Lorem ipsum</span>
+                <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>{{ conceptoCreado.cuentaCredito }}</span>
               </p>
               <p>
-                <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>Lorem ipsum</span>
+                <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>{{ conceptoCreado.cuentaDebito }}</span>
               </p>
             </div>
           </nb-card>

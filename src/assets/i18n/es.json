@@ -228,9 +228,10 @@
     "guardar": "guardar",
     "nombre": "Nombre:",
     "cuenta-credito": "Cuenta crédito:",
-    "cuenta-debito": "Cuenta dédito:",
+    "cuenta-debito": "Cuenta débito:",
     "escribir-nombre-concepto": "Escribir el nombre del concepto",
-    "crear-nuevo-concepto":"Crear nuevo concepto"
+    "crear-nuevo-concepto":"Crear nuevo concepto",
+    "error-nombre-concepto":"Nombre de concepto inválido o ya se encuentra en uso"
   },
   "FOOTER": {
     "dias_disponibilidad": "Lunes a Viernes",
