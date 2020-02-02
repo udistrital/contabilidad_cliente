@@ -229,7 +229,8 @@
     "nombre": "Nombre:",
     "cuenta-credito": "Cuenta crédito:",
     "cuenta-debito": "Cuenta dédito:",
-    "escribir-nombre-concepto": "Escribir el nombre del concepto"
+    "escribir-nombre-concepto": "Escribir el nombre del concepto",
+    "crear-nuevo-concepto":"Crear nuevo concepto"
   },
   "FOOTER": {
     "dias_disponibilidad": "Lunes a Viernes",

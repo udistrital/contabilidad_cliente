@@ -8,47 +8,56 @@
       class="nbButton-close"
       (click)="cerrarWizard()"><nb-icon icon="close-outline"></nb-icon>
     </button>
-    <nb-stepper orientation="horizontal" #nbStepperWizard>
-      <h2>{{'CONCEPTOS.crear-concepto' | translate }}</h2>
-      <nb-step [label]="firstStep">
-        <ng-template #firstStep >{{'CONCEPTOS.crear-concepto' | translate }}</ng-template>
-        <h3>{{'CONCEPTOS.crear-concepto' | translate }}</h3>
-        <div class="input-create-concept">
-          <input
-            type="text"
-            shape="round"
-            placeholder="{{'CONCEPTOS.escribir-nombre-concepto' | translate }}"
-            (keyup.enter)="validateName()"
-            nbInput fullWidth nbStepperNext >
-          <button class="nbButton-inline-button" nbButton shape="round" nbStepperNext>{{'CONCEPTOS.siguiente' | translate }}</button>
-        </div>
-      </nb-step>
-      <nb-step [label]="secondStep">
-        <ng-template #secondStep>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</ng-template>
-        <h3>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</h3>
-        <ngx-cuentas-contables></ngx-cuentas-contables>
-      </nb-step>
-      <nb-step [label]="thirdStep">
-        <ng-template #thirdStep>{{'CONCEPTOS.concepto-creado' | translate }}</ng-template>
-        <nb-card class="nbCard-resumen" accent="success">
-          <div class="nbCard-columm">
-            <nb-icon status="success" icon="checkmark-circle-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+    <form [formGroup]="addWizardForm" (ngSubmit)="crearConcepto()">
+      <nb-stepper orientation="horizontal" #nbStepperWizard>
+        <h2>{{'CONCEPTOS.crear-concepto' | translate }}</h2>
+        <nb-step [label]="firstStep">
+          <ng-template #firstStep >{{'CONCEPTOS.crear-concepto' | translate }}</ng-template>
+          <h3>{{'CONCEPTOS.crear-concepto' | translate }}</h3>
+          <div class="input-create-concept">
+            <input
+              name="nombreConcepto"
+              type="text"
+              shape="round"
+              placeholder="{{'CONCEPTOS.escribir-nombre-concepto' | translate }}"
+              (keyup)="validateName()"
+              (keyup.enter)="nameValidatedNextStep()"
+              formControlName="nombreConcepto"
+              nbInput fullWidth nbStepperNext >
+            <button
+              class="nbButton-inline-button"
+              shape="round"
+              [disabled]="nextBtnValidateName"
+              nbStepperNext nbButton>{{'CONCEPTOS.siguiente' | translate }}</button>
           </div>
-          <div class="nbCard-columm">
-            <h4 status="success" >{{'CONCEPTOS.concepto-creado' | translate }}</h4>
-            <p>
-              <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>Lorem ipsum</span>
-            </p>
-            <p>
-              <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>Lorem ipsum</span>
-            </p>
-            <p>
-              <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>Lorem ipsum</span>
-            </p>
-          </div>
-        </nb-card>
-        <button nbButton outline nbStepperNext (click)="resetWizard()">Cerrar wizard</button>
-      </nb-step>
-    </nb-stepper>
+        </nb-step>
+        <nb-step [label]="secondStep">
+          <ng-template #secondStep>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</ng-template>
+          <h3>{{'CONCEPTOS.asociar-cuentas-contables' | translate }}</h3>
+          <ngx-cuentas-contables></ngx-cuentas-contables>
+        </nb-step>
+        <nb-step [label]="thirdStep">
+          <ng-template #thirdStep>{{'CONCEPTOS.concepto-creado' | translate }}</ng-template>
+          <nb-card class="nbCard-resumen" accent="success">
+            <div class="nbCard-columm">
+              <nb-icon status="success" icon="checkmark-circle-outline" [options]="{ animation: { type: 'zoom' } }"></nb-icon>
+            </div>
+            <div class="nbCard-columm">
+              <h4 status="success" >{{'CONCEPTOS.concepto-creado' | translate }}</h4>
+              <p>
+                <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>Lorem ipsum</span>
+              </p>
+              <p>
+                <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>Lorem ipsum</span>
+              </p>
+              <p>
+                <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>Lorem ipsum</span>
+              </p>
+            </div>
+          </nb-card>
+          <button nbButton outline nbStepperNext (click)="resetWizard()">{{'CONCEPTOS.crear-nuevo-concepto' | translate }}</button>
+        </nb-step>
+      </nb-stepper>
+    </form>
   </nb-card-body>
 </nb-card>

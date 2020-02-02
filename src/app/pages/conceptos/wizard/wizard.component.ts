@@ -6,6 +6,7 @@ import {
   style,
   animate,
   transition } from '@angular/animations';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'ngx-wizard',
@@ -32,19 +33,46 @@ export class WizardComponent implements OnInit {
   @Input("stateWizard") stateWizard: any;
   @Output() closedWizard = new EventEmitter<boolean>();
 
-  constructor() { }
+  addWizardForm : FormGroup;
+  ayudacontrolForm: FormControl;
+  nombreConcepto: any;
+  nextBtnValidateName: boolean = true;
+
+  constructor( private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.addWizardForm = this.fb.group({
+      nombreConcepto: new FormControl('',[Validators.required,Validators.minLength(4)]),
+    });
+    this.nombreConcepto = this.addWizardForm.controls.nombreConcepto;
+  }
 
-  }
   validateName(){
-    this.nbStepperWizard.next();
+    if('VALID' === this.nombreConcepto.status){
+      this.nextBtnValidateName = false;
+    }else{
+      this.nextBtnValidateName = true;
+    }
   }
+
+  nameValidatedNextStep(){
+    if(!this.nextBtnValidateName){
+      this.nbStepperWizard.next();
+    }
+  }
+
   resetWizard() {
     this.nbStepperWizard.reset();
   }
+
   cerrarWizard(){
     this.stateWizard = 'close';
     this.closedWizard.emit(this.stateWizard);
   }
+
+  crearConcepto(){
+    this.addWizardForm.markAsDirty();
+    console.log('submit');
+  }
+
 }

@@ -2,12 +2,19 @@
   position: absolute;
   right: 0;
 }
+input.ng-valid:not(form){
+  border: 1px solid #42A948; /* green */
+}
+
+input.ng-invalid.ng-dirty:not(form)  {
+  border: 1px solid #a94442; /* red */
+}
 :host ::ng-deep .input-create-concept {
   position: relative;
 
   .nbButton-inline-button {
     position: absolute;
-    right: -8px;
+    right: -6px;
     top: -7px;
   }
 }
@@ -16,7 +23,9 @@
 }
 :host ::ng-deep nb-stepper .step-content {
   text-align: center;
-
+  .input-create-concept input {
+    padding-bottom: 8px;
+  }
   button {
     cursor: pointer;
     margin: 0.5rem;
