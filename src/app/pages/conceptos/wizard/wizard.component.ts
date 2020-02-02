@@ -95,7 +95,6 @@ export class WizardComponent implements OnInit {
 
   crearConcepto(){
     this.updateResumen();
-    console.log('submit',this.addWizardForm.value);
   }
 
   updateResumen(){

@@ -10,11 +10,17 @@
     </button>
     <h3>{{'CUENTAS_CONTABLES.cuentas-contables' | translate }}</h3>
     <div class="resumen-cuentas">
-      <div class="nbCard-columm">
-        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>{{ selectionCredito }}</span>
+      <div class="nbCard-columm" >
+        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong>
+          <span
+            [@changeSelectedValue]="triggerAnimationText('credito')"
+            (@changeSelectedValue.done)="restaurarAnimationInitial($event)">{{ selectionCredito }}</span>
       </div>
       <div class="nbCard-columm">
-        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>{{ selectionDebito }}</span>
+        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong>
+          <span
+            [@changeSelectedValue]="triggerAnimationText('debito')"
+            (@changeSelectedValue.done)="restaurarAnimationInitial($event)">{{ selectionDebito }}</span>
       </div>
     </div>
     <nb-card class="arbol-cuentas">
