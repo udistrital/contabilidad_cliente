@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WizardComponent } from './wizard/wizard.component';
+import { conceptos } from './conceptos-ejemplo'
 
 @Component({
   selector: 'ngx-concepts-conceptos',
@@ -18,15 +19,21 @@ export class ConceptosComponent implements OnInit {
   ngOnInit() {
   }
 
-  abrirWizard(){
+  abrirWizard() {
     this.showModalVar = true;
     this.currentState = 'open';
   }
-  cerrarWizard(){
+
+  cerrarWizard() {
     this.showModalVar = false;
     this.currentState = 'close';
   }
-  updateStateWizard(newState: string){
+
+  updateStateWizard(newState: string) {
     this.currentState = newState;
+  }
+
+  abrirModal() {
+    console.log("Abrir modal!");
   }
 }

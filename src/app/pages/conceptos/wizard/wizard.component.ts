@@ -23,7 +23,7 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
         maxHeight: 0
       })),
       transition('open=>close',animate('500ms')),
-      transition('close=>open',animate('50ms'))
+      transition('close=>open',animate('100ms'))
     ]),
   ]
 })

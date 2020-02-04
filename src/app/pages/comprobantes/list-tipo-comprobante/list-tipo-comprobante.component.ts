@@ -40,7 +40,6 @@ export class ListTipoComprobanteComponent implements OnInit {
   localtabActived: boolean = false;
   viewTab: boolean = false;
 
-  
   listColumns: object;
   tipoComprobanteInfo: any;
   disabledVigencia: boolean = false;
