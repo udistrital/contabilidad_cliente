@@ -36,6 +36,7 @@ import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuenta
 import { ConceptosComponent } from './conceptos/conceptos.component';
 import { WizardComponent } from './conceptos/wizard/wizard.component';
 import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas-contables.component';
+import { ListConceptosComponent } from './conceptos/list-conceptos/list-conceptos.component';
 
 @NgModule({
   imports: [
@@ -78,7 +79,7 @@ import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas
     ConceptosComponent,
     WizardComponent,
     CuentasContablesComponent,
-
+    ListConceptosComponent,
   ],
   providers: [
     ConfiguracionService,

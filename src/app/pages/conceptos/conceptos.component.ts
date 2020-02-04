@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WizardComponent } from './wizard/wizard.component';
-import { conceptos } from './conceptos-ejemplo'
 
 @Component({
   selector: 'ngx-concepts-conceptos',
@@ -10,7 +9,6 @@ import { conceptos } from './conceptos-ejemplo'
 })
 
 export class ConceptosComponent implements OnInit {
-
   showModalVar: boolean = true;
   currentState: string = 'open';
 

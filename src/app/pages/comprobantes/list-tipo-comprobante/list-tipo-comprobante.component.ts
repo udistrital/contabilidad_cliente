@@ -102,7 +102,7 @@ export class ListTipoComprobanteComponent implements OnInit {
       };
     } else {
 
-      this.listSettings = {
+    this.listSettings = {
         actions: {
           add: true,
           edit: false,

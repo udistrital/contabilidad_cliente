@@ -5,11 +5,9 @@ export const conceptos: object[] =[
     "Activo": true,
     "ID": "5e376e1a89a7ed27e4efc402",
     "Nombre": "Nuevo Concepto",
-    "CuentasContables": [
-    "1-11-12-14",
-    "1-12-13-14"
-    ],
-    "SistemaID": "falso sistema"
+    "CuentaDebito": "N/A",
+    "CuentaCredito": "1-12-13-16",
+    "movimientoID": "concepto-movimiento-fake"
   },
   {
     "FechaCreacion": "2020-02-04",
@@ -17,10 +15,8 @@ export const conceptos: object[] =[
     "Activo": true,
     "ID": "5e38b8bc89a7ed27e4efc403",
     "Nombre": "Nuevo Concepto solo crédito",
-    "CuentasContables": [
-    "N/A",
-    "1-12-13-16"
-    ],
-    "SistemaID": "falso sistema"
+    "CuentaDebito": "N/A",
+    "CuentaCredito": "1-1-12-13-16",
+    "movimientoID": "concepto-movimiento-fake"
   }
 ];
