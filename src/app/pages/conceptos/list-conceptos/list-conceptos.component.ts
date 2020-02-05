@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { conceptos } from '../conceptos-ejemplo';
 import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
 import { Observable } from 'rxjs';
 
@@ -10,8 +9,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./list-conceptos.component.scss']
 })
 export class ListConceptosComponent implements OnInit {
-
-  conceptos = conceptos;
 
   /*-- List entity Variables --*/
   formEntity: any;
@@ -52,12 +49,13 @@ export class ListConceptosComponent implements OnInit {
   listSettings: object;
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private conceptoHelper: ConceptoHelper
   ) { }
 
   ngOnInit() {
-    this.loadFormDataFunction = this.conceptos;
-    this.loadDataFunction = this.conceptos;
+    this.loadFormDataFunction = this.conceptoHelper.getConceptos;
+    this.loadDataFunction = this.conceptoHelper.getConceptos;
     this.isOnlyCrud = true;
     this.uuidReadFieldName = 'ID';
     this.uuidDeleteFieldName = 'ID';

@@ -104,6 +104,7 @@ export class ListTipoComprobanteComponent implements OnInit {
 
     this.listSettings = {
         actions: {
+          columnTitle: 'Opciones',
           add: true,
           edit: false,
           delete: false,

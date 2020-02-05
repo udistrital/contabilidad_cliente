@@ -21,13 +21,13 @@ export class ConceptoHelper {
        * @param param object with the params to get in the DB
        * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
        */
-    public getComprobantes(id?: any, params?: any) {
+    public getConceptos(id?: any, params?: any) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-        return this.rqManager.get('comprobante/' + id).pipe(
+        return this.rqManager.get('concepto/' + id).pipe(
             map(
                 (res) => {
                     if (res === 'error') {
-                        this.pUpManager.showErrorAlert('No se pudo consultar los tipos de comprobante');
+                        this.pUpManager.showErrorAlert('No se pudo consultar los conceptos');
                         return undefined;
                     }
                     return res;
@@ -43,9 +43,9 @@ export class ConceptoHelper {
        * @param data object to save in the DB
        * @returns  <Observable> data of the object registered at the DB. undefined if the request has errors
        */
-    public comprobanteRegister(data) {
+    public conceptoRegister(data) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-        return this.rqManager.post(`comprobante/`, data).pipe(
+        return this.rqManager.post(`concepto/`, data).pipe(
             map(
                 (res) => {
                     if (res['Type'] === 'error') {
@@ -66,13 +66,13 @@ export class ConceptoHelper {
      * @param data fields to update
      * @returns  <Observable> object updated information. undefined if the proccess has errors.
      */
-    public comprobanteUpdate(data) {
+    public conceptoUpdate(data) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-        return this.rqManager.put('comprobante/', data, data._id).pipe(
+        return this.rqManager.put('concepto/', data, data._id).pipe(
             map(
                 (res) => {
                     if (res['Type'] === 'error') {
-                        this.pUpManager.showErrorAlert('No se pudo actualizar el tipo de comprobante');
+                        this.pUpManager.showErrorAlert('No se pudo actualizar el concepto');
                         return undefined;
                     }
                     return res;
@@ -91,7 +91,7 @@ export class ConceptoHelper {
      */
     public comprobanteDelete(id: number, params?: any) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-        return this.rqManager.delete('comprobante', id.toString()).pipe(
+        return this.rqManager.delete('concepto', id.toString()).pipe(
             map(
                 (res) => {
                     return res;

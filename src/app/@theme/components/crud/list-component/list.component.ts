@@ -108,6 +108,7 @@ export class ListEntityComponent implements OnInit {
     } else {
       this.settings = {
         actions: {
+          columnTitle: 'Opciones',
           add: true,
           edit: false,
           delete: false,
