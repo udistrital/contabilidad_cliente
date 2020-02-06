@@ -8,6 +8,7 @@ import { NotFoundComponent } from "./miscellaneous/not-found/not-found.component
 import { ListTipoComprobanteComponent } from "./comprobantes/list-tipo-comprobante/list-tipo-comprobante.component";
 import { ListComprobanteComponent } from "./comprobantes/list-comprobante/list-comprobante.component";
 import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
+import { ConceptosComponent } from './conceptos/conceptos.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: "arbol_cuentas_contables",
         component: ArbolCuentasContablesComponent
+      },
+      {
+        path: "conceptos",
+        component: ConceptosComponent
       },
       {
         path: "**",

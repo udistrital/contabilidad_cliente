@@ -1,0 +1,33 @@
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card-body>
+    <ngx-list-entity
+                  [listSettings]="listSettings"
+                  [isOnlyCrud]="isOnlyCrud"
+                  [uuidReadFieldName]="uuidReadFieldName"
+                  [paramsFieldsName] ="paramsFieldsName"
+                  [uuidDeleteFieldName]="uuidDeleteFieldName"
+                  [listColumns]="listColumns"
+                  [deleteConfirmMessage]="deleteConfirmMessage"
+                  [deleteMessage]="deleteMessage"
+                  [loadDataFunction]="loadDataFunction"
+                  [deleteDataFunction]="deleteDataFunction"
+                  [formEntity]="formEntity"
+                  [formTittle]="formTittle"
+                  [updateMessage]="updateMessage"
+                  [createMessage]="createMessage"
+                  [updateConfirmMessage]="updateConfirmMessage"
+                  [createConfirmMessage]="createConfirmMessage"
+                  [loadFormDataFunction]="loadFormDataFunction"
+                  [updateEntityFunction]="updateEntityFunction"
+                  [createEntityFunction]="createEntityFunction"
+                  [viewItemSelected]="viewItemSelected"
+                  (infooutput)="receiveMessage($event)"
+                  (eventChange)="onChange($event)"
+                  (crudcambiotab)="onFirstTab($event)"
+                  (auxcambiotab)="onChangeTab($event)"
+                  (externalTabActive)="onChangeExternalTab($event)"
+                  (externalTabActivator)="onExternalTabActivator($event)"
+                  >
+    </ngx-list-entity>
+  </nb-card-body>
+</nb-card>

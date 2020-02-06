@@ -38,7 +38,6 @@ export class ListComprobanteComponent implements OnInit {
   localtabActived: boolean = false;
   paramsTab: boolean = false;
 
-  
   listColumns: object;
   comprobanteInfo: any;
   disabledVigencia: boolean = false;
@@ -94,7 +93,7 @@ export class ListComprobanteComponent implements OnInit {
       // type: 'string;',
       valuePrepareFunction: value => {
         return value;
-      }      
+      }
     },
     FechaModificacion: {
       title: this.translate.instant('GLOBAL.fecha_modificacion'),

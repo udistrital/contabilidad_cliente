@@ -6,11 +6,13 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { Observable } from 'rxjs';
 import { RequestManager } from '../../../../@core/managers/requestManager';
+
 @Component({
   selector: 'ngx-list-entity',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
+
 export class ListEntityComponent implements OnInit {
   // Local Inputs ...
   @Input('uuidReadFieldName') uuidReadField: string;
@@ -49,6 +51,7 @@ export class ListEntityComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
   cambiotab: boolean;
+
   constructor(
     private translate: TranslateService,
     private popUpManager: PopUpManager,
@@ -70,6 +73,7 @@ export class ListEntityComponent implements OnInit {
     });
     this.filtrarLista();
   }
+
   ngOnChanges(changes) {
     if (changes['paramsFieldsName'] && changes['paramsFieldsName'].currentValue) {
       this.paramsFieldsName = changes['paramsFieldsName'].currentValue;
@@ -77,6 +81,7 @@ export class ListEntityComponent implements OnInit {
     }
 
   }
+
   filtrarLista() {
     this.source.onChanged().subscribe((change) => {
 
@@ -95,14 +100,15 @@ export class ListEntityComponent implements OnInit {
 
       }
     });
-
   }
+
   cargarCampos() {
     if (this.listSettings !== undefined) {
       this.settings = this.listSettings;
     } else {
       this.settings = {
         actions: {
+          columnTitle: 'Opciones',
           add: true,
           edit: false,
           delete: false,
@@ -116,16 +122,17 @@ export class ListEntityComponent implements OnInit {
         },
         mode: 'external',
         columns: this.listColumns,
+        noDataMessage: 'No se encontro información.',
       };
     }
 
   }
+
   useLanguage(language: string) {
     this.translate.use(language);
   }
 
   loadData(): void {
-
     this.loadDataFunction('', this.paramsFieldsName ? this.paramsFieldsName : '').subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
@@ -135,6 +142,7 @@ export class ListEntityComponent implements OnInit {
       }
     });
   }
+
   IsFuente(event) {
     if (event.data.ValorInicial !== undefined) {
       this.formEntity.campos[this.getIndexForm('Codigo')].deshabilitar = true;
@@ -144,8 +152,8 @@ export class ListEntityComponent implements OnInit {
       }
     }
   }
+
   onEdit(event): void {
-    // console.info(event);
     this.uid = event.data[this.uuidReadField];
     this.IsFuente(event);
     this.activetab('crud');
@@ -156,10 +164,10 @@ export class ListEntityComponent implements OnInit {
   }
 
   onAddOther(event): void {
-    // console.info(event);
     this.infooutput.emit(event.data);
     this.activetab(event.action);
   }
+
   onCustom(event): void {
     switch (event.action) {
       case 'edit':
@@ -230,8 +238,6 @@ export class ListEntityComponent implements OnInit {
     }
   }
 
-
-
   selectTab(event): void {
     if (event.tabTitle === this.translate.instant('GLOBAL.lista')) {
       this.crudcambiotab.emit(false);
@@ -249,9 +255,10 @@ export class ListEntityComponent implements OnInit {
       this.crudcambiotab.emit(this.cambiotab);
     }
   }
+
   itemselec(event): void {
-    // console.info(event);
   }
+
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formEntity.campos.length; index++) {
       const element = this.formEntity.campos[index];
@@ -261,5 +268,4 @@ export class ListEntityComponent implements OnInit {
     }
     return 0;
   }
-
 }

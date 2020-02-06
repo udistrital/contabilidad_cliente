@@ -1,0 +1,45 @@
+<nb-card>
+  <nb-card-body>
+    <button nbButton outline nbStepperPrevious>
+      <span class="text">{{'CONCEPTOS.anterior' | translate }}</span>
+      <span class="icon"><nb-icon status="primary" icon="arrow-ios-back-outline"></nb-icon></span>
+    </button>
+    <button nbButton outline nbStepperNext status="info" (click)="enviarGuardado()">
+      <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
+      <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
+    </button>
+    <h3>{{'CUENTAS_CONTABLES.cuentas-contables' | translate }}</h3>
+    <div class="resumen-cuentas">
+      <div class="nbCard-columm" >
+        <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong>
+          <span
+            [@changeSelectedValue]="triggerAnimationText('credito')"
+            (@changeSelectedValue.done)="restaurarAnimationInitial($event)">{{ selectionCredito }}</span>
+      </div>
+      <div class="nbCard-columm">
+        <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong>
+          <span
+            [@changeSelectedValue]="triggerAnimationText('debito')"
+            (@changeSelectedValue.done)="restaurarAnimationInitial($event)">{{ selectionDebito }}</span>
+      </div>
+    </div>
+    <nb-card class="arbol-cuentas">
+      <div class="nbCard-columm">
+        <nb-list>
+          <nb-list-item *ngFor="let fruit of fruits" (click)="updateCredito(fruit)">
+            <span>{{ fruit }}</span>
+            <span>Nombre de cuenta contables</span>
+          </nb-list-item>
+        </nb-list>
+      </div>
+      <div class="nbCard-columm">
+        <nb-list>
+          <nb-list-item *ngFor="let fruit of fruits" (click)="updateDebito(fruit)">
+            <span>{{ fruit }}</span>
+            <span>Nombre de cuenta contables</span>
+          </nb-list-item>
+        </nb-list>
+      </div>
+    </nb-card>
+  </nb-card-body>
+</nb-card>

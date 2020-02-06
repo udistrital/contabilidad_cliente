@@ -40,7 +40,6 @@ export class ListTipoComprobanteComponent implements OnInit {
   localtabActived: boolean = false;
   viewTab: boolean = false;
 
-  
   listColumns: object;
   tipoComprobanteInfo: any;
   disabledVigencia: boolean = false;
@@ -103,8 +102,9 @@ export class ListTipoComprobanteComponent implements OnInit {
       };
     } else {
 
-      this.listSettings = {
+    this.listSettings = {
         actions: {
+          columnTitle: 'Opciones',
           add: true,
           edit: false,
           delete: false,
