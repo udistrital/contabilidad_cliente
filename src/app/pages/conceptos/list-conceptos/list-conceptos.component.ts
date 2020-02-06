@@ -10,8 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class ListConceptosComponent implements OnInit {
 
-  @Input("stateWizard") stateWizard: string;
-  @Output() wizardActivator = new EventEmitter<string>();
+  @Input("stateWizard") stateWizard:       string;
+  @Input("setDataRequest") setDataRequest: string;
+  @Output() wizardActivator      = new EventEmitter<string>();
+  @Output() getAllConceptosNames = new EventEmitter<any>();
+  @Output() emitDataRequested    = new EventEmitter<any>();
 
   /*-- List entity Variables --*/
   formEntity: any;
@@ -46,15 +49,17 @@ export class ListConceptosComponent implements OnInit {
   auxcambiotab         = new EventEmitter<boolean>();
   externalTabActivator = new EventEmitter<string>();
 
-  /*-- Local Variables--*/
-  listSettings: object;
-  externalCreate: boolean = true;
-  externalEdit: boolean = true;
-
   receiveMessage: any;
-  onChange: any;
-  onFirstTab: any;
-  onChangeTab: any;
+  onChange:       any;
+  onFirstTab:     any;
+  onChangeTab:    any;
+
+  /*-- Local Variables--*/
+  listSettings:   object;
+  externalCreate: boolean = true;
+  externalEdit:   boolean = true;
+  arrayConceptoNames: string[] = [];
+
 
   constructor(
     private translate: TranslateService,
@@ -73,11 +78,12 @@ export class ListConceptosComponent implements OnInit {
     this.uuidReadFieldName = 'ID';
     this.uuidDeleteFieldName = 'ID';
     this.deleteMessage = 'Eliminar Concepto'; // TODO: traducir
-    this.deleteConfirmMessage = "Feliz, elimino el concepto!";
+    this.deleteConfirmMessage = "Feliz, elimino el concepto!"; // TODO: traducir
     this.listColumns = {
       Nombre: {
         title: "Nombre",
         valuePrepareFunction: value => {
+          this.arrayConceptoNames.push(value.toLowerCase());
           return value;
         }
       },
@@ -114,6 +120,9 @@ export class ListConceptosComponent implements OnInit {
       mode: 'external',
       columns: this.listColumns,
     };
+    if(this.setDataRequest !== 'none') {
+      this.emitData('conceptos-names');
+    }
   }
 
   onExternalTabActivator(event){
@@ -121,6 +130,7 @@ export class ListConceptosComponent implements OnInit {
       this.stateWizard = 'open';
       this.wizardActivator.emit(this.stateWizard);
     } else {
+      this.getAllConceptosNames.emit(this.arrayConceptoNames);
       console.log(event,'onExternalTabActivator');
     }
   }
@@ -129,4 +139,13 @@ export class ListConceptosComponent implements OnInit {
     console.log(event,'onChangeExternalTab');
   }
 
+  emitData(event) {
+    if(event === 'conceptos-names') {
+      let objectSend = { requested: event, data: this.arrayConceptoNames };
+      this.emitDataRequested.emit(objectSend);
+    }
+    if(event === 'rowSelect') {
+      console.log('emitData  rowSelect');
+    }
+  }
 }

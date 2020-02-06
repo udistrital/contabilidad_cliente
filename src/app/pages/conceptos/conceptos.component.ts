@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { WizardComponent } from './wizard/wizard.component';
 
@@ -9,10 +9,12 @@ import { WizardComponent } from './wizard/wizard.component';
 })
 
 export class ConceptosComponent implements OnInit {
-  showModalVar: boolean = true;
-  currentState: string = 'open';
+  showModalVar:   boolean = true;
+  currentState:   string = 'open';
+  setDataRequest: string = 'conceptos-names';
+  namesConceptosArray: [] = [];
 
-  constructor() { }
+  constructor( private cd: ChangeDetectorRef ) { }
 
   ngOnInit() {
   }
@@ -32,6 +34,28 @@ export class ConceptosComponent implements OnInit {
   }
 
   abrirModal() {
-    console.log("Abrir modal!");
+    console.log("Abrir modal!",'abrirModal');
+  }
+
+  getAllConceptosNames(listNames : []){
+    this.namesConceptosArray = listNames;
+    console.log(listNames,'getAllConceptosNames');
+  }
+
+  getDataList(request: string) {
+    if(request === 'get-names') {
+      console.log('getDataList');
+    }
+  }
+
+  getDataRequested(event) {
+    if(event.requested === 'conceptos-names') {
+      this.setDataRequest = 'none';
+      this.namesConceptosArray = event.data;
+    }
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 }
