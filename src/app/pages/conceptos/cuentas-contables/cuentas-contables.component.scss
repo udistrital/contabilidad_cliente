@@ -1,0 +1,71 @@
+@import '../../../@theme/styles/themes';
+:host ::ng-deep nb-card-body {
+  position: relative;
+
+  button {
+    position: absolute;
+  }
+  button:nth-child(1) {
+    left: 1%;
+  }
+  button:nth-child(2) {
+    right: 1%;
+  }
+  h3 {
+    font-size: 1.2rem;
+    margin-top: 2%;
+    color: nb-theme(color-primary-700);
+  }
+  .resumen-cuentas , .arbol-cuentas {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .arbol-cuentas {
+    border-top: 2px solid #7f7f7f;
+  }
+  .resumen-cuentas {
+    font-size: 1.1rem;
+
+    .nbCard-columm {
+      text-align: left;
+      margin-bottom: 10px;
+    }
+
+    strong {
+      margin-right: 10px;
+    }
+  }
+  .nbCard-columm {
+    width: 40%;
+    margin-left: 10%;
+  }
+  nb-list {
+    text-align: left;
+  }
+  nb-list-item {
+    display: flex;
+    flex-direction: column;
+  }
+  nb-list-item:hover {
+    color: white;
+    background-color: nb-theme(color-primary-200);
+  }
+}
+
+@media (max-width: 640px) {
+  :host ::ng-deep nb-card-body {
+    button {
+      span.icon {display:inline-block}
+      span.text {display:none}
+    }
+  }
+}
+@media (min-width: 641px) {
+  :host ::ng-deep nb-card-body {
+    button {
+      span.icon {display:none}
+      span.text {display:inline-block}
+    }
+  }
+}

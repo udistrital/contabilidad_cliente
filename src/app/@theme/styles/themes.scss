@@ -91,13 +91,13 @@ $nb-themes: nb-register-theme((
 
 $nb-themes: nb-register-theme((
 
-  color-primary-100: #faf7ff, // <- new primary color
-  color-primary-200: #f6f6ed,
-  color-primary-300: #f8f7c9,
-  color-primary-400: #ebe7af,
-  color-primary-500: #f9dba5,
-  color-primary-600: #f9dba5,
-  color-primary-700: #fcca59,
+  color-primary-100: #fdde9d, // <- new primary color
+  color-primary-200: #fccd6c,
+  color-primary-300: #fccd6c,
+  color-primary-400: #fbc554,
+  color-primary-500: #fbbd3b,
+  color-primary-600: #fab523,
+  color-primary-700: #fab523,
   color-primary-800: #faad0b,
   color-primary-900: #dd9900,
   menu-background-color: #dd9900,
@@ -108,5 +108,5 @@ $nb-themes: nb-register-theme((
   context-menu-border-color: #0000,
   text-basic-color: 	#101426,
   text-disabled-color: #8f9bb3,
-  actions-icon-color:#faad0b,
+  actions-icon-color: #dd9900,
 ), kronos, default);

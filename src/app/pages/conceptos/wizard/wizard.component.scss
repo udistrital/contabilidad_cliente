@@ -1,0 +1,80 @@
+.hidden {
+  display: none !important;
+}
+.nbButton-close {
+  position: absolute;
+  right: 0;
+}
+input.ng-valid:not(form){
+  border: 1px solid #42A948; /* green */
+}
+
+input.ng-invalid.ng-dirty:not(form)  {
+  border: 1px solid #a94442; /* red */
+}
+:host ::ng-deep .input-create-concept {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  .nbButton-inline-button {
+    position: absolute;
+    right: -6px;
+    top: -7px;
+  }
+  span {
+    color: #a94442;
+    align-self: center;
+    font-size: 0.8rem;
+  }
+}
+:host ::ng-deep nb-stepper .header {
+  margin-top: 50px;
+}
+:host ::ng-deep nb-stepper .step-content {
+  text-align: center;
+  .input-create-concept input {
+    padding-bottom: 8px;
+  }
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+  }
+}
+:host ::ng-deep .nbCard-resumen {
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+
+  .nbCard-columm:nth-child(1){
+    margin-right: 2%;
+    margin-top: 4%;
+  }
+  .nbCard-columm:nth-child(2){
+    margin-top: 2%;
+
+    p:nth-child(2) {
+      strong{
+        margin-right: 52px;
+      }
+    }
+    p:nth-child(3) {
+      strong {
+        margin-right: 3px;
+      }
+    }
+    p:nth-child(4) {
+      strong {
+        margin-right: 8px;
+      }
+    }
+  }
+  nb-icon {
+    width: 60px;
+  }
+
+  h4 {
+    font-size: 1.1 rem;
+    color: #28a745;
+  }
+};

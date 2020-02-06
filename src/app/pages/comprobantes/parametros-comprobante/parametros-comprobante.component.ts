@@ -31,10 +31,10 @@ export class ParametrosComprobanteComponent implements OnInit {
     private popUpManager: PopUpManager
   ) {
   }
-  
+
   ngOnInit() {
     this.formEntity = FORM_PARAM_COMPROBANTES;
-    this.entityId = this.infoinput._id; 
+    this.entityId = this.infoinput._id;
     this.formTittle = "COMPROBANTE.add_param";
     this.updateMessage = "COMPROBANTE.mensaje_actualizar_param";
     this.updateConfirmMessage = "COMPROBANTE.confirm_actualizar_param"
