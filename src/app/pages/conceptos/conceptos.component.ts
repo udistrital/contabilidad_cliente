@@ -9,8 +9,8 @@ import { WizardComponent } from './wizard/wizard.component';
 })
 
 export class ConceptosComponent implements OnInit {
-  showModalVar: boolean = false;
-  currentState: string = 'close';
+  showModalVar: boolean = true;
+  currentState: string = 'open';
 
   constructor() { }
 

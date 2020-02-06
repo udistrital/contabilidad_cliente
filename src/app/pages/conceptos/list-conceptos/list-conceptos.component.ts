@@ -68,10 +68,12 @@ export class ListConceptosComponent implements OnInit {
     this.deleteDataFunction   = this.conceptoHelper.conceptoDelete;
     this.updateEntityFunction = this.conceptoHelper.conceptoUpdate;
     this.createEntityFunction = this.conceptoHelper.conceptoRegister;
+
     this.isOnlyCrud = true;
     this.uuidReadFieldName = 'ID';
     this.uuidDeleteFieldName = 'ID';
     this.deleteMessage = 'Eliminar Concepto'; // TODO: traducir
+    this.deleteConfirmMessage = "Feliz, elimino el concepto!";
     this.listColumns = {
       Nombre: {
         title: "Nombre",
