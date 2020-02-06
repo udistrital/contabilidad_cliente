@@ -1,5 +1,5 @@
-<ngx-wizard #modalWizard [stateWizard]="currentState" (closedWizard)=updateStateWizard($event)></ngx-wizard>
+<ngx-wizard #modalWizard [stateWizard]="currentState" (wizardActivator)=updateStateWizard($event)></ngx-wizard>
 <button nbButton outline status="info" (click)="abrirWizard()">Abrir  Wizard</button>
 <button nbButton outline status="info" (click)="cerrarWizard()">Cerrar Wizard</button>
 <button nbButton outline status="info" (click)="abrirModal()">Abrir Modal Edit</button>
-<ngx-list-conceptos></ngx-list-conceptos>
+<ngx-list-conceptos [stateWizard]="currentState" (wizardActivator)=updateStateWizard($event)></ngx-list-conceptos>
