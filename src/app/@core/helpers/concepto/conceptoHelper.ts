@@ -89,7 +89,7 @@ export class ConceptoHelper {
      * @param id the id of the object to remove in the DB.
      * @returns  <Observable> object with api response. undefined if the proccess has errors
      */
-    public comprobanteDelete(id: number, params?: any) {
+    public conceptoDelete(id: number, params?: any) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
         return this.rqManager.delete('concepto', id.toString()).pipe(
             map(
