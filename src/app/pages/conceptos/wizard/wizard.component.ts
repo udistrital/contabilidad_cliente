@@ -32,7 +32,7 @@ export class WizardComponent implements OnInit {
   @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard;
   @Input("stateWizard") stateWizard: any;
 
-  @Output() closedWizard = new EventEmitter<boolean>();
+  @Output() wizardActivator = new EventEmitter<boolean>();
 
   addWizardForm :   FormGroup;
   ayudacontrolForm: FormControl;
@@ -90,7 +90,7 @@ export class WizardComponent implements OnInit {
 
   cerrarWizard(){
     this.stateWizard = 'close';
-    this.closedWizard.emit(this.stateWizard);
+    this.wizardActivator.emit(this.stateWizard);
   }
 
   crearConcepto(){

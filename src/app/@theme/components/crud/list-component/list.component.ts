@@ -35,6 +35,7 @@ export class ListEntityComponent implements OnInit {
   @Input('isOnlyCrud') isOnlyCrud: boolean;
   @Input('listSettings') listSettings: object;
   @Input('externalCreate') externalCreate: boolean;
+  @Input('externalEdit') externalEdit: boolean;
   @Input('viewItemSelected') viewItemSelected: boolean;
   @Input('loadFormDataFunction') loadFormData: (...params) => Observable<any>;
   @Input('updateEntityFunction') updateEntityFunction: (...params) => Observable<any>;
@@ -155,8 +156,12 @@ export class ListEntityComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data[this.uuidReadField];
-    this.IsFuente(event);
-    this.activetab('crud');
+    if (!this.externalEdit) {
+      this.IsFuente(event);
+      this.activetab('crud');
+    } else {
+      this.activetab('external-edit');
+    }
   }
 
   emitItemSelected(event) {
@@ -169,9 +174,9 @@ export class ListEntityComponent implements OnInit {
   }
 
   onCustom(event): void {
+    console.info(event);
     switch (event.action) {
       case 'edit':
-        console.info(event);
         this.onEdit(event);
         break;
       case 'delete':
@@ -257,6 +262,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   itemselec(event): void {
+    console.log(event,'itemselect');
   }
 
   getIndexForm(nombre: String): number {
