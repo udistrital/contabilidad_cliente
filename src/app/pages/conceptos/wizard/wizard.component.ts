@@ -111,8 +111,8 @@ export class WizardComponent implements OnInit {
 
   updateResumen(){
     this.conceptoCreado.nombre        = this.addWizardForm.value.nombreConcepto;
-    this.conceptoCreado.cuentaDebito  = this.addWizardForm.value.numeroCuentaDebito;
-    this.conceptoCreado.cuentaCredito = this.addWizardForm.value.numeroCuentaCredito;
+    this.conceptoCreado.cuentaDebito  = this.numeroCuentaDebito;
+    this.conceptoCreado.cuentaCredito = this.numeroCuentaCredito;
   }
 
   checkWizardReset(event) {
