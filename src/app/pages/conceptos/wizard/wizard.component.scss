@@ -2,6 +2,10 @@
 .hidden {
   display: none !important;
 }
+
+:host ::ng-deep nb-card-body {
+  overflow: hidden;
+}
 .nbButton-close {
   position: absolute;
   right: 0;
@@ -63,7 +67,7 @@ input.ng-invalid.ng-dirty:not(form)  {
     }
     p:nth-child(2) {
       strong{
-        margin-right: 52px;
+        margin-right: 47px;
       }
     }
     p:nth-child(3) {

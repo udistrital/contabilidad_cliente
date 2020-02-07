@@ -3,10 +3,11 @@
   [stateWizard]="currentState"
   [namesConceptosArray]="namesConceptosArray"
   (wizardActivator)=updateStateWizard($event)
+  #wizardCreateConcepto
 ></ngx-wizard>
 <!--button nbButton outline status="info" (click)="abrirWizard()">Abrir  Wizard</button-->
 <!--button nbButton outline status="info" (click)="cerrarWizard()">Cerrar Wizard</button-->
-<!--button nbButton outline status="info" (click)="abrirModal()">Abrir Modal Edit</button-->
+<button nbButton outline status="info" (click)="abrirModal()">Abrir Modal Edit</button>
 <ngx-list-conceptos
   [stateWizard]="currentState"
   [setDataRequest]="setDataRequest"
@@ -14,3 +15,6 @@
   (getAllConceptosNames)=getAllConceptosNames($event)
   (emitDataRequested)=getDataRequested($event)
 ></ngx-list-conceptos>
+<ngx-edit-modal
+  #modalEdit
+></ngx-edit-modal>

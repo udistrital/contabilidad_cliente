@@ -37,6 +37,7 @@ import { ConceptosComponent } from './conceptos/conceptos.component';
 import { WizardComponent } from './conceptos/wizard/wizard.component';
 import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas-contables.component';
 import { ListConceptosComponent } from './conceptos/list-conceptos/list-conceptos.component';
+import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component';
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { ListConceptosComponent } from './conceptos/list-conceptos/list-concepto
     WizardComponent,
     CuentasContablesComponent,
     ListConceptosComponent,
+    EditModalComponent,
   ],
   providers: [
     ConfiguracionService,
