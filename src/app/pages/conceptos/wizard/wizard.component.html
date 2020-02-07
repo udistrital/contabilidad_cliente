@@ -1,4 +1,5 @@
-<nb-card class="col-md-12 col-lg-12 col-xxxl-12" [@openDivWizard]=stateWizard>
+<nb-card class="col-md-12 col-lg-12 col-xxxl-12"
+[@openDivWizard]=stateWizard (@openDivWizard.done)="checkWizardReset($event)">
   <nb-card-body>
     <button
       nbButton ghost
@@ -23,7 +24,7 @@
               (keyup)="validateName()"
               (keyup.enter)="nameValidatedNextStep()"
               formControlName="nombreConcepto"
-              nbInput fullWidth nbStepperNext autofocus >
+              nbInput fullWidth nbStepperNext #inputValidateName>
             <span *ngIf="nextBtnValidateName && touchedBtnValidateName" status="danger" >{{'CONCEPTOS.error-nombre-concepto' | translate }}</span>
             <button
               class="nbButton-inline-button"
