@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NbWindowService } from '@nebular/theme';
 import { WizardComponent } from './wizard/wizard.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-concepts-conceptos',
@@ -9,12 +11,16 @@ import { WizardComponent } from './wizard/wizard.component';
 })
 
 export class ConceptosComponent implements OnInit {
+
+  @ViewChild('wizardCreateConcepto',{static:false}) wizardCreateConcepto : any;
+  @ViewChild('modalEdit',{static:false}) modalEdit                       : any;
+
   showModalVar:   boolean = true;
   currentState:   string = 'open';
   setDataRequest: string = 'conceptos-names';
   namesConceptosArray: [] = [];
 
-  constructor( private cd: ChangeDetectorRef ) { }
+  constructor( private cd: ChangeDetectorRef, private windowService : NbWindowService ) { }
 
   ngOnInit() {
   }
@@ -34,6 +40,12 @@ export class ConceptosComponent implements OnInit {
   }
 
   abrirModal() {
+    this.windowService.open(
+      this.modalEdit,
+      {
+        title: 'Modal Edit',
+        context: 'some text'
+      });
     console.log("Abrir modal!",'abrirModal');
   }
 

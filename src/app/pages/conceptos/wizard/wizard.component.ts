@@ -1,4 +1,10 @@
-import { Component, OnInit , ViewChild, Input, Output, EventEmitter, ChangeDetectorRef} from '@angular/core';
+import { Component,
+         OnInit ,
+         ViewChild,
+         Input,
+         Output,
+         EventEmitter,
+         ChangeDetectorRef } from '@angular/core';
 import { NbButtonModule, NbStepperModule }    from '@nebular/theme';
 import {
   trigger,
@@ -29,7 +35,8 @@ import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms'
 })
 export class WizardComponent implements OnInit {
 
-  @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard;
+  @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard   : any;
+  @ViewChild('inputValidateName',{static:false}) inputValidateName: any;
   @Input("stateWizard") stateWizard: any;
   @Input("namesConceptosArray") namesConceptosArray: any;
 
@@ -54,6 +61,7 @@ export class WizardComponent implements OnInit {
       numeroCuentaDebito:  new FormControl(this.numeroCuentaDebito)
     });
     this.nombreConcepto = this.addWizardForm.controls.nombreConcepto;
+    this.ngAfterViewInit();
   }
 
   validateName(){
@@ -63,7 +71,7 @@ export class WizardComponent implements OnInit {
       this.nextBtnValidateName   = false;
     }else{
       this.nombreConcepto.status = 'INVALID';
-      this.nextBtnValidateName = true;
+      this.nextBtnValidateName   = true;
     }
   }
 
@@ -84,6 +92,7 @@ export class WizardComponent implements OnInit {
   }
 
   resetWizard() {
+    this.addWizardForm.reset();
     this.numeroCuentaCredito = 'N/A';
     this.numeroCuentaDebito  = 'N/A';
     this.addWizardForm.value.numeroCuentaDebito  = this.numeroCuentaDebito;
@@ -102,12 +111,19 @@ export class WizardComponent implements OnInit {
 
   updateResumen(){
     this.conceptoCreado.nombre        = this.addWizardForm.value.nombreConcepto;
-    this.conceptoCreado.cuentaDebito  = this.addWizardForm.value.numeroCuentaDebito;
-    this.conceptoCreado.cuentaCredito = this.addWizardForm.value.numeroCuentaCredito;
+    this.conceptoCreado.cuentaDebito  = this.numeroCuentaDebito;
+    this.conceptoCreado.cuentaCredito = this.numeroCuentaCredito;
+  }
+
+  checkWizardReset(event) {
+    this.addWizardForm.reset();
+    this.nbStepperWizard.reset();
+    this.inputValidateName.nativeElement.focus();
   }
 
   ngAfterViewInit() {
     this.cd.detectChanges();
+    this.inputValidateName.nativeElement.focus();
   }
 
 }
