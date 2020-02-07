@@ -1,4 +1,4 @@
-import { Component, OnInit , ViewChild, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit , ViewChild, Input, Output, EventEmitter, ChangeDetectorRef} from '@angular/core';
 import { NbButtonModule, NbStepperModule }    from '@nebular/theme';
 import {
   trigger,
@@ -31,6 +31,7 @@ export class WizardComponent implements OnInit {
 
   @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard;
   @Input("stateWizard") stateWizard: any;
+  @Input("namesConceptosArray") namesConceptosArray: any;
 
   @Output() wizardActivator = new EventEmitter<boolean>();
 
@@ -44,7 +45,7 @@ export class WizardComponent implements OnInit {
 
   conceptoCreado = <any>{ "nombre":"","cuentaCredito":"","cuentaDebito":"" };
 
-  constructor( private fb: FormBuilder) { }
+  constructor( private fb: FormBuilder, private cd: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.addWizardForm = this.fb.group({
@@ -57,9 +58,11 @@ export class WizardComponent implements OnInit {
 
   validateName(){
     this.touchedBtnValidateName = true;
-    if('VALID' === this.nombreConcepto.status){
+    let localNameValidated = this.addWizardForm.value.nombreConcepto.toLowerCase();
+    if('VALID' === this.nombreConcepto.status && !this.namesConceptosArray.includes(localNameValidated) ) {
       this.nextBtnValidateName   = false;
     }else{
+      this.nombreConcepto.status = 'INVALID';
       this.nextBtnValidateName = true;
     }
   }
@@ -101,6 +104,10 @@ export class WizardComponent implements OnInit {
     this.conceptoCreado.nombre        = this.addWizardForm.value.nombreConcepto;
     this.conceptoCreado.cuentaDebito  = this.addWizardForm.value.numeroCuentaDebito;
     this.conceptoCreado.cuentaCredito = this.addWizardForm.value.numeroCuentaCredito;
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 
 }

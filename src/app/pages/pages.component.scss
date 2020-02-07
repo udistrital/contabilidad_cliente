@@ -19,3 +19,11 @@
     }
   }
 }
+:host ::ng-deep .nb-theme-kronos nb-menu {
+  .menu-item .menu-icon {
+    color: #dcd9d9;
+  }
+  .menu-item .menu-icon:hover {
+    color: #8f9bb3;
+  }
+}
