@@ -262,7 +262,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   itemselec(event): void {
-    console.log(event,'itemselect');
+    //console.log(event,'itemselect'); // onload row
   }
 
   getIndexForm(nombre: String): number {

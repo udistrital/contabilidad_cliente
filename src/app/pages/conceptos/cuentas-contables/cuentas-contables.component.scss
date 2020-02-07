@@ -22,7 +22,7 @@
     justify-content: center;
   }
   .arbol-cuentas {
-    border-top: 2px solid #7f7f7f;
+    border-top: 2px solid nb-theme(color-gray-500);
   }
   .resumen-cuentas {
     font-size: 1.1rem;
@@ -45,11 +45,17 @@
   }
   nb-list-item {
     display: flex;
+    transition-delay: 50ms;
+    background-color: white;
     flex-direction: column;
   }
   nb-list-item:hover {
     color: white;
     background-color: nb-theme(color-primary-200);
+  }
+  nb-list-item:active {
+    color: white;
+    background-color: nb-theme(color-green-ok);
   }
 }
 

@@ -1,3 +1,4 @@
+@import '../../../@theme/styles/themes';
 .hidden {
   display: none !important;
 }
@@ -6,11 +7,11 @@
   right: 0;
 }
 input.ng-valid:not(form){
-  border: 1px solid #42A948; /* green */
+  border: 1px solid nb-theme(color-green-ok); /* green */
 }
 
 input.ng-invalid.ng-dirty:not(form)  {
-  border: 1px solid #a94442; /* red */
+  border: 1px solid nb-theme(color-red-invalid); /* red */
 }
 :host ::ng-deep .input-create-concept {
   display: flex;
@@ -23,7 +24,7 @@ input.ng-invalid.ng-dirty:not(form)  {
     top: -7px;
   }
   span {
-    color: #a94442;
+    color: nb-theme(color-red-invalid);
     align-self: center;
     font-size: 0.8rem;
   }
@@ -33,6 +34,10 @@ input.ng-invalid.ng-dirty:not(form)  {
 }
 :host ::ng-deep nb-stepper .step-content {
   text-align: center;
+
+  h3 {
+    font-size: 1.5rem;
+  }
   .input-create-concept input {
     padding-bottom: 8px;
   }
@@ -53,6 +58,9 @@ input.ng-invalid.ng-dirty:not(form)  {
   .nbCard-columm:nth-child(2){
     margin-top: 2%;
 
+    p strong {
+      font-size: 0.85rem;
+    }
     p:nth-child(2) {
       strong{
         margin-right: 52px;
@@ -73,8 +81,8 @@ input.ng-invalid.ng-dirty:not(form)  {
     width: 60px;
   }
 
-  h4 {
-    font-size: 1.1 rem;
-    color: #28a745;
+  h4{
+    font-size: 1.1rem;
+    color: nb-theme(color-green-ok-title);
   }
 };
