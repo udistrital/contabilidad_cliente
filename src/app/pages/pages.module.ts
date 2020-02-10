@@ -72,7 +72,7 @@ const MODULES = [
     NbInputModule,
     NbListModule,
     NbBadgeModule,
-    NbDialogModule.forChild()
+    NbDialogModule.forRoot(),
 ];
 const COMPONENTS = [
     PagesComponent,

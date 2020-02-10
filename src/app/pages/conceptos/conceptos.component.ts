@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ComponentRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogService } from '@nebular/theme';
 import { WizardComponent } from './wizard/wizard.component';
@@ -14,24 +14,28 @@ import { Observable } from 'rxjs';
 export class ConceptosComponent implements OnInit {
 
   @ViewChild('wizardCreateConcepto',{static:false}) wizardCreateConcepto : any;
-  EditModalComponent = EditModalComponent;
-  showModalVar:   boolean = true;
+  @ViewChild('modalEdit',{static:false}) modalEdit :any;
+
+  showWizzardVar:   boolean = true;
+  showEditModalVar: boolean = false;
   currentState:   string = 'open';
   setDataRequest: string = 'conceptos-names';
   namesConceptosArray: [] = [];
 
-  constructor( private cd: ChangeDetectorRef, private dialogService : NbDialogService ) { }
+  constructor(
+      private cd: ChangeDetectorRef,
+      private dialogService : NbDialogService ) { }
 
   ngOnInit() {
   }
 
   abrirWizard() {
-    this.showModalVar = true;
+    this.showWizzardVar = true;
     this.currentState = 'open';
   }
 
   cerrarWizard() {
-    this.showModalVar = false;
+    this.showWizzardVar = false;
     this.currentState = 'close';
   }
 
@@ -40,8 +44,14 @@ export class ConceptosComponent implements OnInit {
   }
 
   abrirModal() {
-    this.dialogService.open(EditModalComponent).onClose.subscribe(()=> console.log('cierra modal'));
-    console.log("Abrir modal!",'abrirModal');
+    let dialogService = this.dialogService.open(
+        EditModalComponent,
+        {
+          context: {
+            context: 'Input ayuda',
+          }
+        }
+        ).onClose.subscribe(()=> console.log('cierra modal'));
   }
 
   getAllConceptosNames(listNames : []){

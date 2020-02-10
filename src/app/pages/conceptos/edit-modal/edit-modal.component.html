@@ -7,7 +7,7 @@
         nbTooltipStatus="primary"
         status="primary"
         class="nbButton-close"
-        (click)="cancel()"><nb-icon icon="close-outline"></nb-icon></button>
+        (click)="cierraVentana()"><nb-icon icon="close-outline"></nb-icon></button>
     <input
       type="text"
       class="input-editConcepto"
@@ -23,7 +23,7 @@
       [wizzardSteps]="wizzardSteps"
       (updateCuentaDebito)="updateCuentaDebito($event)"
       (updateCuentaCredito)="updateCuentaCredito($event)"
-      (guardarCuentas)="updateResumenaqi()"
+      (guardarCuentas)="updateResumen()"
     ></ngx-cuentas-contables>
   </nb-card-body>
 </nb-card>

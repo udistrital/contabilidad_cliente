@@ -1,5 +1,4 @@
 <ngx-wizard
-  #modalWizard
   [stateWizard]="currentState"
   [namesConceptosArray]="namesConceptosArray"
   (wizardActivator)=updateStateWizard($event)
@@ -15,6 +14,3 @@
   (getAllConceptosNames)=getAllConceptosNames($event)
   (emitDataRequested)=getDataRequested($event)
 ></ngx-list-conceptos>
-<ngx-edit-modal
-  #modalEdit
-></ngx-edit-modal>

@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
 import { NbDialogRef } from '@nebular/theme';
 
 @Component({
@@ -8,17 +8,23 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class EditModalComponent implements OnInit {
 
+  @Input('context') context : any;
+  //@Output() triggerCloseModal  = new EventEmitter<boolean>();
+
   numeroCuentaCredito: string = 'N/A';
   numeroCuentaDebito:  string = 'N/A';
   wizzardSteps: boolean = false;
 
-  constructor( private cd: ChangeDetectorRef) { }
-  //, private dialogRef: NbDialogRef<EditModalComponent>
+  constructor(
+    private cd: ChangeDetectorRef,
+    private dialogRef: NbDialogRef<EditModalComponent> ) { }
+
   ngOnInit() {
+    console.log(this.context);
   }
 
-  cancel() {
-    // this.dialogRef.close();
+  cierraVentana() {
+    this.dialogRef.close();
   }
 
   submit(name) {
@@ -31,15 +37,13 @@ export class EditModalComponent implements OnInit {
 
   updateCuentaCredito(newCuenta: string) {
     this.numeroCuentaCredito = newCuenta;
-    //this.addWizardForm.value.numeroCuentaCredito = this.numeroCuentaCredito;
   }
 
   updateCuentaDebito(newCuenta: string) {
     this.numeroCuentaDebito = newCuenta;
-    //this.addWizardForm.value.numeroCuentaDebito = this.numeroCuentaDebito;
   }
 
-  updateResumenaqi(){
+  updateResumen(){
     console.log('hey hey!');
   }
 }
