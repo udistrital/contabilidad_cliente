@@ -49,6 +49,7 @@ export class WizardComponent implements OnInit {
   touchedBtnValidateName: boolean = false;
   numeroCuentaCredito: string = 'N/A';
   numeroCuentaDebito:  string = 'N/A';
+  wizzardSteps: boolean = true;
 
   conceptoCreado = <any>{ "nombre":"","cuentaCredito":"","cuentaDebito":"" };
 

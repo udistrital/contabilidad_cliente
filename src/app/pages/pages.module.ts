@@ -13,7 +13,9 @@ import {
   NbCheckboxModule,
   NbButtonModule,
   NbInputModule,
-  NbListModule } from '@nebular/theme';
+  NbListModule,
+  NbDialogModule,
+  NbBadgeModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { MatStepperModule } from '@angular/material';
@@ -39,9 +41,9 @@ import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas
 import { ListConceptosComponent } from './conceptos/list-conceptos/list-conceptos.component';
 import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component';
 
-@NgModule({
-  imports: [
-    PagesRoutingModule,
+
+const MODULES = [
+  PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
     NbButtonModule,
@@ -68,9 +70,11 @@ import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component'
     MatStepperModule,
     CurrencyMaskModule,
     NbInputModule,
-    NbListModule
-  ],
-  declarations: [
+    NbListModule,
+    NbBadgeModule,
+    NbDialogModule.forChild()
+];
+const COMPONENTS = [
     PagesComponent,
     ListTipoComprobanteComponent,
     ListComprobanteComponent,
@@ -82,12 +86,31 @@ import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component'
     CuentasContablesComponent,
     ListConceptosComponent,
     EditModalComponent,
-  ],
-  providers: [
+];
+const ENTRY_COMPONENTS = [
+    ListTipoComprobanteComponent,
+    ListComprobanteComponent,
+    CuentasContablesComponent,
+    EditModalComponent
+];
+const SERVICES = [
     ConfiguracionService,
     MenuService,
+];
+
+@NgModule({
+  imports: [
+    ...MODULES,
   ],
-  entryComponents: [ListTipoComprobanteComponent,ListComprobanteComponent],
+  declarations: [
+    ...COMPONENTS,
+  ],
+  providers: [
+    ...SERVICES,
+  ],
+  entryComponents: [
+    ...ENTRY_COMPONENTS,
+  ],
 })
 export class PagesModule {
 }

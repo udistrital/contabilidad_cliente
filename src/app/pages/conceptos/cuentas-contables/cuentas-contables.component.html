@@ -1,10 +1,10 @@
 <nb-card>
   <nb-card-body>
-    <button nbButton outline nbStepperPrevious>
+    <button nbButton outline *ngIf="wizzardSteps" nbStepperPrevious>
       <span class="text">{{'CONCEPTOS.anterior' | translate }}</span>
       <span class="icon"><nb-icon status="primary" icon="arrow-ios-back-outline"></nb-icon></span>
     </button>
-    <button nbButton outline nbStepperNext status="info" (click)="enviarGuardado()">
+    <button nbButton outline *ngIf="wizzardSteps" nbStepperNext status="info" (click)="enviarGuardado()">
       <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
       <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
     </button>

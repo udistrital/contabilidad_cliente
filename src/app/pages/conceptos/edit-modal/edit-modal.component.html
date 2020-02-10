@@ -1,12 +1,29 @@
-<nb-flip-card>
-  <nb-card-front>
-    <nb-card class="col-md-6 col-lg-6 col-xxxl-6">
-      <h3>Flip Card Front</h3>
-    </nb-card>
-  </nb-card-front>
-  <nb-card-back>
-    <nb-card class="col-md-6 col-lg-6 col-xxxl-6">
-      <h3>Flip Card Back</h3>
-    </nb-card>
-  </nb-card-back>
-</nb-flip-card>
+<nb-card class="modal-edit">
+  <nb-card-header>
+    <nb-badge text="Edición" status="warning" position="top left"></nb-badge>
+    <button
+        nbButton ghost
+        nbTooltip="Cerrar Ventana"
+        nbTooltipStatus="primary"
+        status="primary"
+        class="nbButton-close"
+        (click)="cancel()"><nb-icon icon="close-outline"></nb-icon></button>
+    <input
+      type="text"
+      class="input-editConcepto"
+      status="basic"
+      placeholder="Aquí el nombre del concepto"
+      value="Nombre del concepto"
+      nbInput>
+  </nb-card-header>
+  <nb-card-body>
+    <ngx-cuentas-contables
+      [selectionDebito]="numeroCuentaDebito"
+      [selectionCredito]="numeroCuentaCredito"
+      [wizzardSteps]="wizzardSteps"
+      (updateCuentaDebito)="updateCuentaDebito($event)"
+      (updateCuentaCredito)="updateCuentaCredito($event)"
+      (guardarCuentas)="updateResumenaqi()"
+    ></ngx-cuentas-contables>
+  </nb-card-body>
+</nb-card>

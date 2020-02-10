@@ -1,0 +1,19 @@
+:host ::ng-deep .modal-edit {
+  position: relative;
+
+  nb-card-header {
+    display: flex;
+
+    nb-badge {
+      padding: 0.25rem 3.5rem;
+    }
+    button.nbButton-close {
+      position: absolute;
+      right: 0;
+    }
+    input.input-editConcepto {
+      margin-top: 11px;
+      font-size: 1.1rem;
+    }
+  }
+}

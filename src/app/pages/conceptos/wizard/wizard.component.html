@@ -41,6 +41,7 @@
           <ngx-cuentas-contables
             [selectionDebito]="numeroCuentaDebito"
             [selectionCredito]="numeroCuentaCredito"
+            [wizzardSteps]="wizzardSteps"
             (updateCuentaDebito)="updateCuentaDebito($event)"
             (updateCuentaCredito)="updateCuentaCredito($event)"
             (guardarCuentas)="crearConcepto()"
