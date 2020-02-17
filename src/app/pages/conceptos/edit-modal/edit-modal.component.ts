@@ -8,11 +8,13 @@ import { NbDialogRef } from '@nebular/theme';
 })
 export class EditModalComponent implements OnInit {
 
-  @Input('context') context : any;
-  //@Output() triggerCloseModal  = new EventEmitter<boolean>();
+  @Input('id') id                       : string;
+  @Input('nombre') nombre               : string;
+  @Input('cuentaCredito') cuentaCredito : string;
+  @Input('cuentaDebito') cuentaDebito   : string;
 
-  numeroCuentaCredito: string = 'N/A';
-  numeroCuentaDebito:  string = 'N/A';
+  numeroCuentaCredito: string = 'N/A'; //TODO: traducir
+  numeroCuentaDebito:  string = 'N/A'; //TODO: traducir
   wizzardSteps: boolean = false;
 
   constructor(
@@ -20,15 +22,13 @@ export class EditModalComponent implements OnInit {
     private dialogRef: NbDialogRef<EditModalComponent> ) { }
 
   ngOnInit() {
-    console.log(this.context);
+    this.numeroCuentaCredito = this.cuentaCredito;
+    this.numeroCuentaDebito  = this.cuentaDebito;
+    console.log(this.id,this.nombre,this.cuentaCredito,this.cuentaDebito);
   }
 
   cierraVentana() {
     this.dialogRef.close();
-  }
-
-  submit(name) {
-    // this.dialogRef.close(name);
   }
 
   ngAfterViewInit() {

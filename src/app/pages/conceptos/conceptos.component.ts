@@ -21,6 +21,7 @@ export class ConceptosComponent implements OnInit {
   currentState:   string = 'open';
   setDataRequest: string = 'conceptos-names';
   namesConceptosArray: [] = [];
+  conceptoToEdit: any;
 
   constructor(
       private cd: ChangeDetectorRef,
@@ -43,20 +44,23 @@ export class ConceptosComponent implements OnInit {
     this.currentState = newState;
   }
 
-  abrirModal() {
+  abrirModal(conceptoData) {
     let dialogService = this.dialogService.open(
-        EditModalComponent,
-        {
-          context: {
-            context: 'Input ayuda',
-          }
+      EditModalComponent,
+      {
+        closeOnEsc: true,
+        context: {
+          id:            conceptoData.ID,
+          nombre:        conceptoData.Nombre,
+          cuentaCredito: conceptoData.CuentaDebito,
+          cuentaDebito:  conceptoData.CuentaCredito
         }
-        ).onClose.subscribe(()=> console.log('cierra modal'));
+      }
+      ).onClose.subscribe(()=> console.log('cierra modal'));
   }
 
   getAllConceptosNames(listNames : []){
     this.namesConceptosArray = listNames;
-    console.log(listNames,'getAllConceptosNames');
   }
 
   getDataList(request: string) {
@@ -69,6 +73,10 @@ export class ConceptosComponent implements OnInit {
     if(event.requested === 'conceptos-names') {
       this.setDataRequest = 'none';
       this.namesConceptosArray = event.data;
+    }else if(event.requested === 'edit-concepto') {
+      this.setDataRequest = 'none';
+      this.conceptoToEdit = event.data;
+      this.abrirModal(this.conceptoToEdit);
     }
   }
 

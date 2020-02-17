@@ -87,7 +87,7 @@ export class ListEntityComponent implements OnInit {
     this.source.onChanged().subscribe((change) => {
 
       if (change.action === 'filter') {
-        /*        console.info(change);
+        /*     console.info(change);
                console.info(change.filter.filters); */
         change.filter.filters.map((item) => {
           if (item.field === 'Vigencia' &&
@@ -161,6 +161,7 @@ export class ListEntityComponent implements OnInit {
       this.activetab('crud');
     } else {
       this.activetab('external-edit');
+      this.infooutput.emit(event.data);
     }
   }
 
@@ -174,7 +175,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   onCustom(event): void {
-    console.info(event);
+    //console.info(event);
     switch (event.action) {
       case 'edit':
         this.onEdit(event);

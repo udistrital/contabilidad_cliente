@@ -49,7 +49,6 @@ export class ListConceptosComponent implements OnInit {
   auxcambiotab         = new EventEmitter<boolean>();
   externalTabActivator = new EventEmitter<string>();
 
-  receiveMessage: any;
   onChange:       any;
   onFirstTab:     any;
   onChangeTab:    any;
@@ -121,7 +120,8 @@ export class ListConceptosComponent implements OnInit {
       columns: this.listColumns,
     };
     if(this.setDataRequest !== 'none') {
-      this.emitData('conceptos-names');
+      let dataEdited = { event: 'conceptos-names'};
+      this.emitData(dataEdited);
     }
   }
 
@@ -139,13 +139,18 @@ export class ListConceptosComponent implements OnInit {
     console.log(event,'onChangeExternalTab');
   }
 
-  emitData(event) {
-    if(event === 'conceptos-names') {
-      let objectSend = { requested: event, data: this.arrayConceptoNames };
+  emitData( eventObject ) {
+    if(eventObject.event === 'conceptos-names') {
+      let objectSend = { requested: eventObject.event, data: this.arrayConceptoNames };
       this.emitDataRequested.emit(objectSend);
     }
-    if(event === 'rowSelect') {
-      console.log('emitData  rowSelect');
+    if(eventObject.event === 'edit-concepto') {
+      let objectSend = { requested: eventObject.event, data: eventObject.data };
+      this.emitDataRequested.emit(objectSend);
     }
+  }
+  receiveMessage( data ) {
+    let dataEdited = { event: 'edit-concepto', data: data};
+    this.emitData(dataEdited);
   }
 }
