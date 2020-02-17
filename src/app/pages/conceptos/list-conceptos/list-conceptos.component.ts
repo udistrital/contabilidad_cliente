@@ -86,14 +86,14 @@ export class ListConceptosComponent implements OnInit {
           return value;
         }
       },
-      CuentaDebito: {
-        title: "Cuenta Débito", // TODO: traducir
+      CuentaCredito: {
+        title: "Cuenta Crédito", // TODO: traducir
         valuePrepareFunction: value => {
           return value;
         }
       },
-      CuentaCredito: {
-        title: "Cuenta Crédito", // TODO: traducir
+      CuentaDebito: {
+        title: "Cuenta Débito", // TODO: traducir
         valuePrepareFunction: value => {
           return value;
         }
@@ -119,7 +119,7 @@ export class ListConceptosComponent implements OnInit {
       mode: 'external',
       columns: this.listColumns,
     };
-    if(this.setDataRequest !== 'none') {
+    if (this.setDataRequest !== 'none') {
       let dataEdited = { event: 'conceptos-names'};
       this.emitData(dataEdited);
     }
