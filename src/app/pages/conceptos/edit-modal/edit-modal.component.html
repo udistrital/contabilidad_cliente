@@ -1,12 +1,37 @@
-<nb-flip-card>
-  <nb-card-front>
-    <nb-card class="col-md-6 col-lg-6 col-xxxl-6">
-      <h3>Flip Card Front</h3>
-    </nb-card>
-  </nb-card-front>
-  <nb-card-back>
-    <nb-card class="col-md-6 col-lg-6 col-xxxl-6">
-      <h3>Flip Card Back</h3>
-    </nb-card>
-  </nb-card-back>
-</nb-flip-card>
+<nb-card class="modal-edit">
+  <form [formGroup]="editModalConceptoForm" (ngSubmit)="editarConcepto()">
+    <nb-card-header>
+      <nb-badge text="Edición" status="warning" position="top left"></nb-badge>
+      <button
+          nbButton ghost
+          nbTooltip="Cerrar Ventana"
+          nbTooltipStatus="primary"
+          status="primary"
+          class="nbButton-close"
+          (click)="cierraVentana()"><nb-icon icon="close-outline"></nb-icon></button>
+      <input
+        type="text"
+        class="input-editConcepto"
+        status="basic"
+        placeholder="Aquí el nombre del concepto"
+        value='{{ nombre }}'
+        formControlName="nombreConcepto"
+        (keyup)="validateNewNameConcept()"
+        nbInput #inputEditConceptName>
+    </nb-card-header>
+    <nb-card-body>
+      <button nbButton outline status="info" type="submit" [disabled]="statusButtonSave" #submitEditedConcept>
+        <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
+        <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
+      </button>
+      <ngx-cuentas-contables
+        [selectionDebito]="numeroCuentaDebito"
+        [selectionCredito]="numeroCuentaCredito"
+        [wizzardSteps]="wizzardSteps"
+        (updateCuentaDebito)="updateCuentaDebito($event)"
+        (updateCuentaCredito)="updateCuentaCredito($event)"
+        (guardarCuentas)="editarConcepto()"
+      ></ngx-cuentas-contables>
+    </nb-card-body>
+  </form>
+</nb-card>
