@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
 import { Observable } from 'rxjs';
+import { ConceptosService } from '../../../@core/managers/conceptos.service';
 
 @Component({
   selector: 'ngx-list-conceptos',
@@ -62,7 +63,8 @@ export class ListConceptosComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private conceptoHelper: ConceptoHelper
+    private conceptoHelper: ConceptoHelper,
+    private conceptoService: ConceptosService
   ) { }
 
   ngOnInit() {
@@ -131,6 +133,7 @@ export class ListConceptosComponent implements OnInit {
       this.wizardActivator.emit(this.stateWizard);
     } else {
       this.getAllConceptosNames.emit(this.arrayConceptoNames);
+      this.conceptoService.entityListConceptos = this.arrayConceptoNames;
       console.log(event,'onExternalTabActivator');
     }
   }

@@ -17,11 +17,13 @@ export class EditModalComponent implements OnInit {
   @Input('cuentaDebito') cuentaDebito   : string;
 
   @ViewChild('inputEditConceptName',{static:false}) inputEditConceptName: ElementRef;
+  @ViewChild('submitEditedConcept',{static:false})  submitEditedConcept: ElementRef;
 
   nombreConcepto: any;
   numeroCuentaCredito: string = 'N/A'; //TODO: traducir
   numeroCuentaDebito:  string = 'N/A'; //TODO: traducir
   wizzardSteps:        boolean = false;
+  statusButtonSave:    boolean = true;
 
   editModalConceptoForm :   FormGroup;
   conceptoEditado = <any>{ 'Nombre':'','CuentaCredito':'','CuentaDebito':'', 'Contexto': 'no se ha definido', 'MovimientoID': 'fake-movimiento' };
@@ -50,22 +52,35 @@ export class EditModalComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.inputEditConceptName.nativeElement.value = this.nombreConcepto;
+    this.nombreConcepto = this.editModalConceptoForm.controls.nombreConcepto;
+    this.inputEditConceptName.nativeElement.value = this.nombre;
     this.cd.detectChanges();
   }
 
   updateCuentaCredito(newCuenta: string) {
     this.numeroCuentaCredito = newCuenta;
+    this.statusButtonSave = false;
   }
 
   updateCuentaDebito(newCuenta: string) {
     this.numeroCuentaDebito = newCuenta;
+    this.statusButtonSave = false;
   }
 
   updateResumen(){
     this.conceptoEditado.Nombre        = this.inputEditConceptName.nativeElement.value;
     this.conceptoEditado.CuentaDebito  = this.numeroCuentaDebito;
     this.conceptoEditado.CuentaCredito = this.numeroCuentaCredito;
+  }
+
+  validateNewNameConcept() {
+    if( this.conceptoService.validateConceptNameExits(this.inputEditConceptName.nativeElement.value) == true ) {
+      this.nombreConcepto.status = 'INVALID';
+      this.statusButtonSave = true;
+    } else {
+      this.nombreConcepto.status = 'VALID';
+      this.statusButtonSave = false;
+    }
   }
 
   editarConcepto() {

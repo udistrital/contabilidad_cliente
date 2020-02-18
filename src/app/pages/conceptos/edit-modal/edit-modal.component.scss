@@ -1,6 +1,8 @@
+@import '../../../@theme/styles/themes';
 :host ::ng-deep .modal-edit {
   position: relative;
   height: 40rem;
+  overflow: hidden;
 
   nb-card-header {
     display: flex;
@@ -16,5 +18,15 @@
       margin-top: 11px;
       font-size: 1.1rem;
     }
+    input.input-editConcepto.ng-valid:not(form){
+      border: 1px solid nb-theme(color-green-ok); /* green */
+    }
+    input.input-editConcepto.ng-invalid.ng-dirty:not(form)  {
+      border: 1px solid nb-theme(color-red-invalid); /* red */
+    }
+  }
+  nb-card-body {
+    display: flex;
+    flex-direction: column;
   }
 }

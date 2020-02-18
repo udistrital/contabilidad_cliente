@@ -14,11 +14,13 @@
         class="input-editConcepto"
         status="basic"
         placeholder="Aquí el nombre del concepto"
-        value='{{ nombreConcepto }}'
+        value='{{ nombre }}'
+        formControlName="nombreConcepto"
+        (keyup)="validateNewNameConcept()"
         nbInput #inputEditConceptName>
     </nb-card-header>
     <nb-card-body>
-      <button nbButton outline status="info" type="submit">
+      <button nbButton outline status="info" type="submit" [disabled]="statusButtonSave" #submitEditedConcept>
         <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
         <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
       </button>
