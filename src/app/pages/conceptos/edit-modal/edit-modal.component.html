@@ -1,29 +1,35 @@
 <nb-card class="modal-edit">
-  <nb-card-header>
-    <nb-badge text="Edición" status="warning" position="top left"></nb-badge>
-    <button
-        nbButton ghost
-        nbTooltip="Cerrar Ventana"
-        nbTooltipStatus="primary"
-        status="primary"
-        class="nbButton-close"
-        (click)="cierraVentana()"><nb-icon icon="close-outline"></nb-icon></button>
-    <input
-      type="text"
-      class="input-editConcepto"
-      status="basic"
-      placeholder="Aquí el nombre del concepto"
-      value="Nombre del concepto"
-      nbInput>
-  </nb-card-header>
-  <nb-card-body>
-    <ngx-cuentas-contables
-      [selectionDebito]="numeroCuentaDebito"
-      [selectionCredito]="numeroCuentaCredito"
-      [wizzardSteps]="wizzardSteps"
-      (updateCuentaDebito)="updateCuentaDebito($event)"
-      (updateCuentaCredito)="updateCuentaCredito($event)"
-      (guardarCuentas)="updateResumen()"
-    ></ngx-cuentas-contables>
-  </nb-card-body>
+  <form [formGroup]="editModalConceptoForm" (ngSubmit)="editarConcepto()">
+    <nb-card-header>
+      <nb-badge text="Edición" status="warning" position="top left"></nb-badge>
+      <button
+          nbButton ghost
+          nbTooltip="Cerrar Ventana"
+          nbTooltipStatus="primary"
+          status="primary"
+          class="nbButton-close"
+          (click)="cierraVentana()"><nb-icon icon="close-outline"></nb-icon></button>
+      <input
+        type="text"
+        class="input-editConcepto"
+        status="basic"
+        placeholder="Aquí el nombre del concepto"
+        value='{{ nombreConcepto }}'
+        nbInput #inputEditConceptName>
+    </nb-card-header>
+    <nb-card-body>
+      <button nbButton outline status="info" type="submit">
+        <span class="text">{{'CONCEPTOS.guardar' | translate }}</span>
+        <span class="icon"><nb-icon status="info" icon="arrow-ios-forward-outline"></nb-icon></span>
+      </button>
+      <ngx-cuentas-contables
+        [selectionDebito]="numeroCuentaDebito"
+        [selectionCredito]="numeroCuentaCredito"
+        [wizzardSteps]="wizzardSteps"
+        (updateCuentaDebito)="updateCuentaDebito($event)"
+        (updateCuentaCredito)="updateCuentaCredito($event)"
+        (guardarCuentas)="editarConcepto()"
+      ></ngx-cuentas-contables>
+    </nb-card-body>
+  </form>
 </nb-card>

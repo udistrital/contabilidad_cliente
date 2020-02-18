@@ -52,8 +52,8 @@ export class ConceptosComponent implements OnInit {
         context: {
           id:            conceptoData.ID,
           nombre:        conceptoData.Nombre,
-          cuentaCredito: conceptoData.CuentaDebito,
-          cuentaDebito:  conceptoData.CuentaCredito
+          cuentaCredito: conceptoData.CuentaCredito,
+          cuentaDebito:  conceptoData.CuentaDebito
         }
       }
       ).onClose.subscribe(()=> console.log('cierra modal'));

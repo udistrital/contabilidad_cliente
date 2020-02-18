@@ -46,9 +46,9 @@ export class WizardComponent implements OnInit {
 
   addWizardForm :   FormGroup;
   ayudacontrolForm: FormControl;
-  nombreConcepto: any;
   nextBtnValidateName:    boolean = true;
   touchedBtnValidateName: boolean = false;
+  nombreConcepto: any;
   numeroCuentaCredito: string = 'N/A';
   numeroCuentaDebito:  string = 'N/A';
   wizzardSteps: boolean = true;

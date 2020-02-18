@@ -1,5 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input, ViewChild, ElementRef } from '@angular/core';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
+import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
+import { ConceptosService } from '../../../@core/managers/conceptos.service';
 
 @Component({
   selector: 'ngx-edit-modal',
@@ -13,18 +16,33 @@ export class EditModalComponent implements OnInit {
   @Input('cuentaCredito') cuentaCredito : string;
   @Input('cuentaDebito') cuentaDebito   : string;
 
+  @ViewChild('inputEditConceptName',{static:false}) inputEditConceptName: ElementRef;
+
+  nombreConcepto: any;
   numeroCuentaCredito: string = 'N/A'; //TODO: traducir
   numeroCuentaDebito:  string = 'N/A'; //TODO: traducir
-  wizzardSteps: boolean = false;
+  wizzardSteps:        boolean = false;
+
+  editModalConceptoForm :   FormGroup;
+  conceptoEditado = <any>{ 'Nombre':'','CuentaCredito':'','CuentaDebito':'', 'Contexto': 'no se ha definido', 'MovimientoID': 'fake-movimiento' };
 
   constructor(
+    private fb: FormBuilder,
     private cd: ChangeDetectorRef,
-    private dialogRef: NbDialogRef<EditModalComponent> ) { }
+    private dialogRef: NbDialogRef<EditModalComponent>,
+    private conceptoHelper: ConceptoHelper,
+    private conceptoService: ConceptosService ) { }
 
   ngOnInit() {
+    this.nombreConcepto      = this.nombre;
     this.numeroCuentaCredito = this.cuentaCredito;
     this.numeroCuentaDebito  = this.cuentaDebito;
-    console.log(this.id,this.nombre,this.cuentaCredito,this.cuentaDebito);
+
+    this.editModalConceptoForm = this.fb.group({
+      nombreConcepto:      new FormControl('',[Validators.required,Validators.minLength(4)]),
+      numeroCuentaCredito: new FormControl(this.numeroCuentaCredito),
+      numeroCuentaDebito:  new FormControl(this.numeroCuentaDebito)
+    });
   }
 
   cierraVentana() {
@@ -32,6 +50,7 @@ export class EditModalComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    this.inputEditConceptName.nativeElement.value = this.nombreConcepto;
     this.cd.detectChanges();
   }
 
@@ -44,6 +63,16 @@ export class EditModalComponent implements OnInit {
   }
 
   updateResumen(){
-    console.log('hey hey!');
+    this.conceptoEditado.Nombre        = this.inputEditConceptName.nativeElement.value;
+    this.conceptoEditado.CuentaDebito  = this.numeroCuentaDebito;
+    this.conceptoEditado.CuentaCredito = this.numeroCuentaCredito;
+  }
+
+  editarConcepto() {
+    this.updateResumen();
+    this.conceptoHelper.conceptoUpdate(this.conceptoEditado,this.id).subscribe( res => {
+      this.cierraVentana();
+      this.conceptoService.updateEvent('update-list');
+    });
   }
 }
