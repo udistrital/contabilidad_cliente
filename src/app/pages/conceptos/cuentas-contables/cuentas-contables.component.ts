@@ -29,10 +29,11 @@ export class CuentasContablesComponent implements OnInit {
   fruits = fruits;
   @Input("selectionDebito")  selectionDebito: string ;
   @Input("selectionCredito") selectionCredito: string ;
+  @Input("wizzardSteps")     wizzardSteps: boolean;
 
   @Output() updateCuentaDebito  = new EventEmitter<string>();
   @Output() updateCuentaCredito = new EventEmitter<string>();
-  @Output() guardarCuentas = new EventEmitter<boolean>();
+  @Output() guardarCuentas      = new EventEmitter<boolean>();
 
   stateHighlight: string = 'initial';
   animationCuenta: string;

@@ -6,6 +6,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
 import { Observable } from 'rxjs';
 import { RequestManager } from '../../../../@core/managers/requestManager';
+import { ConceptosService } from '../../../../@core/managers/conceptos.service';
 
 @Component({
   selector: 'ngx-list-entity',
@@ -19,6 +20,7 @@ export class ListEntityComponent implements OnInit {
   @Input('paramsFieldsName') paramsFieldsName: object;
   @Input('uuidDeleteFieldName') uuidDeleteField: string;
   @Input('listColumns') listColumns: object;
+  @Input('actionRequested') actionRequested: any = '';
 
   @Input('deleteConfirmMessage') deleteConfirmMessage: string;
   @Input('deleteMessage') deleteMessage: string;
@@ -58,11 +60,11 @@ export class ListEntityComponent implements OnInit {
     private popUpManager: PopUpManager,
     // tslint:disable-next-line
     private rqManager: RequestManager,
+    private conceptoService: ConceptosService
   ) {
     this.cambiotab = false;
     this.crudcambiotab.emit(false);
     this.auxcambiotab.emit(false);
-    // console.log('constructor');
   }
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class ListEntityComponent implements OnInit {
       this.cargarCampos();
     });
     this.filtrarLista();
+    this.conceptoService.$entityProceedEvent.subscribe( event => this.actionRequested = event );
   }
 
   ngOnChanges(changes) {
@@ -80,14 +83,19 @@ export class ListEntityComponent implements OnInit {
       this.paramsFieldsName = changes['paramsFieldsName'].currentValue;
       this.loadData();
     }
+  }
 
+  ngDoCheck() {
+    if (this.actionRequested === 'update-list') {
+      this.loadData();
+    }
   }
 
   filtrarLista() {
     this.source.onChanged().subscribe((change) => {
 
       if (change.action === 'filter') {
-        /*        console.info(change);
+        /*     console.info(change);
                console.info(change.filter.filters); */
         change.filter.filters.map((item) => {
           if (item.field === 'Vigencia' &&
@@ -134,6 +142,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   loadData(): void {
+    this.conceptoService.updateEvent('none');
     this.loadDataFunction('', this.paramsFieldsName ? this.paramsFieldsName : '').subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
@@ -161,6 +170,7 @@ export class ListEntityComponent implements OnInit {
       this.activetab('crud');
     } else {
       this.activetab('external-edit');
+      this.infooutput.emit(event.data);
     }
   }
 
@@ -174,7 +184,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   onCustom(event): void {
-    console.info(event);
+    //console.info(event);
     switch (event.action) {
       case 'edit':
         this.onEdit(event);

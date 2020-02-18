@@ -41,9 +41,10 @@
           <ngx-cuentas-contables
             [selectionDebito]="numeroCuentaDebito"
             [selectionCredito]="numeroCuentaCredito"
+            [wizzardSteps]="wizzardSteps"
             (updateCuentaDebito)="updateCuentaDebito($event)"
             (updateCuentaCredito)="updateCuentaCredito($event)"
-            (guardarCuentas)="crearConcepto()"
+            (guardarCuentas)="updateResumen()"
           ></ngx-cuentas-contables>
         </nb-step>
         <nb-step [label]="thirdStep">
@@ -55,13 +56,13 @@
             <div class="nbCard-columm">
               <h4 status="success" >{{'CONCEPTOS.concepto-creado' | translate }}</h4>
               <p>
-                <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>{{ conceptoCreado.nombre }}</span>
+                <strong>{{'CONCEPTOS.nombre' | translate }}</strong><span>{{ conceptoCreado.Nombre }}</span>
               </p>
               <p>
-                <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>{{ conceptoCreado.cuentaCredito }}</span>
+                <strong>{{'CONCEPTOS.cuenta-credito' | translate }}</strong><span>{{ conceptoCreado.CuentaCredito }}</span>
               </p>
               <p>
-                <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>{{ conceptoCreado.cuentaDebito }}</span>
+                <strong>{{'CONCEPTOS.cuenta-debito' | translate }}</strong><span>{{ conceptoCreado.CuentaDebito }}</span>
               </p>
             </div>
           </nb-card>

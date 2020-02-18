@@ -13,6 +13,8 @@ import {
   animate,
   transition } from '@angular/animations';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
+import { ConceptosService } from '../../../@core/managers/conceptos.service';
 
 @Component({
   selector: 'ngx-wizard',
@@ -37,22 +39,27 @@ export class WizardComponent implements OnInit {
 
   @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard   : any;
   @ViewChild('inputValidateName',{static:false}) inputValidateName: any;
-  @Input("stateWizard") stateWizard: any;
-  @Input("namesConceptosArray") namesConceptosArray: any;
+  @Input('stateWizard') stateWizard: any;
+  @Input('namesConceptosArray') namesConceptosArray: any;
 
   @Output() wizardActivator = new EventEmitter<boolean>();
 
   addWizardForm :   FormGroup;
   ayudacontrolForm: FormControl;
-  nombreConcepto: any;
   nextBtnValidateName:    boolean = true;
   touchedBtnValidateName: boolean = false;
+  nombreConcepto: any;
   numeroCuentaCredito: string = 'N/A';
   numeroCuentaDebito:  string = 'N/A';
+  wizzardSteps: boolean = true;
 
-  conceptoCreado = <any>{ "nombre":"","cuentaCredito":"","cuentaDebito":"" };
+  conceptoCreado = <any>{ 'Nombre':'','CuentaCredito':'','CuentaDebito':'', 'Contexto': 'no se a definido', 'MovimientoID': 'fake-movimiento' };
 
-  constructor( private fb: FormBuilder, private cd: ChangeDetectorRef) { }
+  constructor(
+    private fb: FormBuilder,
+    private cd: ChangeDetectorRef,
+    private conceptoHelper: ConceptoHelper,
+    private conceptoService: ConceptosService ) { }
 
   ngOnInit() {
     this.addWizardForm = this.fb.group({
@@ -107,12 +114,16 @@ export class WizardComponent implements OnInit {
 
   crearConcepto(){
     this.updateResumen();
+    const registraConcepto = this.conceptoHelper.conceptoRegister(this.conceptoCreado).subscribe(res => {
+      this.nbStepperWizard.next();
+      this.conceptoService.updateEvent('update-list');
+    });
   }
 
   updateResumen(){
-    this.conceptoCreado.nombre        = this.addWizardForm.value.nombreConcepto;
-    this.conceptoCreado.cuentaDebito  = this.numeroCuentaDebito;
-    this.conceptoCreado.cuentaCredito = this.numeroCuentaCredito;
+    this.conceptoCreado.Nombre        = this.addWizardForm.value.nombreConcepto;
+    this.conceptoCreado.CuentaDebito  = this.numeroCuentaDebito;
+    this.conceptoCreado.CuentaCredito = this.numeroCuentaCredito;
   }
 
   checkWizardReset(event) {
