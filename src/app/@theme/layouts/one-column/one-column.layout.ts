@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NbSidebarService } from '@nebular/theme';
-import { LayoutService } from '../../../@core/utils';
 
 
 @Component({
@@ -30,7 +29,6 @@ export class OneColumnLayoutComponent {
 
   constructor(
     private sidebarService: NbSidebarService,
-    private layoutService: LayoutService,
   ) {
 
   }
@@ -39,7 +37,6 @@ export class OneColumnLayoutComponent {
     if (event.target.nextSibling === null &&
       (event.target.className === 'menu-title' || event.target.lastElementChild.className === 'menu-title')) {
       this.sidebarService.toggle(true, 'menu-sidebar');
-      this.layoutService.changeLayoutSize();
       return false;
     }
     return true;
