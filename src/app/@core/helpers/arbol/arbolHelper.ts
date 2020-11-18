@@ -54,6 +54,26 @@ export class ArbolHelper {
     );
   }
 
+  public getCuenta(cuenta,withDisabledNodes = false) {
+    this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+    // this.rqManager.setPath('DUMMY_SERVICE');
+    // Set the optional branch for the API request.
+    // const raiz = 3;
+    // call request manager for the tree's data.
+    return this.rqManager.get('nodo_cuenta_contable/cuentas/'+cuenta+`?fullTree=${withDisabledNodes}`).pipe(
+      map(
+        (res) => {
+          if (res && res['Type'] === 'error') {
+            this.pUpManager.showErrorAlert('No se pudo consultar la informacion del arbol');
+            return undefined;
+          }
+
+          return res;
+        },
+      ),
+    );
+  }
+
   /**
     * Gets full arbol by Estado
     *  returns full rubro's tree information (all nodes and branches).
