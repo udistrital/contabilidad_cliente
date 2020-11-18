@@ -24,22 +24,67 @@
       </div>
     </div>
     <nb-card class="arbol-cuentas">
-      <div class="nbCard-columm">
-        <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits" (click)="updateCredito(fruit)">
-            <span>{{ fruit }}</span>
-            <span>Nombre de cuenta contables</span>
-          </nb-list-item>
-        </nb-list>
+      <div class="col-sm-6">
+        <table [nbTreeGrid]="dataSourceCredito" [nbSort]="dataSourceCredito" (sort)="updateSort($event)">
+          <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+          <tr #nebularTree class="table-row" [class.highlight]="validHighlight(row, nebularTree)"
+            (click)="onSelect(row, nebularTree);updateCredito(row)" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"
+            [attr.data-picker]="row.data.Codigo"></tr>
+          <ng-container [nbTreeGridColumnDef]="customColumn">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+              {{ customColumn }}
+            </th>
+            <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
+              <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
+              <span [ngClass]="{
+                  'nb-chevron-down': row.expanded,
+                  'nb-chevron-right': !row.expanded
+                }" aria-hidden="true">
+              </span>{{ row.data[customColumn] }}
+            </td>
+          </ng-container>
+          <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
+            [showOn]="getShowOn(index)">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+              {{ column }}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{ column === "Activo" ? (row.data[column] ? "Si" : "No" ): (row.data[column] || "-") }}
+            </td>
+          </ng-container>  
+        </table>
       </div>
-      <div class="nbCard-columm">
-        <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits" (click)="updateDebito(fruit)">
-            <span>{{ fruit }}</span>
-            <span>Nombre de cuenta contables</span>
-          </nb-list-item>
-        </nb-list>
+      <div class="col-sm-6">
+        <table [nbTreeGrid]="dataSourceDebito" [nbSort]="dataSourceDebito" (sort)="updateSort($event)">
+          <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+          <tr #nebularTree class="table-row" [class.highlight]="validHighlight(row, nebularTree)"
+            (click)="onSelect(row, nebularTree);updateDebito(row)" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"
+            [attr.data-picker]="row.data.Codigo"></tr>
+          <ng-container [nbTreeGridColumnDef]="customColumn">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+              {{ customColumn }}
+            </th>
+            <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
+              <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
+              <span [ngClass]="{
+                  'nb-chevron-down': row.expanded,
+                  'nb-chevron-right': !row.expanded
+                }" aria-hidden="true">
+              </span>{{ row.data[customColumn] }}
+            </td>
+          </ng-container>
+          <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
+            [showOn]="getShowOn(index)">
+            <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+              {{ column }}
+            </th>
+            <td nbTreeGridCell *nbTreeGridCellDef="let row">
+              {{ column === "Activo" ? (row.data[column] ? "Si" : "No" ): (row.data[column] || "-") }}
+            </td>
+          </ng-container>  
+        </table>
       </div>
-    </nb-card>
+    </nb-card> 
   </nb-card-body>
-</nb-card>
+</nb-card> 
+
