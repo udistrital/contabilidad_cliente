@@ -31,7 +31,6 @@ interface EstructuraArbolRubrosApropiaciones {
   data?: EstructuraArbolRubrosApropiaciones;
   children?: EstructuraArbolRubrosApropiaciones[];
 }
-
 @Component({
   selector: 'ngx-cuentas-contables',
   templateUrl: './cuentas-contables.component.html',
@@ -50,9 +49,7 @@ interface EstructuraArbolRubrosApropiaciones {
     ]),
   ]
 })
-export class CuentasContablesComponent implements OnInit {
-  
-  
+export class CuentasContablesComponent implements OnInit {  
   @Input("wizzardSteps")     wizzardSteps: boolean;
   @Input() updateSignal: Observable<string[]>;
   @Input('paramsFieldsName') paramsFieldsName: object;
@@ -69,16 +66,12 @@ export class CuentasContablesComponent implements OnInit {
 
   stateHighlight: string = 'initial';
   animationCuenta: string;
-
   customColumn = 'Codigo';
   defaultColumns = ['Nombre'];
   searchValue: string;
-
   sortDirection: NbSortDirection = NbSortDirection.NONE;
-
   dataSourceCredito: NbTreeGridDataSource<EstructuraArbolRubrosApropiaciones>;
   dataSourceDebito: NbTreeGridDataSource<EstructuraArbolRubrosApropiaciones>;
-
   credito = 'credito';
   debito = 'debito';
 
@@ -91,7 +84,6 @@ export class CuentasContablesComponent implements OnInit {
   ngOnInit() {
     this.loadTreeCuenta();
   }
-
 
   updateCredito(cuenta) {
     this.selectionCredito  = cuenta;
@@ -150,7 +142,6 @@ export class CuentasContablesComponent implements OnInit {
       this.dataSourceDebito = this.dataSourceBuilder.create(this.data, getters);
     });
   }
-
 
   restaurarAnimationInitial( event ){
     this.stateHighlight = 'initial';

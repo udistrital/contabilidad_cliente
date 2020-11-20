@@ -9,7 +9,6 @@ import {
     NbSortDirection,
     NbSortRequest,
   } from '@nebular/theme';
-
 @Component({
   selector: 'ngx-table',
   templateUrl: './table.component.html',
@@ -39,7 +38,6 @@ export class TableComponent implements OnInit {
   @Output() updateDebito  = new EventEmitter<string>();
   @Output() updateCredito = new EventEmitter<string>();
   
-
   customColumn = 'Codigo';
   defaultColumns = ['Nombre'];
   oldHighlight: ElementRef;
@@ -64,7 +62,6 @@ export class TableComponent implements OnInit {
       this.updateDebito.emit(this.selectedNodeData.Nombre);
     }
   }
-
 
   updateSort(sortRequest: NbSortRequest): void {
     this.sortColumn = sortRequest.column;
