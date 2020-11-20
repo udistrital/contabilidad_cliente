@@ -2,9 +2,10 @@
 :host ::ng-deep nb-card-body {
   position: relative;
 
-  button {
+  /* button {
     position: absolute;
-  }
+  } */
+
   button:nth-child(1) {
     left: 1%;
   }
