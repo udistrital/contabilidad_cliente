@@ -36,6 +36,8 @@ export class TableComponent implements OnInit {
   
   @Output() rubroSeleccionado = new EventEmitter();
   @Output() selectedNodeData: any;
+  @Output() updateDebito  = new EventEmitter<string>();
+  @Output() updateCredito = new EventEmitter<string>();
   
 
   customColumn = 'Codigo';
@@ -56,6 +58,11 @@ export class TableComponent implements OnInit {
   async onSelect(selectedItem: any, treegrid) {
     this.idHighlight = treegrid.elementRef.nativeElement.getAttribute('data-picker');
     this.selectedNodeData = selectedItem.data;
+    if (this.selection=='credito'){
+      this.updateCredito.emit(this.selectedNodeData.Nombre);   
+    } else if (this.selection=='debito'){
+      this.updateDebito.emit(this.selectedNodeData.Nombre);
+    }
   }
 
 

@@ -79,6 +79,9 @@ export class CuentasContablesComponent implements OnInit {
   dataSourceCredito: NbTreeGridDataSource<EstructuraArbolRubrosApropiaciones>;
   dataSourceDebito: NbTreeGridDataSource<EstructuraArbolRubrosApropiaciones>;
 
+  credito = 'credito';
+  debito = 'debito';
+
   private data: [];
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
@@ -88,6 +91,7 @@ export class CuentasContablesComponent implements OnInit {
   ngOnInit() {
     this.loadTreeCuenta();
   }
+
 
   updateCredito(cuenta) {
     this.selectionCredito  = cuenta;

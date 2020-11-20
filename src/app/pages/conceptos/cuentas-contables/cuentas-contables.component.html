@@ -27,10 +27,20 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6">  
-            <ngx-table [dataSource]= "dataSourceCredito" [allColumns]="columns" ></ngx-table>
+            <ngx-table 
+            [dataSource]= "dataSourceCredito" 
+            [allColumns]="columns"
+            (updateDebito)="updateDebito($event)"
+            (updateCredito)="updateCredito($event)"
+            [selection]="credito" ></ngx-table>
           </div>
           <div class="col-sm-6">        
-            <ngx-table [dataSource]= "dataSourceDebito" [allColumns]="columns" ></ngx-table>
+            <ngx-table 
+            [dataSource]= "dataSourceDebito" 
+            [allColumns]="columns" 
+            (updateDebito)="updateDebito($event)"
+            (updateCredito)="updateCredito($event)"
+            [selection]="debito" ></ngx-table>
           </div>
         </div>
     </div>
