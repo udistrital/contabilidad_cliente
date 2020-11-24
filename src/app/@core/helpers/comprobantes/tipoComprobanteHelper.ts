@@ -68,7 +68,7 @@ export class TipoComprobanteHelper {
      */
     public tipoComprobanteUpdate(data) {
         const id = data.Codigo;
-        data.Codigo = "";
+        data.Codigo = '';
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
         return this.rqManager.put('tipo_comprobante/', data, id).pipe(
             map(

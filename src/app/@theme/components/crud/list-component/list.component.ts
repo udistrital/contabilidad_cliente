@@ -184,7 +184,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   onCustom(event): void {
-    //console.info(event);
+    // console.info(event);
     switch (event.action) {
       case 'edit':
         this.onEdit(event);
@@ -272,7 +272,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   itemselec(event): void {
-    //console.log(event,'itemselect'); // onload row
+    // console.log(event,'itemselect'); // onload row
   }
 
   getIndexForm(nombre: String): number {

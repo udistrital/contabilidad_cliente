@@ -49,7 +49,7 @@ export class ListTipoComprobanteComponent implements OnInit {
     private tipoComprobanteHelper: TipoComprobanteHelper) {   }
 
    ngOnInit() {
-    //this.paramsFieldsName = { Vigencia: this.vigenciaSel, UnidadEjecutora: 1 };
+    // this.paramsFieldsName = { Vigencia: this.vigenciaSel, UnidadEjecutora: 1 };
     this.loadFormDataFunction = this.tipoComprobanteHelper.getTiposComprobante;
     this.isOnlyCrud = false;
     this.uuidReadFieldName = 'Codigo';
@@ -110,7 +110,7 @@ export class ListTipoComprobanteComponent implements OnInit {
           delete: false,
           custom: [
             { name: 'edit', title: '<i title="Editar" class="nb-edit"></i>' },
-            { name: 'delete', title: '<i title="Eliminar" class="nb-trash"></i>' },],
+            { name: 'delete', title: '<i title="Eliminar" class="nb-trash"></i>' }, ],
           position: 'right'
         },
         add: {
@@ -127,7 +127,7 @@ export class ListTipoComprobanteComponent implements OnInit {
     for (let index = 0; index < this.formEntity.campos.length; index++) {
       const element = this.formEntity.campos[index];
       if (element.nombre === nombre) {
-        return index
+        return index;
       }
     }
     return 0;
@@ -148,7 +148,7 @@ export class ListTipoComprobanteComponent implements OnInit {
 
   onSelect(selectedItem: any) {
     this.vigenciaSel = selectedItem;
-    if(this)
+    if (this)
     this.paramsFieldsName = { Vigencia: this.vigenciaSel, UnidadEjecutora: 1 };
     // this.eventChange.emit(true);
   }
@@ -172,7 +172,7 @@ export class ListTipoComprobanteComponent implements OnInit {
     this.auxcambiotab = false;
     this.localtabActived = false;
     this.createTab = false;
-    this.viewTab = false
+    this.viewTab = false;
   }
 
 

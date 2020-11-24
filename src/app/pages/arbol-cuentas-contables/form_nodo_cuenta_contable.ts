@@ -1,5 +1,5 @@
-const activeData =  { Label: "Si", Id: true };
-const unActiveData =  { Label: "No", Id: false };
+const activeData =  { Label: 'Si', Id: true };
+const unActiveData =  { Label: 'No', Id: false };
 export let FORM_NODO_CUENTA_CONTABLE = {
 
     tipo_formulario: 'mini',

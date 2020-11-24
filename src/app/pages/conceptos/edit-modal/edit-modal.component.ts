@@ -11,22 +11,22 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
 })
 export class EditModalComponent implements OnInit {
 
-  @Input('id') id                       : string;
-  @Input('nombre') nombre               : string;
-  @Input('cuentaCredito') cuentaCredito : string;
-  @Input('cuentaDebito') cuentaDebito   : string;
+  @Input('id') id: string;
+  @Input('nombre') nombre: string;
+  @Input('cuentaCredito') cuentaCredito: string;
+  @Input('cuentaDebito') cuentaDebito: string;
 
-  @ViewChild('inputEditConceptName',{static:false}) inputEditConceptName: ElementRef;
-  @ViewChild('submitEditedConcept',{static:false})  submitEditedConcept: ElementRef;
+  @ViewChild('inputEditConceptName', {static: false}) inputEditConceptName: ElementRef;
+  @ViewChild('submitEditedConcept', {static: false})  submitEditedConcept: ElementRef;
 
   nombreConcepto: any;
-  numeroCuentaCredito: string = 'N/A'; //TODO: traducir
-  numeroCuentaDebito:  string = 'N/A'; //TODO: traducir
+  numeroCuentaCredito: string = 'N/A'; // TODO: traducir
+  numeroCuentaDebito:  string = 'N/A'; // TODO: traducir
   wizzardSteps:        boolean = false;
   statusButtonSave:    boolean = true;
 
-  editModalConceptoForm :   FormGroup;
-  conceptoEditado = <any>{ 'Nombre':'','CuentaCredito':'','CuentaDebito':'', 'Contexto': 'no se ha definido', 'MovimientoID': 'fake-movimiento' };
+  editModalConceptoForm:   FormGroup;
+  conceptoEditado = <any>{ 'Nombre': '', 'CuentaCredito': '', 'CuentaDebito': '', 'Contexto': 'no se ha definido', 'MovimientoID': 'fake-movimiento' };
 
   constructor(
     private fb: FormBuilder,
@@ -41,7 +41,7 @@ export class EditModalComponent implements OnInit {
     this.numeroCuentaDebito  = this.cuentaDebito;
 
     this.editModalConceptoForm = this.fb.group({
-      nombreConcepto:      new FormControl('',[Validators.required,Validators.minLength(4)]),
+      nombreConcepto:      new FormControl('', [Validators.required, Validators.minLength(4)]),
       numeroCuentaCredito: new FormControl(this.numeroCuentaCredito),
       numeroCuentaDebito:  new FormControl(this.numeroCuentaDebito)
     });
@@ -67,14 +67,14 @@ export class EditModalComponent implements OnInit {
     this.statusButtonSave = false;
   }
 
-  updateResumen(){
+  updateResumen() {
     this.conceptoEditado.Nombre        = this.inputEditConceptName.nativeElement.value;
     this.conceptoEditado.CuentaDebito  = this.numeroCuentaDebito;
     this.conceptoEditado.CuentaCredito = this.numeroCuentaCredito;
   }
 
   validateNewNameConcept() {
-    if( this.conceptoService.validateConceptNameExits(this.inputEditConceptName.nativeElement.value) == true ) {
+    if ( this.conceptoService.validateConceptNameExits(this.inputEditConceptName.nativeElement.value) == true ) {
       this.nombreConcepto.status = 'INVALID';
       this.statusButtonSave = true;
     } else {
@@ -85,7 +85,7 @@ export class EditModalComponent implements OnInit {
 
   editarConcepto() {
     this.updateResumen();
-    this.conceptoHelper.conceptoUpdate(this.conceptoEditado,this.id).subscribe( res => {
+    this.conceptoHelper.conceptoUpdate(this.conceptoEditado, this.id).subscribe( res => {
       this.cierraVentana();
       this.conceptoService.updateEvent('update-list');
     });

@@ -7,13 +7,12 @@ import {
   NbTreeGridDataSourceBuilder,
   NbSortRequest,
 } from '@nebular/theme';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable } from 'rxjs';
 // import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 // import { RubroHelper } from '../../../@core/helpers/rubros/rubroHelper';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-CO';
 import { ArbolHelper } from '../../@core/helpers/arbol/arbolHelper';
-import { FormGroup } from '@angular/forms';
 import { FormManager } from '../../@core/managers/formManager';
 import { FORM_NODO_CUENTA_CONTABLE } from './form_nodo_cuenta_contable';
 import { TranslateService } from '@ngx-translate/core';
@@ -92,9 +91,9 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
     this.loadTree();
 
-    this.formData = FORM_NODO_CUENTA_CONTABLE
+    this.formData = FORM_NODO_CUENTA_CONTABLE;
     this.nodeData = undefined;
-    this.construirForm()
+    this.construirForm();
   }
   construirForm() {
     this.formData.btn = this.translate.instant('GLOBAL.guardar');
@@ -214,7 +213,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
   validarForm($event) {
     const nodeData = $event.data.NodoCuentaContable;
-    
+
     nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['Id'];
     nodeData['MonedaID'] = nodeData['MonedaID']['Id'];
     nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['Id'];
@@ -225,12 +224,12 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     nodeData['CodigoCuentaAlterna'] = nodeData['CodigoCuentaAlterna'] + '';
     nodeData['Codigo'] = nodeData['Codigo'] + '';
     if (this.selectedNodeData) {
-      nodeData['Padre'] = this.selectedNodeData['Codigo']
+      nodeData['Padre'] = this.selectedNodeData['Codigo'];
     }
     if (this.nodeData) {
       this.treeHelper.updateNode($event.data.NodoCuentaContable.Codigo, $event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
-          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente')
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente');
           this.cleanInterface();
           this.showTreeTab();
         }
@@ -239,7 +238,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
       this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
-          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente');
           this.cleanInterface();
           this.showTreeTab();
         }
@@ -291,9 +290,9 @@ export class ArbolCuentasContablesComponent implements OnChanges {
       this.nodeData['CentroDecostosID'] = this.formData.campos[centroCostosIndex].opciones.find(element => element.Id === this.nodeData['CentroDecostosID']);
       this.nodeData['MonedaID'] = this.formData.campos[tipoMonedaIndex].opciones.find(element => element.Id === this.nodeData['MonedaID']);
       this.nodeData['NaturalezaCuentaID'] = this.formData.campos[naturalezaIndex].opciones.find(element => element.Id === this.nodeData['NaturalezaCuentaID']);
-      this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
-      this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
-      this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
+      this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
     });
   }
 

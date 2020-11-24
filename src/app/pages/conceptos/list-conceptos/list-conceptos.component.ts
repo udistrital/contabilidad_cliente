@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
-import { Observable } from 'rxjs';
 import { ConceptosService } from '../../../@core/managers/conceptos.service';
 
 @Component({
@@ -11,8 +10,8 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
 })
 export class ListConceptosComponent implements OnInit {
 
-  @Input("stateWizard") stateWizard:       string;
-  @Input("setDataRequest") setDataRequest: string;
+  @Input('stateWizard') stateWizard:       string;
+  @Input('setDataRequest') setDataRequest: string;
   @Output() wizardActivator      = new EventEmitter<string>();
   @Output() getAllConceptosNames = new EventEmitter<any>();
   @Output() emitDataRequested    = new EventEmitter<any>();
@@ -39,8 +38,8 @@ export class ListConceptosComponent implements OnInit {
   listColumns:       object;
 
   loadFormDataFunction:     any;
-  loadDataFunction    :     any;
-  deleteDataFunction  :     any;
+  loadDataFunction:     any;
+  deleteDataFunction:     any;
   updateEntityFunction:     any;
   createEntityFunction:     any;
 
@@ -79,23 +78,23 @@ export class ListConceptosComponent implements OnInit {
     this.uuidReadFieldName = 'ID';
     this.uuidDeleteFieldName = 'ID';
     this.deleteMessage = 'Eliminar Concepto'; // TODO: traducir
-    this.deleteConfirmMessage = "Feliz, elimino el concepto!"; // TODO: traducir
+    this.deleteConfirmMessage = 'Feliz, elimino el concepto!'; // TODO: traducir
     this.listColumns = {
       Nombre: {
-        title: "Nombre",
+        title: 'Nombre',
         valuePrepareFunction: value => {
           this.arrayConceptoNames.push(value.toLowerCase());
           return value;
         }
       },
       CuentaCredito: {
-        title: "Cuenta Crédito", // TODO: traducir
+        title: 'Cuenta Crédito', // TODO: traducir
         valuePrepareFunction: value => {
           return value;
         }
       },
       CuentaDebito: {
-        title: "Cuenta Débito", // TODO: traducir
+        title: 'Cuenta Débito', // TODO: traducir
         valuePrepareFunction: value => {
           return value;
         }
@@ -107,10 +106,10 @@ export class ListConceptosComponent implements OnInit {
         add: true,
         edit: false,
         delete: false,
-        type:'html',
+        type: 'html',
         custom: [
-          { name: 'edit', type:'html', title: '<i title="Editar" class="nb-edit" nbTooltip="Editar Concepto" nbTooltipStatus="primary"></i>' },
-          { name: 'delete', type:'html', title: '<i title="Eliminar" class="nb-trash" nbTooltip="Eliminar Concepto" nbTooltipStatus="primary"></i>' },],
+          { name: 'edit', type: 'html', title: '<i title="Editar" class="nb-edit" nbTooltip="Editar Concepto" nbTooltipStatus="primary"></i>' },
+          { name: 'delete', type: 'html', title: '<i title="Eliminar" class="nb-trash" nbTooltip="Eliminar Concepto" nbTooltipStatus="primary"></i>' }, ],
         position: 'right'
       },
       add: {
@@ -122,38 +121,38 @@ export class ListConceptosComponent implements OnInit {
       columns: this.listColumns,
     };
     if (this.setDataRequest !== 'none') {
-      let dataEdited = { event: 'conceptos-names'};
+      const dataEdited = { event: 'conceptos-names'};
       this.emitData(dataEdited);
     }
   }
 
-  onExternalTabActivator(event){
+  onExternalTabActivator(event) {
     if (event === 'external-create') {
       this.stateWizard = 'open';
       this.wizardActivator.emit(this.stateWizard);
     } else {
       this.getAllConceptosNames.emit(this.arrayConceptoNames);
       this.conceptoService.entityListConceptos = this.arrayConceptoNames;
-      console.log(event,'onExternalTabActivator');
+      console.log(event, 'onExternalTabActivator');
     }
   }
 
-  onChangeExternalTab(event){
-    console.log(event,'onChangeExternalTab');
+  onChangeExternalTab(event) {
+    console.log(event, 'onChangeExternalTab');
   }
 
   emitData( eventObject ) {
-    if(eventObject.event === 'conceptos-names') {
-      let objectSend = { requested: eventObject.event, data: this.arrayConceptoNames };
+    if (eventObject.event === 'conceptos-names') {
+      const objectSend = { requested: eventObject.event, data: this.arrayConceptoNames };
       this.emitDataRequested.emit(objectSend);
     }
-    if(eventObject.event === 'edit-concepto') {
-      let objectSend = { requested: eventObject.event, data: eventObject.data };
+    if (eventObject.event === 'edit-concepto') {
+      const objectSend = { requested: eventObject.event, data: eventObject.data };
       this.emitDataRequested.emit(objectSend);
     }
   }
   receiveMessage( data ) {
-    let dataEdited = { event: 'edit-concepto', data: data};
+    const dataEdited = { event: 'edit-concepto', data: data};
     this.emitData(dataEdited);
   }
 }
