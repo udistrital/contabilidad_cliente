@@ -21,7 +21,6 @@ export class ArbolHelper {
     */
   public getFullArbol(vigencia = '0') {
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
-    // this.rqManager.setPath('DUMMY_SERVICE');
     // Set the optional branch for the API request.
     const unidadEjecutora = 1;
     // const raiz = 3;
@@ -36,7 +35,6 @@ export class ArbolHelper {
     */
   public getTree(withDisabledNodes = false) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-    // this.rqManager.setPath('DUMMY_SERVICE');
     // Set the optional branch for the API request.
     // const raiz = 3;
     // call request manager for the tree's data.
@@ -56,7 +54,6 @@ export class ArbolHelper {
 
   public getCuenta(cuenta,withDisabledNodes = false) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
-    // this.rqManager.setPath('DUMMY_SERVICE');
     // Set the optional branch for the API request.
     // const raiz = 3;
     // call request manager for the tree's data.
@@ -87,7 +84,6 @@ export class ArbolHelper {
       query = `?query=${queryString}`;
     }
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
-    // this.rqManager.setPath('DUMMY_SERVICE');
     // Set the optional branch for the API request.
     const unidadEjecutora = 1;
     // const raiz = 3;
