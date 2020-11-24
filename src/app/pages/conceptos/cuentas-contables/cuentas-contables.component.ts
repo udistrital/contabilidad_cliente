@@ -114,10 +114,10 @@ export class CuentasContablesComponent implements OnInit {
   }
 
   triggerAnimationText(cuenta: string){
-    if (cuenta == 'debito'  && this.animationCuenta === 'debito') {
+    if (cuenta === 'debito'  && this.animationCuenta === 'debito') {
       return 'highlight';
     }
-    else if (cuenta == 'credito' && this.animationCuenta === 'credito') {
+    else if (cuenta === 'credito' && this.animationCuenta === 'credito') {
       return 'highlight';
     } else {
       return 'initial';
