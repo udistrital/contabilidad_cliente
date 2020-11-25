@@ -1,10 +1,7 @@
 @import '../../../@theme/styles/themes';
 :host ::ng-deep nb-card-body {
   position: relative;
-
-  button {
-    position: absolute;
-  }
+  
   button:nth-child(1) {
     left: 1%;
   }
@@ -60,7 +57,6 @@
     background-color: nb-theme(color-green-ok);
   }
 }
-
 @media (max-width: 640px) {
   :host ::ng-deep nb-card-body {
     button {

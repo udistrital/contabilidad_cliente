@@ -23,23 +23,25 @@
             (@changeSelectedValue.done)="restaurarAnimationInitial($event)">{{ selectionDebito }}</span>
       </div>
     </div>
-    <nb-card class="arbol-cuentas">
-      <div class="nbCard-columm">
-        <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits" (click)="updateCredito(fruit)">
-            <span>{{ fruit }}</span>
-            <span>Nombre de cuenta contables</span>
-          </nb-list-item>
-        </nb-list>
-      </div>
-      <div class="nbCard-columm">
-        <nb-list>
-          <nb-list-item *ngFor="let fruit of fruits" (click)="updateDebito(fruit)">
-            <span>{{ fruit }}</span>
-            <span>Nombre de cuenta contables</span>
-          </nb-list-item>
-        </nb-list>
-      </div>
-    </nb-card>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">  
+            <ngx-table 
+            [dataSource]= "dataSourceCredito" 
+            [allColumns]="columns"
+            (updateDebito)="updateDebito($event)"
+            (updateCredito)="updateCredito($event)"
+            [selection]="credito" ></ngx-table>
+          </div>
+          <div class="col-sm-6">        
+            <ngx-table 
+            [dataSource]= "dataSourceDebito" 
+            [allColumns]="columns" 
+            (updateDebito)="updateDebito($event)"
+            (updateCredito)="updateCredito($event)"
+            [selection]="debito" ></ngx-table>
+          </div>
+        </div>
+    </div>
   </nb-card-body>
-</nb-card>
+</nb-card> 
