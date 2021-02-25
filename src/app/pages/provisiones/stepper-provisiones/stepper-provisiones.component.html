@@ -1,0 +1,46 @@
+
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                CREAR PROVISIÓN
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-horizontal-stepper linear #stepper>
+                <mat-step [stepControl]="infoReintegroGroup">
+                    <ng-template matStepLabel>Inicio</ng-template>
+                    <div class="container">
+                        <ngx-set-infoprovision></ngx-set-infoprovision>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="infoAfectacionGroup">
+                    <ng-template matStepLabel>Conceptos Provisión</ng-template>
+                    <div class="container">
+                        <ngx-set-conceptoprovision></ngx-set-conceptoprovision>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="contabilizacionGroup">
+                    <ng-template matStepLabel>Resumen</ng-template>
+                    <div class="container">
+                        <ngx-set-resumenprovision></ngx-set-resumenprovision>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="detalleReintegroGroup">
+                    <ng-template matStepLabel>Cálculo de Régimen</ng-template>
+                    <div class="container">
+                        <ngx-set-calculoregimen></ngx-set-calculoregimen>
+                    </div>
+                </mat-step>
+                <mat-step [stepControl]="detalleReintegroGroup">
+                    <ng-template matStepLabel>Contabilización</ng-template>
+                    <div class="container">
+                        <ngx-set-contabilizacion></ngx-set-contabilizacion>
+                    </div>
+                </mat-step>
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

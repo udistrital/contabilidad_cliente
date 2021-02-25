@@ -1,0 +1,103 @@
+<form [formGroup]="regimenGroup" (ngSubmit)="saveForm()">
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Cálculo del Régimen
+                </h6>
+            </div>
+        </div>
+
+        <br>
+        <!-- Campos: Tipo de nómina y mes -->
+
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label>Tipo de Nómina</label>
+                <input value=" " type="text" class="form-control" readonly>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <label>Mes</label>
+                <input value=" " type="text" class="form-control" readonly>
+            </div>
+        </div>
+
+        <!-- Campos: Concepto Nómina y Regimen  -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label>Tipo de Nómina</label>
+                <input value=" " type="text" class="form-control" readonly>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <label>Régimen</label>
+                <select class="custom-select" formControlName="regimen" [class.is-invalid]="regimenInvalid">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Antíguo</option>
+                    <option>Nuevo</option>
+                </select>
+                <small *ngIf="regimenInvalid" class="text-danger">Seleccione una opción</small>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Valor del Concepto de Cesantías -->
+        <div class="form-group row ">
+            <div class="col-md-4 text-right pt-3">
+                <label class="text-right">Valor del Concepto de Cesantías</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" value=" $ 65.778.321" readonly>
+            </div>
+        </div>
+
+        <div class="row py-3">
+            <div class="col bg-white">
+                <ngx-general-table [config]="configRegimen" [datos]="datosRegimen">
+                </ngx-general-table>
+            </div>
+        </div>
+
+
+        <!-- Campos: Total Régimen Antíguo y Total Régimen Nuevo -->
+        <div class="form-group row ">
+            <div class="col-md-3 text-right pt-3">
+                <label class="text-right">Total Régimen Antíguo</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" value=" $ 220.121.538" readonly>
+            </div>
+
+            <div class="col-md-3 text-right pt-3">
+                <label class="text-right">Total Régimen Nuevo</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" value=" $ 137.102.639" readonly>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+        <!-- Botones: Volver, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                    </div>
+                        <button  mat-button matStepperPrevious type="button" class="btn btn-warning mb-3 mt-3 text-white">Volver
+                        </button>
+                    </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">
+                        Contabilización
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</form>

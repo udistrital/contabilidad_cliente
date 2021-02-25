@@ -1,0 +1,150 @@
+<form [formGroup]="infoProvisionGroup" (ngSubmit)="saveForm()">
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Información de Provision
+                </h6>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Área Funcional, Centro Gestor, fecha  -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label for="areaFuncional">Área Funcional</label>
+                <select id="areaFuncional" class="custom-select" formControlName="areaFuncional" [class.is-invalid]="esInvalido('areaFuncional')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>01</option>
+                    <option>02</option>
+                </select>
+                <small *ngIf="esInvalido('areaFuncional')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="centroGestor">Centro Gestor</label>
+                <select id="centroGestor"  class="custom-select" formControlName="centroGestor" [class.is-invalid]="esInvalido('centroGestor')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>230</option>
+                </select>
+                <small *ngIf="esInvalido('centroGestor')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="fecha">Fecha</label>
+                <div class="input-group">
+                    <input id="fecha" type="date" name="fecha" class="form-control" formControlName="fecha" [class.is-invalid]="esInvalido('fecha')">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                <small *ngIf="esInvalido('fecha')" class="text-danger">Seleccione una fecha</small>
+            </div>
+        </div>
+        <br>
+
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+        <!-- Campos: Tipo de nomina, mes   -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label for="tipoActa">Tipo de Nómina</label>
+                <select id="tipoNomina" class="custom-select" formControlName="tipoNomina" [class.is-invalid]="esInvalido('tipoNomina')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Administrativos</option>
+                    <option>Docente de Planta Tiempo Completo</option>
+                    <option>Docente Cátedra</option>
+                    <option>Docente Hora-Catédra Pregrado</option>
+                    <option>Docentes ILUD</option>
+                </select>
+                <small *ngIf="esInvalido('tipoNomina')" class="text-danger">Complete este campo</small>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <label for="mes">Mes</label>
+                <select id="mes" class="custom-select" formControlName="mes" [class.is-invalid]="esInvalido('mes')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Enero</option>
+                    <option>Febrero</option>
+                    <option>Marzo</option>
+                    <option>Abril</option>
+                    <option>Mayo</option>
+                    <option>Junio</option>
+                    <option>Julio</option>
+                    <option>Agosto</option>
+                    <option>Septiembre</option>
+                    <option>Octubre</option>
+                    <option>Noviembre</option>
+                    <option>Diciembre</option>
+                </select>
+                <small *ngIf="esInvalido('mes')" class="text-danger">Complete este campo</small>
+            </div>
+        </div>
+        <!-- Campos: concepto de nomina y cuenta contable -->
+        <div class="form-group row">
+
+            <div class="col-md-4">
+                <label for="conceptoNomina">Concepto de nómina</label>
+                <select id="conceptoNomina" class="custom-select" formControlName="conceptoNomina" [class.is-invalid]="esInvalido('conceptoNomina')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Sueldo</option>
+                    <option>Sueldo y Salarios</option>
+                    <option>Sueldos Básicos</option>
+                </select>
+                <small *ngIf="esInvalido('conceptoNomina')" class="text-danger">Complete este campo</small>
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <div class="row px-3">
+                    <label for="cuentaContable">Cuenta Contable</label>
+                    <select id="cuentaContable"  class="custom-select" formControlName="cuentaContable" [class.is-invalid]="esInvalido('cuentaContable')">
+                        <option selected disabled value="">Seleccione...</option>
+                        <option>51-01-01</option>
+                        <option>72-07-03-01</option>
+                        <option>72-07-03-03</option>
+                        <option>72-08-03-01</option>
+                        <option>72-08-03-03</option>
+                        <option>72-50-03</option>
+                    </select>
+                    <small *ngIf="esInvalido('cuentaContable')" class="text-danger">Ingrese números en este campo</small>
+            </div>
+            </div>
+        </div>
+
+        <!-- Campos: Valor concepto nómina -->
+        <br>
+        <div class="form-group row">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <label>Valor de Concepto de Nómina</label>
+                <input value=" " type="text" class="form-control" readonly>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+        <!-- Botones: Volver a registro, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <a routerLink="../lista">
+                        <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <span>Volver a registros</span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,103 @@
+<form [formGroup]="contabilizacionGroup" (ngSubmit)="saveForm()">
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Contabilización
+                </h6>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Número Comprobante, tipo de Comprobante, Consecutivo  -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label for="numeroComprobante">Número Comprobante</label>
+                <select id="numeroComprobante" class="custom-select" formControlName="numeroComprobante" [class.is-invalid]="esInvalido('numeroComprobante')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>01</option>
+                    <option>02</option>
+                </select>
+                <small *ngIf="esInvalido('numeroComprobante')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="tipoComprobante">Tipo de comprobante</label>
+                <select id="tipoComprobante"  class="custom-select" formControlName="tipoComprobante" [class.is-invalid]="esInvalido('tipoComprobante')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>L</option>
+                </select>
+                <small *ngIf="esInvalido('tipoComprobante')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="consecutivo">Consecutivo</label>
+                <select id="consecutivo"  class="custom-select" formControlName="consecutivo" [class.is-invalid]="esInvalido('consecutivo')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>1</option>
+                </select>
+                <small *ngIf="esInvalido('consecutivo')" class="text-danger">Complete este campo</small>
+            </div>
+        </div>
+
+        <!-- Campos: Concepto  -->
+
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label for="concepto">Concepto</label>
+                <select id="concepto" class="custom-select" formControlName="concepto" [class.is-invalid]="esInvalido('concepto')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Provisiones</option>
+                </select>
+                <small *ngIf="esInvalido('concepto')" class="text-danger">Complete este campo</small>
+            </div>
+        </div>
+        <br>
+        <!-- Tabla -->
+        <div class="row">
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configContabilizacion" [datos]="datosContabilizacion"></ngx-general-table>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Sumas Iguales -->
+        <br>
+        <div class="form-group row">
+
+            <div class=" col-md-6 text-right pt-3">
+                <label  class="text-right" >SUMAS IGUALES</label>   
+            </div>
+            <div class="col-md-3"> 
+                <input value=" $ 424.359.827" type="text" class="form-control" readonly>
+            </div>
+            <div class="col-md-3"> 
+                <input value=" $ 424.359.827" type="text" class="form-control" readonly>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+        <!-- Botones: Volver a registro, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <a routerLink="../lista">
+                        <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <span>Volver</span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
