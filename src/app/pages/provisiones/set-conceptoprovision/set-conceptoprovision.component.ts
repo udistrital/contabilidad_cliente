@@ -25,8 +25,6 @@ export class SetConceptoprovisionComponent implements OnInit {
   conceptosProvisionGroup: FormGroup;
 
   constructor(private fb: FormBuilder, private modalService: NgbModal, public provisionHelper: ProvisionesHelper ) {
-    this.datosConceptos = DATOS_CONCEPTOS;
-    this.configConceptos = CONFIGURACION_CONCEPTOS;
     this.createForm();
    }
 
@@ -36,8 +34,9 @@ export class SetConceptoprovisionComponent implements OnInit {
   createForm() {
     this.conceptosProvisionGroup = this.fb.group({
       conceptos: ['', Validators.required],
-
     });
+    this.datosConceptos = DATOS_CONCEPTOS;
+    this.configConceptos = CONFIGURACION_CONCEPTOS;
   }
 
   get conceptosInvalid() {
@@ -56,6 +55,7 @@ export class SetConceptoprovisionComponent implements OnInit {
         control.markAsTouched();
       });
     }
+    this.createForm();
   }
 
   AddConcepto(){

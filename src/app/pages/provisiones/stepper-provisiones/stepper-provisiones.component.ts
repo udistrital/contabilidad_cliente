@@ -42,7 +42,9 @@ export class StepperProvisionesComponent implements OnInit {
 
   nextClick(index : any): void {
     this.setInfoprovisionComponent.infoProvisionGroup.reset();
+    this.setInfoprovisionComponent.createForm()
     this.setConceptoprovisionComponent.conceptosProvisionGroup.reset();
+    this.setConceptoprovisionComponent.createForm()
     this.stepper.linear = false;
     this.stepper.selectedIndex = index;
     setTimeout(() => {

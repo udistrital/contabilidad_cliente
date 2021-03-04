@@ -1,7 +1,7 @@
 
 
 
-<form novalidate [formGroup]="regimenGroup" (ngSubmit)="saveForm()">
+<form novalidate  [formGroup]="regimenGroup" (ngSubmit)="saveForm()" >
     <!-- Grupo: Información de Provision -->
     <br>
     <div class="container">
@@ -15,7 +15,7 @@
 
    
         <!-- Campos: Tipo de nómina y mes -->
-        <mat-tab-group >
+        <mat-tab-group (selectedTabChange)="onTabChanged($event);">
         <mat-tab *ngFor="let provision of this.provisionesHelper.listaProvisiones" [label]="provision.tipoNomina">
         <br>
         <div class="form-group row">
@@ -39,10 +39,11 @@
             <div class="col-md-2"></div>
             <div class="col-md-4">
                 <label>Régimen</label>
-                <select class="custom-select" formControlName="regimen" [class.is-invalid]="regimenInvalid">
+                <select class="custom-select" formControlName="regimen" [class.is-invalid]="regimenInvalid" (change)="onChange($event.target.value, provision)">
                     <option selected disabled value="">Seleccione...</option>
                     <option>Antíguo</option>
                     <option>Nuevo</option>
+                    <option>Antíguo/Nuevo</option>
                 </select>
                 <small *ngIf="regimenInvalid" class="text-danger">Seleccione una opción</small>
             </div>
@@ -58,7 +59,7 @@
             </div>
         </div>
 
-        <div class="row ">
+        <div class="row">
             <div class="col-md-12 bg-white px-4 pb-3">
                 <ngx-general-table [config]="configRegimen" [datos]="datosRegimen">
                 </ngx-general-table>
@@ -76,14 +77,14 @@
                 <label class="text-right">Total Régimen Antíguo</label>
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control" value=" $ 220.121.538" readonly>
+                <input type="text" class="form-control" [value]=" '$' + totalRegimenAntiguo.toString() " readonly>
             </div>
 
             <div class="col-md-3 text-right pt-3">
                 <label class="text-right">Total Régimen Nuevo</label>
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control" value=" $ 137.102.639" readonly>
+                <input type="text" class="form-control" [value]=" '$' + totalRegimenNuevo.toString()" readonly>
             </div>
         </div>
 
@@ -96,7 +97,7 @@
                 <div class="col-md-6">
                     <div class="col-md-6">
                     </div>
-                        <button  mat-button matStepperPrevious type="button" class="btn btn-warning mb-3 mt-3 text-white">Volver
+                        <button  mat-button matStepperPrevious type="button"  class="btn btn-warning mb-3 mt-3 text-white">Volver
                         </button>
                     </div>
                 <div class="col-md-6">

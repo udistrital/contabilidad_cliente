@@ -55,6 +55,7 @@ export class SetInfoprovisionComponent implements OnInit {
         control.markAsTouched();
       });
     }
+    this.createForm();
   }
 
 }
