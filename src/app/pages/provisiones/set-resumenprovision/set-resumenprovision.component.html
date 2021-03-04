@@ -12,8 +12,8 @@
 
     <br>
     <!-- Tabla -->     
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">    
+    <div  class="table-responsive">
+        <table *ngIf="this.provisionesHelper.nuevaProvision" class="table table-bordered table-hover">    
             <thead>
               <tr>
                 <th class="tg-0pky">Tipo Nómina</th>
@@ -25,35 +25,21 @@
                 <th class="tg-0pky">Valor Provisión</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngFor="let provision of this.provisionesHelper.listaProvisiones">
               <tr>
-                <td class="tg-0pky" rowspan="5">Administrativos</td>
-                <td class="tg-0pky" rowspan="5">Julio</td>
-                <td class="tg-0pky" rowspan="5">Sueldos</td>
-                <td class="tg-0pky" rowspan="5">51-01-01</td>
-                <td class="tg-0pky">Cesantías</td>
-                <td class="tg-0pky">0,0833</td>
-                <td class="tg-0pky">$65.788.321.00</td>
+                <td class="tg-0pky" rowspan="20">{{provision.tipoNomina}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.mes}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.conceptoNomina}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.cuentaContable}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos" class="tg-0pky">{{provision.conceptos[0].conceptoProvision}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos" class="tg-0pky">{{provision.conceptos[0].porcentaje}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos"class="tg-0pky"> ${{provision.conceptos[0].porcentaje*provision.valorProvision}}</td>
               </tr>
-              <tr>
-                <td class="tg-0pky">Intereses Cesantías </td>
-                <td class="tg-0pky">0,001</td>
-                <td class="tg-0pky">$657.783.00</td> 
-              </tr>
-              <tr>
-                <td class="tg-0pky">Vacaciones </td>
-                <td class="tg-0pky">0,0833</td>
-                <td class="tg-0pky">$65.788.321.00</td>
-              </tr>
-              <tr>
-                <td class="tg-0pky">Prima de Vacaciones </td>
-                <td class="tg-0pky">0,0417</td>
-                <td class="tg-0pky">$32.928.643</td>
-              </tr>
-              <tr>
-                <td class="tg-0pky">Prima de Servicios </td>
-                <td class="tg-0pky">0,0833</td>
-                <td class="tg-0pky">$65.788.321.00</td>
+
+              <tr *ngFor="let item of provision.conceptos | slice:1 ">
+                <td class="tg-0pky">{{item.conceptoProvision}} </td>
+                <td class="tg-0pky">{{item.porcentaje}}</td>
+                <td class="tg-0pky">${{provision.valorProvision*item.porcentaje}}</td> 
               </tr>
             </tbody>
         </table>
@@ -62,12 +48,12 @@
         <!-- Campos: Tipo de nómina -->
 
         <br>
-        <div class="row py-4 ">
+        <div *ngIf="this.provisionesHelper.nuevaProvision" class="row py-4 ">
             <div class="col-md-4 text-right pt-3">
                 <label class="text-right">TOTAL PROVISIÓN</label>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" value=" $ 296.739.170" readonly>
+                <input *ngIf="this.provisionesHelper.nuevaProvision.conceptos" type="text" class="form-control" [value]="'$ ' + this.provisionesHelper.nuevaProvision.valorConceptos.toString() " readonly>
             </div>
         </div>
 
@@ -78,18 +64,14 @@
         <div class="container">
             <div class="row pt-2 text-center">
                 <div class="col-md-4">
-                    <button  mat-button matStepperPrevious type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                    <button  mat-button matStepperPrevious type="button" (click)="borrarRegistro()" class="btn btn-warning mb-3 mt-3 text-white">
                         Volver
                     </button>
                     </div>
                     <div class="col-md-4">
-                        <a routerLink="../crear">
-                            <button type="button" class="btn btn-success mb-3 mt-3 text-white">
-                                <div class="d-flex flex-row justify-content-around align-middle">
-                                    <span>Nueva Provisión</span>
-                                </div>
-                            </button>
-                        </a>
+                        <button mat-button  class="btn btn-success m-0 mt-4" (click)="reset();">
+                            Nueva Provisión
+                        </button>
                     </div>
                     <div class="col-md-4">
                     <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">

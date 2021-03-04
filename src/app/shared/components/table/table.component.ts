@@ -75,4 +75,8 @@ export class TableComponent implements OnInit {
     console.log("Sirvio Action")
   }
 
+  SelectedAction(action: any , row : any) {
+    this.selectedAction.emit({accion:action, fila: row})
+  }
+
 }

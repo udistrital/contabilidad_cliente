@@ -1,4 +1,4 @@
-<form [formGroup]="infoProvisionGroup" (ngSubmit)="saveForm()">
+<form novalidate [formGroup]="infoProvisionGroup" (ngSubmit)="saveForm()">
     <!-- Grupo: Información de Provision -->
     <br>
     <div class="container">
@@ -54,7 +54,7 @@
                     <option>Administrativos</option>
                     <option>Docente de Planta Tiempo Completo</option>
                     <option>Docente Cátedra</option>
-                    <option>Docente Hora-Catédra Pregrado</option>
+                    <option>Docente Hora-Cátedra Pregrado</option>
                     <option>Docentes ILUD</option>
                 </select>
                 <small *ngIf="esInvalido('tipoNomina')" class="text-danger">Complete este campo</small>
@@ -120,7 +120,7 @@
             </div>
             <div class="col-md-4">
                 <label>Valor de Concepto de Nómina</label>
-                <input value=" " type="text" class="form-control" readonly>
+                <input [value]="'$ ' + this.precio.toString()" type="text" class="form-control" readonly>
             </div>
         </div>
 
@@ -140,7 +140,7 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">
+                    <button mat-button matStepperNext  [disabled]="infoProvisionGroup.invalid" type="submit" class="btn btn-success m-0 mt-4">
                         Siguiente
                     </button>
                 </div>

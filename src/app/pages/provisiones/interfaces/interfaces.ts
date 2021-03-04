@@ -170,11 +170,11 @@ export const CONFIGURACION_CONCEPTOS: any = {
 export const DATOS_CONCEPTOS: any = [
     {
         conceptoProvision: 'Cesantias',
-        porcentaje: '0.0833',
+        porcentaje: 0.0833,
     },
     {
         conceptoProvision: 'Vacaciones',
-        porcentaje: '0.0833',
+        porcentaje: 0.0833,
     }
 ];
 

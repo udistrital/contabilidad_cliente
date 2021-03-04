@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatStepperModule, MatDividerModule } from '@angular/material';
+import { MatStepperModule, MatDividerModule, MatTabsModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
@@ -34,6 +34,7 @@ import { SetContabilizacionComponent } from './set-contabilizacion/set-contabili
     SharedModule,
     MatStepperModule, 
     MatDividerModule,
+    MatTabsModule,
     NgbModule,
     FormsModule, 
     ReactiveFormsModule,

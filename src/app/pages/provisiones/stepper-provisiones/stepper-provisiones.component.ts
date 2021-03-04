@@ -4,6 +4,7 @@ import { SetConceptoprovisionComponent } from '../set-conceptoprovision/set-conc
 import { SetContabilizacionComponent } from '../set-contabilizacion/set-contabilizacion.component'
 import { SetInfoprovisionComponent } from '../set-infoprovision/set-infoprovision.component'
 import { SetResumenprovisionComponent } from '../set-resumenprovision/set-resumenprovision.component'
+import {MatStep, MatStepper} from '@angular/material/stepper';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -17,26 +18,36 @@ export class StepperProvisionesComponent implements OnInit {
   @ViewChild(SetContabilizacionComponent, { static: false }) setContabilizacionComponent: SetContabilizacionComponent;
   @ViewChild(SetInfoprovisionComponent, { static: false }) setInfoprovisionComponent: SetInfoprovisionComponent;
   @ViewChild(SetResumenprovisionComponent, { static: false }) setResumenprovisionComponent: SetResumenprovisionComponent;
+  @ViewChild('stepper' ,{ static: false }) stepper: MatStepper;
+ 
+
 
   constructor(private fb: FormBuilder) { }
 
+
   ngOnInit() {
   }
+  get regimenGroups() {
+    return this.setCalculoregimenComponent ? this.setCalculoregimenComponent.regimenGroup : this.fb.group({});
+  }
+  get conceptosProvisionGroups() {
+    return this.setConceptoprovisionComponent ? this.setConceptoprovisionComponent.conceptosProvisionGroup : this.fb.group({});
+  }
+  get contabilizacionGroups() {
+    return this.setContabilizacionComponent ? this.setContabilizacionComponent.contabilizacionGroup : this.fb.group({});
+  }
+  get infoProvisionGroups() {
+    return this.setInfoprovisionComponent ? this.setInfoprovisionComponent.infoProvisionGroup : this.fb.group({});
+  }
 
-  // get calculoRegimenGroup() {
-  //   return this.setCalculoregimenComponent ? this.setCalculoregimenComponent.infoReintegroGroup : this.fb.group({});
-  // }
-  // get conceptoProvisionGroup() {
-  //   return this.setConceptoprovisionComponent ? this.setConceptoprovisionComponent.infoAfectacionGroup : this.fb.group({});
-  // }
-  // get contabilizacionGroup() {
-  //   return this.setContabilizacionComponent ? this.setContabilizacionComponent.contabilizacionGroup : this.fb.group({});
-  // }
-  // get infoProvisionGroup() {
-  //   return this.setInfoprovisionComponent ? this.setInfoprovisionComponent.detalleReintegroGroup : this.fb.group({});
-  // }
-  // get resumenProvisionGroup() {
-  //   return this.setResumenprovisionComponent ? this.setResumenprovisionComponent.detalleReintegroGroup : this.fb.group({});
-  // }
+  nextClick(index : any): void {
+    this.setInfoprovisionComponent.infoProvisionGroup.reset();
+    this.setConceptoprovisionComponent.conceptosProvisionGroup.reset();
+    this.stepper.linear = false;
+    this.stepper.selectedIndex = index;
+    setTimeout(() => {
+       this.stepper.linear = true;
+    });
+}
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DATOS_REGIMEN, CONFIGURACION_REGIMEN } from '../interfaces/interfaces';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
 
 @Component({
   selector: 'ngx-set-calculoregimen',
@@ -16,7 +17,7 @@ export class SetCalculoregimenComponent implements OnInit {
 
   regimenGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, public provisionesHelper: ProvisionesHelper) { 
     this.datosRegimen = DATOS_REGIMEN;
     this.configRegimen = CONFIGURACION_REGIMEN;
     this.createForm();

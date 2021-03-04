@@ -1,7 +1,5 @@
-  
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-//import { Store } from '@ngrx/store';
-//import { LoadFilaSeleccionada } from '../../actions/shared.actions';
 
 /* tslint:disable:component-selector */
 @Component({
@@ -15,6 +13,8 @@ export class CellViewComponent implements OnInit {
   @Input() items: any;
   @Input() rowspanTable: any;
   @Input() index: any;
+  @Output() accionFila = new EventEmitter();
+
 
   constructor() {
   }
@@ -23,15 +23,7 @@ export class CellViewComponent implements OnInit {
   }
 
   SelectedAction(action: any, row: any, index: any) {
-
-    console.log("Seleccione")
-    // this.store.dispatch(LoadFilaSeleccionada({
-    //   titulo: this.config.title,
-    //   accion: action,
-    //   fila: row,
-    //   index: index,
-    // }));
+    this.accionFila.emit({accion:action.name, fila:index})
   }
-
 
 }

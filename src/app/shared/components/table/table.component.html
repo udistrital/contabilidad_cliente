@@ -72,7 +72,7 @@
             <!-- Elementos Relacionados -->
             <tbody>
               <ng-container *ngFor="let items of datos | filterTable:stringBusqueda; index as i">
-                <tr ngx-cell-view [items]="items" [config]="config" [rowspanTable]="rowspanTable" [index]="i"></tr>
+                <tr ngx-cell-view [items]="items" [config]="config" [rowspanTable]="rowspanTable" [index]="i" (accionFila)="SelectedAction($event.accion,$event.fila )"></tr>
                 <!-- Para Arreglos de Objetos -->
                 <ng-container *ngFor="let data of config.dataConfig">
                   <ng-container *ngIf="data.compound">
@@ -118,6 +118,7 @@
       <div *ngIf="config.tableActions" class="col-12 d-flex justify-content-around">
         <ng-container *ngFor="let allAction of config.tableActions">
           <button type="button" class="btn btn-primary px-3 py-2 m-2 text-light" (click)="SelectedAllAction(allAction)">
+            <button>gfdsgfsdg</button>
             <div class="d-flex flex-row justify-content-around align-middle" >
               <i [class]="allAction.icon"></i>
               <span [class]="allAction.class">{{allAction.title}}</span>

@@ -1,5 +1,7 @@
+import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
 
 @Component({
   selector: 'ngx-set-infoprovision',
@@ -9,8 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SetInfoprovisionComponent implements OnInit {
 
   infoProvisionGroup: FormGroup;
+  precio = 5;
+  // precio = 789655710.00;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private provisionHelper : ProvisionesHelper) { 
     this.createForm();
   }
 
@@ -27,7 +31,6 @@ export class SetInfoprovisionComponent implements OnInit {
       mes: ['', Validators.required],
       conceptoNomina: ['', Validators.required],
       cuentaContable: ['',Validators.required,],
-      valor: ['', Validators.required],
     });
   }
 
@@ -42,6 +45,11 @@ export class SetInfoprovisionComponent implements OnInit {
   }
 
   saveForm() {
+    
+    this.provisionHelper.nuevaProvision = this.infoProvisionGroup.value;
+    this.provisionHelper.nuevaProvision.valorProvision = this.precio;
+    console.log(this.provisionHelper.nuevaProvision)
+    this.provisionHelper.tipoNomina = this.infoProvisionGroup.value.tipoNomina;
     if (this.infoProvisionGroup.invalid) {
       return Object.values(this.infoProvisionGroup.controls).forEach(control => {
         control.markAsTouched();

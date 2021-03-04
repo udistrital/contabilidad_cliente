@@ -18,6 +18,7 @@ import { CellViewComponent } from './components/cell-view/cell-view.component';
     CommonModule,
     TranslateModule,
     TableComponent,
+    CellViewComponent
   ],
   imports: [
     CommonModule,

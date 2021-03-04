@@ -9,37 +9,43 @@
     </div>
     <div class="row">
         <div class="col">
-            <mat-horizontal-stepper linear #stepper>
-                <mat-step [stepControl]="infoReintegroGroup">
+            <mat-horizontal-stepper [linear]="true" #stepper>
+
+                <mat-step [stepControl]="infoProvisionGroup">
                     <ng-template matStepLabel>Inicio</ng-template>
                     <div class="container">
                         <ngx-set-infoprovision></ngx-set-infoprovision>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="infoAfectacionGroup">
+
+                <mat-step [stepControl]="conceptosProvisionGroup">
                     <ng-template matStepLabel>Conceptos Provisión</ng-template>
                     <div class="container">
                         <ngx-set-conceptoprovision></ngx-set-conceptoprovision>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="contabilizacionGroup">
+
+                <mat-step >
                     <ng-template matStepLabel>Resumen</ng-template>
                     <div class="container">
-                        <ngx-set-resumenprovision></ngx-set-resumenprovision>
+                        <ngx-set-resumenprovision (resetStepper)="nextClick($event)" ></ngx-set-resumenprovision>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="detalleReintegroGroup">
+
+                <mat-step [stepControl]="regimenGroup">
                     <ng-template matStepLabel>Cálculo de Régimen</ng-template>
                     <div class="container">
                         <ngx-set-calculoregimen></ngx-set-calculoregimen>
                     </div>
                 </mat-step>
-                <mat-step [stepControl]="detalleReintegroGroup">
+
+                <mat-step [stepControl]="contabilizacionGroup">
                     <ng-template matStepLabel>Contabilización</ng-template>
                     <div class="container">
                         <ngx-set-contabilizacion></ngx-set-contabilizacion>
                     </div>
                 </mat-step>
+
             </mat-horizontal-stepper>
         </div>
     </div>
