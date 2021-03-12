@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { DATOS_LISTA_PROVISION, CONFIGURACION_LISTA_PROVISION } from '../interfaces/interfaces';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { CONFIGURACION_LISTA_PROVISION } from '../interfaces/interfaces';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 @Component({
   selector: 'ngx-tabla-provisiones',
@@ -19,10 +19,10 @@ export class TablaProvisionesComponent implements OnInit {
    closeResult = '';
 
   constructor(
-              private modalService: NgbModal, 
-              private provisionesHelper : ProvisionesHelper
-              ) { 
-    //this.datosProvisiones = DATOS_LISTA_PROVISION;
+              private modalService: NgbModal,
+              private provisionesHelper: ProvisionesHelper
+              ) {
+    // this.datosProvisiones = DATOS_LISTA_PROVISION;
     this.configProvisiones = CONFIGURACION_LISTA_PROVISION;
     this.datosProvisiones = this.provisionesHelper.TablaProvision;
   }
@@ -30,13 +30,13 @@ export class TablaProvisionesComponent implements OnInit {
   ngOnInit() {
 
   }
-  
-  SelectedAction(accion:any, fila: any){
-    if(accion === "verprovision"){
+
+  SelectedAction(accion: any, fila: any) {
+    if (accion === 'verprovision') {
       console.log(this.datosProvisiones[fila]);
     }
-    if(accion === "borrarprovision"){
-      this.modalEliminar(fila)
+    if (accion === 'borrarprovision') {
+      this.modalEliminar(fila);
     }
   }
 
@@ -45,13 +45,13 @@ export class TablaProvisionesComponent implements OnInit {
     modalEliminar(fila: any) {
       this.modalService.open(this.eliminarTipoModal).result.then((result) => {
         if (`${result}`) {
-          this.datosProvisiones.splice(fila,1)
+          this.datosProvisiones.splice(fila, 1);
         }
       }, (reason) => {
         this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
       });
     }
-  
+
     private getDismissReason(reason: any): string {
       if (reason === ModalDismissReasons.ESC) {
         return 'by pressing ESC';
@@ -61,7 +61,7 @@ export class TablaProvisionesComponent implements OnInit {
         return `with: ${reason}`;
       }
     }
-  
+
   }
 
 

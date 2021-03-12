@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class TableComponent implements OnInit {
   keyObject: any;
 
   constructor(
-    
+
   ) {
     this.stringBusqueda = '';
     this.selectedAction = new EventEmitter<any>();
@@ -72,11 +72,11 @@ export class TableComponent implements OnInit {
   }
 
   SelectedAllAction(action: any) {
-    console.log("Sirvio Action")
+    //console.log('Sirvio Action');
   }
 
-  SelectedAction(action: any , row : any) {
-    this.selectedAction.emit({accion:action, fila: row})
+  SelectedAction(action: any , row: any) {
+    this.selectedAction.emit({accion: action, fila: row});
   }
 
 }

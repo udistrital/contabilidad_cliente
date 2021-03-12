@@ -23,7 +23,7 @@ export class CellViewComponent implements OnInit {
   }
 
   SelectedAction(action: any, row: any, index: any) {
-    this.accionFila.emit({accion:action.name, fila:index})
+    this.accionFila.emit({accion: action.name, fila: index});
   }
 
 }

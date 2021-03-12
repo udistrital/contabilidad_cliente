@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild,  ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CONFIGURACION_CONTABILIZACION, DATOS_CONTABILIZACION } from '../interfaces/interfaces';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 @Component({
   selector: 'ngx-set-contabilizacion',
@@ -15,14 +15,14 @@ export class SetContabilizacionComponent implements OnInit {
   contabilizacionGroup: FormGroup;
   configContabilizacion: any;
   datosContabilizacion: any;
-  meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
      // Modales
      closeResult = '';
 
-  constructor(private fb: FormBuilder, private provisionHelper : ProvisionesHelper, private modalService: NgbModal, ) { 
+  constructor(private fb: FormBuilder, private provisionHelper: ProvisionesHelper, private modalService: NgbModal, ) {
     this.datosContabilizacion = DATOS_CONTABILIZACION;
-    //this.datosContabilizacion = [];
+    // this.datosContabilizacion = [];
     this.configContabilizacion = CONFIGURACION_CONTABILIZACION;
     this.createForm();
   }
@@ -33,7 +33,7 @@ export class SetContabilizacionComponent implements OnInit {
   createForm() {
     this.contabilizacionGroup = this.fb.group({
       numeroComprobante: ['', Validators.required],
-      tipoComprobante: ['',Validators.required,],
+      tipoComprobante: ['', Validators.required, ],
       consecutivo: ['', Validators.required],
       concepto: ['', Validators.required],
     });
@@ -53,7 +53,7 @@ export class SetContabilizacionComponent implements OnInit {
   modalGuardar() {
     this.modalService.open(this.guardarModal).result.then((result) => {
       if (`${result}`) {
-        console.log("GUARDADO")
+        console.log('GUARDADO');
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -70,21 +70,21 @@ export class SetContabilizacionComponent implements OnInit {
     }
   }
 
-  GuardarProvisiones(){
+  GuardarProvisiones() {
     this.provisionHelper.listaProvisiones.forEach(provision => {
       provision = this.AjusteFecha(provision);
-      provision.consecutivo = +this.provisionHelper.TablaProvision[this.provisionHelper.TablaProvision.length-1].consecutivo + 1;
-      this.provisionHelper.TablaProvision.push(provision)
-      //console.log(this.provisionHelper.TablaProvision)
+      provision.consecutivo = +this.provisionHelper.TablaProvision[this.provisionHelper.TablaProvision.length - 1].consecutivo + 1;
+      this.provisionHelper.TablaProvision.push(provision);
+      // console.log(this.provisionHelper.TablaProvision)
 
     });
   }
 
-  AjusteFecha(provision: any){
-    let mes : string;
+  AjusteFecha(provision: any) {
+    let mes: string;
     mes = (this.meses.findIndex( index => index === provision.mes) + 1).toString();
-    provision.fechainicial = "01/"+mes+"/2020";
-    provision.fechafinal = "30/"+mes+"/2020";
+    provision.fechainicial = '01/' + mes + '/2020';
+    provision.fechafinal = '30/' + mes + '/2020';
     return provision;
   }
 
@@ -94,7 +94,7 @@ export class SetContabilizacionComponent implements OnInit {
       provision.contabilizacion = this.contabilizacionGroup.value;
     });
     this.GuardarProvisiones();
-    this.modalGuardar()
+    this.modalGuardar();
     if (this.contabilizacionGroup.invalid) {
       return Object.values(this.contabilizacionGroup.controls).forEach(control => {
         control.markAsTouched();

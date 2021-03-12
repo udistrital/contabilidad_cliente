@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DATOS_REGIMEN, CONFIGURACION_REGIMEN } from '../interfaces/interfaces';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { CONFIGURACION_REGIMEN } from '../interfaces/interfaces';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 @Component({
   selector: 'ngx-set-calculoregimen',
@@ -18,7 +18,7 @@ export class SetCalculoregimenComponent implements OnInit {
 
   regimenGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, public provisionesHelper: ProvisionesHelper) { 
+  constructor(private fb: FormBuilder, public provisionesHelper: ProvisionesHelper) {
     this.datosRegimen = [];
     this.configRegimen = CONFIGURACION_REGIMEN;
     this.createForm();
@@ -39,74 +39,74 @@ export class SetCalculoregimenComponent implements OnInit {
     return this.regimenGroup.get('regimen').invalid && this.regimenGroup.get('regimen').touched;
   }
 
-  onChange(itemSelected, provision){
+  onChange(itemSelected, provision) {
     let porcentaje: number;
     let valor: number;
     let Regimen: any;
-    switch(itemSelected){
-      case "Antíguo":
+    switch (itemSelected) {
+      case 'Antíguo':
         porcentaje = 61.62;
-        valor = (porcentaje* provision.valorCesantias)/100;
+        valor = (porcentaje * provision.valorCesantias) / 100;
         Regimen = [{
           regimen: 'Antíguo',
-          porcentaje: porcentaje.toString() + "%",
-          valor: "$" + valor.toString(),
+          porcentaje: porcentaje.toString() + '%',
+          valor: '$' + valor.toString(),
         }];
         break;
 
-      case "Nuevo":
+      case 'Nuevo':
         porcentaje = 38.38;
-        valor = (porcentaje* provision.valorCesantias)/100;
+        valor = (porcentaje * provision.valorCesantias) / 100;
         Regimen = [{
           regimen: 'Nuevo',
-          porcentaje: porcentaje.toString() + "%",
-          valor: "$" + valor.toString(),
+          porcentaje: porcentaje.toString() + '%',
+          valor: '$' + valor.toString(),
         }];
         break;
 
-      case "Antíguo/Nuevo":
+      case 'Antíguo/Nuevo':
         porcentaje = 61.62;
-        valor = (porcentaje* provision.valorCesantias)/100;
+        valor = (porcentaje * provision.valorCesantias) / 100;
         Regimen = [{
           regimen: 'Antíguo',
-          porcentaje: porcentaje.toString() + "%",
-          valor: "$" + valor.toString(),
+          porcentaje: porcentaje.toString() + '%',
+          valor: '$' + valor.toString(),
         }];
 
         porcentaje = 38.38;
-        valor = (porcentaje* provision.valorCesantias)/100;
+        valor = (porcentaje * provision.valorCesantias) / 100;
         Regimen.push({
           regimen: 'Nuevo',
-          porcentaje: porcentaje.toString() + "%",
-          valor: "$" + valor.toString(),
+          porcentaje: porcentaje.toString() + '%',
+          valor: '$' + valor.toString(),
         });
         break;
 
       default:
-        this.datosRegimen= [];
+        this.datosRegimen = [];
         break;
 
     }
     provision.datosRegimen = Regimen;
     this.datosRegimen = provision.datosRegimen;
-    this.TotalRegimen()
+    this.TotalRegimen();
   }
 
-  onTabChanged($event){
+  onTabChanged($event) {
     this.configRegimen = CONFIGURACION_REGIMEN;
     this.datosRegimen = this.provisionesHelper.listaProvisiones[$event.index].datosRegimen;
   }
 
-  TotalRegimen(){
+  TotalRegimen() {
     this.totalRegimenNuevo = 0;
-    this.totalRegimenAntiguo= 0;
+    this.totalRegimenAntiguo = 0;
     this.provisionesHelper.listaProvisiones.forEach(provision => {
-      if(!!provision.datosRegimen){
+      if (!!provision.datosRegimen) {
         provision.datosRegimen.forEach(regimen => {
-          if(regimen.regimen === "Nuevo"){
-            this.totalRegimenNuevo = this.totalRegimenNuevo + +regimen.valor.split("$")[1]
-          }else{
-            this.totalRegimenAntiguo = this.totalRegimenAntiguo + +regimen.valor.split("$")[1]
+          if (regimen.regimen === 'Nuevo') {
+            this.totalRegimenNuevo = this.totalRegimenNuevo + +regimen.valor.split('$')[1];
+          } else {
+            this.totalRegimenAntiguo = this.totalRegimenAntiguo + +regimen.valor.split('$')[1];
           }
       });
       }

@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ProvisionesRoutingModule } from './provisiones-routing.module';
 import { TablaProvisionesComponent } from './tabla-provisiones/tabla-provisiones.component';
-import { StepperProvisionesComponent } from './stepper-provisiones/stepper-provisiones.component'
+import { StepperProvisionesComponent } from './stepper-provisiones/stepper-provisiones.component';
 import { MiscellaneousModule } from '../miscellaneous/miscellaneous.module';
 import { SharedModule } from '../../shared/shared.module';
 import { SetInfoprovisionComponent } from './set-infoprovision/set-infoprovision.component';
@@ -19,12 +19,12 @@ import { SetContabilizacionComponent } from './set-contabilizacion/set-contabili
 
 @NgModule({
   declarations: [
-    TablaProvisionesComponent, 
-    StepperProvisionesComponent, 
-    SetInfoprovisionComponent, 
-    SetConceptoprovisionComponent, 
-    SetResumenprovisionComponent, 
-    SetCalculoregimenComponent, 
+    TablaProvisionesComponent,
+    StepperProvisionesComponent,
+    SetInfoprovisionComponent,
+    SetConceptoprovisionComponent,
+    SetResumenprovisionComponent,
+    SetCalculoregimenComponent,
     SetContabilizacionComponent,
   ],
   imports: [
@@ -32,11 +32,11 @@ import { SetContabilizacionComponent } from './set-contabilizacion/set-contabili
     ProvisionesRoutingModule,
     MiscellaneousModule,
     SharedModule,
-    MatStepperModule, 
+    MatStepperModule,
     MatDividerModule,
     MatTabsModule,
     NgbModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     CurrencyMaskModule
   ]

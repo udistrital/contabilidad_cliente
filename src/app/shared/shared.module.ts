@@ -26,11 +26,11 @@ import { CellViewComponent } from './components/cell-view/cell-view.component';
     ReactiveFormsModule,
   ],
   declarations: [
-    TableComponent, 
-    FilterTablePipe, 
-    CustomTablePipe, 
-    MultiPipePipe, 
-    TimeRangePipe, 
+    TableComponent,
+    FilterTablePipe,
+    CustomTablePipe,
+    MultiPipePipe,
+    TimeRangePipe,
     CompoundCellComponent, CellViewComponent],
     providers: [
       DatePipe,

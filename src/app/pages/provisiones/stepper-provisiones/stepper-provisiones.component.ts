@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { SetCalculoregimenComponent } from '../set-calculoregimen/set-calculoregimen.component'
-import { SetConceptoprovisionComponent } from '../set-conceptoprovision/set-conceptoprovision.component'
-import { SetContabilizacionComponent } from '../set-contabilizacion/set-contabilizacion.component'
-import { SetInfoprovisionComponent } from '../set-infoprovision/set-infoprovision.component'
-import { SetResumenprovisionComponent } from '../set-resumenprovision/set-resumenprovision.component'
-import {MatStep, MatStepper} from '@angular/material/stepper';
+import { SetCalculoregimenComponent } from '../set-calculoregimen/set-calculoregimen.component';
+import { SetConceptoprovisionComponent } from '../set-conceptoprovision/set-conceptoprovision.component';
+import { SetContabilizacionComponent } from '../set-contabilizacion/set-contabilizacion.component';
+import { SetInfoprovisionComponent } from '../set-infoprovision/set-infoprovision.component';
+import { SetResumenprovisionComponent } from '../set-resumenprovision/set-resumenprovision.component';
+import {MatStepper} from '@angular/material/stepper';
 import { FormBuilder } from '@angular/forms';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 @Component({
   selector: 'ngx-stepper-provisiones',
@@ -19,8 +19,8 @@ export class StepperProvisionesComponent implements OnInit {
   @ViewChild(SetContabilizacionComponent, { static: false }) setContabilizacionComponent: SetContabilizacionComponent;
   @ViewChild(SetInfoprovisionComponent, { static: false }) setInfoprovisionComponent: SetInfoprovisionComponent;
   @ViewChild(SetResumenprovisionComponent, { static: false }) setResumenprovisionComponent: SetResumenprovisionComponent;
-  @ViewChild('stepper' ,{ static: false }) stepper: MatStepper;
- 
+  @ViewChild('stepper' , { static: false }) stepper: MatStepper;
+
 
 
   constructor(private fb: FormBuilder, private provisionHelper: ProvisionesHelper) { }
@@ -42,11 +42,11 @@ export class StepperProvisionesComponent implements OnInit {
     return this.setInfoprovisionComponent ? this.setInfoprovisionComponent.infoProvisionGroup : this.fb.group({});
   }
 
-  nextClick(index : any): void {
+  nextClick(index: any): void {
     this.setInfoprovisionComponent.infoProvisionGroup.reset();
-    this.setInfoprovisionComponent.createForm()
+    this.setInfoprovisionComponent.createForm();
     this.setConceptoprovisionComponent.conceptosProvisionGroup.reset();
-    this.setConceptoprovisionComponent.createForm()
+    this.setConceptoprovisionComponent.createForm();
     this.stepper.linear = false;
     this.stepper.selectedIndex = index;
     setTimeout(() => {

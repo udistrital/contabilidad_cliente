@@ -7,19 +7,19 @@ import { DATOS_LISTA_PROVISION} from '../../../pages/provisiones/interfaces/inte
 })
 export class ProvisionesHelper {
 
-    nuevaProvision : any;
-    tipoNomina = " ";
-    listaProvisiones : any[] = [];
+    nuevaProvision: any;
+    tipoNomina = ' ';
+    listaProvisiones: any[] = [];
     TablaProvision = DATOS_LISTA_PROVISION;
-    
+
 
     constructor() {
      }
 
-    reiniciar(){
+    reiniciar() {
 
-        this.nuevaProvision = {}
-        this.tipoNomina = " ";
+        this.nuevaProvision = {};
+        this.tipoNomina = ' ';
         this.listaProvisiones = [];
         this.TablaProvision = DATOS_LISTA_PROVISION;
     }

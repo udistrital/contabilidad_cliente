@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TablaProvisionesComponent } from './tabla-provisiones/tabla-provisiones.component';
 import { StepperProvisionesComponent } from './stepper-provisiones/stepper-provisiones.component';
-import { NotFoundComponent } from "../miscellaneous/not-found/not-found.component";
+import { NotFoundComponent } from '../miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
   path: 'lista',
@@ -13,12 +13,12 @@ const routes: Routes = [{
   component: StepperProvisionesComponent,
 },
 {
-  path: "",
-  redirectTo: "lista",
-  pathMatch: "full"
+  path: '',
+  redirectTo: 'lista',
+  pathMatch: 'full'
 },
 {
-  path: "**",
+  path: '**',
   component: NotFoundComponent
 }
 ];

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter} from '@angular/core';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 
 
@@ -13,20 +13,20 @@ export class SetResumenprovisionComponent implements OnInit {
 
   @Output() resetStepper = new EventEmitter();
 
-  constructor( public provisionesHelper : ProvisionesHelper) {
+  constructor( public provisionesHelper: ProvisionesHelper) {
 
    }
 
   ngOnInit() {
   }
 
-  reset(){
+  reset() {
     this.provisionesHelper.nuevaProvision = {};
     this.resetStepper.emit(0);
   }
 
-  borrarRegistro(){
-    this.provisionesHelper.listaProvisiones.splice(-1,1)
+  borrarRegistro() {
+    this.provisionesHelper.listaProvisiones.splice(-1, 1);
   }
 
 }

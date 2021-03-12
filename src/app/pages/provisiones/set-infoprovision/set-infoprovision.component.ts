@@ -1,7 +1,6 @@
-import { prepareSyntheticPropertyName } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper';
 
 @Component({
   selector: 'ngx-set-infoprovision',
@@ -14,7 +13,7 @@ export class SetInfoprovisionComponent implements OnInit {
   precio = 5;
   // precio = 789655710.00;
 
-  constructor(private fb: FormBuilder, private provisionHelper : ProvisionesHelper) { 
+  constructor(private fb: FormBuilder, private provisionHelper: ProvisionesHelper) {
     this.createForm();
   }
 
@@ -24,13 +23,13 @@ export class SetInfoprovisionComponent implements OnInit {
   createForm() {
     this.infoProvisionGroup = this.fb.group({
       areaFuncional: ['', Validators.required],
-      centroGestor: ['',Validators.required,],
+      centroGestor: ['', Validators.required, ],
       fecha: ['', Validators.required],
 
       tipoNomina: ['', Validators.required],
       mes: ['', Validators.required],
       conceptoNomina: ['', Validators.required],
-      cuentaContable: ['',Validators.required,],
+      cuentaContable: ['', Validators.required, ],
     });
   }
 
@@ -47,14 +46,14 @@ export class SetInfoprovisionComponent implements OnInit {
   saveForm() {
     this.provisionHelper.nuevaProvision = this.infoProvisionGroup.value;
     this.provisionHelper.nuevaProvision.valorProvision = this.precio;
-    //console.log(this.provisionHelper.nuevaProvision)
+    // console.log(this.provisionHelper.nuevaProvision)
     this.provisionHelper.tipoNomina = this.infoProvisionGroup.value.tipoNomina;
     if (this.infoProvisionGroup.invalid) {
       return Object.values(this.infoProvisionGroup.controls).forEach(control => {
         control.markAsTouched();
       });
     }
-    //this.createForm();
+    // this.createForm();
   }
 
 }
