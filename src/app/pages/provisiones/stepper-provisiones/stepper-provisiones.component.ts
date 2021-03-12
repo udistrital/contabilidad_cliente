@@ -6,6 +6,7 @@ import { SetInfoprovisionComponent } from '../set-infoprovision/set-infoprovisio
 import { SetResumenprovisionComponent } from '../set-resumenprovision/set-resumenprovision.component'
 import {MatStep, MatStepper} from '@angular/material/stepper';
 import { FormBuilder } from '@angular/forms';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
 
 @Component({
   selector: 'ngx-stepper-provisiones',
@@ -22,21 +23,22 @@ export class StepperProvisionesComponent implements OnInit {
  
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private provisionHelper: ProvisionesHelper) { }
 
 
   ngOnInit() {
+    this.provisionHelper.reiniciar();
   }
-  get regimenGroups() {
+  get regimenGroup() {
     return this.setCalculoregimenComponent ? this.setCalculoregimenComponent.regimenGroup : this.fb.group({});
   }
-  get conceptosProvisionGroups() {
+  get conceptosProvisionGroup() {
     return this.setConceptoprovisionComponent ? this.setConceptoprovisionComponent.conceptosProvisionGroup : this.fb.group({});
   }
-  get contabilizacionGroups() {
+  get contabilizacionGroup() {
     return this.setContabilizacionComponent ? this.setContabilizacionComponent.contabilizacionGroup : this.fb.group({});
   }
-  get infoProvisionGroups() {
+  get infoProvisionGroup() {
     return this.setInfoprovisionComponent ? this.setInfoprovisionComponent.infoProvisionGroup : this.fb.group({});
   }
 

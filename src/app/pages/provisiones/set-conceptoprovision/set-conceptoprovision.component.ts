@@ -49,13 +49,13 @@ export class SetConceptoprovisionComponent implements OnInit {
     this.provisionHelper.listaProvisiones.push(this.provisionHelper.nuevaProvision)
     this.TotalProvision();
     this.datosConceptos = DATOS_CONCEPTOS;
-    console.log(this.provisionHelper.listaProvisiones)
+    //console.log(this.provisionHelper.listaProvisiones)
     if (this.conceptosProvisionGroup.invalid) {
       return Object.values(this.conceptosProvisionGroup.controls).forEach(control => {
         control.markAsTouched();
       });
     }
-    this.createForm();
+    //this.createForm();
   }
 
   AddConcepto(){

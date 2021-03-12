@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DATOS_LISTA_PROVISION, CONFIGURACION_LISTA_PROVISION } from '../interfaces/interfaces';
+import { ProvisionesHelper } from '../../../@core/helpers/provisiones/provisionesHelper'
 
 @Component({
   selector: 'ngx-tabla-provisiones',
@@ -19,9 +20,11 @@ export class TablaProvisionesComponent implements OnInit {
 
   constructor(
               private modalService: NgbModal, 
+              private provisionesHelper : ProvisionesHelper
               ) { 
-    this.datosProvisiones = DATOS_LISTA_PROVISION;
+    //this.datosProvisiones = DATOS_LISTA_PROVISION;
     this.configProvisiones = CONFIGURACION_LISTA_PROVISION;
+    this.datosProvisiones = this.provisionesHelper.TablaProvision;
   }
 
   ngOnInit() {

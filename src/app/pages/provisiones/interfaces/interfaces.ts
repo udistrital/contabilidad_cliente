@@ -22,7 +22,7 @@ export const CONFIGURACION_LISTA_PROVISION: any = {
             }
         },
         {
-            key: 'tipodenomina',
+            key: 'tipoNomina',
             title: {
                 name: 'Tipo de Nómina',
                 class: 'text-center',
@@ -32,7 +32,7 @@ export const CONFIGURACION_LISTA_PROVISION: any = {
             }
         },
         {
-            key: 'centrogestor',
+            key: 'centroGestor',
             title: {
                 name: 'Centro Gestor',
                 class: 'text-center',
@@ -103,19 +103,20 @@ export const CONFIGURACION_LISTA_PROVISION: any = {
 };
 export const DATOS_LISTA_PROVISION: any = [
     {
-        consecutivo: '001',
+        consecutivo: '1',
         mes: 'Enero',
-        tipodenomina : 'Administrativos',
-        centrogestor: '230',
+        tipoNomina : 'Administrativos',
+        centroGestor: '230',
         areaFuncional: '01',
         fechainicial: '01/01/2020',
         fechafinal: '30/01/2020',
+
     },
     {
-        consecutivo: '002',
+        consecutivo: '2',
         mes: 'Julio',
-        tipodenomina : 'Docentes',
-        centrogestor: '230',
+        tipoNomina : 'Docentes',
+        centroGestor: '230',
         areaFuncional: '01',
         fechainicial: '01/07/2020',
         fechafinal: '30/07/2020',

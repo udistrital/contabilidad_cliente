@@ -45,17 +45,16 @@ export class SetInfoprovisionComponent implements OnInit {
   }
 
   saveForm() {
-    
     this.provisionHelper.nuevaProvision = this.infoProvisionGroup.value;
     this.provisionHelper.nuevaProvision.valorProvision = this.precio;
-    console.log(this.provisionHelper.nuevaProvision)
+    //console.log(this.provisionHelper.nuevaProvision)
     this.provisionHelper.tipoNomina = this.infoProvisionGroup.value.tipoNomina;
     if (this.infoProvisionGroup.invalid) {
       return Object.values(this.infoProvisionGroup.controls).forEach(control => {
         control.markAsTouched();
       });
     }
-    this.createForm();
+    //this.createForm();
   }
 
 }

@@ -19,6 +19,8 @@ export class SetCalculoregimenComponent implements OnInit {
   regimenGroup: FormGroup;
 
   constructor(private fb: FormBuilder, public provisionesHelper: ProvisionesHelper) { 
+    this.datosRegimen = [];
+    this.configRegimen = CONFIGURACION_REGIMEN;
     this.createForm();
   }
 
@@ -29,8 +31,7 @@ export class SetCalculoregimenComponent implements OnInit {
     this.regimenGroup = this.fb.group({
       regimen: ['', Validators.required],
     });
-    this.configRegimen = CONFIGURACION_REGIMEN;
-    this.datosRegimen = [{}];
+
   }
 
 
@@ -82,7 +83,7 @@ export class SetCalculoregimenComponent implements OnInit {
         break;
 
       default:
-        this.datosRegimen= [{}];
+        this.datosRegimen= [];
         break;
 
     }
@@ -100,13 +101,15 @@ export class SetCalculoregimenComponent implements OnInit {
     this.totalRegimenNuevo = 0;
     this.totalRegimenAntiguo= 0;
     this.provisionesHelper.listaProvisiones.forEach(provision => {
-      provision.datosRegimen.forEach(regimen => {
+      if(!!provision.datosRegimen){
+        provision.datosRegimen.forEach(regimen => {
           if(regimen.regimen === "Nuevo"){
             this.totalRegimenNuevo = this.totalRegimenNuevo + +regimen.valor.split("$")[1]
           }else{
             this.totalRegimenAntiguo = this.totalRegimenAntiguo + +regimen.valor.split("$")[1]
           }
       });
+      }
     });
   }
 

@@ -25,7 +25,7 @@
                     </div>
                 </mat-step>
 
-                <mat-step >
+                <mat-step [stepControl]="conceptosProvisionGroup" >
                     <ng-template matStepLabel>Resumen</ng-template>
                     <div class="container">
                         <ngx-set-resumenprovision (resetStepper)="nextClick($event)" ></ngx-set-resumenprovision>
