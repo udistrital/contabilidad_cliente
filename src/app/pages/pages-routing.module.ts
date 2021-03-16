@@ -41,6 +41,11 @@ const routes: Routes = [
         .then(m => m.ProvisionesModule),
       },
       {
+        path: 'conciliaciones',
+        loadChildren: () => import('./conciliaciones/conciliaciones.module')
+        .then(m => m.ConciliacionesModule),
+      },
+      {
         path: "**",
         component: NotFoundComponent
       }

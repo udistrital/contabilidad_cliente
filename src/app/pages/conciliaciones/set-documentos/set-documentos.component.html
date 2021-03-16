@@ -1,0 +1,95 @@
+<form novalidate  [formGroup]="documentosGroup" (ngSubmit)="saveForm()" >
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Documentos
+                </h6>
+            </div>
+        </div>
+
+        <mat-tab-group (selectedTabChange)="onTabChanged($event);">
+        <mat-tab *ngFor="let documento of this.tabsTitles" [label]="documento">
+        <br>
+
+
+        <!-- Campos: Concepto Nómina y Regimen  -->
+        <div *ngIf="documento === 'MOVIMIENTO CONTABLE'" class="form-group row" >
+
+            <div class="col-md-4">
+                <label>Tipo de compobante</label>
+                <select class="custom-select" formControlName="tipoComporbante" [class.is-invalid]="tipoInvalid" (change)="onChange($event.target.value)">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>G</option>
+                    <option>N</option>
+                    <option>R</option>
+                </select>
+                <small *ngIf="tipoInvalid" class="text-danger">Seleccione una opción</small>
+            </div>
+
+            <div class="col-md-2"></div>
+
+            <div class="col-md-4">
+                <label>Número del comprobante</label>
+                <select class="custom-select" formControlName="numeroComprobante" [class.is-invalid]="numeroInvalid" (change)="onChange($event.target.value)">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </select>
+                <small *ngIf="numeroInvalid" class="text-danger">Seleccione una opción</small>
+            </div>
+        </div>
+        <br>
+
+        <div  *ngIf="documento === 'EXTRACTO'" class="row">
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configExtracto" [datos]="datosExtracto">
+                </ngx-general-table>
+            </div>
+        </div>
+
+        <div *ngIf="documento === 'MOVIMIENTO CONTABLE'" class="row" >
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configMovContable" [datos]="datosMovContable">
+                </ngx-general-table>
+            </div>
+        </div>
+
+        <div *ngIf="documento === 'ESTADO DE PAGO'" class="row" >
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configEstadoPago" [datos]="datosEstadoPago">
+                </ngx-general-table>
+            </div>
+        </div>
+
+            <br>
+        </mat-tab>
+        </mat-tab-group>
+
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+        <!-- Botones: Volver, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                    </div>
+                        <button  mat-button matStepperPrevious type="button"  class="btn btn-warning mb-3 mt-3 text-white">Volver
+                        </button>
+                    </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext [disabled]="documentosGroup.invalid" type="submit" class="btn btn-success m-0 mt-4">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</form>
