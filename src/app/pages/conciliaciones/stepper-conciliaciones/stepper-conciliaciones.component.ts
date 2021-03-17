@@ -26,7 +26,7 @@ export class StepperConciliacionesComponent implements OnInit {
     this.conciliacionesHelper.reiniciar();
   }
 
-  get informacionGroups() {
+  get informacionGroup() {
     return this.setInformacionComponent ? this.setInformacionComponent.informacionConciliacionGroup : this.fb.group({});
   }
 

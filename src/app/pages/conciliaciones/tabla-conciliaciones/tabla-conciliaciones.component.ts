@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conciliacionesHelper';
-
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +20,8 @@ export class TablaConciliacionesComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private conciliacionesHelper: ConciliacionesHelper
+    private conciliacionesHelper: ConciliacionesHelper,
+    private router: Router,
   ) { 
     this.configConciliaciones = this.conciliacionesHelper.configTabla;
     this.datosConciliaciones = this.conciliacionesHelper.tablaConciliacion;
@@ -37,7 +38,7 @@ export class TablaConciliacionesComponent implements OnInit {
       this.modalEliminar(fila);
     }
     if (accion === 'contabilizacion') {
-      console.log("Contabilizacion");
+      this.router.navigate(['pages/conciliaciones/conciliacion']);
     }
   }
 

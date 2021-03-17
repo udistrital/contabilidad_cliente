@@ -15,6 +15,8 @@ import { SetInformacionComponent } from './set-informacion/set-informacion.compo
 import { SetDocumentosComponent } from './set-documentos/set-documentos.component';
 import { SetComparacionComponent } from './set-comparacion/set-comparacion.component';
 import { SetConciliacionBancariaComponent } from './set-conciliacion-bancaria/set-conciliacion-bancaria.component';
+import { ConciliacionComponent } from './conciliacion/conciliacion.component';
+import { ContabilizacionComponent } from './contabilizacion/contabilizacion.component';
 
 
 @NgModule({
@@ -24,7 +26,7 @@ import { SetConciliacionBancariaComponent } from './set-conciliacion-bancaria/se
     SetInformacionComponent, 
     SetDocumentosComponent, 
     SetComparacionComponent, 
-    SetConciliacionBancariaComponent],
+    SetConciliacionBancariaComponent, ConciliacionComponent, ContabilizacionComponent],
   imports: [
     CommonModule,
     ConciliacionesRoutingModule,

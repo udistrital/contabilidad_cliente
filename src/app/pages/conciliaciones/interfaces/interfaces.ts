@@ -600,3 +600,130 @@ export const DATOS_CONCILIACION: any = [
         valor : '0',
     },   
 ];
+
+
+// comparacion
+
+export const CONFIGURACION_CONTABILIZACION: any = {
+    showColumnTitle: true,
+    dataConfig: [
+        {
+            key: 'secuencia',
+            title: {
+                name: 'Secuencia',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'nit',
+            title: {
+                name: 'NIT',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'cuenta',
+            title: {
+                name: 'Cuenta',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'nombreCuenta',
+            title: {
+                name: 'Nombre Cuenta',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'detalle',
+            title: {
+                name: 'Detalle',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'debito',
+            title: {
+                name: 'Débito',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+        {
+            key: 'credito',
+            title: {
+                name: 'Crédito',
+                class: 'text-center',
+            },
+            pipe: {
+                class: 'text-center',
+            }
+        },
+    ],
+    noData: {
+        name: 'No Existen Elementos Asociados',
+        class: 'text-center',
+    },
+};
+export const DATOS_CONTABILIZACION_NC_libros: any = [
+    {
+        secuencia: '001',
+        nit: 'xxxxx',
+        cuenta : 'xxxxxx',
+        nombreCuenta: 'xxxxxx',
+        detalle: 'Intereses Liquidados Notas crédito No registradas en Libros',
+        debito : '0',
+        credito : '2623613,01',
+
+    },
+    {
+        secuencia: '002',
+        nit: 'xxxxx',
+        cuenta : 'xxxxxx',
+        nombreCuenta: 'xxxxxx',
+        detalle: 'Intereses Liquidados Notas crédito No registradas en Libros',
+        debito : '2623613,01',
+        credito : '0',
+
+    },
+];
+export const DATOS_CONTABILIZACION_ND_libros: any = [
+    {
+        secuencia: '001',
+        nit: '51914734',
+        cuenta : 'xxxxxx',
+        nombreCuenta: 'xxxxxx',
+        detalle: 'Diferencia por conciliar RA 42 Giro sin registrar en libros',
+        debito : '0',
+        credito : '6104175',
+
+    },
+    {
+        secuencia: '002',
+        nit: 'xxxxx',
+        cuenta : 'xxxxxx',
+        nombreCuenta: 'xxxxxx',
+        detalle: 'Diferencia por conciliar RA 42 Giro sin registrar en libros',
+        debito : '6104175',
+        credito : '0',
+
+    },
+];
