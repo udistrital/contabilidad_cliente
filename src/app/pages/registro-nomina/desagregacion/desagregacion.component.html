@@ -1,0 +1,140 @@
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                DESAGREGACIÓN DE NÓMINA
+            </h5>
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+
+<!-- Campos: nombre , codigo, identificador  -->
+    <div class="row">
+        <div class="col-md-4">
+            <label>Nombre</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Código</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Identificació</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+    </div>
+<!-- Campos: año, mes, codigo Q  -->
+    <div class="row">
+        <div class="col-md-4">
+            <label>Año</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Mes</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Codigo Q</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+    </div>
+<!-- Campos: Quincena, vinculacio, dependencia  -->
+    <div class="row">
+        <div class="col-md-4">
+            <label>Quincena</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Vinculación</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Dependencia</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+    </div>
+<!-- fecha inicio, fecha fin, declara  -->
+    <div class="row">
+        <div class="col-md-4">
+            <label>Fecha Inicio</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Fecha Fin</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-4">
+            <label>Declara</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+    </div>
+<!-- Campos: eps -->
+    <div class="row">
+        <div class="col-md-8">
+            <label>EPS</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+    </div>
+<!-- Campos: Fondo pensiones -->
+    <div class="row">
+        <div class="col-md-8">
+            <label>Fondo de Pensiones</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+    </div>
+
+    <br>
+    <br>
+
+    <!-- TABLA  -->
+    <div class="row">
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configRegistro" [datos]="datosRegistro"></ngx-general-table>
+        </div>
+    </div>
+
+        <!-- Botones  -->
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <a  *ngIf="back === 'contabilizacion'" routerLink="../contabilizacion">
+                        <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <span>Volver</span>
+                            </div>
+                        </button>
+                    </a>
+                    <a  *ngIf="back === 'consulta'" routerLink="../consultar">
+                        <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <span>Volver</span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <button mat-button type="button" class="btn btn-success m-0 mt-4">
+                        Descargar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
