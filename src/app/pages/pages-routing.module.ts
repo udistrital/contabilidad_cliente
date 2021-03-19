@@ -51,6 +51,11 @@ const routes: Routes = [
         .then(m => m.RegistroNominaModule),
       },
       {
+        path: 'informesContables',
+        loadChildren: () => import('./informes-contables/informes-contables.module')
+        .then(m => m.InformesContablesModule),
+      },
+      {
         path: "**",
         component: NotFoundComponent
       }
