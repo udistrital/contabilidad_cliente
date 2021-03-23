@@ -1,0 +1,113 @@
+
+
+
+<form novalidate  [formGroup]="regimenGroup" (ngSubmit)="saveForm()" >
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Cálculo del Régimen
+                </h6>
+            </div>
+        </div>
+
+   
+        <!-- Campos: Tipo de nómina y mes -->
+        <mat-tab-group (selectedTabChange)="onTabChanged($event);">
+        <mat-tab *ngFor="let provision of this.provisionesHelper.listaProvisiones" [label]="provision.tipoNomina">
+        <br>
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label>Tipo de Nómina</label>
+                <input [value]=" provision.tipoNomina" type="text" class="form-control" readonly>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <label>Mes</label>
+                <input [value]="provision.mes" type="text" class="form-control" readonly>
+            </div>
+        </div>
+
+        <!-- Campos: Concepto Nómina y Regimen  -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label>Concepto de Nómina</label>
+                <input [value]="provision.conceptoNomina" type="text" class="form-control" readonly>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <label>Régimen</label>
+                <select class="custom-select" formControlName="regimen" [class.is-invalid]="regimenInvalid" (change)="onChange($event.target.value, provision)">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>Antíguo</option>
+                    <option>Nuevo</option>
+                    <option>Antíguo/Nuevo</option>
+                </select>
+                <small *ngIf="regimenInvalid" class="text-danger">Seleccione una opción</small>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Valor del Concepto de Cesantías -->
+        <div class="form-group row ">
+            <div class="col-md-4 text-right pt-3">
+                <label class="text-right">Valor del Concepto de Cesantías</label>
+            </div>
+            <div class="col-md-4">
+                <input type="text" class="form-control" [value]=" '$'+ provision.valorCesantias.toString()" readonly>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configRegimen" [datos]="datosRegimen">
+                </ngx-general-table>
+            </div>
+        </div>
+
+        <br>
+        </mat-tab>
+        </mat-tab-group>
+
+        <br>
+        <!-- Campos: Total Régimen Antíguo y Total Régimen Nuevo -->
+        <div class="form-group row ">
+            <div class="col-md-3 text-right pt-3">
+                <label class="text-right">Total Régimen Antíguo</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" [value]=" '$' + totalRegimenAntiguo.toString() " readonly>
+            </div>
+
+            <div class="col-md-3 text-right pt-3">
+                <label class="text-right">Total Régimen Nuevo</label>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" [value]=" '$' + totalRegimenNuevo.toString()" readonly>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+        <!-- Botones: Volver, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                    </div>
+                        <button  mat-button matStepperPrevious type="button"  class="btn btn-warning mb-3 mt-3 text-white">Volver
+                        </button>
+                    </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext [disabled]="regimenGroup.invalid" type="submit" class="btn btn-success m-0 mt-4">
+                        Contabilización
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</form>

@@ -8,6 +8,7 @@ import { ListComprobanteComponent } from "./comprobantes/list-comprobante/list-c
 import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 import { ConceptosComponent } from './conceptos/conceptos.component';
 
+
 const routes: Routes = [
   {
     path: "",
@@ -33,6 +34,21 @@ const routes: Routes = [
       {
         path: "conceptos",
         component: ConceptosComponent
+      },
+      {
+        path: 'provisiones',
+        loadChildren: () => import('./provisiones/provisiones.module')
+        .then(m => m.ProvisionesModule),
+      },
+      {
+        path: 'conciliaciones',
+        loadChildren: () => import('./conciliaciones/conciliaciones.module')
+        .then(m => m.ConciliacionesModule),
+      },
+      {
+        path: 'registroNomina',
+        loadChildren: () => import('./registro-nomina/registro-nomina.module')
+        .then(m => m.RegistroNominaModule),
       },
       {
         path: "**",

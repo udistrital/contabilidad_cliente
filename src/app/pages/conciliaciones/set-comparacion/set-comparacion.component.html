@@ -1,0 +1,110 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col pb-3">
+            <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                Comparación
+            </h6>
+        </div>
+    </div>
+
+    <mat-tab-group (selectedTabChange)="onTabChanged($event);">
+    <mat-tab *ngFor="let documento of this.tabsTitles; let index = index" [label]="documento">
+    <br>
+    <h6 style="text-align:center">{{ titles[index] }}</h6>
+    <br>   
+    <!-- Campos: Cuenta bancaria y Entidad bancaria  -->
+    <div  class="form-group row" >
+
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <label>Cuenta Bancaria</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+
+        <div class="col-md-4">
+            <label>Entidad bancaria</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+        
+    </div>
+    <!-- Campos: cuenta contable  -->
+    <div  class="form-group row" >
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <label>Cuenta Contable</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div  *ngIf="documento === 'ND NO REG LIBROS'" class="row">
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configtabla" [datos]="datosNDLibros">
+            </ngx-general-table>
+        </div>
+    </div>
+
+    <div *ngIf="documento === 'NC NO REG LIBROS'" class="row" >
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configtabla" [datos]="datosNCLibros">
+            </ngx-general-table>
+        </div>
+    </div>
+
+    <div *ngIf="documento === 'ND NO REG EXT'" class="row" >
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configtabla" [datos]="datosNDExtracto">
+            </ngx-general-table>
+        </div>
+    </div>
+
+    <div *ngIf="documento === 'NC NO REG EXT'" class="row" >
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configtabla" [datos]="datosNCExtracto">
+            </ngx-general-table>
+        </div>
+    </div>
+
+    <br>
+    <!-- Campos: cuenta contable  -->
+    <div  class="form-group row" >
+        <div class="col-md-6"></div>
+        <div class="col-md-4">
+            <label>Valor Total</label>
+            <input [value]="prueba" type="text" class="form-control" readonly>
+        </div>
+    </div>
+    <br>
+    </mat-tab>
+    </mat-tab-group>
+
+
+    <br>
+    <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+    <!-- Botones: Volver, Siguiente -->
+    <div class="container">
+        <div class="row pt-2 text-center">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                </div>
+                    <button  mat-button matStepperPrevious type="button"  class="btn btn-warning mb-3 mt-3 text-white">Volver
+                    </button>
+                </div>
+            <div class="col-md-6">
+                <button mat-button matStepperNext  type="submit" class="btn btn-success m-0 mt-4">
+                    Siguiente
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>

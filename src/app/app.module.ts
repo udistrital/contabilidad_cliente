@@ -76,6 +76,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -144,6 +145,7 @@ export class MaterialModule {}
     AppRoutingModule,
     NgbModule,
     NbEvaIconsModule,
+    FormsModule,
 
     ThemeModule.forRoot(),
 

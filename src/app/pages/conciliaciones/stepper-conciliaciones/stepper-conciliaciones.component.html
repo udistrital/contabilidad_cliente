@@ -1,0 +1,44 @@
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                GENERAR CONCILIACIÓN
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-horizontal-stepper [linear]="true" #stepper>
+
+                <mat-step [stepControl]="informacionGroup">
+                    <ng-template matStepLabel>Inicio</ng-template>
+                    <div class="container">
+                        <ngx-set-informacion></ngx-set-informacion>
+                    </div>
+                </mat-step>
+
+                <mat-step [stepControl]="informacionGroup">
+                    <ng-template matStepLabel>Ver Documentos</ng-template>
+                    <div class="container">
+                        <ngx-set-documentos></ngx-set-documentos>
+                    </div>
+                </mat-step>
+
+                <mat-step [stepControl]="informacionGroup" >
+                    <ng-template matStepLabel>Comparación</ng-template>
+                    <div class="container">
+                        <ngx-set-comparacion></ngx-set-comparacion>
+                    </div>
+                </mat-step>
+
+                <mat-step [stepControl]="informacionGroup">
+                    <ng-template matStepLabel>Conciliación Bancaria</ng-template>
+                    <div class="container">
+                        <ngx-set-conciliacion-bancaria></ngx-set-conciliacion-bancaria>
+                    </div>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </div>
+    </div>
+</div>

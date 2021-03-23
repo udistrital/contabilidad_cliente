@@ -1,0 +1,84 @@
+
+    <!-- Grupo: Información de Provision -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Resumen
+                </h6>
+            </div>
+        </div>
+
+    <br>
+    <!-- Tabla -->     
+    <div  class="table-responsive">
+        <table *ngIf="this.provisionesHelper.nuevaProvision" class="table table-bordered table-hover">    
+            <thead>
+              <tr>
+                <th class="tg-0pky">Tipo Nómina</th>
+                <th class="tg-0pky">Mes</th>
+                <th class="tg-0pky">Concepto Nómina</th>
+                <th class="tg-0pky">Cuenta Contable</th>
+                <th class="tg-0pky">Concepto provisión</th>
+                <th class="tg-0pky">Porcentaje</th>
+                <th class="tg-0pky">Valor Provisión</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let provision of this.provisionesHelper.listaProvisiones">
+              <tr>
+                <td class="tg-0pky" rowspan="20">{{provision.tipoNomina}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.mes}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.conceptoNomina}}</td>
+                <td class="tg-0pky" rowspan="20">{{provision.cuentaContable}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos" class="tg-0pky">{{provision.conceptos[0].conceptoProvision}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos" class="tg-0pky">{{provision.conceptos[0].porcentaje}}</td>
+                <td *ngIf="this.provisionesHelper.nuevaProvision.conceptos"class="tg-0pky"> ${{provision.conceptos[0].porcentaje*provision.valorProvision}}</td>
+              </tr>
+
+              <tr *ngFor="let item of provision.conceptos | slice:1 ">
+                <td class="tg-0pky">{{item.conceptoProvision}} </td>
+                <td class="tg-0pky">{{item.porcentaje}}</td>
+                <td class="tg-0pky">${{provision.valorProvision*item.porcentaje}}</td> 
+              </tr>
+            </tbody>
+        </table>
+     </div>
+
+        <!-- Campos: Tipo de nómina -->
+
+        <br>
+        <div *ngIf="this.provisionesHelper.nuevaProvision" class="row py-4 ">
+            <div class="col-md-4 text-right pt-3">
+                <label class="text-right">TOTAL PROVISIÓN</label>
+            </div>
+            <div class="col-md-4">
+                <input *ngIf="this.provisionesHelper.nuevaProvision.conceptos" type="text" class="form-control" [value]="'$ ' + this.provisionesHelper.nuevaProvision.valorConceptos.toString() " readonly>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+        <!-- Botones: Volver, Siguiente -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-4">
+                    <button  mat-button matStepperPrevious type="button" (click)="borrarRegistro()" class="btn btn-warning mb-3 mt-3 text-white">
+                        Volver
+                    </button>
+                    </div>
+                    <div class="col-md-4">
+                        <button mat-button  class="btn btn-success m-0 mt-4" (click)="reset();">
+                            Agregar Nueva Provisión
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4">
+                        Cálculo de Régimen
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+

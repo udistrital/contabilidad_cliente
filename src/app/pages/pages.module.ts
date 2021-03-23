@@ -38,7 +38,9 @@ import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas
 import { ListConceptosComponent } from './conceptos/list-conceptos/list-conceptos.component';
 import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component';
 import { TableComponent } from './conceptos/table/table.component';
-
+import { ProvisionesComponent } from './provisiones/provisiones.component';
+import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
+import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
 
 const MODULES = [
   PagesRoutingModule,
@@ -81,6 +83,8 @@ const COMPONENTS = [
     CuentasContablesComponent,
     ListConceptosComponent,
     EditModalComponent,
+    ProvisionesComponent,
+    ConciliacionesComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
@@ -100,6 +104,10 @@ const SERVICES = [
   declarations: [
     ...COMPONENTS,
     TableComponent,
+    RegistroNominaComponent,
+
+
+
   ],
   providers: [
     ...SERVICES,
