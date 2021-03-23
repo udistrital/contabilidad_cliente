@@ -39,6 +39,7 @@ import { ListConceptosComponent } from './conceptos/list-conceptos/list-concepto
 import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component';
 import { TableComponent } from './conceptos/table/table.component';
 import { ProvisionesComponent } from './provisiones/provisiones.component';
+import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
 
 const MODULES = [
   PagesRoutingModule,
@@ -82,6 +83,7 @@ const COMPONENTS = [
     ListConceptosComponent,
     EditModalComponent,
     ProvisionesComponent,
+    ConciliacionesComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
@@ -101,6 +103,7 @@ const SERVICES = [
   declarations: [
     ...COMPONENTS,
     TableComponent,
+
 
 
   ],

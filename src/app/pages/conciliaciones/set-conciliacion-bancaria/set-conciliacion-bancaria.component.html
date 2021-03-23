@@ -1,0 +1,65 @@
+    <!-- Grupo: Información de contabilizacion -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Conciliación Bancaria
+                </h6>
+            </div>
+        </div>
+        <br>
+
+        <div class="row" >
+            <div class="col-md-12 bg-white px-4 pb-3">
+                <ngx-general-table [config]="configConciliaciones" [datos]="datosConciliaciones">
+                </ngx-general-table>
+            </div>
+        </div>
+
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+        <!-- Botones: Volver, Guardar -->
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <div class="col-md-6">
+                    </div>
+                        <button  mat-button matStepperPrevious type="button"  class="btn btn-warning mb-3 mt-3 text-white">Volver
+                        </button>
+                    </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext type="submit" class="btn btn-success m-0 mt-4" (click)="modalGuardar()">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Solicitud Guardada -->
+<ng-template #exampleModal2 let-modal>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal2Label"><i class="fas fa-check text-success"></i>¡Guardado!</h5>
+                <button type="button"  [routerLink]="['../lista']" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">Se ha guardado la Conciliación No. 001.</p>
+                <p class="text-center">Estado: Elaborado</p>
+            </div>
+            <div class="modal-footer">
+                <a routerLink="../lista" role="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.close(true)">
+                    Aceptar
+                </a>
+            </div>
+        </div>
+    </div>
+
+</ng-template>
+<!-- Fin Modal: Solicitud Guardada -->
