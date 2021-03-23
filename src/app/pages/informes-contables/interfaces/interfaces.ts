@@ -19,7 +19,6 @@ export const CONTRALORIA_DISTRITAL: string[] = [
     "Estado de resultados",
     "Balance Consolidado",
     "SIPROJ",
-    "Anexos"
 ];
 export const CONTADURIA_GENERAL: string[] = [
     "CGN2015_002 Saldos operaciones reciprocas SI_convergencia",
