@@ -46,6 +46,11 @@ const routes: Routes = [
         .then(m => m.ConciliacionesModule),
       },
       {
+        path: 'registroNomina',
+        loadChildren: () => import('./registro-nomina/registro-nomina.module')
+        .then(m => m.RegistroNominaModule),
+      },
+      {
         path: "**",
         component: NotFoundComponent
       }

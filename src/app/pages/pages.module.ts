@@ -40,6 +40,7 @@ import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component'
 import { TableComponent } from './conceptos/table/table.component';
 import { ProvisionesComponent } from './provisiones/provisiones.component';
 import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
+import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
 
 const MODULES = [
   PagesRoutingModule,
@@ -103,6 +104,7 @@ const SERVICES = [
   declarations: [
     ...COMPONENTS,
     TableComponent,
+    RegistroNominaComponent,
 
 
 
