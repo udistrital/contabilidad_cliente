@@ -41,6 +41,8 @@ import { TableComponent } from './conceptos/table/table.component';
 import { ProvisionesComponent } from './provisiones/provisiones.component';
 import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
 import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
+import { InformesContablesComponent } from './informes-contables/informes-contables.component';
+
 
 const MODULES = [
   PagesRoutingModule,
@@ -105,6 +107,8 @@ const SERVICES = [
     ...COMPONENTS,
     TableComponent,
     RegistroNominaComponent,
+    InformesContablesComponent,
+
 
 
 
