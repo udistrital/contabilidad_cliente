@@ -1,0 +1,96 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 bg-white py-3">
+            <h5 class="card-title text-center text-warning">
+                INFORMES CONTABLES
+            </h5>
+
+            <div class="row">
+                <div class="col-md-6 bg-white py-3">
+                    <div class="card border-warning mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title text-center text-info">
+                            INFORMES UNIVERSIDAD
+                        </h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-dark">ESTADOS FINANCIEROS</h6>
+                            <div *ngFor="let informe of informesUniversidad">
+                                <a  [routerLink]="['../informe']" style="color:black;" (click)="TipoInforme(informe)">{{informe}}.</a><br>
+                            </div>
+
+                            <a mat-button [matMenuTriggerFor]="menu">Revelaciones(Anexos)</a>
+                            <mat-menu #menu="matMenu">
+                              <button *ngFor="let anexo of anexos" [routerLink]="['../informe']" (click)="TipoInforme(anexo)" mat-menu-item>{{anexo}}</button>
+                            </mat-menu>
+                        
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 bg-white py-3">
+                    <div class="card border-warning mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title text-center text-info">CONTRALORÍA DISTRITAL</h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-dark">SIVICOF</h6>
+                        <div *ngFor="let informe of contraloria">
+                            <a  [routerLink]="['../informe']" style="color:black;" (click)="TipoInforme(informe)">{{informe}}.</a><br>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 bg-white py-3">
+                    <div class="card border-warning mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title text-center text-info">CONTADURÍA GENERAL DE LA NACIÓN</h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-dark">CHIP</h6>
+                        <div *ngFor="let informe of contaduria">
+                            <a  [routerLink]="['../informe']" style="color:black;" (click)="TipoInforme(informe)">{{informe}}.</a><br>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 bg-white py-3">
+                    <div class="card border-warning mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title text-center text-info">SECRETARÍA DE HACIENDA</h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-dark">BOGOTÁ CONSOLIDA</h6>
+                        <div *ngFor="let informe of hacienda">
+                            <a  [routerLink]="['../informe']" style="color:black;" (click)="TipoInforme(informe)">{{informe}}.</a><br>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 bg-white py-3">
+                    <div class="card border-warning mb-3">
+                        <div class="card-body">
+                        <h5 class="card-title text-center text-info">MINISTERIO DE EDUCACIÓN NACIONAL</h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-dark">INFORMES MEN</h6>
+                        <div *ngFor="let informe of ministerio">
+                            <a  [routerLink]="['../informe']" style="color:black;" (click)="TipoInforme(informe)">{{informe}}.</a><br>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
