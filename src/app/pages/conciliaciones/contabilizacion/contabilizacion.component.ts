@@ -59,7 +59,7 @@ export class ContabilizacionComponent implements OnInit {
   modalAprobar() {
     this.modalService.open(this.guardarModal).result.then((result) => {
       if (`${result}`) {
-        console.log('Aprobado');
+        // console.log('Aprobado');
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

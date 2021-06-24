@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+// import { TranslateService } from '@ngx-translate/core';
 import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
 import { ConceptosService } from '../../../@core/managers/conceptos.service';
 
@@ -61,7 +61,7 @@ export class ListConceptosComponent implements OnInit {
 
 
   constructor(
-    private translate: TranslateService,
+    // private translate: TranslateService,
     private conceptoHelper: ConceptoHelper,
     private conceptoService: ConceptosService
   ) { }
@@ -133,12 +133,12 @@ export class ListConceptosComponent implements OnInit {
     } else {
       this.getAllConceptosNames.emit(this.arrayConceptoNames);
       this.conceptoService.entityListConceptos = this.arrayConceptoNames;
-      console.log(event, 'onExternalTabActivator');
+      // console.log(event, 'onExternalTabActivator');
     }
   }
 
   onChangeExternalTab(event) {
-    console.log(event, 'onChangeExternalTab');
+    // console.log(event, 'onChangeExternalTab');
   }
 
   emitData( eventObject ) {

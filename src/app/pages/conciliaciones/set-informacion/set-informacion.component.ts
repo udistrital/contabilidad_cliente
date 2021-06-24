@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conciliacionesHelper';
+// import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conciliacionesHelper';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs/Subject';
 
@@ -27,7 +27,7 @@ export class SetInformacionComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private conciliacionesHelper: ConciliacionesHelper
+    // private conciliacionesHelper: ConciliacionesHelper,
   ) {
     this.createForm();
   }
@@ -56,7 +56,7 @@ export class SetInformacionComponent implements OnInit {
   }
 
   onChange(evt) {
-    let data, header;
+    let data; // , header;
     const target: DataTransfer = <DataTransfer>(evt.target);
     this.isExcelFile = !!target.files[0].name.match(/(.xls|.xlsx)/);
     if (target.files.length > 1) {

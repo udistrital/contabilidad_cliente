@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'ngx-general-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements OnChanges, OnInit {
 
   @Input() config: any;
   @Input() datos: any;
@@ -20,12 +19,12 @@ export class TableComponent implements OnInit {
   keyObject: any;
 
   constructor(
-
   ) {
     this.stringBusqueda = '';
     this.selectedAction = new EventEmitter<any>();
     this.rowspanTitle = 1;
   }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes) {
       this.ConfiguracionTabla();

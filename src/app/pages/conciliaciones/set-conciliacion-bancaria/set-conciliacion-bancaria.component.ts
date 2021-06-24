@@ -31,7 +31,7 @@ export class SetConciliacionBancariaComponent implements OnInit {
   modalGuardar() {
     this.modalService.open(this.guardarModal).result.then((result) => {
       if (`${result}`) {
-        console.log('GUARDADO');
+        // console.log('GUARDADO');
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

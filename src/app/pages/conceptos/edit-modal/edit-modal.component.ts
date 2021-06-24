@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Input, ViewChild, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ChangeDetectorRef, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NbDialogRef } from '@nebular/theme';
 import { ConceptoHelper } from '../../../@core/helpers/concepto/conceptoHelper';
@@ -9,7 +9,7 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
   templateUrl: './edit-modal.component.html',
   styleUrls: ['./edit-modal.component.scss']
 })
-export class EditModalComponent implements OnInit {
+export class EditModalComponent implements AfterViewInit, OnInit {
 
   @Input('id') id: string;
   @Input('nombre') nombre: string;

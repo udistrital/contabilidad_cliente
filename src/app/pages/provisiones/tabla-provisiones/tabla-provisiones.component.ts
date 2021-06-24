@@ -33,7 +33,7 @@ export class TablaProvisionesComponent implements OnInit {
 
   SelectedAction(accion: any, fila: any) {
     if (accion === 'verprovision') {
-      console.log(this.datosProvisiones[fila]);
+      // console.log(this.datosProvisiones[fila]);
     }
     if (accion === 'borrarprovision') {
       this.modalEliminar(fila);

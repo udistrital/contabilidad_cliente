@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
 
@@ -8,7 +8,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component';
   styleUrls: ['./conceptos.component.scss']
 })
 
-export class ConceptosComponent implements OnInit {
+export class ConceptosComponent implements AfterViewInit, OnInit {
 
   @ViewChild('wizardCreateConcepto', {static: false}) wizardCreateConcepto: any;
   @ViewChild('modalEdit', {static: false}) modalEdit: any;
@@ -53,7 +53,9 @@ export class ConceptosComponent implements OnInit {
           cuentaDebito:  conceptoData.CuentaDebito
         }
       }
-      ).onClose.subscribe(() => console.log('cierra modal'));
+    ).onClose.subscribe(() => {
+      // console.log('cierra modal');
+    });
   }
 
   getAllConceptosNames(listNames: []) {
@@ -62,7 +64,7 @@ export class ConceptosComponent implements OnInit {
 
   getDataList(request: string) {
     if (request === 'get-names') {
-      console.log('getDataList');
+      // console.log('getDataList');
     }
   }
 

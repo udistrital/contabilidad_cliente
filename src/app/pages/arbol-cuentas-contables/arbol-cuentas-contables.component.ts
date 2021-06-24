@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, OnChanges, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
 import {
   NbGetters,
   NbSortDirection,
@@ -41,7 +41,7 @@ interface EstructuraArbolRubrosApropiaciones {
   templateUrl: './arbol-cuentas-contables.component.html',
   styleUrls: ['./arbol-cuentas-contables.component.scss'],
 })
-export class ArbolCuentasContablesComponent implements OnChanges {
+export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
   @Output() rubroSeleccionado = new EventEmitter();
   @Input() updateSignal: Observable<string[]>;
   @Input() optionSelect: string;
@@ -79,14 +79,14 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   constructor(
     private renderer: Renderer2,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
-    private dataSourceBuilder2: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
+    // private dataSourceBuilder2: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
     private treeHelper: ArbolHelper,
     private translate: TranslateService,
     private pUpManager: PopUpManager,
     // private rubroHelper: RubroHelper,
   ) {
-
   }
+
   ngOnInit() {
 
     this.loadTree();

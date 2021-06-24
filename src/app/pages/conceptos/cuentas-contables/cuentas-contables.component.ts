@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChildren, ElementRef, EventEmitter} from '@angular/core';
+import { Component, OnChanges, OnInit, Input, Output, ViewChildren, ElementRef, EventEmitter} from '@angular/core';
 import {
   trigger,
   state,
@@ -49,7 +49,7 @@ interface EstructuraArbolRubrosApropiaciones {
     ]),
   ]
 })
-export class CuentasContablesComponent implements OnInit {
+export class CuentasContablesComponent implements OnChanges, OnInit {
   @Input('wizzardSteps')     wizzardSteps: boolean;
   @Input() updateSignal: Observable<string[]>;
   @Input('paramsFieldsName') paramsFieldsName: object;

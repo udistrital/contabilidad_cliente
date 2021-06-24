@@ -1,10 +1,13 @@
-import { Component,
-         OnInit ,
-         ViewChild,
-         Input,
-         Output,
-         EventEmitter,
-         ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  AfterViewInit,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   trigger,
   state,
@@ -34,7 +37,7 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
     ]),
   ]
 })
-export class WizardComponent implements OnInit {
+export class WizardComponent implements AfterViewInit, OnInit {
 
   @ViewChild('nbStepperWizard', {static: false}) nbStepperWizard: any;
   @ViewChild('inputValidateName', {static: false}) inputValidateName: any;
