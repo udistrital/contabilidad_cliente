@@ -77,7 +77,7 @@
                 <ng-container *ngFor="let data of config.dataConfig">
                   <ng-container *ngIf="data.compound">
                     <ng-container *ngFor="let element of items[data.key]">
-                      <tr ngx-compound-cell [dataConfig]="data" [items]="element"></tr>
+                      <ngx-compound-cell [dataConfig]="data" [items]="element"></ngx-compound-cell>
                     </ng-container>
                   </ng-container>
                 </ng-container>

@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: '[ngx-compound-cell]',
+  selector: 'ngx-compound-cell',
   templateUrl: './compound-cell.component.html',
   styleUrls: ['./compound-cell.component.scss']
 })
