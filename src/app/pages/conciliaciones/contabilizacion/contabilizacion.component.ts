@@ -16,13 +16,13 @@ export class ContabilizacionComponent implements OnInit {
   configContabilizacion: any;
   contabilizacionGroup: FormGroup;
 
-  tabsTitles: string[] = ["ND NO REG LIBROS","NC NO REG LIBROS"];
+  tabsTitles: string[] = ['ND NO REG LIBROS', 'NC NO REG LIBROS'];
 
   // Modales
   closeResult = '';
 
 
-  constructor(private fb: FormBuilder, public conciliacionesHelper: ConciliacionesHelper, private modalService: NgbModal) { 
+  constructor(private fb: FormBuilder, public conciliacionesHelper: ConciliacionesHelper, private modalService: NgbModal) {
     this.datosConciliacionNCLibros = this.conciliacionesHelper.datosConciliacionNCLibros;
     this.datosConciliacionNDLibros = this.conciliacionesHelper.datosConciliacionNDLibros;
     this.configContabilizacion = this.conciliacionesHelper.configContabilizacion;

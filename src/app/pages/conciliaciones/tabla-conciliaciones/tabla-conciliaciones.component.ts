@@ -22,7 +22,7 @@ export class TablaConciliacionesComponent implements OnInit {
     private modalService: NgbModal,
     private conciliacionesHelper: ConciliacionesHelper,
     private router: Router,
-  ) { 
+  ) {
     this.configConciliaciones = this.conciliacionesHelper.configTabla;
     this.datosConciliaciones = this.conciliacionesHelper.tablaConciliacion;
   }

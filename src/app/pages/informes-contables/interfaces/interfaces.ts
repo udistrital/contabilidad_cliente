@@ -1,60 +1,60 @@
 export const INFORMES_UNIVERSIDAD: string[] = [
-    "CGN2015_002 Saldos operaciones reciprocas SI_convergencia",
-    "DDC2015_100 Saldos operaciones reciprocas SI_convergencia",
-    "CGN2015_001 Saldos y movimientos convergencia",
-    "CGN2015_01 Variaciones Trimestrales",
-    "Estado de cambio Patrimonio",
-    "Estado situación Financiera",
-    "Estado de resultados",
-    "Balance Consolidado",
-    "SIPROJ",
+    'CGN2015_002 Saldos operaciones reciprocas SI_convergencia',
+    'DDC2015_100 Saldos operaciones reciprocas SI_convergencia',
+    'CGN2015_001 Saldos y movimientos convergencia',
+    'CGN2015_01 Variaciones Trimestrales',
+    'Estado de cambio Patrimonio',
+    'Estado situación Financiera',
+    'Estado de resultados',
+    'Balance Consolidado',
+    'SIPROJ',
 ];
 export const CONTRALORIA_DISTRITAL: string[] = [
-    "CGN2015_002 Saldos operaciones reciprocas SI_convergencia",
-    "DDC2015_100 Saldos operaciones reciprocas SI_convergencia",
-    "CGN2015_001 Saldos y movimientos convergencia",
-    "CGN2015_01 Variaciones Trimestrales",
-    "Estado de cambio Patrimonio",
-    "Estado situación Financiera",
-    "Estado de resultados",
-    "Balance Consolidado",
-    "SIPROJ",
+    'CGN2015_002 Saldos operaciones reciprocas SI_convergencia',
+    'DDC2015_100 Saldos operaciones reciprocas SI_convergencia',
+    'CGN2015_001 Saldos y movimientos convergencia',
+    'CGN2015_01 Variaciones Trimestrales',
+    'Estado de cambio Patrimonio',
+    'Estado situación Financiera',
+    'Estado de resultados',
+    'Balance Consolidado',
+    'SIPROJ',
 ];
 export const CONTADURIA_GENERAL: string[] = [
-    "CGN2015_002 Saldos operaciones reciprocas SI_convergencia",
-    "DDC2015_100 Saldos operaciones reciprocas SI_convergencia",
-    "CGN2015_001 Saldos y movimientos convergencia",
+    'CGN2015_002 Saldos operaciones reciprocas SI_convergencia',
+    'DDC2015_100 Saldos operaciones reciprocas SI_convergencia',
+    'CGN2015_001 Saldos y movimientos convergencia',
 ];
 export const SECRETARIA_HACIENDA: string[] = [
-    "CGN2015_002 Saldos operaciones reciprocas SI_convergencia",
-    "DDC2015_100 Saldos operaciones reciprocas SI_convergencia",
-    "CGN2015_001 Saldos y movimientos convergencia",
+    'CGN2015_002 Saldos operaciones reciprocas SI_convergencia',
+    'DDC2015_100 Saldos operaciones reciprocas SI_convergencia',
+    'CGN2015_001 Saldos y movimientos convergencia',
 ];
 export const MINISTERIO_EDUCACIÓN: string[] = [
-    "Flujo Efectivo",
-    "Plan Único de Cuentas",
+    'Flujo Efectivo',
+    'Plan Único de Cuentas',
 ];
 
 export const ANEXOS: string[] = [
-    "Efectivo y Equival Efectivo",
-    "Inversiones",
-    "Cuentas por Cobrar",
-    "Prestamos por cobrar",
-    "Inventarios",
-    "Propiedades, Planta y Equipo",
-    "Bienes Uso Público",
-    "Activos Intangibles",
-    "Otros Derechos y Garantias",
-    "Cuentas por Pagar",
-    "Beneficioas a Empleados y Plan de Activos",
-    "Provisiones",
-    "Otros Pasivos",
-    "Activos Pasivos Contigentes",
-    "Cuentas de orden",
-    "Patrimonio",
-    "Gastos",
-    "Costos de Ventas",
-    "Costos de Tranformación",
+    'Efectivo y Equival Efectivo',
+    'Inversiones',
+    'Cuentas por Cobrar',
+    'Prestamos por cobrar',
+    'Inventarios',
+    'Propiedades, Planta y Equipo',
+    'Bienes Uso Público',
+    'Activos Intangibles',
+    'Otros Derechos y Garantias',
+    'Cuentas por Pagar',
+    'Beneficioas a Empleados y Plan de Activos',
+    'Provisiones',
+    'Otros Pasivos',
+    'Activos Pasivos Contigentes',
+    'Cuentas de orden',
+    'Patrimonio',
+    'Gastos',
+    'Costos de Ventas',
+    'Costos de Tranformación',
 ];
 
 
@@ -1005,7 +1005,7 @@ export const DATOS_PATRIMONIO: any = [
 
 export const CONFIGURACION_SIPROJ: any = {
     title: {
-        name: "INFORMACIÓN CONTABLE | INFORMACIÓN APLICATIVO PROCESOS JUDICIALES | DIFERENCIAS ",
+        name: 'INFORMACIÓN CONTABLE | INFORMACIÓN APLICATIVO PROCESOS JUDICIALES | DIFERENCIAS ',
         class: 'text-center',
         actionClass: 'd-flex flex-row justify-content-around align-middle'
     },
@@ -1131,7 +1131,7 @@ export const CONFIGURACION_SIPROJ: any = {
                 class: 'text-left',
             }
         },
-        
+
     ],
     noData: {
         name: 'No Existen Elementos Asociados',
@@ -1236,7 +1236,7 @@ export const CONFIGURACION_FLUJO_EFECTIVO: any = {
             }
         },
 
-        
+
     ],
     noData: {
         name: 'No Existen Elementos Asociados',
@@ -1333,7 +1333,7 @@ export const CONFIGURACION_PLAN_UNICO: any = {
             }
         },
 
-        
+
     ],
     noData: {
         name: 'No Existen Elementos Asociados',

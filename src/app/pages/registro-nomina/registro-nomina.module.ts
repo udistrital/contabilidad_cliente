@@ -18,9 +18,9 @@ import { ConsultaComponent } from './consulta/consulta.component';
 
 @NgModule({
   declarations: [
-    TablaRegistroNominaComponent, 
-    ContabilizacionComponent, 
-    DesagregacionComponent, 
+    TablaRegistroNominaComponent,
+    ContabilizacionComponent,
+    DesagregacionComponent,
     ConsultaComponent
   ],
   imports: [

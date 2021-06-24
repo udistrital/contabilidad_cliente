@@ -11,7 +11,7 @@ export class ConciliacionComponent implements OnInit {
   configConciliaciones: any;
   datosConciliaciones: any;
 
-  constructor( private conciliacionesHelper: ConciliacionesHelper ) { 
+  constructor( private conciliacionesHelper: ConciliacionesHelper ) {
     this.configConciliaciones = this.conciliacionesHelper.configConciliacion;
     this.datosConciliaciones = this.conciliacionesHelper.datosConciliacion;
    }

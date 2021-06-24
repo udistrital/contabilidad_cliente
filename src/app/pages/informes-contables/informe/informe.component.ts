@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild,  ElementRef} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InformesContablesHelper } from '../../../@core/helpers/informesContables/informesContablesHelper';
 import { MatPaginator } from '@angular/material/paginator';
@@ -16,13 +16,13 @@ export class InformeComponent implements OnInit {
   datosTabla: any;
   configTabla: any;
   informeGroup: FormGroup;
-  titulo :string;
+  titulo: string;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     public informesContablesHelper: InformesContablesHelper,
-  ) { 
-    this.datosTabla = this.informesContablesHelper.datosTabla.slice(0,5);
+  ) {
+    this.datosTabla = this.informesContablesHelper.datosTabla.slice(0, 5);
     this.configTabla = this.informesContablesHelper.configTabla;
     this.titulo = this.informesContablesHelper.titulo;
     this.createForm();
@@ -48,8 +48,8 @@ export class InformeComponent implements OnInit {
       return true;
   }
 
-  paginacion(event){
-    this.datosTabla = this.informesContablesHelper.datosTabla.slice(event.pageIndex*event.pageSize, event.pageIndex*event.pageSize +event.pageSize);
+  paginacion(event) {
+    this.datosTabla = this.informesContablesHelper.datosTabla.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize);
   }
 
   saveForm() {

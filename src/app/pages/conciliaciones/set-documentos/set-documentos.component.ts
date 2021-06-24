@@ -20,11 +20,11 @@ export class SetDocumentosComponent implements OnInit {
   configEstadoPago: any;
 
   documentosGroup: FormGroup;
-  tabsTitles: string[] = ["EXTRACTO","MOVIMIENTO CONTABLE","ESTADO DE PAGO"];
+  tabsTitles: string[] = ['EXTRACTO', 'MOVIMIENTO CONTABLE', 'ESTADO DE PAGO'];
 
   constructor(
     private fb: FormBuilder,
-    public conciliacionesHelper: ConciliacionesHelper) { 
+    public conciliacionesHelper: ConciliacionesHelper) {
 
       this.datosExtracto = this.conciliacionesHelper.tablaExtracto;
       this.configExtracto = this.conciliacionesHelper.configExtracto;

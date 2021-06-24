@@ -72,7 +72,7 @@ export class TableComponent implements OnInit {
   }
 
   SelectedAllAction(action: any) {
-    //console.log('Sirvio Action');
+    // console.log('Sirvio Action');
   }
 
   SelectedAction(action: any , row: any) {

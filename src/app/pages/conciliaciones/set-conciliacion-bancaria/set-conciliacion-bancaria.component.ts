@@ -19,7 +19,7 @@ export class SetConciliacionBancariaComponent implements OnInit {
   constructor(
     private conciliacionesHelper: ConciliacionesHelper,
     private modalService: NgbModal,
-    ) { 
+    ) {
     this.configConciliaciones = this.conciliacionesHelper.configConciliacion;
     this.datosConciliaciones = this.conciliacionesHelper.datosConciliacion;
   }

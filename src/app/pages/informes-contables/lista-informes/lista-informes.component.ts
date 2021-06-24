@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { INFORMES_UNIVERSIDAD, CONTADURIA_GENERAL, CONTRALORIA_DISTRITAL, SECRETARIA_HACIENDA, MINISTERIO_EDUCACIÓN, ANEXOS } from '../interfaces/interfaces'
+import { INFORMES_UNIVERSIDAD, CONTADURIA_GENERAL, CONTRALORIA_DISTRITAL, SECRETARIA_HACIENDA, MINISTERIO_EDUCACIÓN, ANEXOS } from '../interfaces/interfaces';
 import { InformesContablesHelper } from '../../../@core/helpers/informesContables/informesContablesHelper';
 
 @Component({
@@ -16,7 +16,7 @@ export class ListaInformesComponent implements OnInit {
   ministerio: string[];
   anexos: string[];
 
-  constructor(private informesContablesHelper: InformesContablesHelper,) {
+  constructor(private informesContablesHelper: InformesContablesHelper, ) {
     this.informesUniversidad = INFORMES_UNIVERSIDAD;
     this.contraloria = CONTRALORIA_DISTRITAL;
     this.contaduria = CONTADURIA_GENERAL;
@@ -29,7 +29,7 @@ export class ListaInformesComponent implements OnInit {
 
   }
 
-  TipoInforme(informe){
-    this.informesContablesHelper.TipoInforme(informe)
+  TipoInforme(informe) {
+    this.informesContablesHelper.TipoInforme(informe);
   }
 }
