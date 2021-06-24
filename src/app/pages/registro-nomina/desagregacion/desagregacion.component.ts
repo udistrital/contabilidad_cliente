@@ -13,9 +13,9 @@ export class DesagregacionComponent implements OnInit {
   datosRegistro: any;
   back: string;
 
-  prueba = "Prueba"
+  prueba = 'Prueba';
 
-  constructor(private registroNominaHelper: RegistroNominaHelper) { 
+  constructor(private registroNominaHelper: RegistroNominaHelper) {
     this.configRegistro = this.registroNominaHelper.configDesagregacion;
     this.datosRegistro = this.registroNominaHelper.datosDesagregacion;
     this.back = this.registroNominaHelper.back;

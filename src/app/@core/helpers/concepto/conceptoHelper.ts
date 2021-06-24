@@ -66,7 +66,7 @@ export class ConceptoHelper {
      * @param data fields to update
      * @returns  <Observable> object updated information. undefined if the proccess has errors.
      */
-    public conceptoUpdate(data,id) {
+    public conceptoUpdate(data, id) {
         this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
         return this.rqManager.put('concepto/', data, id).pipe(
             map(

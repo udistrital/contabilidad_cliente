@@ -17,8 +17,8 @@ export class RegistroNominaHelper {
     datosDesagregacion = DATOS_DESAGREGACION;
     configDesagregacion = CONFIGURACION_DESAGREGACION;
 
-    back: string = "consulta";
-    contabilizacion: string = "lista";
+    back: string = 'consulta';
+    contabilizacion: string = 'lista';
 
     constructor() {
      }

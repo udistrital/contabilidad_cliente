@@ -88,7 +88,7 @@ export class ListComprobanteComponent implements OnInit {
         return value;
       }
     },
-    Numero:{
+    Numero: {
       title: this.translate.instant('GLOBAL.numero'),
       // type: 'string;',
       valuePrepareFunction: value => {
@@ -136,7 +136,7 @@ export class ListComprobanteComponent implements OnInit {
       columns: this.listColumns,
     };
   }
-  this.tipoComprobanteHelper.getTiposComprobante("").subscribe(res => {
+  this.tipoComprobanteHelper.getTiposComprobante('').subscribe(res => {
     if (res) {
       this.tiposComprobante = res;
       this.loadOptionsTipoComprobante();
@@ -152,14 +152,14 @@ export class ListComprobanteComponent implements OnInit {
     }
   }
   loadOptionsTipoComprobante(): void {
-    let aplicacion = this.tiposComprobante;
+    const aplicacion = this.tiposComprobante;
     this.formEntity.campos[this.getIndexForm('TipoComprobante')].opciones = aplicacion;
   }
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formEntity.campos.length; index++) {
       const element = this.formEntity.campos[index];
       if (element.nombre === nombre) {
-        return index
+        return index;
       }
     }
     return 0;
@@ -188,6 +188,6 @@ export class ListComprobanteComponent implements OnInit {
     this.auxcambiotab = false;
     this.localtabActived = false;
     this.createTab = false;
-    this.paramsTab = false
+    this.paramsTab = false;
   }
 }

@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RegistroNominaHelper } from '../../../@core/helpers/registroNomina/registroNominaHelper';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'ngx-consulta',
@@ -14,13 +13,13 @@ export class ConsultaComponent implements OnInit {
   informacionGroup: FormGroup;
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private registroNominaHelper: RegistroNominaHelper,
     private router: Router,
-  ) { 
+  ) {
     this.createForm();
-    this.registroNominaHelper.back = "consulta";
-    this.registroNominaHelper.contabilizacion = "consulta";
+    this.registroNominaHelper.back = 'consulta';
+    this.registroNominaHelper.contabilizacion = 'consulta';
   }
 
   ngOnInit() {
@@ -52,9 +51,9 @@ export class ConsultaComponent implements OnInit {
         control.markAsTouched();
       });
     }
-    if(this.informacionGroup.value.tipoComprobante === "Desagregación Nómina"){
+    if (this.informacionGroup.value.tipoComprobante === 'Desagregación Nómina') {
       this.router.navigate(['pages/registroNomina/desagregacion']);
-    }else{
+    } else {
       this.router.navigate(['pages/registroNomina/contabilizacion']);
     }
   }

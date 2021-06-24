@@ -9,7 +9,7 @@ import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conc
 export class SetComparacionComponent implements OnInit {
 
 
-  prueba = "Prueba";
+  prueba = 'Prueba';
 
   configtabla: any;
   datosNDLibros: any;
@@ -18,15 +18,15 @@ export class SetComparacionComponent implements OnInit {
   datosNCExtracto: any;
 
 
-  tabsTitles: string[] = ["ND NO REG LIBROS","NC NO REG LIBROS","ND NO REG EXT","NC NO REG EXT"];
+  tabsTitles: string[] = ['ND NO REG LIBROS', 'NC NO REG LIBROS', 'ND NO REG EXT', 'NC NO REG EXT'];
   titles: string[] = [
-          "Notas débito no registradas en libros",
-          "Notas crédito no registradas en libros",
-          "Notas debito no registradas en extracto",
-          "Notas crédito no registradas en extractos"];
+          'Notas débito no registradas en libros',
+          'Notas crédito no registradas en libros',
+          'Notas debito no registradas en extracto',
+          'Notas crédito no registradas en extractos'];
 
   constructor(
-    public conciliacionesHelper: ConciliacionesHelper) { 
+    public conciliacionesHelper: ConciliacionesHelper) {
 
       this.configtabla = this.conciliacionesHelper.configTablaComparacion;
       this.datosNDLibros = this.conciliacionesHelper.datosNDLibros;

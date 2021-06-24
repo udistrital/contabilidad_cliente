@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef  } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conciliacionesHelper';
+// import { ConciliacionesHelper } from '../../../@core/helpers/conciliaciones/conciliacionesHelper';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs/Subject';
 
@@ -14,7 +14,7 @@ import { Subject } from 'rxjs/Subject';
 export class SetInformacionComponent implements OnInit {
 
   informacionConciliacionGroup: FormGroup;
-  prueba = "Prueba";
+  prueba = 'Prueba';
 
   // excel
   spinnerEnabled = false;
@@ -26,14 +26,14 @@ export class SetInformacionComponent implements OnInit {
   isExcelFile: boolean;
 
   constructor(
-    private fb: FormBuilder, 
-    private conciliacionesHelper: ConciliacionesHelper
-  ) { 
+    private fb: FormBuilder,
+    // private conciliacionesHelper: ConciliacionesHelper,
+  ) {
     this.createForm();
   }
 
   ngOnInit() {
-    
+
   }
 
   createForm() {
@@ -56,7 +56,7 @@ export class SetInformacionComponent implements OnInit {
   }
 
   onChange(evt) {
-    let data, header;
+    let data; // , header;
     const target: DataTransfer = <DataTransfer>(evt.target);
     this.isExcelFile = !!target.files[0].name.match(/(.xls|.xlsx)/);
     if (target.files.length > 1) {
@@ -83,19 +83,19 @@ export class SetInformacionComponent implements OnInit {
       reader.onloadend = (e) => {
         this.spinnerEnabled = false;
         this.keys = Object.keys(data[0]);
-        this.dataSheet.next(data)
-      }
+        this.dataSheet.next(data);
+      };
     } else {
       this.inputFile.nativeElement.value = '';
     }
   }
 
   removeData(file: string) {
-    if(file === "1"){
+    if (file === '1') {
       this.inputFile.nativeElement.value = '';
       this.dataSheet.next(null);
       this.keys = null;
-    }else{
+    } else {
       this.inputFile2.nativeElement.value = '';
       this.dataSheet.next(null);
       this.keys = null;

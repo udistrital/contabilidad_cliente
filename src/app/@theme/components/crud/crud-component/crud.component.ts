@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { FormManager } from '../../../../@core/managers/formManager';
 import { PopUpManager } from '../../../../@core/managers/popUpManager';
@@ -12,7 +12,7 @@ import { RequestManager } from '../../../../@core/managers/requestManager';
   templateUrl: './crud.component.html',
   styleUrls: ['./crud.component.scss']
 })
-export class CrudEntityComponent implements OnInit {
+export class CrudEntityComponent implements OnInit, OnChanges {
   @Input('entitiId') entitiId: any;
   @Input('formEntity') formEntity: any;
   @Input('formTittle') formTittle: string;
@@ -36,13 +36,14 @@ export class CrudEntityComponent implements OnInit {
     // tslint:disable-next-line
     private rqManager: RequestManager,
   ) {
-
   }
+
   ngOnChanges(changes) {
     if (changes['paramsFieldsName'] && changes['paramsFieldsName'].currentValue) {
       this.paramsFieldsName = changes['paramsFieldsName'].currentValue;
     }
   }
+
   ngOnInit() {
     this.formEntity = FormManager.ConstruirForm(
       this.formEntity,

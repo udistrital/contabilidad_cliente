@@ -1,11 +1,13 @@
-import { Component,
-         OnInit ,
-         ViewChild,
-         Input,
-         Output,
-         EventEmitter,
-         ChangeDetectorRef } from '@angular/core';
-import { NbButtonModule, NbStepperModule }    from '@nebular/theme';
+import {
+  Component,
+  AfterViewInit,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter,
+  ChangeDetectorRef,
+} from '@angular/core';
 import {
   trigger,
   state,
@@ -21,7 +23,7 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
   templateUrl: './wizard.component.html',
   styleUrls: ['./wizard.component.scss'],
   animations: [
-    trigger('openDivWizard',[
+    trigger('openDivWizard', [
       state('open', style({
         opacity: 1,
         maxHeight: 100
@@ -30,21 +32,21 @@ import { ConceptosService } from '../../../@core/managers/conceptos.service';
         opacity: 0,
         maxHeight: 0
       })),
-      transition('open=>close',animate('500ms')),
-      transition('close=>open',animate('100ms'))
+      transition('open=>close', animate('500ms')),
+      transition('close=>open', animate('100ms'))
     ]),
   ]
 })
-export class WizardComponent implements OnInit {
+export class WizardComponent implements AfterViewInit, OnInit {
 
-  @ViewChild('nbStepperWizard',{static: false}) nbStepperWizard   : any;
-  @ViewChild('inputValidateName',{static:false}) inputValidateName: any;
+  @ViewChild('nbStepperWizard', {static: false}) nbStepperWizard: any;
+  @ViewChild('inputValidateName', {static: false}) inputValidateName: any;
   @Input('stateWizard') stateWizard: any;
   @Input('namesConceptosArray') namesConceptosArray: any;
 
   @Output() wizardActivator = new EventEmitter<boolean>();
 
-  addWizardForm :   FormGroup;
+  addWizardForm:   FormGroup;
   ayudacontrolForm: FormControl;
   nextBtnValidateName:    boolean = true;
   touchedBtnValidateName: boolean = false;
@@ -53,7 +55,7 @@ export class WizardComponent implements OnInit {
   numeroCuentaDebito:  string = 'N/A';
   wizzardSteps: boolean = true;
 
-  conceptoCreado = <any>{ 'Nombre':'','CuentaCredito':'','CuentaDebito':'', 'Contexto': 'no se a definido', 'MovimientoID': 'fake-movimiento' };
+  conceptoCreado = <any>{ 'Nombre': '', 'CuentaCredito': '', 'CuentaDebito': '', 'Contexto': 'no se a definido', 'MovimientoID': 'fake-movimiento' };
 
   constructor(
     private fb: FormBuilder,
@@ -63,7 +65,7 @@ export class WizardComponent implements OnInit {
 
   ngOnInit() {
     this.addWizardForm = this.fb.group({
-      nombreConcepto:      new FormControl('',[Validators.required,Validators.minLength(4)]),
+      nombreConcepto:      new FormControl('', [Validators.required, Validators.minLength(4)]),
       numeroCuentaCredito: new FormControl(this.numeroCuentaCredito),
       numeroCuentaDebito:  new FormControl(this.numeroCuentaDebito)
     });
@@ -71,19 +73,19 @@ export class WizardComponent implements OnInit {
     this.ngAfterViewInit();
   }
 
-  validateName(){
+  validateName() {
     this.touchedBtnValidateName = true;
-    let localNameValidated = this.addWizardForm.value.nombreConcepto.toLowerCase();
-    if('VALID' === this.nombreConcepto.status && !this.namesConceptosArray.includes(localNameValidated) ) {
+    const localNameValidated = this.addWizardForm.value.nombreConcepto.toLowerCase();
+    if ('VALID' === this.nombreConcepto.status && !this.namesConceptosArray.includes(localNameValidated) ) {
       this.nextBtnValidateName   = false;
-    }else{
+    } else {
       this.nombreConcepto.status = 'INVALID';
       this.nextBtnValidateName   = true;
     }
   }
 
-  nameValidatedNextStep(){
-    if(!this.nextBtnValidateName){
+  nameValidatedNextStep() {
+    if (!this.nextBtnValidateName) {
       this.nbStepperWizard.next();
     }
   }
@@ -107,20 +109,21 @@ export class WizardComponent implements OnInit {
     this.nbStepperWizard.reset();
   }
 
-  cerrarWizard(){
+  cerrarWizard() {
     this.stateWizard = 'close';
     this.wizardActivator.emit(this.stateWizard);
   }
 
-  crearConcepto(){
+  crearConcepto() {
     this.updateResumen();
-    const registraConcepto = this.conceptoHelper.conceptoRegister(this.conceptoCreado).subscribe(res => {
+    // const registraConcepto =
+    this.conceptoHelper.conceptoRegister(this.conceptoCreado).subscribe(res => {
       this.nbStepperWizard.next();
       this.conceptoService.updateEvent('update-list');
     });
   }
 
-  updateResumen(){
+  updateResumen() {
     this.conceptoCreado.Nombre        = this.addWizardForm.value.nombreConcepto;
     this.conceptoCreado.CuentaDebito  = this.numeroCuentaDebito;
     this.conceptoCreado.CuentaCredito = this.numeroCuentaCredito;

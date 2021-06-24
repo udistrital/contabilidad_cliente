@@ -21,11 +21,11 @@ import { ContabilizacionComponent } from './contabilizacion/contabilizacion.comp
 
 @NgModule({
   declarations: [
-    TablaConciliacionesComponent, 
-    StepperConciliacionesComponent, 
-    SetInformacionComponent, 
-    SetDocumentosComponent, 
-    SetComparacionComponent, 
+    TablaConciliacionesComponent,
+    StepperConciliacionesComponent,
+    SetInformacionComponent,
+    SetDocumentosComponent,
+    SetComparacionComponent,
     SetConciliacionBancariaComponent, ConciliacionComponent, ContabilizacionComponent],
   imports: [
     CommonModule,

@@ -22,7 +22,7 @@ export class TablaConciliacionesComponent implements OnInit {
     private modalService: NgbModal,
     private conciliacionesHelper: ConciliacionesHelper,
     private router: Router,
-  ) { 
+  ) {
     this.configConciliaciones = this.conciliacionesHelper.configTabla;
     this.datosConciliaciones = this.conciliacionesHelper.tablaConciliacion;
   }
@@ -32,7 +32,7 @@ export class TablaConciliacionesComponent implements OnInit {
 
   SelectedAction(accion: any, fila: any) {
     if (accion === 'verconciliacion') {
-      console.log(this.datosConciliaciones[fila]);
+      // console.log(this.datosConciliaciones[fila]);
     }
     if (accion === 'borrarconciliacion') {
       this.modalEliminar(fila);

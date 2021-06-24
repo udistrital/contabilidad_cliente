@@ -508,7 +508,7 @@ export const DATOS_NC_EXTRACTO: any = [
 ];
 
 
-// resumen 
+// resumen
 export const CONFIGURACION_CONCILIACION: any = {
     showColumnTitle: true,
     dataConfig: [
@@ -588,17 +588,17 @@ export const DATOS_CONCILIACION: any = [
         detalle: 'Más ajuste por aproximación',
         valores: '605,58',
         valor : ' ',
-    },   
+    },
     {
         detalle: 'Saldo según auxiliar',
         valores: ' ',
         valor : '20706706446.00',
-    },   
+    },
     {
         detalle: ' ',
         valores: ' ',
         valor : '0',
-    },   
+    },
 ];
 
 

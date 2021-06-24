@@ -20,30 +20,30 @@ export class ContabilizacionComponent implements OnInit {
   datosContabilizacion: any;
   configContabilizacion: any;
   contabilizacionGroup: FormGroup;
-  prueba = "prueba";
-  
+  prueba = 'prueba';
+
 
   // Modales
   closeResult = '';
 
   constructor(
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     public registroNominaHelper: RegistroNominaHelper,
     private modalService: NgbModal,
     private router: Router,
   ) {
-    this.datosContabilizacion = this.registroNominaHelper.datosContabilizacion.slice(0,5);
+    this.datosContabilizacion = this.registroNominaHelper.datosContabilizacion.slice(0, 5);
     this.configContabilizacion = this.registroNominaHelper.configContabilizacion;
     this.createForm();
-    this.registroNominaHelper.back = "contabilizacion";
+    this.registroNominaHelper.back = 'contabilizacion';
    }
 
   ngOnInit() {
-    
+
   }
 
-  paginacion(event){
-    this.datosContabilizacion = this.registroNominaHelper.datosContabilizacion.slice(event.pageIndex*event.pageSize, event.pageIndex*event.pageSize +event.pageSize);
+  paginacion(event) {
+    this.datosContabilizacion = this.registroNominaHelper.datosContabilizacion.slice(event.pageIndex * event.pageSize, event.pageIndex * event.pageSize + event.pageSize);
   }
 
   createForm() {
@@ -67,7 +67,7 @@ export class ContabilizacionComponent implements OnInit {
   modalAprobar() {
     this.modalService.open(this.aprobarModal).result.then((result) => {
       if (`${result}`) {
-        console.log('Aprobado');
+        // console.log('Aprobado');
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
@@ -77,7 +77,7 @@ export class ContabilizacionComponent implements OnInit {
   modalGuardar() {
     this.modalService.open(this.guardarModal).result.then((result) => {
       if (`${result}`) {
-        console.log('Guardar');
+        // console.log('Guardar');
       }
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

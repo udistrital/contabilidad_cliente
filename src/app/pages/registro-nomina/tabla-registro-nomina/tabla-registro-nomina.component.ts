@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class TablaRegistroNominaComponent implements OnInit {
   @ViewChild('eliminarTipoModal', { static: false }) eliminarTipoModal: ElementRef;
-  
+
   configRegistro: any;
   datosRegistro: any;
 
@@ -21,10 +21,10 @@ export class TablaRegistroNominaComponent implements OnInit {
     private modalService: NgbModal,
     private registroNominaHelper: RegistroNominaHelper,
     private router: Router,
-  ) { 
+  ) {
     this.configRegistro = this.registroNominaHelper.configTabla;
     this.datosRegistro = this.registroNominaHelper.datosTabla;
-    this.registroNominaHelper.contabilizacion = "lista";
+    this.registroNominaHelper.contabilizacion = 'lista';
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class TablaRegistroNominaComponent implements OnInit {
     }
   }
 
-  
+
     // Modal acciones sobre la tabla: eliminar registros
     modalEliminar(fila: any) {
       this.modalService.open(this.eliminarTipoModal).result.then((result) => {

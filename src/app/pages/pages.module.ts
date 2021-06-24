@@ -17,7 +17,7 @@ import {
   NbDialogModule,
   NbBadgeModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 import { MatStepperModule } from '@angular/material';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ThemeModule } from '../@theme/theme.module';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, OnChanges, DoCheck, Input, EventEmitter, Output } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import Swal from 'sweetalert2';
@@ -14,7 +14,7 @@ import { ConceptosService } from '../../../../@core/managers/conceptos.service';
   styleUrls: ['./list.component.scss']
 })
 
-export class ListEntityComponent implements OnInit {
+export class ListEntityComponent implements DoCheck, OnInit, OnChanges {
   // Local Inputs ...
   @Input('uuidReadFieldName') uuidReadField: string;
   @Input('paramsFieldsName') paramsFieldsName: object;
@@ -184,7 +184,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   onCustom(event): void {
-    //console.info(event);
+    // console.info(event);
     switch (event.action) {
       case 'edit':
         this.onEdit(event);
@@ -272,7 +272,7 @@ export class ListEntityComponent implements OnInit {
   }
 
   itemselec(event): void {
-    //console.log(event,'itemselect'); // onload row
+    // console.log(event,'itemselect'); // onload row
   }
 
   getIndexForm(nombre: String): number {
