@@ -74,7 +74,7 @@ export class EditModalComponent implements AfterViewInit, OnInit {
   }
 
   validateNewNameConcept() {
-    if ( this.conceptoService.validateConceptNameExits(this.inputEditConceptName.nativeElement.value) == true ) {
+    if ( this.conceptoService.validateConceptNameExits(this.inputEditConceptName.nativeElement.value) === true ) {
       this.nombreConcepto.status = 'INVALID';
       this.statusButtonSave = true;
     } else {

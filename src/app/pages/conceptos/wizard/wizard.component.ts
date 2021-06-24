@@ -116,7 +116,8 @@ export class WizardComponent implements AfterViewInit, OnInit {
 
   crearConcepto() {
     this.updateResumen();
-    const registraConcepto = this.conceptoHelper.conceptoRegister(this.conceptoCreado).subscribe(res => {
+    // const registraConcepto =
+    this.conceptoHelper.conceptoRegister(this.conceptoCreado).subscribe(res => {
       this.nbStepperWizard.next();
       this.conceptoService.updateEvent('update-list');
     });

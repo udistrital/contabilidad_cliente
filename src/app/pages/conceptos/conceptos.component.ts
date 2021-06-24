@@ -42,7 +42,8 @@ export class ConceptosComponent implements AfterViewInit, OnInit {
   }
 
   abrirModal(conceptoData) {
-    const dialogService = this.dialogService.open(
+    // const dialogService =
+    this.dialogService.open(
       EditModalComponent,
       {
         closeOnEsc: true,
