@@ -61,7 +61,7 @@ export let FORM_NODO_CUENTA_CONTABLE = {
         },
         {
             etiqueta: 'select',
-            claseGrid: 'col-md-12',
+            claseGrid: 'col-md-6',
             nombre: 'CuentaAlterna',
             label_i18n: 'Cuenta Alterna',
             placeholder_i18n: 'Cuenta Alterna',
@@ -75,7 +75,7 @@ export let FORM_NODO_CUENTA_CONTABLE = {
         },
         {
             etiqueta: 'input',
-            claseGrid: 'col-md-4',
+            claseGrid: 'col-md-6',
             nombre: 'CodigoCuentaAlterna',
             label_i18n: 'Código alterno',
             placeholder_i18n: 'Código alterno',
@@ -85,7 +85,7 @@ export let FORM_NODO_CUENTA_CONTABLE = {
         },
         {
             etiqueta: 'input',
-            claseGrid: 'col-md-8',
+            claseGrid: 'col-md-12',
             nombre: 'NombreCuentaAlterna',
             label_i18n: 'Nombre cuenta alterna',
             placeholder_i18n: 'Nombre cuenta',
