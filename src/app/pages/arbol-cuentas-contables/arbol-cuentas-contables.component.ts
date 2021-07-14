@@ -223,6 +223,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
     nodeData['Nmnc'] = nodeData['Nmnc']['Id'];
     nodeData['CodigoCuentaAlterna'] = nodeData['CodigoCuentaAlterna'] + '';
     nodeData['Codigo'] = nodeData['Codigo'] + '';
+    nodeData['Activo'] = nodeData['Activa']['Id'];
     if (this.selectedNodeData) {
       nodeData['Padre'] = this.selectedNodeData['Codigo'];
     }
@@ -293,6 +294,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
       this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
       this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
       this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['Activa'] = this.nodeData['Activo'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
     });
   }
 
