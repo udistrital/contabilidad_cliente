@@ -20,6 +20,20 @@ export let FORM_NODO_CUENTA_CONTABLE = {
             },
         },
         {
+            etiqueta: 'select',
+            claseGrid: 'col-md-12',
+            nombre: 'Activa',
+            label_i18n: 'Activa',
+            placeholder_i18n: 'Activa',
+            requerido: true,
+            tipo: 'Activa',
+            key: 'Label',
+            opciones: [
+                activeData,
+                unActiveData,
+            ],
+        },
+        {
             etiqueta: 'input',
             claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
             nombre: 'Nombre',
