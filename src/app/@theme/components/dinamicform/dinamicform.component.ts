@@ -23,6 +23,7 @@ export class DinamicformComponent implements OnInit, OnChanges {
   @Output() result: EventEmitter<any> = new EventEmitter();
   @Output() resultAux: EventEmitter<any> = new EventEmitter();
   @Output() resultSmart: EventEmitter<any> = new EventEmitter();
+  @Output() resultChanges: EventEmitter<any> = new EventEmitter();
   @Output() interlaced: EventEmitter<any> = new EventEmitter();
   @Output() percentage: EventEmitter<any> = new EventEmitter();
   data: any;
@@ -148,6 +149,7 @@ export class DinamicformComponent implements OnInit, OnChanges {
   }
 
   validCampo(c): boolean {
+    this.resultChanges.emit(c);
     if (c.etiqueta === 'file') {
       if (c.valor === null) {
         c.valor = '';
