@@ -163,14 +163,15 @@ export class ArbolHelper {
     );
   }
 
-  public getInfoCuenta(UUID: string) {
+  public getInfoCuenta(UUID: string, pUp: boolean = true) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
 
     return this.rqManager.get(`nodo_cuenta_contable/${UUID}`).pipe(
       map(
         (res) => {
           if (res && res['Type'] === 'error') {
-            this.pUpManager.showErrorAlert('No se pudo consultar la información de la cuenta');
+            if (pUp)
+              this.pUpManager.showErrorAlert('No se pudo consultar la información de la cuenta');
             return undefined;
           }
 
