@@ -8,7 +8,7 @@ export const environment = {
   NUXEO: {
     PATH: 'https://documental.udistrital.edu.co/nuxeo/',
   },
-  CLIENTE_PRESUPUESTO: 'https://pruebaspresupuesto.portaloas.udistrital.edu.co/pages',
+  CLIENTE_PRESUPUESTO: 'https://presupuesto.portaloas.udistrital.edu.co/pages',
   CLIENTE_CONTABILIDAD: '/pages/comprobantes',
   WSO2_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/',
   PLAN_CUENTAS_MONGO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/plan_cuentas_mongo_crud/v1/',
