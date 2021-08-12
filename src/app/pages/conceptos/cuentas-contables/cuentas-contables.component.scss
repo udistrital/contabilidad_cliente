@@ -60,16 +60,16 @@
 @media (max-width: 640px) {
   :host ::ng-deep nb-card-body {
     button {
-      span.icon {display:inline-block}
-      span.text {display:none}
+      span.icon {display:inline-block;}
+      span.text {display:none;}
     }
   }
 }
 @media (min-width: 641px) {
   :host ::ng-deep nb-card-body {
     button {
-      span.icon {display:none}
-      span.text {display:inline-block}
+      span.icon {display:none;}
+      span.text {display:inline-block;}
     }
   }
 }
