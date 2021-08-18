@@ -10,6 +10,7 @@ steps:
     branch:
     - develop
     - feature/*
+    - hotfix/*
     - release/*
     event:
     - push
@@ -22,21 +23,23 @@ steps:
     branch:
     - develop
     - feature/*
+    - hotfix/*
     - release/*
     event:
     - push
 
-- name: check_commits
-  image: jjvargass/qa_develoment:latest
-  commands:
-  - python /app/check_commits.py
-  when:
-    branch:
-    - develop
-    - feature/*
-    - release/*
-    event:
-    - push
+# - name: check_commits
+#   image: jjvargass/qa_develoment:latest
+#   commands:
+#   - python /app/check_commits.py
+#   when:
+#     branch:
+#     - develop
+#     - feature/*
+#     - hotfix/*
+#     - release/*
+#     event:
+#     - push
 
 # - name: prueba_unitarias
 #   image: node:12.6.0
@@ -51,11 +54,13 @@ steps:
   image: node:12.6.0
   commands:
   - npm i
-  - npm run lint
+  - npm run lint:ci
   when:
     branch:
     - develop
     # - unitest
+    - feature/*
+    - hotfix/*
 
 - name: run_sonar_scanner
   image: aosapps/drone-sonar-plugin
@@ -68,6 +73,7 @@ steps:
     branch:
     - develop
     - feature/*
+    - hotfix/*
     - release/*
     event:
     - push
@@ -82,7 +88,6 @@ steps:
     branch:
     - develop
     - feature/*
-    - hotfix/*
     - release/*
     event:
     - push
@@ -96,6 +101,7 @@ steps:
   when:
     branch:
     - master
+    - hotfix/*
     event:
     - push
 

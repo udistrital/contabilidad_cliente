@@ -17,10 +17,10 @@
       margin-top: 11px;
       font-size: 1.1rem;
     }
-    input.input-editConcepto.ng-valid:not(form){
+    input.input-editConcepto.ng-valid:not(form) {
       border: 1px solid nb-theme(color-green-ok); /* green */
     }
-    input.input-editConcepto.ng-invalid.ng-dirty:not(form)  {
+    input.input-editConcepto.ng-invalid.ng-dirty:not(form) {
       border: 1px solid nb-theme(color-red-invalid); /* red */
     }
   }
