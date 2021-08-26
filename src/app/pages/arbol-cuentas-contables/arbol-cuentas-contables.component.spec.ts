@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArbolComponent } from './arbol-cuentas-contables.component';
+import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables.component';
 
-describe('ArbolComponent', () => {
-  let component: ArbolComponent;
-  let fixture: ComponentFixture < ngx; -arbolComponent > ;
+describe('ArbolCuentasContablesComponent', () => {
+  let component: ArbolCuentasContablesComponent;
+  let fixture: ComponentFixture < ArbolCuentasContablesComponent > ;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArbolComponent ],
+      declarations: [ ArbolCuentasContablesComponent ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArbolComponent);
+    fixture = TestBed.createComponent(ArbolCuentasContablesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
