@@ -12,7 +12,7 @@ export class TimeRangePipe implements PipeTransform {
   //   end: Date
   // }
   constructor(
-    private datePipe: DatePipe,
+    private datePipe?: DatePipe,
   ) {
   }
 
