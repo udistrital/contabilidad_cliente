@@ -9,12 +9,12 @@ import { TimeRangePipe } from './time-range.pipe';
 export class MultiPipePipe implements PipeTransform {
 
   constructor(
-    private date: DatePipe,
-    private currency: CurrencyPipe,
-    private decimal: DecimalPipe,
-    private percent: PercentPipe,
-    private custom: CustomTablePipe,
-    private timeRange: TimeRangePipe,
+    private date?: DatePipe,
+    private currency?: CurrencyPipe,
+    private decimal?: DecimalPipe,
+    private percent?: PercentPipe,
+    private custom?: CustomTablePipe,
+    private timeRange?: TimeRangePipe,
   ) {
   }
   transform(value: any, type: any, args?: any[]): any {
