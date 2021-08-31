@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output,ViewChildren, ElementRef, EventEmitter, Renderer2} from '@angular/core';
+import { Component, OnChanges, OnInit, Input, Output, ViewChildren, ElementRef, EventEmitter} from '@angular/core';
 import {
   trigger,
   state,
@@ -36,7 +36,7 @@ interface EstructuraArbolRubrosApropiaciones {
   templateUrl: './cuentas-contables.component.html',
   styleUrls: ['./cuentas-contables.component.scss'],
   animations: [
-    trigger('changeSelectedValue',[
+    trigger('changeSelectedValue', [
       state('initial', style({
         color: '#101426',
         fontSize:  '1.1rem'
@@ -45,20 +45,20 @@ interface EstructuraArbolRubrosApropiaciones {
         color: '#42A948',
         fontSize:  '1.15rem'
       })),
-      transition('initial <=> highlight',animate('200ms'))
+      transition('initial <=> highlight', animate('200ms'))
     ]),
   ]
 })
-export class CuentasContablesComponent implements OnInit {  
-  @Input("wizzardSteps")     wizzardSteps: boolean;
+export class CuentasContablesComponent implements OnChanges, OnInit {
+  @Input('wizzardSteps')     wizzardSteps: boolean;
   @Input() updateSignal: Observable<string[]>;
   @Input('paramsFieldsName') paramsFieldsName: object;
   @Input () selectedNodeData: any;
-  @Input("selectionDebito")  selectionDebito: string ;
-  @Input("selectionCredito") selectionCredito: string ;
+  @Input('selectionDebito')  selectionDebito: string ;
+  @Input('selectionCredito') selectionCredito: string ;
 
   @Output() guardarCuentas      = new EventEmitter<boolean>();
-  @Output() columns : any;
+  @Output() columns: any;
   @Output() updateCuentaDebito  = new EventEmitter<string>();
   @Output() updateCuentaCredito = new EventEmitter<string>();
 
@@ -113,16 +113,15 @@ export class CuentasContablesComponent implements OnInit {
     }
   }
 
-  triggerAnimationText(cuenta: string){
+  triggerAnimationText(cuenta: string) {
     if (cuenta === 'debito'  && this.animationCuenta === 'debito') {
       return 'highlight';
-    }
-    else if (cuenta === 'credito' && this.animationCuenta === 'credito') {
+    } else if (cuenta === 'credito' && this.animationCuenta === 'credito') {
       return 'highlight';
     } else {
       return 'initial';
     }
-  } 
+  }
 
   loadTreeCuenta() {
     const getters: NbGetters<any, any> = {
@@ -133,21 +132,21 @@ export class CuentasContablesComponent implements OnInit {
     this.customColumn = 'Codigo';
     this.defaultColumns = ['Nombre'];
     this.columns = [this.customColumn, ...this.defaultColumns];
-    this.treeHelper.getCuenta('credito',true).subscribe(res => {
+    this.treeHelper.getCuenta('credito', true).subscribe(res => {
       this.data = res;
       this.dataSourceCredito = this.dataSourceBuilder.create(this.data, getters);
     });
-    this.treeHelper.getCuenta('debito',true).subscribe(res => {
+    this.treeHelper.getCuenta('debito', true).subscribe(res => {
       this.data = res;
       this.dataSourceDebito = this.dataSourceBuilder.create(this.data, getters);
     });
   }
 
-  restaurarAnimationInitial( event ){
+  restaurarAnimationInitial( event ) {
     this.stateHighlight = 'initial';
   }
 
-  enviarGuardado(){
+  enviarGuardado() {
     this.guardarCuentas.emit(true);
   }
 }

@@ -17,7 +17,7 @@ import {
   NbDialogModule,
   NbBadgeModule } from '@nebular/theme';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 import { MatStepperModule } from '@angular/material';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ThemeModule } from '../@theme/theme.module';
@@ -38,6 +38,10 @@ import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas
 import { ListConceptosComponent } from './conceptos/list-conceptos/list-conceptos.component';
 import { EditModalComponent } from './conceptos/edit-modal/edit-modal.component';
 import { TableComponent } from './conceptos/table/table.component';
+import { ProvisionesComponent } from './provisiones/provisiones.component';
+import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
+import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
+import { InformesContablesComponent } from './informes-contables/informes-contables.component';
 
 
 const MODULES = [
@@ -81,6 +85,8 @@ const COMPONENTS = [
     CuentasContablesComponent,
     ListConceptosComponent,
     EditModalComponent,
+    ProvisionesComponent,
+    ConciliacionesComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
@@ -100,6 +106,12 @@ const SERVICES = [
   declarations: [
     ...COMPONENTS,
     TableComponent,
+    RegistroNominaComponent,
+    InformesContablesComponent,
+
+
+
+
   ],
   providers: [
     ...SERVICES,

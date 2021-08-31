@@ -1,0 +1,208 @@
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                REGISTRO CONTABLE DE NÓMINA
+            </h5>
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+
+        <form novalidate [formGroup]="contabilizacionGroup" (ngSubmit)="saveForm()">
+                <div class="container">
+                    <div class="row">
+                        <div class="col pb-3">
+                            <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                                Contabilización
+                            </h6>
+                        </div>
+                    </div>
+
+                     <!-- Campos modificables: Número Comprobante, tipo de Comprobante, Consecutivo  -->
+                     <div *ngIf="this.registroNominaHelper.contabilizacion === 'consulta'" class="form-group row">
+                        <div class="col-md-4">
+                            <label for="numeroComprobante">Número Comprobante</label>
+                            <select id="numeroComprobante" class="custom-select" formControlName="numeroComprobante" [class.is-invalid]="esInvalido('numeroComprobante')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>01</option>
+                                <option>02</option>
+                            </select>
+                            <small *ngIf="esInvalido('numeroComprobante')" class="text-danger">Complete este campo</small>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <label for="tipoComprobante">Tipo de comprobante</label>
+                            <select id="tipoComprobante"  class="custom-select" formControlName="tipoComprobante" [class.is-invalid]="esInvalido('tipoComprobante')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>P</option>
+                            </select>
+                            <small *ngIf="esInvalido('tipoComprobante')" class="text-danger">Complete este campo</small>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <label for="consecutivo">Consecutivo</label>
+                            <select id="consecutivo"  class="custom-select" formControlName="consecutivo" [class.is-invalid]="esInvalido('consecutivo')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>16</option>
+                            </select>
+                            <small *ngIf="esInvalido('consecutivo')" class="text-danger">Complete este campo</small>
+                        </div>
+                    </div>
+
+                     <!-- Campos no modificables: Número Comprobante, tipo de Comprobante, Consecutivo  -->
+                     <div *ngIf="this.registroNominaHelper.contabilizacion != 'consulta'" class="form-group row">
+                        <div class="col-md-4">
+                            <label for="numeroComprobante">Número Comprobante</label>
+                            <input [value]="prueba" type="text" class="form-control" readonly>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <label for="tipoComprobante">Tipo de comprobante</label>
+                            <input [value]="prueba" type="text" class="form-control" readonly>
+                        </div>
+            
+                        <div class="col-md-4">
+                            <label for="consecutivo">Consecutivo</label>
+                            <input [value]="prueba" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+            
+                    <!-- Campos modificables: Concepto  -->
+                    <div *ngIf="this.registroNominaHelper.contabilizacion === 'consulta'" class="form-group row">
+                        <div class="col-md-8">
+                            <label for="concepto">Concepto</label>
+                            <select id="concepto" class="custom-select" formControlName="concepto" [class.is-invalid]="esInvalido('concepto')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>Nómina de Planta mes Enero 2020</option>
+
+                            </select>
+                            <small *ngIf="esInvalido('concepto')" class="text-danger">Complete este campo</small>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Campos  no modificables: Concepto  -->
+                    <div *ngIf="this.registroNominaHelper.contabilizacion != 'consulta'" class="form-group row">
+                        <div class="col-md-8">
+                            <label for="concepto">Concepto</label>
+                            <input [value]="prueba" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <br>
+              
+                
+                    <div class="row" >
+                        <div class="col-md-12 bg-white px-4 pb-3">
+                            <mat-paginator [length]="registroNominaHelper.datosContabilizacion.length" [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 25, 100]" (page) = "paginacion($event)" showFirstLastButtons > </mat-paginator>
+                            <ngx-general-table [config]="configContabilizacion" [datos]="datosContabilizacion" (selectedAction)="SelectedAction($event.accion, $event.fila)">
+                            </ngx-general-table>
+                        </div>
+                    </div>
+                
+                    <!-- Campos: Sumas Iguales -->
+                    <br>
+                    <div class="row">
+                        <div class=" col-md-6 text-right pt-3">
+                            <label  class="text-right" >SUMAS IGUALES</label>   
+                        </div>
+                        <div class="col-md-3"> 
+                            <input value=" $ 5.939.950.517" type="text" style="text-align:right;" class="form-control" readonly>
+                        </div>
+                        <div class="col-md-3"> 
+                            <input value=" $ 5.939.950.517" type="text" style="text-align:right;" class="form-control" readonly>
+                        </div>
+                    </div>
+              
+                    <br>
+                    <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+                
+                    <!-- Botones: Volver, Siguiente -->
+                    <div class="container">
+                        <div class="row pt-2 text-center">
+                            <div class="col-md-4">
+                                    <button *ngIf="this.registroNominaHelper.contabilizacion != 'consulta'" type="button"  [routerLink]="['../lista']" class="btn btn-warning mb-3 mt-3 text-white">
+                                        Volver
+                                    </button>
+                                    <button  *ngIf="this.registroNominaHelper.contabilizacion === 'consulta'" type="button"  [routerLink]="['../consultar']" class="btn btn-warning mb-3 mt-3 text-white">
+                                        Volver
+                                    </button>
+                                </div>
+                                <div class="col-md-4">
+                                    <button  *ngIf="this.registroNominaHelper.contabilizacion != 'consulta'" type="button" class="btn btn-success m-0 mt-4" >
+                                        Imprimir
+                                    </button>
+                                </div>
+                            <div class="col-md-4">
+                                <button  *ngIf="this.registroNominaHelper.contabilizacion === 'consulta'" type="button" [disabled]="contabilizacionGroup.invalid" (click)="modalGuardar()" class="btn btn-success m-0 mt-4" >
+                                    Guardar
+                                </button>
+                                <button  *ngIf="this.registroNominaHelper.contabilizacion != 'consulta'" type="button" (click)="modalAprobar()" class="btn btn-success m-0 mt-4" >
+                                    Aprobar Contabilidad 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
+
+
+                   
+                
+                </div>
+            </form>
+            
+            
+            <!-- Modal: Solicitud Guardada -->
+            <ng-template #exampleModal2 let-modal>
+            
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModal2Label"><i class="fas fa-check text-success"></i>Guardado!</h5>
+                            <button type="button"  [routerLink]="['../contabilizacion']" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Se ha Guardado el Registro de Nómina No. 001.</p>
+                            <p class="text-center">Estado: Guardado</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a routerLink="../lista" role="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.close(true)">
+                                Aceptar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+            </ng-template>
+            <!-- Fin Modal: Solicitud Guardada -->
+
+            <!-- Modal: Solicitud Aprobar -->
+            <ng-template #exampleModal let-modal>
+            
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModal2Label"><i class="fas fa-check text-success"></i>Aprobado!</h5>
+                            <button type="button"  [routerLink]="['../contabilizacion']" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-center">Se ha Aprobado el Registro de Nómina No. 001.</p>
+                            <p class="text-center">Estado: Aprobado</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a routerLink="../lista" role="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.close(true)">
+                                Aceptar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            
+            </ng-template>
+            <!-- Fin Modal: Solicitud Guardada -->
+
+    </div>
+</div>

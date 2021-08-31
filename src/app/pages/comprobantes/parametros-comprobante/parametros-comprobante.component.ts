@@ -1,20 +1,20 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { TranslateService, LangChangeEvent } from "@ngx-translate/core";
-import { FormManager } from "../../../@core/managers/formManager";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { FormManager } from '../../../@core/managers/formManager';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
-import { ComprobanteHelper } from "../../../@core/helpers/comprobantes/comprobanteHelper";
+import { ComprobanteHelper } from '../../../@core/helpers/comprobantes/comprobanteHelper';
 import { FORM_PARAM_COMPROBANTES } from './form-param-comprobante';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: "ngx-parametros-comprobante",
-  templateUrl: "./parametros-comprobante.component.html",
-  styleUrls: ["./parametros-comprobante.component.scss"]
+  selector: 'ngx-parametros-comprobante',
+  templateUrl: './parametros-comprobante.component.html',
+  styleUrls: ['./parametros-comprobante.component.scss']
 })
 export class ParametrosComprobanteComponent implements OnInit {
   entityId: any;
-  @Input("infoinput") infoinput: any;
-  @Input("formEntity") formEntity: any;
+  @Input('infoinput') infoinput: any;
+  @Input('formEntity') formEntity: any;
   @Output() auxcambiotab = new EventEmitter<boolean>();
   entityInfo: any;
   formTittle: string;
@@ -35,9 +35,9 @@ export class ParametrosComprobanteComponent implements OnInit {
   ngOnInit() {
     this.formEntity = FORM_PARAM_COMPROBANTES;
     this.entityId = this.infoinput._id;
-    this.formTittle = "COMPROBANTE.add_param";
-    this.updateMessage = "COMPROBANTE.mensaje_actualizar_param";
-    this.updateConfirmMessage = "COMPROBANTE.confirm_actualizar_param"
+    this.formTittle = 'COMPROBANTE.add_param';
+    this.updateMessage = 'COMPROBANTE.mensaje_actualizar_param';
+    this.updateConfirmMessage = 'COMPROBANTE.confirm_actualizar_param';
     this.loadData();
     this.formEntity = FormManager.ConstruirForm(
       this.formEntity,
@@ -59,15 +59,15 @@ export class ParametrosComprobanteComponent implements OnInit {
       if (this.entityInfo === undefined) {
         // this.createEntity(event.data[this.formEntity['modelo']]);
       } else {
-        this.updateEntity(event.data[this.formEntity["modelo"]]);
+        this.updateEntity(event.data[this.formEntity['modelo']]);
       }
     }
   }
   updateEntity(entityData: any): void {
     const opt: any = {
-      title: this.translate.instant("GLOBAL.actualizar"),
+      title: this.translate.instant('GLOBAL.actualizar'),
       text: this.translate.instant(this.updateMessage),
-      icon: "warning",
+      icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true
@@ -79,8 +79,8 @@ export class ParametrosComprobanteComponent implements OnInit {
         this.entityInfo.TipoImpresion = this.entityInfo.TipoImpresion.Valor;
         this.entityInfo.NumeracionAutomatica = this.entityInfo.NumeracionAutomatica.valorBool;
         this.comprobanteHelper.comprobanteUpdate(this.entityInfo).subscribe(res => {
-          if (res["Type"] === "error") {
-            this.popUpManager.showErrorAlert(res["Message"]);
+          if (res['Type'] === 'error') {
+            this.popUpManager.showErrorAlert(res['Message']);
           } else {
             this.loadData();
             this.popUpManager.showSuccessAlert(
@@ -99,23 +99,23 @@ export class ParametrosComprobanteComponent implements OnInit {
         if (res !== null) {
           this.entityInfo = res;
           this.TipoImpresion = [
-            {Valor: "Forma continua" },
-            {Valor: "Hojas normales" },
+            {Valor: 'Forma continua' },
+            {Valor: 'Hojas normales' },
             {Valor: this.entityInfo.TipoImpresion}
           ];
           this.FormatoImpresion = [
-            {Valor: "Egreso Generico" },
-            {Valor: "Formato Adicional" },
+            {Valor: 'Egreso Generico' },
+            {Valor: 'Formato Adicional' },
             {Valor: this.entityInfo.FormatoImpresion}
           ];
           this.NumeracionAutomatica = [
-            {Valor: "Si", valorBool: true },
-            {Valor: "No", valorBool: false },
-            {Valor: this.entityInfo.NumeracionAutomatica?"Si":"No", valorBool: this.entityInfo.NumeracionAutomatica}
+            {Valor: 'Si', valorBool: true },
+            {Valor: 'No', valorBool: false },
+            {Valor: this.entityInfo.NumeracionAutomatica ? 'Si' : 'No', valorBool: this.entityInfo.NumeracionAutomatica}
           ];
           this.loadOptionsSelect('TipoImpresion', this.TipoImpresion);
           this.loadOptionsSelect('FormatoImpresion', this.FormatoImpresion);
-          this.loadOptionsSelect('NumeracionAutomatica', this.NumeracionAutomatica);                    
+          this.loadOptionsSelect('NumeracionAutomatica', this.NumeracionAutomatica);
         }
       });
     } else {
@@ -123,7 +123,7 @@ export class ParametrosComprobanteComponent implements OnInit {
       this.clean = !this.clean;
     }
   }
-  loadOptionsSelect(selectForm:string , obj:any): void {
+  loadOptionsSelect(selectForm: string , obj: any): void {
     const newObj = this.getUnique(obj, 'Valor');
     this.formEntity.campos[this.getIndexForm(selectForm)].opciones = newObj;
   }
@@ -141,9 +141,9 @@ export class ParametrosComprobanteComponent implements OnInit {
     for (let index = 0; index < this.formEntity.campos.length; index++) {
       const element = this.formEntity.campos[index];
       if (element.nombre === nombre) {
-        return index
+        return index;
       }
     }
     return 0;
-  }  
+  }
 }

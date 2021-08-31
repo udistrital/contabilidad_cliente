@@ -67,7 +67,7 @@
     <button *ngIf="viewTab" (click)="cleanInterface(); showTreeTab();" class="btn btn-info btn-sm"> <i class="nb-arrow-dropleft"></i>
       Regresar</button>
     <ngx-dinamicform *ngIf="viewTab" [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
-      [clean]="cleanForm">
+      (resultChanges)="validarCampo($event)" [clean]="cleanForm">
     </ngx-dinamicform>
   </nb-card-body>
 </nb-card>

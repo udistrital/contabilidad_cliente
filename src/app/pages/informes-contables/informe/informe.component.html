@@ -1,0 +1,113 @@
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                {{titulo}}
+            </h5>
+        </div>
+    </div>
+
+    <br>
+    <div class="container">
+
+        <form novalidate [formGroup]="informeGroup" (ngSubmit)="saveForm()">
+                <div class="container">
+                    <div class="row">
+                        <div class="col pb-3">
+                            <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                                Información
+                            </h6>
+                        </div>
+                    </div>
+
+                     <!-- Campos : año, fecha inicio, fecha fin, formato   -->
+                     <div class="form-group row">
+                        <div class="col-md-3">
+                            <label for="vigencia">Año</label>
+                            <select id="vigencia" class="custom-select" formControlName="vigencia" [class.is-invalid]="esInvalido('vigencia')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>2020</option>
+                                <option>2021</option>
+                            </select>
+                            <small *ngIf="esInvalido('vigencia')" class="text-danger">Complete este campo</small>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-3">
+                            <label for="fechaInicio">Desde</label>
+                            <div class="input-group">
+                                <input id="fechaInicio" type="date" name="fechaInicio" class="form-control" formControlName="fechaInicio" [class.is-invalid]="esInvalido('fechaInicio')">
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                            <small *ngIf="esInvalido('fechaInicio')" class="text-danger">Seleccione una fecha</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="fechaFin">Hasta </label>
+                            <div class="input-group">
+                                <input id="fechaFin" type="date" name="fechaFin" class="form-control" formControlName="fechaFin" [class.is-invalid]="esInvalido('fechaFin')">
+                                <div class="input-group-append">
+                                </div>
+                            </div>
+                            <small *ngIf="esInvalido('fechaFin')" class="text-danger">Seleccione una fecha</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label for="formato">Formato Descarga</label>
+                            <select id="formato"  class="custom-select" formControlName="formato" [class.is-invalid]="esInvalido('formato')">
+                                <option selected disabled value="">Seleccione...</option>
+                                <option>Excel</option>
+                                <option>Archivo de Texto</option>
+                                <option>PDF</option>
+                            </select>
+                            <small *ngIf="esInvalido('formato')" class="text-danger">Complete este campo</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-6">
+                            <button type="button" [disabled]="informeGroup.invalid" class="btn btn-warning mb-4 mt-4 text-white" >
+                                Consultar 
+                            </button>
+                        </div>
+                    </div>
+                    <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+                <!-- TABLA -->
+                    <div class="row" >
+                        <div class="col-md-12 bg-white px-4 pb-3">
+                            <mat-paginator [length]="informesContablesHelper.datosTabla.length" [pageSize]="5" [pageSizeOptions]="[2, 5, 10, 25, 100]" (page) = "paginacion($event)" showFirstLastButtons > </mat-paginator>
+                            <ngx-general-table [config]="configTabla" [datos]="datosTabla" >
+                            </ngx-general-table>
+                        </div>
+                    </div>
+                
+                    <br>
+                    <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+                
+                    <!-- Botones: Volver, Descargar -->
+                    <div class="container">
+                        <div class="row pt-2 text-center">
+                            <div class="col-md-4">
+                                    <button type="button"  [routerLink]="['../lista']" class="btn btn-warning mb-3 mt-3 text-white">
+                                        Volver
+                                    </button>
+                                </div>
+
+                            <div class="col-md-4"></div>
+
+                            <div class="col-md-4">
+                                <button type="button" [disabled]="informeGroup.invalid" class="btn btn-success m-0 mt-4" >
+                                    Descargar 
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </form>
+            
+    </div>
+</div>

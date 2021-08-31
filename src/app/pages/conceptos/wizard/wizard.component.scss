@@ -10,11 +10,11 @@
   position: absolute;
   right: 0;
 }
-input.ng-valid:not(form){
+input.ng-valid:not(form) {
   border: 1px solid nb-theme(color-green-ok); /* green */
 }
 
-input.ng-invalid.ng-dirty:not(form)  {
+input.ng-invalid.ng-dirty:not(form) {
   border: 1px solid nb-theme(color-red-invalid); /* red */
 }
 :host ::ng-deep .input-create-concept {
@@ -55,18 +55,18 @@ input.ng-invalid.ng-dirty:not(form)  {
   justify-content: center;
   text-align: left;
 
-  .nbCard-columm:nth-child(1){
+  .nbCard-columm:nth-child(1) {
     margin-right: 2%;
     margin-top: 4%;
   }
-  .nbCard-columm:nth-child(2){
+  .nbCard-columm:nth-child(2) {
     margin-top: 2%;
 
     p strong {
       font-size: 0.85rem;
     }
     p:nth-child(2) {
-      strong{
+      strong {
         margin-right: 47px;
       }
     }
@@ -85,7 +85,7 @@ input.ng-invalid.ng-dirty:not(form)  {
     width: 60px;
   }
 
-  h4{
+  h4 {
     font-size: 1.1rem;
     color: nb-theme(color-green-ok-title);
   }

@@ -1,4 +1,3 @@
-import { RequestManager } from '../managers/requestManager';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -23,9 +22,9 @@ export class ConceptosService {
     return this.entityListConceptos;
   }
 
-  public validateConceptNameExits(name){
-    let arrayNames = this.getListConceptosNames();
-    if (arrayNames.includes(name.toLowerCase())){
+  public validateConceptNameExits(name) {
+    const arrayNames = this.getListConceptosNames();
+    if (arrayNames.includes(name.toLowerCase())) {
       return true;
     } else {
       return false;

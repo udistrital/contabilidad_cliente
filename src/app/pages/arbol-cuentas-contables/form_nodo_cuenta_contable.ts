@@ -1,5 +1,5 @@
-const activeData =  { Label: "Si", Id: true };
-const unActiveData =  { Label: "No", Id: false };
+const activeData =  { Label: 'Si', Id: true };
+const unActiveData =  { Label: 'No', Id: false };
 export let FORM_NODO_CUENTA_CONTABLE = {
 
     tipo_formulario: 'mini',
@@ -18,6 +18,20 @@ export let FORM_NODO_CUENTA_CONTABLE = {
             prefix: {
                 value: '',
             },
+        },
+        {
+            etiqueta: 'select',
+            claseGrid: 'col-md-12',
+            nombre: 'Activa',
+            label_i18n: 'Activa',
+            placeholder_i18n: 'Activa',
+            requerido: true,
+            tipo: 'Activa',
+            key: 'Label',
+            opciones: [
+                activeData,
+                unActiveData,
+            ],
         },
         {
             etiqueta: 'input',
@@ -59,16 +73,38 @@ export let FORM_NODO_CUENTA_CONTABLE = {
                 { ID: 3 , Label: 2}
             ],
         },
-
+        {
+            etiqueta: 'select',
+            claseGrid: 'col-md-6',
+            nombre: 'CuentaAlterna',
+            label_i18n: 'Cuenta Alterna',
+            placeholder_i18n: 'Cuenta Alterna',
+            requerido: true,
+            tipo: 'CuentaAlterna',
+            key: 'Label',
+            opciones: [
+                activeData,
+                unActiveData,
+            ],
+        },
         {
             etiqueta: 'input',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
+            claseGrid: 'col-md-6',
             nombre: 'CodigoCuentaAlterna',
             label_i18n: 'Código alterno',
             placeholder_i18n: 'Código alterno',
             requerido: true,
-            pattern: '^[1-9]{1,9}',
+            pattern: '^[0-9]{1,9}',
             tipo: 'number',
+        },
+        {
+            etiqueta: 'input',
+            claseGrid: 'col-md-12',
+            nombre: 'NombreCuentaAlterna',
+            label_i18n: 'Nombre cuenta alterna',
+            placeholder_i18n: 'Nombre cuenta',
+            requerido: false,
+            tipo: 'text',
         },
         {
             etiqueta: 'select',

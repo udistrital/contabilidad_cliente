@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 bg-white py-3">
+            <h5 class="card-title text-center text-warning">
+                LISTA DE PROVISIONES
+            </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-white px-5 d-flex flex-row justify-content-end">
+            <a routerLink="../crear">
+                <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                <div class="d-flex flex-row justify-content-around align-middle">
+                    <i class="fas fa-plus py-1 px-2"></i>
+                    <span>
+                            Crear Provisión
+                        </span>
+                </div>
+                </button>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configProvisiones" [datos]="datosProvisiones" (selectedAction)="SelectedAction($event.accion, $event.fila)"></ngx-general-table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Eliminar registros de la tabla -->
+<ng-template #eliminarTipoModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="BorrarTipoModal">Borrar Registro</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        ¿Desea borrar el registro?
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('Cross click')">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close(true)">Borrar</button>
+    </div>
+</ng-template>
+<!-- Fin Modal -->

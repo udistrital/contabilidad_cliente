@@ -1,0 +1,54 @@
+<div class="container bg-white p-5 border rounded">
+    <div class="row">
+        <div class="col py-2">
+            <h5 class="card-title text-center text-warning text-uppercase">
+                AJUSTES A LA CONCILIACIÓN
+            </h5>
+        </div>
+    </div>
+    
+    <!-- Grupo: Información de contabilizacion -->
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col pb-3">
+            <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                Conciliación Bancaria
+            </h6>
+        </div>
+    </div>
+    <br>
+
+    <div class="row" >
+        <div class="col-md-12 bg-white px-4 pb-3">
+            <ngx-general-table [config]="configConciliaciones" [datos]="datosConciliaciones">
+            </ngx-general-table>
+        </div>
+    </div>
+
+    <br>
+    <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+    <!-- Botones: Volver, Guardar -->
+    <div class="container">
+        <div class="row pt-2 text-center">
+            <div class="col-md-6">
+                <div class="col-md-6">
+                </div>
+                    <button  type="button"  [routerLink]="['../lista']" class="btn btn-warning mb-3 mt-3 text-white">
+                        Volver
+                    </button>
+                </div>
+            <div class="col-md-6">
+                <button  type="button" [routerLink]="['../contabilizacion']" class="btn btn-success m-0 mt-4" >
+                    Contabilización
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+

@@ -1,9 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ComponentRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AfterViewInit, Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { NbDialogService } from '@nebular/theme';
-import { WizardComponent } from './wizard/wizard.component';
 import { EditModalComponent } from './edit-modal/edit-modal.component';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ngx-concepts-conceptos',
@@ -11,10 +8,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./conceptos.component.scss']
 })
 
-export class ConceptosComponent implements OnInit {
+export class ConceptosComponent implements AfterViewInit, OnInit {
 
-  @ViewChild('wizardCreateConcepto',{static:false}) wizardCreateConcepto : any;
-  @ViewChild('modalEdit',{static:false}) modalEdit :any;
+  @ViewChild('wizardCreateConcepto', {static: false}) wizardCreateConcepto: any;
+  @ViewChild('modalEdit', {static: false}) modalEdit: any;
 
   showWizzardVar:   boolean = true;
   showEditModalVar: boolean = false;
@@ -25,7 +22,7 @@ export class ConceptosComponent implements OnInit {
 
   constructor(
       private cd: ChangeDetectorRef,
-      private dialogService : NbDialogService ) { }
+      private dialogService: NbDialogService ) { }
 
   ngOnInit() {
   }
@@ -45,7 +42,8 @@ export class ConceptosComponent implements OnInit {
   }
 
   abrirModal(conceptoData) {
-    let dialogService = this.dialogService.open(
+    // const dialogService =
+    this.dialogService.open(
       EditModalComponent,
       {
         closeOnEsc: true,
@@ -56,24 +54,26 @@ export class ConceptosComponent implements OnInit {
           cuentaDebito:  conceptoData.CuentaDebito
         }
       }
-      ).onClose.subscribe(()=> console.log('cierra modal'));
+    ).onClose.subscribe(() => {
+      // console.log('cierra modal');
+    });
   }
 
-  getAllConceptosNames(listNames : []){
+  getAllConceptosNames(listNames: []) {
     this.namesConceptosArray = listNames;
   }
 
   getDataList(request: string) {
-    if(request === 'get-names') {
-      console.log('getDataList');
+    if (request === 'get-names') {
+      // console.log('getDataList');
     }
   }
 
   getDataRequested(event) {
-    if(event.requested === 'conceptos-names') {
+    if (event.requested === 'conceptos-names') {
       this.setDataRequest = 'none';
       this.namesConceptosArray = event.data;
-    }else if(event.requested === 'edit-concepto') {
+    } else if (event.requested === 'edit-concepto') {
       this.setDataRequest = 'none';
       this.conceptoToEdit = event.data;
       this.abrirModal(this.conceptoToEdit);

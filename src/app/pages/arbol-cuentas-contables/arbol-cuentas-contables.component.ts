@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnChanges, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, OnChanges, ViewChildren, ElementRef, Renderer2 } from '@angular/core';
 import {
   NbGetters,
   NbSortDirection,
@@ -7,13 +7,12 @@ import {
   NbTreeGridDataSourceBuilder,
   NbSortRequest,
 } from '@nebular/theme';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable } from 'rxjs';
 // import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 // import { RubroHelper } from '../../../@core/helpers/rubros/rubroHelper';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-CO';
 import { ArbolHelper } from '../../@core/helpers/arbol/arbolHelper';
-import { FormGroup } from '@angular/forms';
 import { FormManager } from '../../@core/managers/formManager';
 import { FORM_NODO_CUENTA_CONTABLE } from './form_nodo_cuenta_contable';
 import { TranslateService } from '@ngx-translate/core';
@@ -42,7 +41,7 @@ interface EstructuraArbolRubrosApropiaciones {
   templateUrl: './arbol-cuentas-contables.component.html',
   styleUrls: ['./arbol-cuentas-contables.component.scss'],
 })
-export class ArbolCuentasContablesComponent implements OnChanges {
+export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
   @Output() rubroSeleccionado = new EventEmitter();
   @Input() updateSignal: Observable<string[]>;
   @Input() optionSelect: string;
@@ -77,24 +76,27 @@ export class ArbolCuentasContablesComponent implements OnChanges {
   showTree: boolean = true;
   viewTab: boolean = false;
 
+  cuentaAlterna: any;
+  cuentaAlternaAnt: number;
+
   constructor(
     private renderer: Renderer2,
     private dataSourceBuilder: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
-    private dataSourceBuilder2: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
+    // private dataSourceBuilder2: NbTreeGridDataSourceBuilder<EstructuraArbolRubrosApropiaciones>,
     private treeHelper: ArbolHelper,
     private translate: TranslateService,
     private pUpManager: PopUpManager,
     // private rubroHelper: RubroHelper,
   ) {
-
   }
+
   ngOnInit() {
 
     this.loadTree();
 
-    this.formData = FORM_NODO_CUENTA_CONTABLE
+    this.formData = FORM_NODO_CUENTA_CONTABLE;
     this.nodeData = undefined;
-    this.construirForm()
+    this.construirForm();
   }
   construirForm() {
     this.formData.btn = this.translate.instant('GLOBAL.guardar');
@@ -212,9 +214,63 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     return false;
   }
 
+  validarCampo($event) {
+    // Cambios por campo
+    switch ($event.nombre) {
+      // Cuando se cambia el campo de cuenta alterna, se oculta o muestran el campo de cód y nombre
+      case 'CuentaAlterna': {
+        const codCuenta = this.formData.campos[FormManager.getIndexForm(this.formData, 'CodigoCuentaAlterna')];
+        const nomCuenta = this.formData.campos[FormManager.getIndexForm(this.formData, 'NombreCuentaAlterna')];
+        if ($event.valor !== undefined && $event.valor.Id) {
+          codCuenta.claseGrid = codCuenta.claseGrid.replaceAll(' d-none', '');
+          nomCuenta.claseGrid = nomCuenta.claseGrid.replaceAll(' d-none', '');
+          codCuenta.requerido = true;
+        } else {
+          this.cuentaAlterna = null;
+          codCuenta.claseGrid += ' d-none';
+          nomCuenta.claseGrid += ' d-none';
+          codCuenta.requerido = false;
+        }
+        break;
+      }
+      // Cuando se cambia el cód de cuenta, se debe buscar la cuenta
+      case 'CodigoCuentaAlterna': {
+        if (this.cuentaAlternaAnt !== $event.valor.toString()) {
+          this.cuentaAlternaAnt = $event.valor;
+          const nomCuenta = this.formData.campos[FormManager.getIndexForm(this.formData, 'NombreCuentaAlterna')];
+          const cAlterna = $event.valor.toString();
+          let cA = '';
+          // Cuenta númerica a cuenta con guiones
+          if (cAlterna.length >= 6) {
+            cA = cAlterna[0] + '-' + cAlterna[1] + '-' + cAlterna.substring(2, 4) + '-' + cAlterna.substring(4, 6);
+            if (cAlterna.length >= 8)
+              cA += '-' + cAlterna.substring(6, 8);
+          }
+          // Valores para cuenta inválida o no encontrada
+          this.cuentaAlterna = null;
+          nomCuenta.requerido = true;
+          nomCuenta.valor = '';
+          nomCuenta.alerta = 'Cuenta inválida o no encontrada';
+          // Solicitud de datos de cuenta
+          this.treeHelper.getInfoCuenta(cA, false).subscribe(res => {
+            if (res && res !== undefined && res.Codigo && res.Nombre) {
+              // Valores para cuenta válida
+              this.cuentaAlterna = res.Codigo;
+              nomCuenta.requerido = false;
+              nomCuenta.valor = res.Codigo + ' ' + res.Nombre;
+              nomCuenta.alerta = null;
+            }
+          });
+        }
+        break;
+      }
+    }
+  }
+
   validarForm($event) {
+    if (!$event.valid) return;
     const nodeData = $event.data.NodoCuentaContable;
-    
+
     nodeData['DetalleCuentaID'] = nodeData['DetalleCuentaID']['Id'];
     nodeData['MonedaID'] = nodeData['MonedaID']['Id'];
     nodeData['NaturalezaCuentaID'] = nodeData['NaturalezaCuentaID']['Id'];
@@ -222,15 +278,16 @@ export class ArbolCuentasContablesComponent implements OnChanges {
     nodeData['Ajustable'] = nodeData['Ajustable']['Id'];
     nodeData['RequiereTercero'] = nodeData['RequiereTercero']['Id'];
     nodeData['Nmnc'] = nodeData['Nmnc']['Id'];
-    nodeData['CodigoCuentaAlterna'] = nodeData['CodigoCuentaAlterna'] + '';
+    nodeData['CodigoCuentaAlterna'] = this.cuentaAlterna !== null ? this.cuentaAlterna.replaceAll('-', '') : null;
     nodeData['Codigo'] = nodeData['Codigo'] + '';
+    nodeData['Activo'] = nodeData['Activa']['Id'];
     if (this.selectedNodeData) {
-      nodeData['Padre'] = this.selectedNodeData['Codigo']
+      nodeData['Padre'] = this.selectedNodeData['Codigo'];
     }
     if (this.nodeData) {
       this.treeHelper.updateNode($event.data.NodoCuentaContable.Codigo, $event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
-          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente')
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente');
           this.cleanInterface();
           this.showTreeTab();
         }
@@ -239,7 +296,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
 
       this.treeHelper.addNode($event.data.NodoCuentaContable).subscribe(res => {
         if (res) {
-          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente')
+          this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente');
           this.cleanInterface();
           this.showTreeTab();
         }
@@ -273,6 +330,7 @@ export class ArbolCuentasContablesComponent implements OnChanges {
       const codigoIndex = FormManager.getIndexForm(this.formData, 'Codigo');
       this.formData.campos[codigoIndex].deshabilitar = true;
     }
+    this.formData.campos[FormManager.getIndexForm(this.formData, 'NombreCuentaAlterna')].deshabilitar = true;
   }
 
   showTreeTab() {
@@ -291,9 +349,12 @@ export class ArbolCuentasContablesComponent implements OnChanges {
       this.nodeData['CentroDecostosID'] = this.formData.campos[centroCostosIndex].opciones.find(element => element.Id === this.nodeData['CentroDecostosID']);
       this.nodeData['MonedaID'] = this.formData.campos[tipoMonedaIndex].opciones.find(element => element.Id === this.nodeData['MonedaID']);
       this.nodeData['NaturalezaCuentaID'] = this.formData.campos[naturalezaIndex].opciones.find(element => element.Id === this.nodeData['NaturalezaCuentaID']);
-      this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
-      this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
-      this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: "Si", Id: true } : { Label: "No", Id: false };
+      this.nodeData['Ajustable'] = this.nodeData['Ajustable'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['RequiereTercero'] = this.nodeData['RequiereTercero'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['Nmnc'] = this.nodeData['Nmnc'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['CuentaAlterna'] =
+        this.nodeData['CodigoCuentaAlterna'] !== null && this.nodeData['CodigoCuentaAlterna'] !== '' ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['Activa'] = this.nodeData['Activo'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
     });
   }
 

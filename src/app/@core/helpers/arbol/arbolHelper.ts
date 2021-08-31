@@ -52,12 +52,12 @@ export class ArbolHelper {
     );
   }
 
-  public getCuenta(cuenta,withDisabledNodes = false) {
+  public getCuenta(cuenta, withDisabledNodes = false) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
     // Set the optional branch for the API request.
     // const raiz = 3;
     // call request manager for the tree's data.
-    return this.rqManager.get('nodo_cuenta_contable/cuentas/'+cuenta+`?fullTree=${withDisabledNodes}`).pipe(
+    return this.rqManager.get('nodo_cuenta_contable/cuentas/' + cuenta + `?fullTree=${withDisabledNodes}`).pipe(
       map(
         (res) => {
           if (res && res['Type'] === 'error') {
@@ -80,7 +80,7 @@ export class ArbolHelper {
 
     let query = '';
     if (params) {
-      let queryString = Object.keys(params).map(key => key + ':' + params[key]).join(',');
+      const queryString = Object.keys(params).map(key => key + ':' + params[key]).join(',');
       query = `?query=${queryString}`;
     }
     this.rqManager.setPath('PLAN_CUENTAS_MONGO_SERVICE');
@@ -146,7 +146,7 @@ export class ArbolHelper {
 
   }
 
-  public getCentroCostos(){
+  public getCentroCostos() {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
 
     return this.rqManager.get(`centro_costos`).pipe(
@@ -163,14 +163,15 @@ export class ArbolHelper {
     );
   }
 
-  public getInfoCuenta(UUID: string) {
+  public getInfoCuenta(UUID: string, pUp: boolean = true) {
     this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
 
     return this.rqManager.get(`nodo_cuenta_contable/${UUID}`).pipe(
       map(
         (res) => {
           if (res && res['Type'] === 'error') {
-            this.pUpManager.showErrorAlert('No se pudo consultar la información de la cuenta');
+            if (pUp)
+              this.pUpManager.showErrorAlert('No se pudo consultar la información de la cuenta');
             return undefined;
           }
 

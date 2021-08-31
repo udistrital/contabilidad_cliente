@@ -1,0 +1,228 @@
+<form novalidate [formGroup]="informacionConciliacionGroup" (ngSubmit)="saveForm()">
+    <!-- Grupo: Información de Conciliación -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col pb-3">
+                <h6 class="card-title col-md-6 bg-warning text-white text-center py-2 px-2 rounded">
+                    Datos Generales
+                </h6>
+            </div>
+        </div>
+        <br>
+        <!-- Campos: Área Funcional, Centro Gestor, fecha  -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <label for="areaFuncional">Área Funcional</label>
+                <select id="areaFuncional" class="custom-select" formControlName="areaFuncional" [class.is-invalid]="esInvalido('areaFuncional')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>01</option>
+                    <option>02</option>
+                </select>
+                <small *ngIf="esInvalido('areaFuncional')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="centroGestor">Centro Gestor</label>
+                <select id="centroGestor"  class="custom-select" formControlName="centroGestor" [class.is-invalid]="esInvalido('centroGestor')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>230</option>
+                </select>
+                <small *ngIf="esInvalido('centroGestor')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="fecha">Fecha</label>
+                <div class="input-group">
+                    <input id="fecha" type="date" name="fecha" class="form-control" formControlName="fecha" [class.is-invalid]="esInvalido('fecha')">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                <small *ngIf="esInvalido('fecha')" class="text-danger">Seleccione una fecha</small>
+            </div>
+        </div>
+        <br>
+
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+
+        <!-- Campos: fecha inicial , fecha final  -->
+        <div class="form-group row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-4">
+                <label for="fechaInicial">Desde</label>
+                <div class="input-group">
+                    <input id="fechaInicial" type="date" name="fechaInicial" class="form-control" formControlName="fechaInicial" [class.is-invalid]="esInvalido('fechaInicial')">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                <small *ngIf="esInvalido('fechaInicial')" class="text-danger">Seleccione una fecha</small>
+            </div>
+
+            <div class="col-md-4">
+                <label for="fechaFinal">Hasta</label>
+                <div class="input-group">
+                    <input id="fechaFinal" type="date" name="fechaFinal" class="form-control" formControlName="fechaFinal" [class.is-invalid]="esInvalido('fechaFinal')">
+                    <div class="input-group-append">
+                    </div>
+                </div>
+                <small *ngIf="esInvalido('fechaFinal')" class="text-danger">Seleccione una fecha</small>
+            </div>
+        </div>
+        <br>
+
+        <!-- Campos: cuenta contable , entidad bancaria  -->
+        <div class="form-group row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <label for="cuentaContable">Cuenta Contable</label>
+                <select id="cuentaContable" class="custom-select" formControlName="cuentaContable" [class.is-invalid]="esInvalido('cuentaContable')">
+                    <option selected disabled value="">Seleccione...</option>
+                    <option>11-10-06-17</option>
+                    <option>11-10-06-18</option>
+                    <option>11-10-06-19</option>
+                </select>
+                <small *ngIf="esInvalido('cuentaContable')" class="text-danger">Complete este campo</small>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-4">
+                <label>Entidad Bancaria</label>
+                <input [value]="prueba" type="text" class="form-control" readonly>
+            </div>
+            
+        </div>
+
+        <!-- Campos: cuenta bancaria  y tipo de cuenta -->
+        <div class="form-group row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <label>Cuenta Bancaria</label>
+                <input [value]="prueba" type="text" class="form-control" readonly>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-4">
+                <label>Tipo de cuenta</label>
+                <input [value]="prueba" type="text" class="form-control" readonly>
+            </div>
+
+        </div>
+
+        <!-- Campos: nombre cuenta  y sucursal -->
+        <div class="form-group row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <label>Nombre Cuenta</label>
+                <input [value]="prueba" type="text" class="form-control" readonly>
+            </div>
+
+            <div class="col-md-2">
+            </div>
+
+            <div class="col-md-4">
+                <label>Sucursal</label>
+                <input [value]="prueba" type="text" class="form-control" readonly>
+            </div>
+
+        </div>
+
+        <!-- Campo: Adjuntar Extracto de reintegro -->
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <p class="text-center">Adjuntar Extracto Bancario</p>
+                    </div>
+                    <div class="row">
+                    <div class="container my-2 dropzone" >
+                        <div class="row">
+                            <div class="col-md-2 p-2">
+                                <i class="fas fa-paperclip fa-4x"></i>
+                            </div>
+                            <div class="col-md-8 text-center h-100 my-auto">
+                                <div class="row py-4 align-items-baseline">
+                                    <input type="file" (change)="onChange($event)" #inputFile>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-danger btn-block text-white" (click)="removeData('1')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            <div *ngIf="isExcelFile === false">
+                              This is not an Excel file
+                            </div>
+                            <span *ngIf="spinnerEnabled" class="k-i-loading k-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <br>
+        <!-- Campo: Adjuntar Estado de Pago -->
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">
+                        <p class="text-center">Adjuntar Estado de Pago</p>
+                    </div>
+                    <div class="row">
+                    <div class="container my-2 dropzone" >
+                        <div class="row">
+                            <div class="col-md-2 p-2">
+                                <i class="fas fa-paperclip fa-4x"></i>
+                            </div>
+                            <div class="col-md-8 text-center h-100 my-auto">
+                                <div class="row py-4 align-items-baseline">
+                                    <input type="file" (change)="onChange($event)" #inputFile2>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-danger btn-block text-white" (click)="removeData('2')">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            <div *ngIf="isExcelFile === false">
+                                This is not an Excel file
+                            </div>
+                            <span *ngIf="spinnerEnabled" class="k-i-loading k-icon"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        
+        <!-- Botones: Volver a registro, Siguiente -->
+        <br>
+        <mat-divider class="col-md-12 py-2 border-warning"></mat-divider>
+        <br>
+
+        <div class="container">
+            <div class="row pt-2 text-center">
+                <div class="col-md-6">
+                    <a routerLink="../lista">
+                        <button type="button" class="btn btn-warning mb-3 mt-3 text-white">
+                            <div class="d-flex flex-row justify-content-around align-middle">
+                                <span>Volver a registros</span>
+                            </div>
+                        </button>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <button mat-button matStepperNext  [disabled]="informacionConciliacionGroup.invalid" type="submit" class="btn btn-success m-0 mt-4">
+                        Siguiente
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
