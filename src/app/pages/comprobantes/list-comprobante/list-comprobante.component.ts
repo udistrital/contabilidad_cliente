@@ -67,13 +67,6 @@ export class ListComprobanteComponent implements OnInit {
   this.updateEntityFunction = this.comprobanteHelper.comprobanteUpdate;
   this.createEntityFunction = this.comprobanteHelper.comprobanteRegister;
   this.listColumns = {
-    TipoComprobante: {
-      title: this.translate.instant('GLOBAL.tipo_comprobante'),
-      // type: 'string;',
-      valuePrepareFunction: value => {
-        return value.TipoDocumento;
-      }
-    },
     Codigo: {
       title: this.translate.instant('GLOBAL.codigo'),
       // type: 'string;',
@@ -81,15 +74,22 @@ export class ListComprobanteComponent implements OnInit {
         return value;
       }
     },
-    Descripcion: {
-      title: this.translate.instant('GLOBAL.descripcion'),
+    TipoComprobante: {
+      title: this.translate.instant('GLOBAL.tipo_comprobante'),
+      // type: 'string;',
+      valuePrepareFunction: value => {
+        return value.TipoDocumento;
+      }
+    },
+    Numero: {
+      title: this.translate.instant('GLOBAL.numero'),
       // type: 'string;',
       valuePrepareFunction: value => {
         return value;
       }
     },
-    Numero: {
-      title: this.translate.instant('GLOBAL.numero'),
+    Descripcion: {
+      title: this.translate.instant('GLOBAL.descripcion'),
       // type: 'string;',
       valuePrepareFunction: value => {
         return value;
