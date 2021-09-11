@@ -46,9 +46,9 @@
           </th>
           <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
             <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
-            <span [ngClass]="{
-                'nb-chevron-down': row.expanded,
-                'nb-chevron-right': !row.expanded
+            <span *ngIf="row.hasChildren()" class="fas" [ngClass]="{
+                'fa-chevron-down': row.expanded,
+                'fa-chevron-right': !row.expanded
               }" aria-hidden="true">
             </span>{{ row.data[customColumn] }}
           </td>
