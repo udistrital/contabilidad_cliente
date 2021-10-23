@@ -4,6 +4,7 @@ name: oas_cliente_ci
 steps:
 - name: check_readme
   image: jjvargass/qa_develoment:latest
+  failure: ignore
   commands:
   - python /app/check_readme.py
   when:
@@ -17,6 +18,7 @@ steps:
 
 - name: check_branch
   image: jjvargass/qa_develoment:latest
+  failure: ignore
   commands:
   - python /app/check_branch.py -H ${DRONE_GIT_HTTP_URL}
   when:
@@ -28,28 +30,35 @@ steps:
     event:
     - push
 
-# - name: check_commits
-#   image: jjvargass/qa_develoment:latest
-#   commands:
-#   - python /app/check_commits.py
-#   when:
-#     branch:
-#     - develop
-#     - feature/*
-#     - hotfix/*
-#     - release/*
-#     event:
-#     - push
+# STEP NO OBJETIVO! Debe revisarse/ajustarse. Para más información:
+# https://github.com/udistrital/arka_cliente/commit/37e3ece10d52cae1303d837ad0e8a6ca1fb7a549
+- name: check_commits
+  image: jjvargass/qa_develoment:latest
+  failure: ignore
+  commands:
+  - python /app/check_commits.py
+  when:
+    branch:
+    - develop
+    - feature/*
+    - hotfix/*
+    - release/*
+    event:
+    - push
 
+# TODO: Pasar a jest y descomentar este step
 # - name: prueba_unitarias
 #   image: node:12.6.0
+#   failure: ignore
 #   commands:
 #   - npm i
 #   - npm run test
 #   when:
 #     branch:
+#     - feature/*
+#     - hotfix/*
 #     - unitest
-#
+
 - name:  pruebas_linter
   image: node:12.6.0
   commands:
@@ -86,6 +95,7 @@ steps:
   - npm run build:test
   when:
     branch:
+    - dependabot/**
     - develop
     - feature/*
     - release/*
