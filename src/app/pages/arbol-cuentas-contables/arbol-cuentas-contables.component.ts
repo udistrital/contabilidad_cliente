@@ -17,6 +17,7 @@ import { FormManager } from '../../@core/managers/formManager';
 import { FORM_NODO_CUENTA_CONTABLE } from './form_nodo_cuenta_contable';
 import { TranslateService } from '@ngx-translate/core';
 import { PopUpManager } from '../../@core/managers/popUpManager';
+import { TesoreriaHelper } from '../../@core/helpers/tesoreria/tesoreriaHelper';
 
 registerLocaleData(locales, 'co');
 
@@ -87,13 +88,13 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
     private translate: TranslateService,
     private pUpManager: PopUpManager,
     // private rubroHelper: RubroHelper,
+    private tesoreriaHelper: TesoreriaHelper,
   ) {
   }
 
   ngOnInit() {
 
     this.loadTree();
-
     this.formData = FORM_NODO_CUENTA_CONTABLE;
     this.nodeData = undefined;
     this.construirForm();
@@ -109,6 +110,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
     const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
     const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
     const centroCostosIndex = FormManager.getIndexForm(this.formData, 'CentroDecostosID');
+    const cuentaBancariaIndex = FormManager.getIndexForm(this.formData, 'CuentaBancariaID');
 
     this.treeHelper.getNaturalezaCuenta().subscribe(res => {
       this.formData.campos[naturalezaIndex].opciones = res;
@@ -126,6 +128,13 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
       this.formData.campos[centroCostosIndex].opciones = res;
     });
 
+    // Cuentas bancarias
+    this.tesoreriaHelper.getCuentasBancarias().subscribe(res => {
+      if (res && res.Data) {
+        this.formData.campos[cuentaBancariaIndex].opciones = res.Data.map(
+          c => ({ Id: c.Id, Label: c.NumeroCuenta + ' - ' + c.NombreBanco + ' - ' + c.NombreSucursal }));
+      }
+    });
 
   }
   ngOnChanges(changes) {
@@ -281,6 +290,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
     nodeData['CodigoCuentaAlterna'] = this.cuentaAlterna !== null ? this.cuentaAlterna.replaceAll('-', '') : null;
     nodeData['Codigo'] = nodeData['Codigo'] + '';
     nodeData['Activo'] = nodeData['Activa']['Id'];
+    nodeData['CuentaBancariaID'] = nodeData['CuentaBancariaID']['Id'];
     if (this.selectedNodeData) {
       nodeData['Padre'] = this.selectedNodeData['Codigo'];
     }
@@ -345,6 +355,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
       const tipoMonedaIndex = FormManager.getIndexForm(this.formData, 'MonedaID');
       const detalleCuentaIndex = FormManager.getIndexForm(this.formData, 'DetalleCuentaID');
       const centroCostosIndex = FormManager.getIndexForm(this.formData, 'CentroDecostosID');
+      const cuentaBancariaIndex = FormManager.getIndexForm(this.formData, 'CuentaBancariaID');
       this.nodeData['DetalleCuentaID'] = this.formData.campos[detalleCuentaIndex].opciones.find(element => element.Id === this.nodeData['DetalleCuentaID']);
       this.nodeData['CentroDecostosID'] = this.formData.campos[centroCostosIndex].opciones.find(element => element.Id === this.nodeData['CentroDecostosID']);
       this.nodeData['MonedaID'] = this.formData.campos[tipoMonedaIndex].opciones.find(element => element.Id === this.nodeData['MonedaID']);
@@ -355,6 +366,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
       this.nodeData['CuentaAlterna'] =
         this.nodeData['CodigoCuentaAlterna'] !== null && this.nodeData['CodigoCuentaAlterna'] !== '' ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
       this.nodeData['Activa'] = this.nodeData['Activo'] === true ? { Label: 'Si', Id: true } : { Label: 'No', Id: false };
+      this.nodeData['CuentaBancariaID'] = this.formData.campos[cuentaBancariaIndex].opciones.find(element => element.Id === this.nodeData['CuentaBancariaID']);
     });
   }
 

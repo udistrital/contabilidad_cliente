@@ -179,5 +179,17 @@ export let FORM_NODO_CUENTA_CONTABLE = {
                 unActiveData,
             ],
         },
+
+        {
+            etiqueta: 'select',
+            claseGrid: 'col-md-12',
+            nombre: 'CuentaBancariaID',
+            label_i18n: 'Cuenta bancaria',
+            placeholder_i18n: 'Cuenta bancaria',
+            requerido: true,
+            tipo: 'Cuenta',
+            key: 'Label',
+            opciones: [],
+        },
     ],
 };
