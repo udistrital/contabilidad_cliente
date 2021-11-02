@@ -23,7 +23,7 @@
           </button>
         </div>
         <div class="col">
-          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
+          <button [disabled]="!selectedNodeData || selectedNodeData?.Hijos" type="submit" class="btn btn-success btn-block"
             (click)="getTreeInfo(); makeFormEditable(false, true); showViewTab('group');">
             {{'GLOBAL.editar' | translate }}
           </button>
@@ -45,12 +45,8 @@
             {{ customColumn }}
           </th>
           <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
-            <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
-            <span *ngIf="row.hasChildren()" class="fas" [ngClass]="{
-                'fa-chevron-down': row.expanded,
-                'fa-chevron-right': !row.expanded
-              }" aria-hidden="true">
-            </span>{{ row.data[customColumn] }}
+            <ngx-nb-fs-icon [kind]="row.hasChildren() ? 'dir' : 'doc'" [expanded]="row.expanded"></ngx-nb-fs-icon>
+             {{ row.data[customColumn] }}
           </td>
         </ng-container>
         <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
