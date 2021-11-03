@@ -365,12 +365,19 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
 @Component({
   selector: 'ngx-nb-fs-icon',
   template: `
-    <nb-tree-grid-row-toggle
-      [expanded]="expanded"
-      *ngIf="isDir(); else fileIcon"
-    >
-    </nb-tree-grid-row-toggle>
-    <ng-template #fileIcon> </ng-template>
+        <nb-icon nbTreeGridRowToggle
+        *ngIf="isDir(); else fileIcon"
+        [attr.aria-label]="expanded ? 'collapse' : 'expand'"
+        [icon]="expanded ? 'folder-open' : 'folder'"
+                aria-hidden="true" pack="fas">
+        </nb-icon>
+
+    <ng-template #fileIcon>
+      <nb-icon *ngIf="isDoc()"
+        [icon]="'file-invoice-dollar'" aria-hidden="true" pack="fas" status="primary">
+        </nb-icon>
+    </ng-template>
+    &nbsp;&nbsp;
   `,
 })
 export class FsIconAComponent {
@@ -380,5 +387,9 @@ export class FsIconAComponent {
 
   isDir(): boolean {
     return this.kind === 'dir';
+  }
+
+  isDoc(): boolean {
+    return this.kind === 'doc';
   }
 }
