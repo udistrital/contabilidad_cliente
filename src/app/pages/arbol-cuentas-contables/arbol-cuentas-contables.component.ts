@@ -367,13 +367,13 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
   template: `
         <nb-icon nbTreeGridRowToggle
         *ngIf="isDir(); else fileIcon"
-        [attr.aria-label]="expanded ? 'collapse' : 'expand'" 
+        [attr.aria-label]="expanded ? 'collapse' : 'expand'"
         [icon]="expanded ? 'folder-open' : 'folder'"
                 aria-hidden="true" pack="fas">
         </nb-icon>
 
     <ng-template #fileIcon>
-      <nb-icon 
+      <nb-icon
         [icon]="'file-invoice-dollar'" aria-hidden="true" pack="fas" status="primary">
         </nb-icon>
     </ng-template>
