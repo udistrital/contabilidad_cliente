@@ -373,7 +373,7 @@ export class ArbolCuentasContablesComponent implements OnInit, OnChanges {
         </nb-icon>
 
     <ng-template #fileIcon>
-      <nb-icon
+      <nb-icon *ngIf="isDoc()"
         [icon]="'file-invoice-dollar'" aria-hidden="true" pack="fas" status="primary">
         </nb-icon>
     </ng-template>
@@ -387,5 +387,9 @@ export class FsIconAComponent {
 
   isDir(): boolean {
     return this.kind === 'dir';
+  }
+
+  isDoc(): boolean {
+    return this.kind === 'doc';
   }
 }
