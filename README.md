@@ -90,9 +90,9 @@ Los siguientes mockups representan la estructura general de la aplicación, mód
 
 ## Estado CI
 
-| Develop | Relese 0.2.0 | Master |
+| Develop | Relese 0.2.1 | Master |
 | -- | -- | -- |
-| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg?ref=refs/heads/release/0.2.0)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) |
+| [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg?ref=refs/heads/develop)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg?ref=refs/heads/release/0.2.1)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) | [![Build Status](https://hubci.portaloas.udistrital.edu.co/api/badges/udistrital/contabilidad_cliente/status.svg)](https://hubci.portaloas.udistrital.edu.co/udistrital/contabilidad_cliente) |
 
 
 ## Licencia
