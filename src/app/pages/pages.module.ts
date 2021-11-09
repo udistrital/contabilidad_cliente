@@ -31,7 +31,7 @@ import { NbIconModule } from '@nebular/theme';
 import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comprobante/list-tipo-comprobante.component';
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
-import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
+import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 import { ConceptosComponent } from './conceptos/conceptos.component';
 import { WizardComponent } from './conceptos/wizard/wizard.component';
 import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas-contables.component';
@@ -42,6 +42,8 @@ import { ProvisionesComponent } from './provisiones/provisiones.component';
 import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
 import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
 import { InformesContablesComponent } from './informes-contables/informes-contables.component';
+import { CuentaContableComponent } from './arbol-cuentas-contables/cuenta-contable/cuenta-contable.component';
+import { ArbolContableComponent } from './arbol-contable/arbol-contable.component';
 
 
 const MODULES = [
@@ -79,7 +81,6 @@ const COMPONENTS = [
     ListComprobanteComponent,
     ParametrosComprobanteComponent,
     ArbolCuentasContablesComponent,
-    FsIconAComponent,
     ConceptosComponent,
     WizardComponent,
     CuentasContablesComponent,
@@ -87,6 +88,8 @@ const COMPONENTS = [
     EditModalComponent,
     ProvisionesComponent,
     ConciliacionesComponent,
+    CuentaContableComponent,
+    ArbolContableComponent
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
