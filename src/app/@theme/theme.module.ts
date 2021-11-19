@@ -31,6 +31,8 @@ import {
   ListEntityComponent,
   CrudEntityComponent,
   FsIconAComponent,
+  ReactiveFormComponent,
+  ReactiveControlComponent
 } from './components';
 import {
   CapitalizePipe,
@@ -118,6 +120,8 @@ const COMPONENTS = [
   CrudEntityComponent,
   PDFviewerComponent,
   FsIconAComponent,
+  ReactiveFormComponent,
+  ReactiveControlComponent
 ];
 const PIPES = [
   CapitalizePipe,

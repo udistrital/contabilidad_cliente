@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
           [icon]="expanded ? 'folder-open' : 'folder'"
                   aria-hidden="true" pack="fas">
           </nb-icon>
-  
+
       <ng-template #fileIcon>
         <nb-icon *ngIf="isDoc()"
           [icon]="'file-invoice-dollar'" aria-hidden="true" pack="fas" status="primary">
@@ -20,15 +20,14 @@ import { Component, Input } from '@angular/core';
   })
   export class FsIconAComponent {
     @Input() kind: string;
-  
+
     @Input() expanded: boolean;
-  
+
     isDir(): boolean {
       return this.kind === 'dir';
     }
-  
+
     isDoc(): boolean {
       return this.kind === 'doc';
     }
   }
-  

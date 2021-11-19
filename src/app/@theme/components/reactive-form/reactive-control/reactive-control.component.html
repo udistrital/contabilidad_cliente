@@ -1,0 +1,30 @@
+<ng-container [ngSwitch]="data.type">
+    <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'autocomplete'">
+        <mat-label>{{data.label}}aa</mat-label>
+        <input type="text" placeholder="{{data.placeholder || ''}}" matInput [formControl]="control"
+            [ngClass]="data.class" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filterList | async" [value]="option[data.optionList.valueKey]">
+                {{option[data.optionList.valueKey]}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="control.errors">
+            {{control.errors.msg || data.errorMsg || '' }}
+        </mat-error>
+        <mat-hint><strong>{{data.hintMsg}}</strong> </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'input'">
+        <mat-label>{{data.label}}</mat-label>
+        <input [type]="data.inputType" matInput placeholder="{{data.label}}" [formControl]="control"
+            [ngClass]="data.class">
+        <mat-error *ngIf="control.errors">
+            {{control.errors.msg || data.errorMsg || '' }}
+        </mat-error>
+        <mat-hint><strong>{{data.hintMsg}}</strong> </mat-hint>
+    </mat-form-field>
+
+    <button id="basic" type="button" mat-button (click)="data.buttonAction(control.parent)" *ngSwitchCase="'button'">
+        {{data.label}}
+    </button>
+</ng-container>

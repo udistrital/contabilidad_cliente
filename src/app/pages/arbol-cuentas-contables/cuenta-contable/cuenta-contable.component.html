@@ -1,0 +1,12 @@
+<nb-card status="warning">
+  <nb-card-header>
+    {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
+  </nb-card-header>
+  <nb-card-body>
+
+    <ngx-reactive-form [dataForm]="dataForm" [(reactiveForm)]="form" [(value)]="valueForm"></ngx-reactive-form>
+
+    <button (click)="something()">click</button>
+
+  </nb-card-body>
+</nb-card>
