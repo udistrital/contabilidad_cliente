@@ -22,7 +22,7 @@ import { MatStepperModule } from '@angular/material';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
-import { PagesRoutingModule } from './pages-routing.module';
+import { entityResolvers, PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ConfiguracionService } from '../@core/data/configuracion.service';
 import { MenuService } from '../@core/data/menu.service';
@@ -43,7 +43,8 @@ import { ConciliacionesComponent } from './conciliaciones/conciliaciones.compone
 import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
 import { InformesContablesComponent } from './informes-contables/informes-contables.component';
 import { CuentaContableComponent } from './arbol-cuentas-contables/cuenta-contable/cuenta-contable.component';
-import { ArbolContableComponent } from './arbol-contable/arbol-contable.component';
+import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable/arbol-contable.component';
+import { FloatMenuComponent } from './arbol-cuentas-contables/float-menu/float-menu.component';
 
 
 const MODULES = [
@@ -89,13 +90,15 @@ const COMPONENTS = [
     ProvisionesComponent,
     ConciliacionesComponent,
     CuentaContableComponent,
-    ArbolContableComponent
+    ArbolContableComponent,
+    CuentasContablesComponent
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
     ListComprobanteComponent,
     CuentasContablesComponent,
-    EditModalComponent
+    EditModalComponent,
+    CuentaContableComponent
 ];
 const SERVICES = [
     ConfiguracionService,
@@ -111,6 +114,7 @@ const SERVICES = [
     TableComponent,
     RegistroNominaComponent,
     InformesContablesComponent,
+    FloatMenuComponent,
 
 
 
@@ -118,6 +122,7 @@ const SERVICES = [
   ],
   providers: [
     ...SERVICES,
+    entityResolvers
   ],
   entryComponents: [
     ...ENTRY_COMPONENTS,

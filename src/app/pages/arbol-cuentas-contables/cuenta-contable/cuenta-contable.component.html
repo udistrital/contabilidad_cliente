@@ -1,12 +1,8 @@
-<nb-card status="warning">
-  <nb-card-header>
-    {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
-  </nb-card-header>
-  <nb-card-body>
-
+<div mat-dialog-content style="width: 80vw;">
     <ngx-reactive-form [dataForm]="dataForm" [(reactiveForm)]="form" [(value)]="valueForm"></ngx-reactive-form>
 
+    <ngx-dinamicform [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
+      (resultChanges)="validarCampo($event)">
+    </ngx-dinamicform>
     <button (click)="something()">click</button>
-
-  </nb-card-body>
-</nb-card>
+</div>

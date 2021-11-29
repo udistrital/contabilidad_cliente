@@ -1,7 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs';
+import { selectAllEntities } from './../../../@core/_store/selectors';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NbGetters, NbSortDirection, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbSortRequest } from '@nebular/theme';
-import { ArbolHelper } from '../../@core/helpers/arbol/arbolHelper';
+import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 import { EstructuraCuentaContable } from './cuenta-contable.model';
+import { Store, select } from '@ngrx/store';
 
 @Component({
   selector: 'ngx-arbol-contable',
@@ -9,18 +12,24 @@ import { EstructuraCuentaContable } from './cuenta-contable.model';
   styleUrls: ['./arbol-contable.component.scss'],
 })
 export class ArbolContableComponent implements OnInit {
+
+  @Output() onSelection: EventEmitter<EstructuraCuentaContable> = new EventEmitter();
+
   customColumn = 'Codigo';
   defaultColumns = ['Nombre', 'Activo'];
   allColumns = [this.customColumn, ...this.defaultColumns];
   dataSource: NbTreeGridDataSource < EstructuraCuentaContable > ;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
-  data: null;
+  data: any;
   selectedNode: EstructuraCuentaContable;
+
+  dataTree = this.store.pipe(select(selectAllEntities));
 
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable > ,
-    private treeHelper: ArbolHelper
+    private treeHelper: ArbolHelper,
+    private store: Store<any>
   ) {}
 
   ngOnInit() {
@@ -34,14 +43,17 @@ export class ArbolContableComponent implements OnInit {
         !!node.children && !!node.children.length ? node.children : [],
       expandedGetter: (node: any) => !!node.expanded,
     };
-    this.treeHelper.getTree(true).subscribe((res) => {
+
+    this.dataTree.subscribe(res => {
       this.dataSource = this.dataSourceBuilder.create(res, getters);
       this.data = res;
     });
+
   }
 
   onSelect(row) {
     this.selectedNode = row.data;
+    this.onSelection.emit(this.selectedNode );
   }
 
   updateSort(sortRequest: NbSortRequest): void {

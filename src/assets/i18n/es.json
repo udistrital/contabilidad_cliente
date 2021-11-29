@@ -228,7 +228,8 @@
   },
   "CUENTAS_CONTABLES": {
     "arbol_cuentas_contables": "Cuentas Contables",
-    "cuentas-contables": "Cuentas-contables"
+    "cuentas-contables": "Cuentas-contables",
+    "arbol-contable": "Arbol Contable"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

@@ -1,6 +1,6 @@
 export interface EstructuraCuentaContable {
   Codigo: string;
-  Descripcion?: string;
+  Nombre?: string;
   ValorInicial: number;
   Hijos?: EstructuraCuentaContable[];
   Movimientos?: string[];
