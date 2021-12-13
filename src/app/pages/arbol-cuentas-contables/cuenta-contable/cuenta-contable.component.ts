@@ -20,12 +20,18 @@ export class CuentaContableComponent implements OnInit {
   constructor(private builder: FormBuilder) {}
 
   ngOnInit() {
-    this.valueForm = { input: 'asdq' };
+    this.valueForm = {
+      input: 'asdq'
+    };
     this.formData = FORM_NODO_CUENTA_CONTABLE;
   }
 
   something() {
     this.form.markAllAsTouched();
+  }
+
+  setSelectedCount(count) {
+
   }
 
   validarForm($event) {

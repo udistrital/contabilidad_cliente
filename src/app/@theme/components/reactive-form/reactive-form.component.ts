@@ -10,8 +10,16 @@ import { ReactiveFormControl, ReactiveFormStructure, ReactiveFormGroup, isGroup 
 export class ReactiveFormComponent implements OnInit {
   private _reactiveForm: FormGroup;
   private _value: any = {};
+  private _dataForm: ReactiveFormStructure;
 
-  @Input('dataForm') dataForm: ReactiveFormStructure;
+  @Input('dataForm')
+  public get dataForm(): ReactiveFormStructure {
+    return this._dataForm;
+  }
+  public set dataForm(value: ReactiveFormStructure) {
+    this._dataForm = value;
+    this.build();
+  }
 
   @Input('value')
   public get value(): FormGroup {
@@ -35,10 +43,16 @@ export class ReactiveFormComponent implements OnInit {
   constructor(private builder: FormBuilder) {}
 
   ngOnInit() {
+    this.build();
+  }
+
+  build() {
+    const valueForm = this.reactiveForm ? this.reactiveForm.value : {};
     this.reactiveForm = this.builderForm(this.dataForm);
     this.reactiveForm.setValue({
       ...this.reactiveForm.value,
-      ...this._value
+      ...this._value,
+      ...valueForm
     });
   }
 

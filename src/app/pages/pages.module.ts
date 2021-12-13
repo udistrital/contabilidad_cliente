@@ -45,6 +45,7 @@ import { InformesContablesComponent } from './informes-contables/informes-contab
 import { CuentaContableComponent } from './arbol-cuentas-contables/cuenta-contable/cuenta-contable.component';
 import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable/arbol-contable.component';
 import { FloatMenuComponent } from './arbol-cuentas-contables/float-menu/float-menu.component';
+import { SelectorContableComponent } from './arbol-cuentas-contables/selector-contable/selector-contable.component';
 
 
 const MODULES = [
@@ -115,10 +116,7 @@ const SERVICES = [
     RegistroNominaComponent,
     InformesContablesComponent,
     FloatMenuComponent,
-
-
-
-
+    SelectorContableComponent,
   ],
   providers: [
     ...SERVICES,

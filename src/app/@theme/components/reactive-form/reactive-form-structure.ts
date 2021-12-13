@@ -31,6 +31,8 @@ export interface ReactiveFormControl {
     inputType ?: FormControlInputType;
     hintMsg ?: string;
     buttonAction ?: (FormGroup) => void;
+    disabled ?: (FormGroup) => boolean;
+    valueChanges ?: (FormGroup) => void;
 }
 
 export type FormControlType = 'autocomplete' | 'input' | 'date' | 'checkbox' | 'radio' | 'select' | 'button';
@@ -38,8 +40,7 @@ export type FormControlType = 'autocomplete' | 'input' | 'date' | 'checkbox' | '
 export type FormControlInputType = 'button' | 'checkbox' | 'color' | 'date' | 'datetime-local' | 'email' | 'file' | 'hidden' | 'image' | 'month' | 'number' | 'password' | 'radio' | 'range' | 'reset' | 'search' | 'submit' | 'tel' | 'text' | 'time' | 'url' | 'week';
 
 export interface OptionList {
-    elements: (filter ?: string) => Array < any > ;
-    valueKey: string;
+    elements: (parent ?: any) => Array < any > ;
     labelKey: string;
 }
 

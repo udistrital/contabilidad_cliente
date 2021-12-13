@@ -1,11 +1,11 @@
 <ng-container [ngSwitch]="data.type">
     <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'autocomplete'">
-        <mat-label>{{data.label}}aa</mat-label>
+        <mat-label>{{data.label}}</mat-label>
         <input type="text" placeholder="{{data.placeholder || ''}}" matInput [formControl]="control"
-            [ngClass]="data.class" [matAutocomplete]="auto">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filterList | async" [value]="option[data.optionList.valueKey]">
-                {{option[data.optionList.valueKey]}}
+            [ngClass]="data.class" [matAutocomplete]="auto" (focus)="focusAutocomplete()">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="dislayAutocomplete">
+            <mat-option *ngFor="let option of filterList | async" [value]="option">
+                {{option[data.optionList.labelKey]}}
             </mat-option>
         </mat-autocomplete>
         <mat-error *ngIf="control.errors">

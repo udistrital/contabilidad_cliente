@@ -22,8 +22,13 @@ export class ReactiveControlComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
+    this.buildControl();
+  }
+
+  private buildControl() {
     if (this.data) {
-      const [parent, value] = [this.control.parent,  this.control.value];
+      const [parent, value] = [this.control.parent, this.control.value];
+
       switch (this.data.type) {
         case 'autocomplete':
           this.control = this.buildAutocomplete(this.data);
@@ -47,12 +52,28 @@ export class ReactiveControlComponent implements OnInit {
     const formControl = new FormControl(item.defaultValue, item.validators);
     this.filterList = formControl.valueChanges.pipe(
       startWith(''),
-      map(value => item.optionList.elements().filter(option => {
-        const labelKey: string = option[item.optionList.labelKey] || option;
-        return labelKey.toLowerCase().includes(value.toLowerCase());
-      })),
+      map(value => {
+        item.valueChanges ? item.valueChanges(formControl.parent) : null;
+        return item.optionList.elements(formControl.parent).filter(option => {
+          const labelKey: string = option[item.optionList.labelKey] || option;
+          const valueKey: string = value && typeof value === 'object' ? value[item.optionList.labelKey] : value;
+          return labelKey.toLowerCase().includes(valueKey ? valueKey.toLowerCase() : '');
+        });
+      }),
     );
     return formControl;
+  }
+
+  focusAutocomplete() {
+    if (!this.control.value) {
+      this.control.setValue('');
+    }
+    this.control.setValue(this.control.value);
+  }
+
+  dislayAutocomplete = (value) => {
+    // value && typeof value === 'object' ? value[item.optionList.labelKey] : value;
+    return value && typeof value === 'object' ? value[this.data.optionList.labelKey] : value;
   }
 
   buildInput(item: ReactiveFormControl): FormControl {

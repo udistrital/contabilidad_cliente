@@ -1,0 +1,19 @@
+<nb-card status="danger">
+
+    <div [formGroup]="form">
+        <div *ngFor="let element of selectorForm.controls">
+            <ngx-reactive-control [data]="element" [(control)]="form.controls[element.key]"></ngx-reactive-control>
+        </div>
+    </div>
+    <nb-card-footer nbButtonGroup style="text-align: right;">
+        <button nbButton ghost status="primary" size="small" (click)="addControl()">
+            <nb-icon icon="plus" aria-hidden="true" pack="fas">
+            </nb-icon>
+        </button>
+        <button nbButton ghost status="primary" size="small" (click)="deleteControl()">
+            <nb-icon icon="minus" aria-hidden="true" pack="fas">
+            </nb-icon>
+        </button>
+    </nb-card-footer>
+
+</nb-card>

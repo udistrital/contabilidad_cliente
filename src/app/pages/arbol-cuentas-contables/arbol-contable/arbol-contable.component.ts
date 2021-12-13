@@ -27,8 +27,7 @@ export class ArbolContableComponent implements OnInit {
   dataTree = this.store.pipe(select(selectAllEntities));
 
   constructor(
-    private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable > ,
-    private treeHelper: ArbolHelper,
+    private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable >,
     private store: Store<any>
   ) {}
 

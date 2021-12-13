@@ -1,8 +1,12 @@
-<div mat-dialog-content style="width: 80vw;">
-    <ngx-reactive-form [dataForm]="dataForm" [(reactiveForm)]="form" [(value)]="valueForm"></ngx-reactive-form>
+<div mat-dialog-content>
 
-    <ngx-dinamicform [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
-      (resultChanges)="validarCampo($event)">
-    </ngx-dinamicform>
-    <button (click)="something()">click</button>
+  <ngx-selector-contable (selectCount)="setSelectedCount($event)" [account]="cuenta ? cuenta.Codigo : ''">
+  </ngx-selector-contable>
+
+  <!--  <ngx-reactive-form [dataForm]="dataForm" [(reactiveForm)]="form" [(value)]="valueForm"></ngx-reactive-form> -->
+
+  <ngx-dinamicform [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
+    (resultChanges)="validarCampo($event)">
+  </ngx-dinamicform>
+  <button (click)="something()">click</button>
 </div>

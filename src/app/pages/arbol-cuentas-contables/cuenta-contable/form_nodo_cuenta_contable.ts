@@ -20,8 +20,7 @@ export let myForm: ReactiveFormStructure = {
             }, {
               ab: 'calor f'
             }],
-            labelKey: 'ab',
-            valueKey: 'ab'
+            labelKey: 'ab'
           }
         },
         {
@@ -49,8 +48,7 @@ export let myForm: ReactiveFormStructure = {
         }, {
           ab: 'ghg f'
         }],
-        labelKey: 'ab',
-        valueKey: 'ab'
+        labelKey: 'ab'
       }
     },
     {
