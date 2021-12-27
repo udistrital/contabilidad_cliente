@@ -3,23 +3,23 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, switchMap, catchError } from 'rxjs/operators';
 
-import { fromEntityActions } from './actions';
+import { fromCuentaActions } from './actions';
 import { ArbolHelper } from '../helpers/arbol/arbolHelper';
 
 @Injectable()
-export class EntityEffects {
-  loadEntities$ = createEffect(() =>
+export class CuentaEffects {
+  loadCuentas$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fromEntityActions.loadEntities),
+      ofType(fromCuentaActions.loadCuentas),
       switchMap(() =>
         this.entityService.getTree().pipe(
-          map((res: any) => fromEntityActions.loadEntitiesSuccess({
+          map((res: any) => fromCuentaActions.loadCuentasSuccess({
               data: res
             })
           ),
           catchError(error =>
             of(
-              fromEntityActions.loadEntitiesFail({
+              fromCuentaActions.loadCuentasFail({
                 error
               })
             )
@@ -28,6 +28,28 @@ export class EntityEffects {
       )
     )
   );
+
+  loadNaturalezas$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(fromCuentaActions.loadNaturalezas),
+      switchMap(() =>
+        this.entityService.getNaturalezaCuenta().pipe(
+          map((res: any) => fromCuentaActions.loadNaturalezasSuccess({
+              data: res
+            })
+          ),
+          catchError(error =>
+            of(
+              fromCuentaActions.loadNaturalezasFail({
+                error
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
 
   constructor(
     private actions$: Actions,

@@ -4,7 +4,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, Output, 
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { CustomValidators } from '../../../@core/_custom-validators/custom-validators';
-import { selectAllEntities } from '../../../@core/_store/selectors';
+import { selectAllCuentas } from '../../../@core/_store/selectors';
 import { ReactiveFormStructure } from '../../../@theme/components/reactive-form/reactive-form-structure';
 
 @Component({
@@ -13,10 +13,14 @@ import { ReactiveFormStructure } from '../../../@theme/components/reactive-form/
   styleUrls: ['./selector-contable.component.scss'],
 })
 export class SelectorContableComponent implements OnInit {
-  dataTree = this.store.pipe(select(selectAllEntities));
+
+  @Output() isValid: EventEmitter < boolean > = new EventEmitter < boolean > ();
+
+  dataTree = this.store.pipe(select(selectAllCuentas));
   cuentasList = [];
   form = new FormGroup({});
   formValue: any = {};
+  status = false;
   claseMinima = 3;
   normaContable = [{
       key: 'grupo',
@@ -52,15 +56,45 @@ export class SelectorContableComponent implements OnInit {
 
   selectorForm: ReactiveFormStructure;
 
-
-  @Output() selectCount: EventEmitter < any > = new EventEmitter();
+  @Output() selectAcount: EventEmitter < any > = new EventEmitter();
 
   @Input() account: string;
+
+  constructor(private store: Store < any > ) {}
+
+  ngOnInit() {
+    this.dataTree.subscribe((res) => {
+      this.cuentasList = res;
+    });
+    try {
+      this.setAcount();
+      this.buildForm();
+    } catch (error) {
+      console.error(error);
+    }
+
+    this.form.valueChanges.subscribe((value) => {
+      console.log(value);
+
+      const control = this.selectorForm.controls[this.selectorForm.controls.length - 1];
+      if (value && control && value[control.key]) {
+        this.selectAcount.emit(value[control.key]);
+      }
+    });
+
+    this.form.statusChanges.subscribe((status) => {
+      const value = status === 'VALID';
+      if (this.status !== value) {
+        this.status = value;
+        this.isValid.emit(this.status);
+      }
+    });
+  }
 
   public setAcount() {
     if (this.account) {
       const codigos = this.account.split('-');
-      codigos.pop();
+      // codigos.pop();
       this.claseMinima = codigos.length;
       codigos.forEach((codigo, index) => {
         if (index === 0) {
@@ -79,23 +113,6 @@ export class SelectorContableComponent implements OnInit {
         }
       });
     }
-  }
-
-  constructor(private store: Store < any > ) {}
-
-  ngOnInit() {
-    this.dataTree.subscribe((res) => {
-      this.cuentasList = res;
-    });
-    this.setAcount();
-    this.buildForm();
-
-    this.form.valueChanges.subscribe((value) => {
-      const control = this.selectorForm.controls[this.selectorForm.controls.length - 1];
-      if (value && control && value[control.key] && typeof value[control.key] === 'object') {
-        this.selectCount.emit(value[control.key]);
-      }
-    });
   }
 
   buildForm() {

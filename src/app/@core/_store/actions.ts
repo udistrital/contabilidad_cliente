@@ -1,56 +1,59 @@
 import { createAction, props } from '@ngrx/store';
 
-export enum EntityActionTypes {
-  LoadEntities = '[Entity] Load Entities',
-  LoadEntitiesSuccess = '[Entity] Load Entities Success',
-  LoadEntitiesFail = '[Entity] Load Entities Fail',
-  LoadEntity = '[Entity] Load Entity',
-  LoadEntitySuccess = '[Entity] Load Entity Success',
-  LoadEntityFail = '[Entity] Load Entity Fail',
-  UpdateEntity = '[Entity] Update Entity',
-  UpdateEntitySuccess = '[Entity] Update Entity Success',
-  UpdateEntityFail = '[Entity] Update Entity Fail'
+export enum CuentaActionTypes {
+  LoadCuentas = '[Cuenta] Load Cuentas',
+  LoadCuentasSuccess = '[Cuenta] Load Cuentas Success',
+  LoadCuentasFail = '[Cuenta] Load Cuentas Fail',
+  LoadCuenta = '[Cuenta] Load Cuenta',
+  LoadCuentaSuccess = '[Cuenta] Load Cuenta Success',
+  LoadCuentaFail = '[Cuenta] Load Cuenta Fail',
+  UpdateCuenta = '[Cuenta] Update Cuenta',
+  UpdateCuentaSuccess = '[Cuenta] Update Cuenta Success',
+  UpdateCuentaFail = '[Cuenta] Update Cuenta Fail',
+  LoadNaturalezas = '[Naturaleza] Load Naturaleza',
+  LoadNaturalezasSuccess = '[Naturaleza] Load Naturalezas Success',
+  LoadNaturalezasFail = '[Naturaleza] Load Naturalezas Fail',
 }
 
-export const loadEntities = createAction(EntityActionTypes.LoadEntities);
+export const loadCuentas = createAction(CuentaActionTypes.LoadCuentas);
 
-export const loadEntitiesSuccess = createAction(
-  EntityActionTypes.LoadEntitiesSuccess,
+export const loadCuentasSuccess = createAction(
+  CuentaActionTypes.LoadCuentasSuccess,
   props<{ data: any[] }>()
 );
 
-export const loadEntitiesFail = createAction(
-  EntityActionTypes.LoadEntitiesFail,
+export const loadCuentasFail = createAction(
+  CuentaActionTypes.LoadCuentasFail,
   props<{ error: Error | any }>()
 );
 
-export const loadEntity = createAction(
-  EntityActionTypes.LoadEntity,
+export const loadCuenta = createAction(
+  CuentaActionTypes.LoadCuenta,
   props<{ id: string | number }>()
 );
 
-export const loadEntitySuccess = createAction(
-  EntityActionTypes.LoadEntitySuccess,
+export const loadCuentaSuccess = createAction(
+  CuentaActionTypes.LoadCuentaSuccess,
   props<{ id: string | number; item: any }>()
 );
 
-export const loadEntityFail = createAction(
-  EntityActionTypes.LoadEntityFail,
+export const loadCuentaFail = createAction(
+  CuentaActionTypes.LoadCuentaFail,
   props<{ error: Error | any }>()
 );
 
-export const updateEntity = createAction(
-  EntityActionTypes.UpdateEntity,
+export const updateCuenta = createAction(
+  CuentaActionTypes.UpdateCuenta,
   props<{ id: number | string; originalItem: any; updatedItem: any }>()
 );
 
-export const updateEntitySuccess = createAction(
-  EntityActionTypes.UpdateEntitySuccess,
+export const updateCuentaSuccess = createAction(
+  CuentaActionTypes.UpdateCuentaSuccess,
   props<{ id: number | string; originalItem: any; updatedItem: any }>()
 );
 
-export const updateEntityFail = createAction(
-  EntityActionTypes.UpdateEntityFail,
+export const updateCuentaFail = createAction(
+  CuentaActionTypes.UpdateCuentaFail,
   props<{
     id: number | string;
     originalItem: any;
@@ -59,11 +62,26 @@ export const updateEntityFail = createAction(
   }>()
 );
 
-export const fromEntityActions = {
-  loadEntities,
-  loadEntitiesFail,
-  loadEntitiesSuccess,
-  loadEntity,
-  loadEntityFail,
-  loadEntitySuccess
+export const loadNaturalezas = createAction(CuentaActionTypes.LoadNaturalezas);
+
+export const loadNaturalezasSuccess = createAction(
+  CuentaActionTypes.LoadNaturalezasSuccess,
+  props<{ data: any[] }>()
+);
+
+export const loadNaturalezasFail = createAction(
+  CuentaActionTypes.LoadNaturalezasFail,
+  props<{ error: Error | any }>()
+);
+
+export const fromCuentaActions = {
+  loadCuentas,
+  loadCuentasFail,
+  loadCuentasSuccess,
+  loadCuenta,
+  loadCuentaFail,
+  loadCuentaSuccess,
+  loadNaturalezas,
+  loadNaturalezasFail,
+  loadNaturalezasSuccess,
 };

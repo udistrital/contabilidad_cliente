@@ -8,9 +8,9 @@ import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-c
 import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 import { ConceptosComponent } from './conceptos/conceptos.component';
 import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable/arbol-contable.component';
-import { EntitiesResolver } from '../@core/_resolver/entities.resolver';
+import { CuentasResolver } from '../@core/_resolver/entities.resolver';
 
-export const entityResolvers = [EntitiesResolver];
+export const entityResolvers = [CuentasResolver];
 
 const routes: Routes = [
   {
@@ -34,7 +34,7 @@ const routes: Routes = [
         path: 'arbol_cuentas_contables',
         component: ArbolCuentasContablesComponent,
         resolve: {
-          entities: EntitiesResolver
+          cuentas: CuentasResolver
         }
       },
       {

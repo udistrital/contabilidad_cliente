@@ -2,7 +2,7 @@
     <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'autocomplete'">
         <mat-label>{{data.label}}</mat-label>
         <input type="text" placeholder="{{data.placeholder || ''}}" matInput [formControl]="control"
-            [ngClass]="data.class" [matAutocomplete]="auto" (focus)="focusAutocomplete()">
+            [ngClass]="data.class" [matAutocomplete]="auto" (focus)="focusAutocomplete()" autocomplete="off">
         <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="dislayAutocomplete">
             <mat-option *ngFor="let option of filterList | async" [value]="option">
                 {{option[data.optionList.labelKey]}}
@@ -18,10 +18,30 @@
         <mat-label>{{data.label}}</mat-label>
         <input [type]="data.inputType" matInput placeholder="{{data.label}}" [formControl]="control"
             [ngClass]="data.class">
+        <span matPrefix *ngIf="data.prefix">{{data.prefix}}</span>
         <mat-error *ngIf="control.errors">
             {{control.errors.msg || data.errorMsg || '' }}
         </mat-error>
         <mat-hint><strong>{{data.hintMsg}}</strong> </mat-hint>
+    </mat-form-field>
+
+    <section *ngSwitchCase="'checkbox'" class="form-group" appearance="legacy">
+        <mat-slide-toggle [formControl]="control" [color]="'primary'">{{data.label}}</mat-slide-toggle>
+        <mat-error *ngIf="control.errors">
+            {{control.errors.msg || data.errorMsg || '' }}
+        </mat-error>
+    </section>
+
+    <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'select'">
+        <mat-label>{{data.label}}</mat-label>
+        <mat-select [formControl]="control">
+            <mat-option *ngFor="let option of selectList" [value]="option">
+                {{option[data.optionList.labelKey]}}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="control.errors">
+            {{control.errors.msg || data.errorMsg || '' }}
+        </mat-error>
     </mat-form-field>
 
     <button id="basic" type="button" mat-button (click)="data.buttonAction(control.parent)" *ngSwitchCase="'button'">

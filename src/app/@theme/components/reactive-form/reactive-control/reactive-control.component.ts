@@ -11,13 +11,25 @@ import { Observable } from 'rxjs';
 })
 export class ReactiveControlComponent implements OnInit {
 
-  @Input('data') data: ReactiveFormControl;
+  private _data: ReactiveFormControl;
+
+  @Input('data')
+  public get data(): ReactiveFormControl {
+    return this._data;
+  }
+  public set data(value: ReactiveFormControl) {
+    this._data = value;
+    if (value && this.control) {
+      this.buildControl();
+    }
+  }
 
   @Input('control') control: FormControl;
 
   @Output() controlChange ?: EventEmitter < FormControl > = new EventEmitter();
 
   filterList: Observable < any[] > ;
+  selectList: any[];
 
   constructor() {}
 
@@ -27,41 +39,46 @@ export class ReactiveControlComponent implements OnInit {
 
   private buildControl() {
     if (this.data) {
-      const [parent, value] = [this.control.parent, this.control.value];
+      //const [parent, value] = [this.control.parent, this.control.value];
 
       switch (this.data.type) {
         case 'autocomplete':
-          this.control = this.buildAutocomplete(this.data);
+          this.buildAutocomplete(this.data);
           break;
         case 'input':
-          this.control = this.buildInput(this.data);
+          this.buildInput(this.data);
           break;
         case 'button':
-          this.control = this.buildButton(this.data);
+          this.buildButton(this.data);
+          break;
+        case 'select':
+          this.buildSelect(this.data);
           break;
         default:
           break;
       }
-      this.control.setParent(parent);
-      this.control.setValue(value);
+      //this.control.setValue(this.control.value || this.data.defaultValue);
+      this.control.setValidators(this.data.validators);
+      //this.control.setParent(parent);
+      //this.control.setValue(value);
       this.controlChange.emit(this.control);
     }
   }
 
-  buildAutocomplete(item: ReactiveFormControl): FormControl {
-    const formControl = new FormControl(item.defaultValue, item.validators);
-    this.filterList = formControl.valueChanges.pipe(
+  buildAutocomplete(item: ReactiveFormControl) {
+    //const formControl = new FormControl(item.defaultValue, item.validators);
+    this.filterList = this.control.valueChanges.pipe(
       startWith(''),
       map(value => {
-        item.valueChanges ? item.valueChanges(formControl.parent) : null;
-        return item.optionList.elements(formControl.parent).filter(option => {
+        item.valueChanges ? item.valueChanges(this.control.parent) : null;
+        return item.optionList.elements(this.control.parent).filter(option => {
           const labelKey: string = option[item.optionList.labelKey] || option;
           const valueKey: string = value && typeof value === 'object' ? value[item.optionList.labelKey] : value;
           return labelKey.toLowerCase().includes(valueKey ? valueKey.toLowerCase() : '');
         });
       }),
     );
-    return formControl;
+    //return formControl;
   }
 
   focusAutocomplete() {
@@ -76,14 +93,20 @@ export class ReactiveControlComponent implements OnInit {
     return value && typeof value === 'object' ? value[this.data.optionList.labelKey] : value;
   }
 
-  buildInput(item: ReactiveFormControl): FormControl {
-    const formControl = new FormControl(item.defaultValue, item.validators);
-    return formControl;
+  buildInput(item: ReactiveFormControl) {
+    // const formControl = new FormControl(item.defaultValue, item.validators);
   }
 
-  buildButton(item: ReactiveFormControl): FormControl {
+  buildSelect(item: ReactiveFormControl) {
+    this.selectList = item.optionList.elements();
+    if(this.control.value) {
+      this.control.setValue(this.selectList.find(option => option[item.optionList.idKey] === this.control.value[item.optionList.idKey]));
+    }
+  }
+
+  buildButton(item: ReactiveFormControl) {
     const formControl = new FormControl(item.label);
-    return formControl;
+    this.control.setValue(item.label);
   }
 
 }

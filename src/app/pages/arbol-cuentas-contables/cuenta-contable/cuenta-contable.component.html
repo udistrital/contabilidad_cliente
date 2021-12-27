@@ -1,12 +1,54 @@
-<div mat-dialog-content>
 
-  <ngx-selector-contable (selectCount)="setSelectedCount($event)" [account]="cuenta ? cuenta.Codigo : ''">
-  </ngx-selector-contable>
+    <ngx-selector-contable (selectAcount)="setSelectedCount($event)" [account]="indexAcount" (isValid)="validateSelector($event)">
+    </ngx-selector-contable>
 
-  <!--  <ngx-reactive-form [dataForm]="dataForm" [(reactiveForm)]="form" [(value)]="valueForm"></ngx-reactive-form> -->
+    <nb-card class="cuenta-contable">
+      <nb-card-body>
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          <mat-grid-list cols="6" rowHeight="68px">
+            <mat-grid-tile colspan="5" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.Codigo" [(control)]="form.controls.Codigo" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.Activo" [(control)]="form.controls.Activo" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="6" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.Nombre" [(control)]="form.controls.Nombre" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.NaturalezaCuentaID" [(control)]="form.controls.NaturalezaCuentaID" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.tipoCuenta" [(control)]="form.controls.tipoCuenta" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.DetalleCuentaID" [(control)]="form.controls.DetalleCuentaID" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.tieneCentroCostos" [(control)]="form.controls.tieneCentroCostos" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.CentroDecostosID" [(control)]="form.controls.CentroDecostosID" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="1" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.RequiereTercero" [(control)]="form.controls.RequiereTercero" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="5" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.tercero" [(control)]="form.controls.tercero" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.Ajustable" [(control)]="form.controls.Ajustable" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.Nmnc" [(control)]="form.controls.Nmnc" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+            <mat-grid-tile colspan="2" rowspan="1">
+              <ngx-reactive-control [data]="dataForm.MonedaID" [(control)]="form.controls.MonedaID" class="form-width"></ngx-reactive-control>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </form>
+      </nb-card-body>
+    </nb-card>
 
-  <ngx-dinamicform [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
-    (resultChanges)="validarCampo($event)">
-  </ngx-dinamicform>
-  <button (click)="something()">click</button>
-</div>
+
+  <button (click)="onSubmit()">click</button>

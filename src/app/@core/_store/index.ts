@@ -4,11 +4,12 @@ import * as fromRouter from '@ngrx/router-store';
 import { Params } from '@angular/router';
 
 import {
-  State as EntityState,
-  reducer as EntityReducer,
-  ENTITY_FEATURE_KEY
+  State as CuentaState,
+  reducer as CuentaReducer,
+  CUENTA_FEATURE_KEY,
+  NATURALEZA_FEATURE_KEY
 } from './reducer';
-import { EntityEffects } from './effects';
+import { CuentaEffects } from './effects';
 import { environment } from '../../../environments/environment';
 
 export interface RouterStateUrl {
@@ -45,7 +46,8 @@ function resetState(reducer) {
  */
 export interface AppState {
   router: fromRouter.RouterReducerState<RouterStateUrl>;
-  [ENTITY_FEATURE_KEY]: EntityState;
+  [CUENTA_FEATURE_KEY]: CuentaState;
+  [NATURALEZA_FEATURE_KEY]: CuentaState;
 }
 
 /**
@@ -55,7 +57,8 @@ export interface AppState {
  */
 const reducers: ActionReducerMap<AppState> = {
   router: fromRouter.routerReducer,
-  [ENTITY_FEATURE_KEY]: EntityReducer
+  [CUENTA_FEATURE_KEY]: CuentaReducer,
+  [NATURALEZA_FEATURE_KEY]: CuentaReducer
 };
 
 /**
@@ -79,4 +82,4 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
   }
 );
 
-export const appEffects = [EntityEffects];
+export const appEffects = [CuentaEffects];

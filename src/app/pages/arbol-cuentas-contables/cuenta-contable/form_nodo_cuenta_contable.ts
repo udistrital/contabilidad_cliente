@@ -1,257 +1,174 @@
-import { ReactiveFormStructure } from './../../../@theme/components/reactive-form/reactive-form-structure';
-import { FormGroup, Validators } from '@angular/forms';
-import { CustomValidators } from '../../../@core/_custom-validators/custom-validators';
+import { Validators } from '@angular/forms';
 
-export let myForm: ReactiveFormStructure = {
-  controls: [{
-      key: 'group',
-      controls: [{
-          key: 'listado',
-          type: 'autocomplete',
-          label: 'prueba',
-          defaultValue: '',
-          placeholder: 'Listado seleccionable',
-          validators: [CustomValidators.customRequired('Campo Requerido')],
-          optionList: {
-            elements: () => [{
-              ab: 'calor a'
-            }, {
-              ab: 'dqwqw'
-            }, {
-              ab: 'calor f'
-            }],
-            labelKey: 'ab'
-          }
-        },
-        {
-          key: 'button',
-          type: 'button',
-          label: 'Submit',
-          buttonAction: (parent: FormGroup) => {
-            parent.get('listado').setValue('Cambiado papulin');
-          }
-        }
-      ]
+export let myForm = {
+  Codigo: {
+    key: 'Codigo',
+    type: 'input',
+    inputType: 'text',
+    label: 'Código',
+    defaultValue: 'dq',
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '',
+  },
+  Activo: {
+    key: 'Activo',
+    type: 'checkbox',
+    inputType: 'text',
+    label: 'Disponible',
+    defaultValue: true,
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '1-01',
+  },
+  tipoCuenta: {
+    key: 'tipoCuenta',
+    type: 'select',
+    label: 'Tipo Cuenta',
+    defaultValue: null,
+    placeholder: 'Listado seleccionable',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [{
+        ab: 'calor a'
+      }, {
+        ab: 'dqwqw'
+      }, {
+        ab: 'calor f'
+      }],
+      labelKey: 'ab'
     },
-    {
-      key: 'control',
-      type: 'autocomplete',
-      label: 'prueba2',
-      defaultValue: '',
-      validators: [Validators.required],
-      errorMsg: 'Campo requerido',
-      optionList: {
-        elements: () => [{
-          ab: 'q112'
-        }, {
-          ab: 'qwe'
-        }, {
-          ab: 'ghg f'
-        }],
-        labelKey: 'ab'
-      }
+    errorMsg: 'Campo requerido',
+  },
+  NaturalezaCuentaID: {
+    key: 'NaturalezaCuentaID',
+    type: 'select',
+    label: 'Naturaleza',
+    defaultValue: null,
+    placeholder: 'Listado seleccionable',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [],
+      labelKey: 'Label',
+      idKey: 'Id'
     },
-    {
-      key: 'input',
-      type: 'input',
-      inputType: 'text',
-      label: 'prueba input',
-      defaultValue: 'Hola',
-      validators: [Validators.required],
-      errorMsg: 'Campo requerido',
-      hintMsg: 'Soy un hjint jejeje'
+    errorMsg: 'Campo requerido',
+  },
+  DetalleCuentaID: {
+    key: 'DetalleCuentaID',
+    type: 'select',
+    label: 'Detalle',
+    defaultValue: null,
+    placeholder: 'Listado seleccionable',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [],
+      labelKey: 'Label',
+      idKey: 'Id'
     },
-    {
-      key: 'button',
-      type: 'button',
-      label: 'Submit',
-      buttonAction: (parent: FormGroup) => {
-        parent.get('input').setValue('Cambiado papulin');
-      }
-    }
-  ]
-};
-
-const activeData =  { Label: 'Si', Id: true };
-const unActiveData =  { Label: 'No', Id: false };
-export let FORM_NODO_CUENTA_CONTABLE = {
-
-    tipo_formulario: 'mini',
-    alertas: true,
-    modelo: 'NodoCuentaContable',
-    campos: [
-        {
-            etiqueta: 'input',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'Codigo',
-            label_i18n: 'Código',
-            placeholder_i18n: 'Código',
-            requerido: true,
-            pattern: '^[1-9]{1,9}',
-            tipo: 'text',
-            prefix: {
-                value: '',
-            },
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-md-12',
-            nombre: 'Activa',
-            label_i18n: 'Activa',
-            placeholder_i18n: 'Activa',
-            requerido: true,
-            tipo: 'Activa',
-            key: 'Label',
-            opciones: [
-                activeData,
-                unActiveData,
-            ],
-        },
-        {
-            etiqueta: 'input',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'Nombre',
-            label_i18n: 'Nombre',
-            placeholder_i18n: 'Nombre del Rubro',
-            requerido: true,
-            tipo: 'text',
-        },
-
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'DetalleCuentaID',
-            label_i18n: 'Detalle Cuenta',
-            placeholder_i18n: 'Detalle Cuenta',
-            requerido: true,
-            tipo: 'Detalle Cuenta',
-            key: 'Label',
-            opciones: [
-                { Label: 1 },
-                { Label: 2 },
-                { Label: 3 }
-            ],
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'NaturalezaCuentaID',
-            label_i18n: 'Naturaleza',
-            placeholder_i18n: 'Naturaleza',
-            requerido: true,
-            tipo: 'NaturalezaCuentaID',
-            key: 'Label',
-            opciones: [
-                { ID: 1, Label: 2 },
-                { ID: 2 , Label: 2},
-                { ID: 3 , Label: 2}
-            ],
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-md-6',
-            nombre: 'CuentaAlterna',
-            label_i18n: 'Cuenta Alterna',
-            placeholder_i18n: 'Cuenta Alterna',
-            requerido: true,
-            tipo: 'CuentaAlterna',
-            key: 'Label',
-            opciones: [
-                activeData,
-                unActiveData,
-            ],
-        },
-        {
-            etiqueta: 'input',
-            claseGrid: 'col-md-6',
-            nombre: 'CodigoCuentaAlterna',
-            label_i18n: 'Código alterno',
-            placeholder_i18n: 'Código alterno',
-            requerido: true,
-            pattern: '^[0-9]{1,9}',
-            tipo: 'number',
-        },
-        {
-            etiqueta: 'input',
-            claseGrid: 'col-md-12',
-            nombre: 'NombreCuentaAlterna',
-            label_i18n: 'Nombre cuenta alterna',
-            placeholder_i18n: 'Nombre cuenta',
-            requerido: false,
-            tipo: 'text',
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'Ajustable',
-            label_i18n: 'Ajustable',
-            placeholder_i18n: 'Ajustable',
-            requerido: true,
-            tipo: 'Ajustable',
-            key: 'Label',
-            opciones: [
-                activeData,
-                unActiveData,
-            ],
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'MonedaID',
-            label_i18n: 'Tipo Moneda',
-            placeholder_i18n: 'Tipo Moneda',
-            requerido: true,
-            tipo: 'MonedaID',
-            key: 'Label',
-            opciones: [
-                { Label: 1 },
-                { Label: 2 },
-                { Label: 3 }
-            ],
-        },
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'RequiereTercero',
-            label_i18n: 'Requiere tercero',
-            placeholder_i18n: 'Requiere tercero',
-            requerido: true,
-            tipo: 'RequiereTercero',
-            key: 'Label',
-            opciones: [
-                activeData,
-                unActiveData,
-            ],
-        },
-
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'CentroDecostosID',
-            label_i18n: 'Centro de costos',
-            placeholder_i18n: 'Centro de costos',
-            requerido: true,
-            tipo: 'CentroDecostosID',
-            key: 'Label',
-            opciones: [
-                { Label: 1 },
-                { Label: 2 },
-            ],
-        },
-
-        {
-            etiqueta: 'select',
-            claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
-            nombre: 'Nmnc',
-            label_i18n: 'NMNC',
-            placeholder_i18n: 'NMNC',
-            requerido: true,
-            tipo: 'Nmnc',
-            key: 'Label',
-            opciones: [
-                activeData,
-                unActiveData,
-            ],
-        },
-    ],
+    errorMsg: 'Campo requerido',
+  },
+  Nombre: {
+    key: 'Nombre',
+    type: 'input',
+    inputType: 'text',
+    label: 'Nombre',
+    defaultValue: 'lalala lalala',
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+  },
+  tieneCentroCostos: {
+    key: 'tieneCentroCostos',
+    type: 'checkbox',
+    inputType: 'text',
+    label: 'Centro de costos',
+    defaultValue: true,
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '1-01',
+  },
+  CentroDecostosID: {
+    key: 'CentroDecostosID',
+    type: 'select',
+    label: 'Centro de costos',
+    defaultValue: null,
+    placeholder: 'Listado seleccionable',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [],
+      labelKey: 'Label',
+      idKey: 'Id'
+    },
+    errorMsg: 'Campo requerido',
+  },
+  RequiereTercero: {
+    key: 'RequiereTercero',
+    type: 'checkbox',
+    inputType: 'text',
+    label: 'Requiere tercero',
+    defaultValue: true,
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '1-01',
+  },
+  tercero: {
+    key: 'tercero',
+    type: 'autocomplete',
+    label: 'Tercero',
+    defaultValue: null,
+    placeholder: 'Tercero',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [{
+        ab: 'calor a'
+      }, {
+        ab: 'dqwqw'
+      }, {
+        ab: 'calor f'
+      }],
+      labelKey: 'ab'
+    },
+    errorMsg: 'Campo requerido',
+  },
+  Ajustable: {
+    key: 'Ajustable',
+    type: 'checkbox',
+    inputType: 'text',
+    label: 'Ajustable',
+    defaultValue: false,
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '1-01',
+  },
+  Nmnc: {
+    key: 'Nmnc',
+    type: 'checkbox',
+    inputType: 'text',
+    label: 'NMNC',
+    defaultValue: false,
+    validators: [Validators.required],
+    errorMsg: 'Campo requerido',
+    hintMsg: 'Complete el código con la cifra consecutiva',
+    prefix: '1-01',
+  },
+  MonedaID: {
+    key: 'MonedaID',
+    type: 'select',
+    label: 'Moneda',
+    defaultValue: null,
+    placeholder: 'Listado seleccionable',
+    validators: [Validators.required],
+    optionList: {
+      elements: () => [],
+      labelKey: 'Label',
+      idKey: 'Id'
+    },
+    errorMsg: 'Campo requerido',
+  }
 };

@@ -1,8 +1,6 @@
-import { Observable } from 'rxjs';
-import { selectAllEntities } from './../../../@core/_store/selectors';
+import { selectAllCuentas } from './../../../@core/_store/selectors';
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NbGetters, NbSortDirection, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbSortRequest } from '@nebular/theme';
-import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 import { EstructuraCuentaContable } from './cuenta-contable.model';
 import { Store, select } from '@ngrx/store';
 
@@ -24,7 +22,7 @@ export class ArbolContableComponent implements OnInit {
   data: any;
   selectedNode: EstructuraCuentaContable;
 
-  dataTree = this.store.pipe(select(selectAllEntities));
+  dataTree = this.store.pipe(select(selectAllCuentas));
 
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable >,
