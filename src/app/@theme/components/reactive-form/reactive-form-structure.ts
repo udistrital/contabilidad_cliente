@@ -45,6 +45,7 @@ export interface OptionList {
     elements: (parent ?: any) => Array < any > ;
     labelKey?: string;
     idKey?: string;
+    valueid?: boolean;
 }
 
 export function isGroup(object: any): object is ReactiveFormGroup {

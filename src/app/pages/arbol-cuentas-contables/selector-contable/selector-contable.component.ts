@@ -14,8 +14,6 @@ import { ReactiveFormStructure } from '../../../@theme/components/reactive-form/
 })
 export class SelectorContableComponent implements OnInit {
 
-  @Output() isValid: EventEmitter < boolean > = new EventEmitter < boolean > ();
-
   dataTree = this.store.pipe(select(selectAllCuentas));
   cuentasList = [];
   form = new FormGroup({});
@@ -74,19 +72,10 @@ export class SelectorContableComponent implements OnInit {
     }
 
     this.form.valueChanges.subscribe((value) => {
-      console.log(value);
 
       const control = this.selectorForm.controls[this.selectorForm.controls.length - 1];
-      if (value && control && value[control.key]) {
+      if (value && control ) {
         this.selectAcount.emit(value[control.key]);
-      }
-    });
-
-    this.form.statusChanges.subscribe((status) => {
-      const value = status === 'VALID';
-      if (this.status !== value) {
-        this.status = value;
-        this.isValid.emit(this.status);
       }
     });
   }
@@ -137,26 +126,26 @@ export class SelectorContableComponent implements OnInit {
     const norma = this.normaContable[this.selectorForm.controls.length];
     if (norma) {
       const control = this.createItemSelector(norma);
-      this.form.addControl(control.key, new FormControl(''));
-      this.form.controls[norma.parent].valueChanges.subscribe((value) => {
-        if (value) {
-          this.form.get(norma.key).setValue('');
-        }
-      });
       this.selectorForm = {
         controls: [
           ...this.selectorForm.controls,
           control
         ]
       };
+      this.form.addControl(control.key, new FormControl(''));
+      this.form.controls[norma.parent].valueChanges.subscribe((value) => {
+        if (value) {
+          this.form.get(norma.key).setValue('');
+        }
+      });
     }
   }
 
   deleteControl() {
     const norma = this.normaContable[this.selectorForm.controls.length - 1];
     if (norma && this.selectorForm.controls.length > this.claseMinima) {
-      this.form.removeControl(norma.key);
       this.selectorForm.controls.pop();
+      this.form.removeControl(norma.key);
     }
   }
 

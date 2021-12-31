@@ -35,7 +35,7 @@
     <mat-form-field class="form-group" appearance="legacy" *ngSwitchCase="'select'">
         <mat-label>{{data.label}}</mat-label>
         <mat-select [formControl]="control">
-            <mat-option *ngFor="let option of selectList" [value]="option">
+            <mat-option *ngFor="let option of selectList" [value]="data.optionList.valueid ? option[data.optionList.idKey] : option">
                 {{option[data.optionList.labelKey]}}
             </mat-option>
         </mat-select>

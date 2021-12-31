@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { myForm} from './form_nodo_cuenta_contable';
-import { FormBuilder } from '@angular/forms';
+import { SelectorContableComponent } from './../selector-contable/selector-contable.component';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormCuentaContable} from './form_nodo_cuenta_contable';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectAllNaturalezas } from '../../../@core/_store/selectors';
@@ -15,40 +16,25 @@ export class CuentaContableComponent implements OnInit {
 
   @Input() cuenta;
 
-  dataForm = {...myForm};
-  valueForm: any = {
-    Codigo: '',
-    Activo: true,
-    Nombre: '',
-    NaturalezaCuentaID: '',
-    tipoCuenta: '',
-    DetalleCuentaID: '',
-    tieneCentroCostos: false,
-    CentroDecostosID: '',
-    RequiereTercero: false,
-    tercero: '',
-    Ajustable: false,
-    Nmnc: false,
-    MonedaID: '',
-  };
-  form = this.builder.group( this.valueForm);
+  @ViewChild(SelectorContableComponent, { static: false})
+  private selectorContable!: SelectorContableComponent;
 
-  indexAcount: string;
-
-  dataNaturalezas = this.store.pipe(select(selectAllNaturalezas));
+  formCuenta = new FormCuentaContable(this.builder);
+  form: FormGroup = this.formCuenta.getForm();
+  prefix: string;
+  naturalezas = [];
+  detalleCuentas = [];
+  tipoMonedas = [];
+  centroCostos = [];
+  tipoCuentas = [{Id: 'activos', Label: 'Activos'}];
 
   constructor(private builder: FormBuilder,
-    private store: Store<any>,
     private acountService: ArbolHelper
     ) {}
 
   ngOnInit() {
-    this.dataNaturalezas.subscribe(res => {
-      //console.log(res, '****/*');
-    });
     this.buildData();
-    this.form.setValue(this.valueForm);
-
+    this.loadParams();
   }
 
   private loadParams() {
@@ -58,81 +44,40 @@ export class CuentaContableComponent implements OnInit {
       this.acountService.getTipoMoneda(),
       this.acountService.getCentroCostos()
     ]).subscribe(results => {
-      this.dataForm.NaturalezaCuentaID = {
-        ...this.dataForm.NaturalezaCuentaID,
-        optionList: {
-          elements: () => results[0],
-          labelKey: 'Label',
-          idKey: 'Id'
-        }
-      };
-      this.dataForm.DetalleCuentaID = {
-        ...this.dataForm.DetalleCuentaID,
-        optionList: {
-          elements: () => results[1],
-          labelKey: 'Label',
-          idKey: 'Id'
-        }
-      };
-      this.dataForm.MonedaID = {
-        ...this.dataForm.MonedaID,
-        optionList: {
-          elements: () => results[2],
-          labelKey: 'Label',
-          idKey: 'Id'
-        }
-      };
-      this.dataForm.CentroDecostosID = {
-        ...this.dataForm.CentroDecostosID,
-        optionList: {
-          elements: () => results[3],
-          labelKey: 'Label',
-          idKey: 'Id'
-        }
-      };
+      this.naturalezas = results[0];
+      this.detalleCuentas = results[1];
+      this.tipoMonedas = results[2];
+      this.centroCostos = results[3];
     });
   }
 
   private buildData() {
-
     if (this.cuenta) {
-      this.acountService.getInfoCuenta(this.cuenta.Codigo).subscribe(res => {
-        this.valueForm.RequiereTercero = res.RequiereTercero;
-        this.valueForm.Nmnc = res.Nmnc;
-        this.valueForm.Ajustable = res.Ajustable;
-        this.valueForm.NaturalezaCuentaID = {Label: res.NaturalezaCuentaID, Id: res.NaturalezaCuentaID};
-        this.valueForm.MonedaID = {Label: res.MonedaID, Id: res.MonedaID};
-        this.valueForm.DetalleCuentaID = {Label: res.DetalleCuentaID, Id: res.DetalleCuentaID};
-        this.valueForm.CentroDecostosID = {Label: res.CentroDecostosID, Id: res.CentroDecostosID};
-        this.form.setValue(this.valueForm);
-        this.loadParams();
-      });
-
       const codes = this.cuenta.Codigo.split('-');
-      this.valueForm.Codigo = codes.pop();
-      this.indexAcount = codes.join('-');
-      this.dataForm.Codigo.prefix = `${this.indexAcount}-`;
-      this.valueForm.Nombre = this.cuenta.Nombre;
-    } else {
-      this.loadParams();
+      const code = codes.pop();
+      this.prefix = `${codes.join('-')}`;
+      this.acountService.getInfoCuenta(this.cuenta.Codigo).subscribe(res => {
+        this.form.patchValue({...res, Codigo: code});
+      });
     }
   }
 
   something() {
-    this.form.markAllAsTouched();
-    console.log(this.form);
-    
   }
 
-  setSelectedCount(count) {
+  setSelectedCount(account) {
+    console.log(account);
+    if (account && account.data) {
+      const data = account.data;
+      this.prefix = data.Codigo;
+    }
+  }
+
+  addNode() {
 
   }
 
-  validarForm($event) {
-
-  }
-
-  validarCampo($event) {
+  updateNode() {
 
   }
 
@@ -141,7 +86,22 @@ export class CuentaContableComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.value);
+    if (this.form.valid && this.selectorContable.form.valid) {
+      // this.acountService.updateNode(this.form.value.Codigo, this.form.value);
+      const code =  this.prefix + '-' + this.form.value.Codigo;
+      const newAccount = {
+        ...this.form.value,
+        Nivel: code.split('-').length,
+        Padre: this.prefix,
+      };
+      this.acountService.addNode(newAccount).subscribe(res => {
+        console.log(res);
+      });
+    } else {
+      this.form.markAllAsTouched();
+      this.selectorContable.form.markAllAsTouched();
+    }
+    console.log(this.form.value, this.selectorContable);
   }
 
 }

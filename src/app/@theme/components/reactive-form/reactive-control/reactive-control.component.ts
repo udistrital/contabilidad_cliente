@@ -99,7 +99,7 @@ export class ReactiveControlComponent implements OnInit {
 
   buildSelect(item: ReactiveFormControl) {
     this.selectList = item.optionList.elements();
-    if(this.control.value) {
+    if(this.control.value && !item.optionList.valueid) {
       this.control.setValue(this.selectList.find(option => option[item.optionList.idKey] === this.control.value[item.optionList.idKey]));
     }
   }
