@@ -19,7 +19,6 @@ export class SelectorContableComponent implements OnInit {
   form = new FormGroup({});
   formValue: any = {};
   status = false;
-  claseMinima = 3;
   normaContable = [{
       key: 'grupo',
       label: 'Grupo',
@@ -57,6 +56,8 @@ export class SelectorContableComponent implements OnInit {
   @Output() selectAcount: EventEmitter < any > = new EventEmitter();
 
   @Input() account: string;
+
+  @Input() claseMinima: number;
 
   constructor(private store: Store < any > ) {}
 

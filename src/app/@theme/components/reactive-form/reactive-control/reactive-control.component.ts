@@ -39,7 +39,7 @@ export class ReactiveControlComponent implements OnInit {
 
   private buildControl() {
     if (this.data) {
-      //const [parent, value] = [this.control.parent, this.control.value];
+      // const [parent, value] = [this.control.parent, this.control.value];
 
       switch (this.data.type) {
         case 'autocomplete':
@@ -57,16 +57,16 @@ export class ReactiveControlComponent implements OnInit {
         default:
           break;
       }
-      //this.control.setValue(this.control.value || this.data.defaultValue);
+      // this.control.setValue(this.control.value || this.data.defaultValue);
       this.control.setValidators(this.data.validators);
-      //this.control.setParent(parent);
-      //this.control.setValue(value);
+      // this.control.setParent(parent);
+      // this.control.setValue(value);
       this.controlChange.emit(this.control);
     }
   }
 
   buildAutocomplete(item: ReactiveFormControl) {
-    //const formControl = new FormControl(item.defaultValue, item.validators);
+    // const formControl = new FormControl(item.defaultValue, item.validators);
     this.filterList = this.control.valueChanges.pipe(
       startWith(''),
       map(value => {
@@ -78,7 +78,7 @@ export class ReactiveControlComponent implements OnInit {
         });
       }),
     );
-    //return formControl;
+    // return formControl;
   }
 
   focusAutocomplete() {
@@ -99,7 +99,7 @@ export class ReactiveControlComponent implements OnInit {
 
   buildSelect(item: ReactiveFormControl) {
     this.selectList = item.optionList.elements();
-    if(this.control.value && !item.optionList.valueid) {
+    if (this.control.value && !item.optionList.valueid) {
       this.control.setValue(this.selectList.find(option => option[item.optionList.idKey] === this.control.value[item.optionList.idKey]));
     }
   }

@@ -2,9 +2,6 @@ import { EstructuraCuentaContable } from './arbol-contable/cuenta-contable.model
 import { Component, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-CO';
-import { MatDialog } from '@angular/material';
-import { CuentaContableComponent } from './cuenta-contable/cuenta-contable.component';
-import { type } from 'os';
 
 registerLocaleData(locales, 'co');
 

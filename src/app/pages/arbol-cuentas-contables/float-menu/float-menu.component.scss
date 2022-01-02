@@ -1,8 +1,10 @@
 @import '../../../@theme/styles/themes';
+
 .float-menu {
     overflow: auto;
     display: flex;
     align-content: flex-end;
+
     .item {
         .menu-icon {
             * {
@@ -11,9 +13,9 @@
 
             text-align: center;
         }
-    
+
         .menu-label {
-            padding: 0px 15px;
+            padding: 0 15px;
             font-size: 1.2rem;
         }
 
@@ -26,25 +28,24 @@
         padding: 10px;
         margin: 4px;
         border-radius: 15px;
-        cursor: pointer;
         &:hover {
-            box-shadow: 3px 1px 6px 0px #000000;
+            box-shadow: 3px 1px 6px 0 #000000;
         }
 
     }
 
     &.primary {
-        .item {      
-            color: nb-theme(menu-text-color);      
-            background-color:  nb-theme(color-primary-900);
+        .item {
+            color: nb-theme(menu-text-color);
+            background-color: nb-theme(color-primary-900);
         }
 
     }
 
     &.basic-dark {
-        .item {      
-            color: nb-theme(color-primary-500);      
-            background-color:  nb-theme(color-basic-1100);
+        .item {
+            color: nb-theme(color-primary-500);
+            background-color: nb-theme(color-basic-1100);
         }
 
     }

@@ -1,11 +1,10 @@
 import { SelectorContableComponent } from './../selector-contable/selector-contable.component';
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormCuentaContable} from './form_nodo_cuenta_contable';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { forkJoin } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { selectAllNaturalezas } from '../../../@core/_store/selectors';
 import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
+import { PopUpManager } from '../../../@core/managers/popUpManager';
 
 @Component({
   selector: 'ngx-cuenta-contable',
@@ -16,7 +15,9 @@ export class CuentaContableComponent implements OnInit {
 
   @Input() cuenta;
 
-  @ViewChild(SelectorContableComponent, { static: false})
+  @ViewChild(SelectorContableComponent, {
+    static: false
+  })
   private selectorContable!: SelectorContableComponent;
 
   formCuenta = new FormCuentaContable(this.builder);
@@ -26,11 +27,15 @@ export class CuentaContableComponent implements OnInit {
   detalleCuentas = [];
   tipoMonedas = [];
   centroCostos = [];
-  tipoCuentas = [{Id: 'activos', Label: 'Activos'}];
+  tipoCuentas = [{
+    Id: 'activos',
+    Label: 'Activos'
+  }];
 
   constructor(private builder: FormBuilder,
-    private acountService: ArbolHelper
-    ) {}
+    private acountService: ArbolHelper,
+    private pUpManager: PopUpManager,
+  ) {}
 
   ngOnInit() {
     this.buildData();
@@ -57,51 +62,61 @@ export class CuentaContableComponent implements OnInit {
       const code = codes.pop();
       this.prefix = `${codes.join('-')}`;
       this.acountService.getInfoCuenta(this.cuenta.Codigo).subscribe(res => {
-        this.form.patchValue({...res, Codigo: code});
+        this.cuenta = res;
+        this.form.patchValue({
+          ...res,
+          Codigo: code
+        });
       });
     }
   }
 
-  something() {
-  }
-
   setSelectedCount(account) {
-    console.log(account);
     if (account && account.data) {
       const data = account.data;
       this.prefix = data.Codigo;
     }
   }
 
-  addNode() {
-
+  addNode(node) {
+    this.acountService.addNode(node).subscribe(res => {
+      if (res) {
+        this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta registrada correctamente');
+        this.form.reset();
+      }
+    });
   }
 
-  updateNode() {
-
-  }
-
-  validateSelector($event) {
-    console.log($event);
+  updateNode(node, code) {
+    const acount = {
+      ...this.cuenta,
+      ...node,
+    };
+    if (!this.prefix) {
+      delete acount['Padre'];
+    }
+    this.acountService.updateNode(code, acount).subscribe(res => {
+      if (res) {
+        this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente');
+      }
+    });
   }
 
   onSubmit() {
     if (this.form.valid && this.selectorContable.form.valid) {
       // this.acountService.updateNode(this.form.value.Codigo, this.form.value);
-      const code =  this.prefix + '-' + this.form.value.Codigo;
+      const code = `${this.prefix ? this.prefix + '-' : '' }${this.form.value.Codigo}`;
       const newAccount = {
         ...this.form.value,
         Nivel: code.split('-').length,
         Padre: this.prefix,
       };
-      this.acountService.addNode(newAccount).subscribe(res => {
-        console.log(res);
-      });
+      this.cuenta ? this.updateNode(newAccount, code) : this.addNode(newAccount);
+
     } else {
       this.form.markAllAsTouched();
       this.selectorContable.form.markAllAsTouched();
     }
-    console.log(this.form.value, this.selectorContable);
   }
 
 }

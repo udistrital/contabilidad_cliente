@@ -1,5 +1,5 @@
 
-    <ngx-selector-contable #selectorContable (selectAcount)="setSelectedCount($event)" [account]="prefix">
+    <ngx-selector-contable #selectorContable (selectAcount)="setSelectedCount($event)" [account]="prefix" [claseMinima]="cuenta ? cuenta.Nivel - 1: 3">
     </ngx-selector-contable>
 
     <nb-card class="cuenta-contable" *ngIf="form">
@@ -15,7 +15,7 @@
                 <mat-error *ngIf="form.controls['Codigo'].errors">
                     {{form.controls['Codigo'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Ingrese el codigo consecutivo</strong> </mat-hint>
+                <mat-hint><strong>Ingrese el código consecutivo</strong> </mat-hint>
             </mat-form-field>
 
             </mat-grid-tile>
@@ -45,7 +45,6 @@
                 <mat-error *ngIf="form.controls['NaturalezaCuentaID'].errors">
                     {{form.controls['NaturalezaCuentaID'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Seleccione la naturaleza de la cuenta</strong> </mat-hint>
               </mat-form-field>
             </mat-grid-tile>
 
@@ -58,7 +57,6 @@
                 <mat-error *ngIf="form.controls['TipoCuenta'].errors">
                     {{form.controls['TipoCuenta'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Seleccione el tipo de cuenta</strong> </mat-hint>
               </mat-form-field>
             </mat-grid-tile>
 
@@ -71,8 +69,35 @@
                 <mat-error *ngIf="form.controls['DetalleCuentaID'].errors">
                     {{form.controls['DetalleCuentaID'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Seleccione el detalle de la cuenta</strong> </mat-hint>
               </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" rowspan="1">
+              <section class="form-group" appearance="legacy">
+                <mat-slide-toggle [formControl]="form.controls['RequiereTercero']" [color]="'primary'">Requiere Tercero</mat-slide-toggle>
+              </section>
+            </mat-grid-tile>
+
+            <!-- <mat-grid-tile colspan="5" rowspan="1">
+              <mat-form-field class="form-group" appearance="legacy">
+                <mat-label>Tercero</mat-label>
+                <input type="text" matInput placeholder="Tercero" [formControl]="form.controls['Tercero']">
+                <mat-error *ngIf="form.controls['Tercero'].errors">
+                    {{form.controls['Tercero'].errors.msg || 'ingrese un dato valido' }}
+                </mat-error>
+              </mat-form-field>
+            </mat-grid-tile> -->
+
+            <mat-grid-tile colspan="2" rowspan="1">
+              <section class="form-group" appearance="legacy">
+                <mat-slide-toggle [formControl]="form.controls['Ajustable']" [color]="'primary'">Ajustable</mat-slide-toggle>
+              </section>
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="2" rowspan="1">
+              <section class="form-group" appearance="legacy">
+                <mat-slide-toggle [formControl]="form.controls['Nmnc']" [color]="'primary'">NMNC</mat-slide-toggle>
+              </section>
             </mat-grid-tile>
 
             <mat-grid-tile colspan="1" rowspan="1">
@@ -90,24 +115,6 @@
                 <mat-error *ngIf="form.controls['CentroDecostosID'].errors">
                     {{form.controls['CentroDecostosID'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Seleccione el CentroDecostosID de la cuenta</strong> </mat-hint>
-              </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="1" rowspan="1">
-              <section class="form-group" appearance="legacy">
-                <mat-slide-toggle [formControl]="form.controls['RequiereTercero']" [color]="'primary'">Requiere Tercero</mat-slide-toggle>
-              </section>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="5" rowspan="1">
-              <mat-form-field class="form-group" appearance="legacy">
-                <mat-label>Tercero</mat-label>
-                <input type="text" matInput placeholder="Tercero" [formControl]="form.controls['Tercero']">
-                <mat-error *ngIf="form.controls['Tercero'].errors">
-                    {{form.controls['Tercero'].errors.msg || 'ingrese un dato valido' }}
-                </mat-error>
-                <mat-hint><strong>Ingrese el nombre de la Tercero</strong> </mat-hint>
               </mat-form-field>
             </mat-grid-tile>
 
@@ -124,23 +131,10 @@
                 <mat-error *ngIf="form.controls['Banco'].errors">
                     {{form.controls['Banco'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Ingrese el nombre de la Banco</strong> </mat-hint>
               </mat-form-field>              
             </mat-grid-tile>
 
-            <mat-grid-tile colspan="2" rowspan="1">
-              <section class="form-group" appearance="legacy">
-                <mat-slide-toggle [formControl]="form.controls['Ajustable']" [color]="'primary'">Ajustable</mat-slide-toggle>
-              </section>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="2" rowspan="1">
-              <section class="form-group" appearance="legacy">
-                <mat-slide-toggle [formControl]="form.controls['Nmnc']" [color]="'primary'">NMNC</mat-slide-toggle>
-              </section>
-            </mat-grid-tile>
-
-            <mat-grid-tile colspan="2" rowspan="1">
+            <mat-grid-tile colspan="6" rowspan="1">
               <mat-form-field class="form-group" appearance="legacy">
                 <mat-label>Moneda</mat-label>
                 <mat-select [formControl]="form.controls['MonedaID']">
@@ -149,7 +143,6 @@
                 <mat-error *ngIf="form.controls['MonedaID'].errors">
                     {{form.controls['MonedaID'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-                <mat-hint><strong>Seleccione el detalle de la MonedaID</strong> </mat-hint>
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
