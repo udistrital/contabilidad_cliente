@@ -39,14 +39,12 @@ export class ReactiveControlComponent implements OnInit {
 
   private buildControl() {
     if (this.data) {
-      // const [parent, value] = [this.control.parent, this.control.value];
 
       switch (this.data.type) {
         case 'autocomplete':
           this.buildAutocomplete(this.data);
           break;
         case 'input':
-          this.buildInput(this.data);
           break;
         case 'button':
           this.buildButton(this.data);
@@ -57,28 +55,23 @@ export class ReactiveControlComponent implements OnInit {
         default:
           break;
       }
-      // this.control.setValue(this.control.value || this.data.defaultValue);
       this.control.setValidators(this.data.validators);
-      // this.control.setParent(parent);
-      // this.control.setValue(value);
       this.controlChange.emit(this.control);
     }
   }
 
   buildAutocomplete(item: ReactiveFormControl) {
-    // const formControl = new FormControl(item.defaultValue, item.validators);
     this.filterList = this.control.valueChanges.pipe(
       startWith(''),
       map(value => {
-        item.valueChanges ? item.valueChanges(this.control.parent) : null;
+        if (item.valueChanges) item.valueChanges(this.control.parent);
         return item.optionList.elements(this.control.parent).filter(option => {
           const labelKey: string = option[item.optionList.labelKey] || option;
-          const valueKey: string = value && typeof value === 'object' ? value[item.optionList.labelKey] : value;
+          const valueKey: string = ( value && typeof value === 'object' ) ? value[item.optionList.labelKey] : value;
           return labelKey.toLowerCase().includes(valueKey ? valueKey.toLowerCase() : '');
         });
       }),
     );
-    // return formControl;
   }
 
   focusAutocomplete() {
@@ -89,12 +82,7 @@ export class ReactiveControlComponent implements OnInit {
   }
 
   dislayAutocomplete = (value) => {
-    // value && typeof value === 'object' ? value[item.optionList.labelKey] : value;
-    return value && typeof value === 'object' ? value[this.data.optionList.labelKey] : value;
-  }
-
-  buildInput(item: ReactiveFormControl) {
-    // const formControl = new FormControl(item.defaultValue, item.validators);
+    return ( value && typeof value === 'object' ) ? value[this.data.optionList.labelKey] : value;
   }
 
   buildSelect(item: ReactiveFormControl) {

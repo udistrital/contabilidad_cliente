@@ -37,7 +37,7 @@ export class ArbolContableComponent implements OnInit {
     const getters: NbGetters < any, any > = {
       dataGetter: (node: any) => node.data || undefined,
       childrenGetter: (node: any) =>
-        !!node.children && !!node.children.length ? node.children : [],
+        ( !!node.children && !!node.children.length ) ? node.children : [],
       expandedGetter: (node: any) => !!node.expanded,
     };
 

@@ -104,7 +104,6 @@ export class CuentaContableComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid && this.selectorContable.form.valid) {
-      // this.acountService.updateNode(this.form.value.Codigo, this.form.value);
       const code = `${this.prefix ? this.prefix + '-' : '' }${this.form.value.Codigo}`;
       const newAccount = {
         ...this.form.value,

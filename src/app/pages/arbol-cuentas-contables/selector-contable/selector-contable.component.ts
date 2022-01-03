@@ -84,7 +84,6 @@ export class SelectorContableComponent implements OnInit {
   public setAcount() {
     if (this.account) {
       const codigos = this.account.split('-');
-      // codigos.pop();
       this.claseMinima = codigos.length;
       codigos.forEach((codigo, index) => {
         if (index === 0) {
@@ -172,7 +171,7 @@ export class SelectorContableComponent implements OnInit {
         labelKey: 'Nombre',
       },
       valueChanges: (parent) => {
-        parent.get(item.child) && typeof parent.get(item.key).value !== 'object' ? parent.get(item.child).setValue('') : null;
+        if (parent.get(item.child) && typeof parent.get(item.key).value !== 'object') parent.get(item.child).setValue('');
       }
     };
   }
