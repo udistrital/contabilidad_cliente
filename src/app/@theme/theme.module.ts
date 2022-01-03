@@ -30,6 +30,9 @@ import {
   DinamicformComponent,
   ListEntityComponent,
   CrudEntityComponent,
+  FsIconAComponent,
+  ReactiveFormComponent,
+  ReactiveControlComponent
 } from './components';
 import {
   CapitalizePipe,
@@ -116,6 +119,9 @@ const COMPONENTS = [
   ListEntityComponent,
   CrudEntityComponent,
   PDFviewerComponent,
+  FsIconAComponent,
+  ReactiveFormComponent,
+  ReactiveControlComponent
 ];
 const PIPES = [
   CapitalizePipe,
@@ -181,7 +187,7 @@ const NB_THEME_PROVIDERS = [
 @NgModule({
   imports: [SharedModule, CommonModule, FormsModule, ReactiveFormsModule, ...NB_MODULES, ...MAT_MODULES, Ng2SmartTableModule, CurrencyMaskModule],
   exports: [CommonModule, FormsModule, ReactiveFormsModule, TranslateModule, ...PIPES, ...COMPONENTS, ...MAT_MODULES],
-  declarations: [...COMPONENTS, ...PIPES, DinamicformComponent, ListEntityComponent, CrudEntityComponent],
+  declarations: [...COMPONENTS, ...PIPES, DinamicformComponent, FsIconAComponent, ListEntityComponent, CrudEntityComponent],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

@@ -5,3 +5,6 @@ export * from './tiny-mce/tiny-mce.component';
 export * from './dinamicform/dinamicform.component';
 export * from './crud/list-component/list.component';
 export * from './crud/crud-component/crud.component';
+export * from './tree-icon/nb-fs-icon.component';
+export * from './reactive-form/reactive-form.component';
+export * from './reactive-form/reactive-control/reactive-control.component';

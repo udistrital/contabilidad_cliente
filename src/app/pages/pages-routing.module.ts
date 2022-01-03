@@ -7,7 +7,10 @@ import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comproban
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 import { ConceptosComponent } from './conceptos/conceptos.component';
+import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable/arbol-contable.component';
+import { CuentasResolver } from '../@core/_resolver/entities.resolver';
 
+export const entityResolvers = [CuentasResolver];
 
 const routes: Routes = [
   {
@@ -29,7 +32,14 @@ const routes: Routes = [
       },
       {
         path: 'arbol_cuentas_contables',
-        component: ArbolCuentasContablesComponent
+        component: ArbolCuentasContablesComponent,
+        resolve: {
+          cuentas: CuentasResolver
+        }
+      },
+      {
+        path: 'arbol-contable',
+        component: ArbolContableComponent
       },
       {
         path: 'conceptos',

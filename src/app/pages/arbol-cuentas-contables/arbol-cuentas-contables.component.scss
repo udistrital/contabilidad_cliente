@@ -1,61 +1,23 @@
-button[nbTreeGridRowToggle] {
-  background: transparent;
-  border: none;
-  padding: 0;
+.aligned {
+  display: flex;
+  justify-content: center;
 }
 
-.table-row {
-  &:hover {
-    background: #e6e6e6;
-  }
+.floating {
+  margin-bottom: 20px;
+  position: sticky;
+  top: 50px;
 
 }
-:host ::ng-deep table tr td {
-  padding: -0.125rem 1.25rem !important;
-  font-size: 12px !important;
-}
-.aligned-code {
-  padding-left: 8px;
-}
-.search-label {
-  display: block;
-}
-.search-input {
-  margin-bottom: 1rem;
-}
 
-.nb-column-name {
+:host ::ng-deep .mat-tab-label-content {
   width: 100%;
-}
-
-@media screen and (min-width: 400px) {
-  .nb-column-name,
-  .nb-column-size {
-    width: 50%;
+  align-content: space-between;
+  .tab-title {
+    padding: 0 10px;
+    width: 100%;
+    text-align: center;
+    word-break: break-word;
   }
+
 }
-
-@media screen and (min-width: 500px) {
-  .nb-column-name,
-  .nb-column-size,
-  .nb-column-kind {
-    width: 33.333%;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .nb-column-name {
-    width: 31%;
-  }
-  .nb-column-size,
-  .nb-column-kind,
-  .nb-column-items {
-    width: 23%;
-  }
-}
-
-
-.moneyField {
-  text-align: right;
-}
-

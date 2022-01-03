@@ -1,0 +1,10 @@
+<div class="float-menu" [ngClass]="menu.style" [ngStyle]="{'flex-direction': menu.direction}" >
+    <div *ngFor="let item of menu.options" class="item" (mouseenter) ="item.showLabel= true" (mouseleave)="item.showLabel= false" (click)="onSelect(item.key)" >
+        <div class="menu-icon" >
+            <nb-icon
+            [icon]="item.icon" aria-hidden="true" pack="fas">
+          </nb-icon>
+        </div>        
+        <div [hidden]="!item.showLabel && !menu.expanded" class="menu-label">{{item.label}}</div>
+    </div>
+</div>
