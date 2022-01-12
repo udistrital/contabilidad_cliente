@@ -87,10 +87,11 @@ export class CuentaContableComponent implements OnInit {
     });
   }
 
-  updateNode(node) {
+  updateNode(node, code) {
     const acount = {
       ...this.cuenta,
       ...node,
+      Codigo: code
     };
     if (!this.prefix) {
       delete acount['Padre'];
@@ -110,7 +111,7 @@ export class CuentaContableComponent implements OnInit {
         Nivel: code.split('-').length,
         Padre: this.prefix,
       };
-      this.cuenta ? this.updateNode(newAccount) : this.addNode(newAccount);
+      this.cuenta ? this.updateNode(newAccount, code) : this.addNode(newAccount);
 
     } else {
       this.form.markAllAsTouched();
