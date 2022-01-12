@@ -61,7 +61,7 @@ export class CuentaContableComponent implements OnInit {
       const codes = this.cuenta.Codigo.split('-');
       const code = codes.pop();
       this.prefix = `${codes.join('-')}`;
-      this.acountService.getInfoCuenta(this.cuenta.Codigo).subscribe(res => {
+      this.acountService.getInfoCuenta(this.cuenta.Id).subscribe(res => {
         this.cuenta = res;
         this.form.patchValue({
           ...res,
@@ -87,7 +87,7 @@ export class CuentaContableComponent implements OnInit {
     });
   }
 
-  updateNode(node, code) {
+  updateNode(node) {
     const acount = {
       ...this.cuenta,
       ...node,
@@ -95,7 +95,7 @@ export class CuentaContableComponent implements OnInit {
     if (!this.prefix) {
       delete acount['Padre'];
     }
-    this.acountService.updateNode(code, acount).subscribe(res => {
+    this.acountService.updateNode(acount.Id, acount).subscribe(res => {
       if (res) {
         this.pUpManager.showAlert('success', 'Cuenta contable', 'Cuenta actualizada correctamente');
       }
@@ -110,7 +110,7 @@ export class CuentaContableComponent implements OnInit {
         Nivel: code.split('-').length,
         Padre: this.prefix,
       };
-      this.cuenta ? this.updateNode(newAccount, code) : this.addNode(newAccount);
+      this.cuenta ? this.updateNode(newAccount) : this.addNode(newAccount);
 
     } else {
       this.form.markAllAsTouched();
