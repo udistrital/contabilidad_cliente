@@ -1,6 +1,24 @@
 .cuenta-contable {
+    .cuenta-form {
+        input {
+            &:disabled {
+                color: #111;
+            }
+        }
+    }
     .form-group {
         width: 100%;
         padding: 0 10px;
+    }
+}
+::ng-deep .mat-select-disabled .mat-select-value {
+    color: #111;
+}
+::ng-deep .form-group .mat-slide-toggle {
+    &.mat-disabled {
+        opacity: 1;
+        .mat-slide-toggle-bar {
+            opacity: .50;
+        }
     }
 }
