@@ -15,6 +15,8 @@ export class CuentaContableComponent implements OnInit {
 
   @Input() cuenta;
 
+  @Input() action;
+
   @ViewChild(SelectorContableComponent, {
     static: false
   })
@@ -27,10 +29,7 @@ export class CuentaContableComponent implements OnInit {
   detalleCuentas = [];
   tipoMonedas = [];
   centroCostos = [];
-  tipoCuentas = [{
-    Id: 'activos',
-    Label: 'Activos'
-  }];
+  tipoCuentas = [];
 
   constructor(private builder: FormBuilder,
     private acountService: ArbolHelper,
@@ -47,12 +46,14 @@ export class CuentaContableComponent implements OnInit {
       this.acountService.getNaturalezaCuenta(),
       this.acountService.getDetalleCuenta(),
       this.acountService.getTipoMoneda(),
-      this.acountService.getCentroCostos()
+      this.acountService.getCentroCostos(),
+      this.acountService.getTipoCuenta()
     ]).subscribe(results => {
       this.naturalezas = results[0];
       this.detalleCuentas = results[1];
       this.tipoMonedas = results[2];
       this.centroCostos = results[3];
+      this.tipoCuentas = results[4];
     });
   }
 
@@ -67,7 +68,11 @@ export class CuentaContableComponent implements OnInit {
           ...res,
           Codigo: code
         });
+        this.form.controls['Codigo'].disable();
       });
+      if (this.action === 'ver') {
+        this.form.disable();
+      }
     }
   }
 
