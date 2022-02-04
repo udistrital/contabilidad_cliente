@@ -1,11 +1,17 @@
 import { SelectorContableComponent } from './../selector-contable/selector-contable.component';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormCuentaContable} from './form_nodo_cuenta_contable';
+import { FormCuentaContable } from './form_nodo_cuenta_contable';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
+import { TesoreriaHelper } from '../../../@core/helpers/tesoreria/tesoreriaHelper';
+import { map, startWith } from 'rxjs/operators';
 
+export const _filter = (opt: any[], value: string): string[] => {
+  const filterValue = value.toLowerCase();
+  return opt.filter(item => item.name.toLowerCase().includes(filterValue) || item.NombreBanco.toLowerCase().includes(filterValue));
+};
 @Component({
   selector: 'ngx-cuenta-contable',
   templateUrl: './cuenta-contable.component.html',
@@ -30,15 +36,39 @@ export class CuentaContableComponent implements OnInit {
   tipoMonedas = [];
   centroCostos = [];
   tipoCuentas = [];
+  bancos = [];
+  bancosFilter: Observable<any[]>;
+
 
   constructor(private builder: FormBuilder,
     private acountService: ArbolHelper,
     private pUpManager: PopUpManager,
-  ) {}
+    private bancosService: TesoreriaHelper
+  ) { }
 
   ngOnInit() {
     this.buildData();
     this.loadParams();
+    this.bancosService.getCuentasBancarias().subscribe(res => {
+      if (res && res.Data) {
+        this.bancos = this.groupBy(res.Data, 'NombreBanco');
+      }
+    });
+    this.bancosFilter = this.form.get('Banco')!.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterGroup(value)),
+    );
+  }
+
+  private _filterGroup(value): any[] {
+    const valueKey: string = ( value && typeof value === 'object' ) ? value['name'] : value;
+    if (valueKey) {
+      return this.bancos
+        .map(group => ({group: group.group, data: _filter(group.data, valueKey)}))
+        .filter(group => group.data.length > 0);
+    }
+
+    return this.bancos;
   }
 
   private loadParams() {
@@ -110,7 +140,7 @@ export class CuentaContableComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid && this.selectorContable.form.valid) {
-      const code = `${this.prefix ? this.prefix + '-' : '' }${this.form.value.Codigo}`;
+      const code = `${this.prefix ? this.prefix + '-' : ''}${this.form.value.Codigo}`;
       const newAccount = {
         ...this.form.value,
         Nivel: code.split('-').length,
@@ -122,6 +152,24 @@ export class CuentaContableComponent implements OnInit {
       this.form.markAllAsTouched();
       this.selectorContable.form.markAllAsTouched();
     }
+  }
+
+  dislayBanco = (value) => {
+    return ( value && typeof value === 'object' ) ? value['name'] : value;
+  }
+
+  groupBy(xs, key) {
+    let result;
+    try {
+      const grouped = xs.reduce(function (rv, x) {
+        (rv[x[key]] = rv[x[key]] || []).push({...x, name: `${x.NombreSucursal} - ${x.NumeroCuenta}`});
+        return rv;
+      }, {});
+      result = Object.keys(grouped).map((i) => ({ group: i, data: grouped[i] }));
+    } catch {
+      result = [];
+    }
+    return result;
   }
 
 }

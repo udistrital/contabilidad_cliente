@@ -105,11 +105,24 @@
             <mat-grid-tile colspan="6" rowspan="1">
               <mat-form-field class="form-group" appearance="legacy">
                 <mat-label>Banco</mat-label>
-                <input type="text" matInput placeholder="Banco" [formControl]="form.controls['Banco']">
+                <input type="text"
+                      matInput
+                      placeholder="Banco" 
+                      [formControl]="form.controls['Banco']"
+                      [matAutocomplete]="autoGroup"
+                      autocomplete="off">
+                  <mat-autocomplete #autoGroup="matAutocomplete" [displayWith]="dislayBanco">
+                    <mat-optgroup *ngFor="let group of bancosFilter | async" [label]="group.group">
+                      <mat-option *ngFor="let cuenta of group.data" [value]="cuenta">
+                        {{cuenta.name}}
+                      </mat-option>
+                  </mat-optgroup>
+                </mat-autocomplete>
                 <mat-error *ngIf="form.controls['Banco'].errors">
                     {{form.controls['Banco'].errors.msg || 'ingrese un dato valido' }}
                 </mat-error>
-              </mat-form-field>              
+              </mat-form-field>
+
             </mat-grid-tile>
 
             <mat-grid-tile colspan="6" rowspan="1">
