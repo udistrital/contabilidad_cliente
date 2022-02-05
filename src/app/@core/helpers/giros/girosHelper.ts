@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestManager } from '../../managers/requestManager';
+import { QueryParams } from '../model/query-params';
 
 @Injectable({
     providedIn: 'root',
@@ -9,7 +10,7 @@ export class GirosHelper {
 
     // Terceros
 
-    public getCuentasBancarias(parameters?: { id?: any, query?: any, fields?: string[], sortby?: string[], order?: string[], limit?: number, offset?: number }) {
+    public getCuentasBancarias(parameters?: QueryParams) {
         this.rqManager.setPath('GIROS_CRUD_SERVICE');
         return this.rqManager.getv2('cuenta_bancaria', parameters);
     }

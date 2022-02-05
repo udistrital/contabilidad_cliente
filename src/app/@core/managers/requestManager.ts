@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { catchError, map } from 'rxjs/operators';
 import { HttpErrorManager } from './errorManager';
+import { QueryParams } from '../helpers/model/query-params';
 /**
  * This class manage the http connections with internal REST services. Use the response format {
  *  Code: 'xxxxx',
@@ -52,7 +53,7 @@ export class RequestManager {
    * @param offset Start position of result set. Must be an integer
    * @returns
    */
-  getv2(endpoint: string, parameters?: { id?: any, query?: any, fields?: string[], sortby?: string[], order?: string[], limit?: number, offset?: number }) {
+  getv2(endpoint: string, parameters?: QueryParams) {
     const params = {};
     const id = parameters ? parameters.id : undefined;
     if (parameters) {

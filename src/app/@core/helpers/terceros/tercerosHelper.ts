@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { RequestManager } from '../../managers/requestManager';
+import { QueryParams } from '../model/query-params';
 
 @Injectable({
     providedIn: 'root',
@@ -25,7 +26,7 @@ export class TercerosHelper {
     }
 
     // Tercero_tipo_tercero
-    public getTerceroTipoTercero(parameters?: { id?: any, query?: any, fields?: string[], sortby?: string[], order?: string[], limit?: number, offset?: number }) {
+    public getTerceroTipoTercero(parameters?: QueryParams) {
         this.rqManager.setPath('TERCEROS_CRUD_SERVICE');
         return this.rqManager.getv2('tercero_tipo_tercero', parameters);
     }
