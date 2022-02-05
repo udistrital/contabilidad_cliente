@@ -1,4 +1,5 @@
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { CustomValidators } from '../../../@core/_custom-validators/custom-validators';
 
 export class FormCuentaContable  {
 
@@ -11,7 +12,7 @@ export class FormCuentaContable  {
     DetalleCuentaID: ['', Validators.required],
     CentroDecostosID: [''],
     RequiereTercero: [false],
-    Banco: [''],
+    Banco: ['', CustomValidators.customObject('Debe seleccionar un elemento')],
     Ajustable: [false],
     Nmnc: [false],
     MonedaID: ['',  Validators.required],

@@ -10,8 +10,18 @@ function customRequired(msg: string): ValidatorFn {
     };
 }
 
+function customObject(msg?: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+        return control.value && typeof control.value !== 'object' ? {
+            customObject: true,
+            msg
+        } : null;
+    };
+}
+
 const CustomValidators = {
-    customRequired
+    customRequired,
+    customObject
 };
 
 export {

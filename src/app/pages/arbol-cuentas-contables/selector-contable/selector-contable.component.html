@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card class="selector-form">
     <nb-card-body>
         <div [formGroup]="form">
             <div *ngFor="let element of selectorForm.controls">
@@ -6,7 +6,7 @@
             </div>
         </div>
     </nb-card-body>
-    <nb-card-footer nbButtonGroup style="text-align: right;">
+    <nb-card-footer nbButtonGroup style="text-align: right;" *ngIf="editable">
         <button nbButton ghost status="primary" size="small" (click)="addControl()">
             <nb-icon icon="plus" aria-hidden="true" pack="fas">
             </nb-icon>

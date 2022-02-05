@@ -21,31 +21,31 @@ export class SelectorContableComponent implements OnInit {
   status = false;
   normaContable = [{
       key: 'grupo',
-      label: 'Grupo',
+      label: 'Grupo*',
       parent: null,
       child: 'cuenta',
     },
     {
       key: 'cuenta',
-      label: 'Cuenta',
+      label: 'Cuenta*',
       parent: 'grupo',
       child: 'subcuenta',
     },
     {
       key: 'subcuenta',
-      label: 'Subcuenta',
+      label: 'Subcuenta*',
       parent: 'cuenta',
       child: 'auxiliar',
     },
     {
       key: 'auxiliar',
-      label: 'Auxiliar',
+      label: 'Auxiliar*',
       parent: 'subcuenta',
       child: 'subauxiliar',
     },
     {
       key: 'subauxiliar',
-      label: 'Subauxiliar',
+      label: 'Subauxiliar*',
       parent: 'auxiliar',
       child: null,
     },
@@ -58,6 +58,8 @@ export class SelectorContableComponent implements OnInit {
   @Input() account: string;
 
   @Input() claseMinima: number;
+
+  @Input() editable: boolean;
 
   constructor(private store: Store < any > ) {}
 
@@ -108,7 +110,7 @@ export class SelectorContableComponent implements OnInit {
     this.selectorForm = {
       controls: this.normaContable.slice(0, this.claseMinima).map((item, index) => {
         const control = this.createItemSelector(item);
-        const formControl = new FormControl(this.formValue[item.key]);
+        const formControl = new FormControl({value: this.formValue[item.key], disabled: !this.editable});
         if (index === 0) {
           (control as any).optionList.elements = () =>
             this.cuentasList.map((element) => ({
@@ -156,7 +158,7 @@ export class SelectorContableComponent implements OnInit {
       label: item.label,
       defaultValue: '',
       placeholder: item.label,
-      validators: [CustomValidators.customRequired('Campo Requerido')],
+      validators: [CustomValidators.customRequired('Campo Requerido'), CustomValidators.customObject('Debe seleccionar un elemento')],
       optionList: {
         elements: (parent) =>
           parent &&
