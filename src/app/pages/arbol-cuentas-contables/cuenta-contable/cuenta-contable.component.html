@@ -165,12 +165,12 @@
 
 				<mat-grid-tile colspan="6" rowspan="1">
 					<mat-form-field class="form-group" appearance="legacy">
-						<mat-label>Banco</mat-label>
+						<mat-label>Cuenta Bancaria</mat-label>
 						<input
 							type="text"
 							matInput
 							placeholder="Banco"
-							[formControl]="form.controls['Banco']"
+							[formControl]="form.controls['CuentaBancariaID']"
 							[matAutocomplete]="autoGroup"
 							autocomplete="off"
 						/>
@@ -183,13 +183,13 @@
 								[label]="group.group"
 							>
 								<mat-option *ngFor="let cuenta of group.data" [value]="cuenta">
-									{{ cuenta.name }}
+									{{ cuenta.NombreSucursal}} - {{ cuenta.NumeroCuenta }}
 								</mat-option>
 							</mat-optgroup>
 						</mat-autocomplete>
-						<mat-error *ngIf="form.controls['Banco'].errors">
+						<mat-error *ngIf="form.controls['CuentaBancariaID'].errors">
 							{{
-								form.controls["Banco"].errors.msg || "ingrese un dato valido"
+								form.controls["CuentaBancariaID"].errors.msg || "ingrese un dato valido"
 							}}
 						</mat-error>
 					</mat-form-field>

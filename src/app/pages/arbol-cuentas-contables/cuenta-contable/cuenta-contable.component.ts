@@ -10,7 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 
 export const _filter = (opt: any[], value: string): string[] => {
   const filterValue = value.toLowerCase();
-  return opt.filter(item => item.name.toLowerCase().includes(filterValue) || item.NombreBanco.toLowerCase().includes(filterValue));
+  return opt.filter(x => `${x.NombreBanco} ${x.NombreSucursal} - ${x.NumeroCuenta}`.toLowerCase().includes(filterValue));
 };
 @Component({
   selector: 'ngx-cuenta-contable',
@@ -37,7 +37,9 @@ export class CuentaContableComponent implements OnInit {
   centroCostos = [];
   tipoCuentas = [];
   bancos = [];
+  cuentasBancarias = [];
   bancosFilter: Observable<any[]>;
+  code: string;
 
 
   constructor(private builder: FormBuilder,
@@ -49,19 +51,14 @@ export class CuentaContableComponent implements OnInit {
   ngOnInit() {
     this.buildData();
     this.loadParams();
-    this.bancosService.getCuentasBancarias().subscribe(res => {
-      if (res && res.Data) {
-        this.bancos = this.groupBy(res.Data, 'NombreBanco');
-      }
-    });
-    this.bancosFilter = this.form.get('Banco')!.valueChanges.pipe(
+    this.bancosFilter = this.form.get('CuentaBancariaID')!.valueChanges.pipe(
       startWith(''),
       map(value => this._filterGroup(value)),
     );
   }
 
   private _filterGroup(value): any[] {
-    const valueKey: string = ( value && typeof value === 'object' ) ? value['name'] : value;
+    const valueKey: string = ( value && typeof value === 'object' ) ? `${value.NombreBanco} ${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
     if (valueKey) {
       return this.bancos
         .map(group => ({group: group.group, data: _filter(group.data, valueKey)}))
@@ -77,34 +74,44 @@ export class CuentaContableComponent implements OnInit {
       this.acountService.getDetalleCuenta(),
       this.acountService.getTipoMoneda(),
       this.acountService.getCentroCostos(),
-      this.acountService.getTipoCuenta()
+      this.acountService.getTipoCuenta(),
+      this.bancosService.getCuentasBancarias()
     ]).subscribe(results => {
       this.naturalezas = results[0];
       this.detalleCuentas = results[1];
       this.tipoMonedas = results[2];
       this.centroCostos = results[3];
       this.tipoCuentas = results[4];
+      this.cuentasBancarias = results[5]!.Data;
+      this.bancos = this.groupBy(this.cuentasBancarias, 'NombreBanco');
+      if (this.cuenta) {
+        this.loadAccount();
+      }
     });
   }
 
   private buildData() {
     if (this.cuenta) {
       const codes = this.cuenta.Codigo.split('-');
-      const code = codes.pop();
+      this.code = codes.pop();
       this.prefix = `${codes.join('-')}`;
-      this.acountService.getInfoCuenta(this.cuenta.Id).subscribe(res => {
-        this.cuenta = res;
-        this.form.patchValue({
-          ...res,
-          Codigo: code
-        });
-        this.form.controls['Codigo'].disable();
-      });
       if (this.action === 'ver') {
         this.form.disable();
       }
     }
   }
+
+  private loadAccount () {
+    this.acountService.getInfoCuenta(this.cuenta.Id).subscribe(res => {
+      this.cuenta = res;
+      this.form.patchValue({
+        ...res,
+        CuentaBancariaID: res.CuentaBancariaID ? this.cuentasBancarias!.find(account => account.Id === res.CuentaBancariaID) : null,
+        Codigo: this.code
+      });
+      this.form.controls['Codigo'].disable();
+    });
+}
 
   setSelectedCount(account) {
     if (account && account.data) {
@@ -139,12 +146,14 @@ export class CuentaContableComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.form.valid && this.selectorContable.form.valid) {
-      const code = `${this.prefix ? this.prefix + '-' : ''}${this.form.value.Codigo}`;
+    if (this.form.valid && ( this.selectorContable.form.valid || this.selectorContable.form.disabled )) {
+      const formData = this.form.getRawValue();
+      const code = `${this.prefix ? this.prefix + '-' : ''}${formData.Codigo}`;
       const newAccount = {
-        ...this.form.value,
+        ...formData,
         Nivel: code.split('-').length,
         Padre: this.prefix,
+        CuentaBancariaID: formData.CuentaBancariaID!.Id || null,
       };
       this.cuenta ? this.updateNode(newAccount, code) : this.addNode(newAccount);
 
@@ -155,14 +164,14 @@ export class CuentaContableComponent implements OnInit {
   }
 
   dislayBanco = (value) => {
-    return ( value && typeof value === 'object' ) ? value['name'] : value;
+    return ( value && typeof value === 'object' ) ? `${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
   }
 
   groupBy(xs, key) {
     let result;
     try {
       const grouped = xs.reduce(function (rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push({...x, name: `${x.NombreSucursal} - ${x.NumeroCuenta}`});
+        (rv[x[key]] = rv[x[key]] || []).push({...x});
         return rv;
       }, {});
       result = Object.keys(grouped).map((i) => ({ group: i, data: grouped[i] }));

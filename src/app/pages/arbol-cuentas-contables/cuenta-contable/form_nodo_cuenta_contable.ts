@@ -12,7 +12,7 @@ export class FormCuentaContable  {
     DetalleCuentaID: ['', Validators.required],
     CentroDecostosID: [''],
     RequiereTercero: [false],
-    Banco: ['', CustomValidators.customObject('Debe seleccionar un elemento')],
+    CuentaBancariaID: ['', CustomValidators.customObject('Debe seleccionar un elemento')],
     Ajustable: [false],
     Nmnc: [false],
     MonedaID: ['',  Validators.required],
