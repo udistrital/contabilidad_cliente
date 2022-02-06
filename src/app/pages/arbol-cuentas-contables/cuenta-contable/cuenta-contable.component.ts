@@ -10,7 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 
 export const _filter = (opt: any[], value: string): string[] => {
   const filterValue = value.toLowerCase();
-  return opt.filter(x => `${x.NombreBanco} ${x.NombreSucursal} - ${x.NumeroCuenta}`.toLowerCase().includes(filterValue));
+  return opt.filter(x => `${x.NombreBanco} / ${x.NombreSucursal} - ${x.NumeroCuenta}`.toLowerCase().includes(filterValue));
 };
 @Component({
   selector: 'ngx-cuenta-contable',
@@ -58,7 +58,7 @@ export class CuentaContableComponent implements OnInit {
   }
 
   private _filterGroup(value): any[] {
-    const valueKey: string = ( value && typeof value === 'object' ) ? `${value.NombreBanco} ${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
+    const valueKey: string = ( value && typeof value === 'object' ) ? `${value.NombreBanco} / ${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
     if (valueKey) {
       return this.bancos
         .map(group => ({group: group.group, data: _filter(group.data, valueKey)}))
@@ -164,7 +164,7 @@ export class CuentaContableComponent implements OnInit {
   }
 
   dislayBanco = (value) => {
-    return ( value && typeof value === 'object' ) ? `${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
+    return ( value && typeof value === 'object' ) ? `${value.NombreBanco} / ${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
   }
 
   groupBy(xs, key) {

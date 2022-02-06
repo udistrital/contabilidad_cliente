@@ -183,7 +183,7 @@
 								[label]="group.group"
 							>
 								<mat-option *ngFor="let cuenta of group.data" [value]="cuenta">
-									{{ cuenta.NombreSucursal}} - {{ cuenta.NumeroCuenta }}
+									{{cuenta.NombreBanco}} / {{ cuenta.NombreSucursal}} - {{ cuenta.NumeroCuenta }}
 								</mat-option>
 							</mat-optgroup>
 						</mat-autocomplete>
