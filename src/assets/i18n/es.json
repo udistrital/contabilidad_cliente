@@ -246,7 +246,8 @@
     "form_nmnc": "NMNC",
     "form_centro_costo": "Centro de costos",
     "form_cuenta_bancaria": "Cuenta Bancaria",
-    "form_moneda": "Moneda"
+    "form_moneda": "Moneda",
+    "form_confirmar": "Confirmar"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",
