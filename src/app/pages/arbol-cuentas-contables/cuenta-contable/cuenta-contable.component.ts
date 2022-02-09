@@ -7,6 +7,7 @@ import { ArbolHelper } from '../../../@core/helpers/arbol/arbolHelper';
 import { PopUpManager } from '../../../@core/managers/popUpManager';
 import { TesoreriaHelper } from '../../../@core/helpers/tesoreria/tesoreriaHelper';
 import { map, startWith } from 'rxjs/operators';
+import { groupBy } from '../../../@core/utils/general_utility';
 
 export const _filter = (opt: any[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -83,7 +84,7 @@ export class CuentaContableComponent implements OnInit {
       this.centroCostos = results[3];
       this.tipoCuentas = results[4];
       this.cuentasBancarias = results[5]!.Data;
-      this.bancos = this.groupBy(this.cuentasBancarias, 'NombreBanco');
+      this.bancos = groupBy(this.cuentasBancarias, 'NombreBanco');
       if (this.cuenta) {
         this.loadAccount();
       }
@@ -165,20 +166,6 @@ export class CuentaContableComponent implements OnInit {
 
   dislayBanco = (value) => {
     return ( value && typeof value === 'object' ) ? `${value.NombreBanco} / ${value.NombreSucursal} - ${value.NumeroCuenta}` : value;
-  }
-
-  groupBy(xs, key) {
-    let result;
-    try {
-      const grouped = xs.reduce(function (rv, x) {
-        (rv[x[key]] = rv[x[key]] || []).push({...x});
-        return rv;
-      }, {});
-      result = Object.keys(grouped).map((i) => ({ group: i, data: grouped[i] }));
-    } catch {
-      result = [];
-    }
-    return result;
   }
 
 }

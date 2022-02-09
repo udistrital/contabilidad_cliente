@@ -86,16 +86,6 @@ export class PagesComponent implements OnInit {
         key:   itemMenu.Nombre,
         children: this.mapMenuChildrenObject(itemMenu.Opciones)
       };
-      if (this.object.title === 'plan_cuentas') {
-        this.object.children.push({
-          title: 'arbol-contable',
-          icon:  '',
-          link:  `/pages/arbol-contable`,
-          home:  false,
-          key:   'arbol-contable',
-          children: null
-        });
-      }
       this.menu.push(this.object);
     });
   }
