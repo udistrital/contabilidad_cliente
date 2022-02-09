@@ -229,7 +229,25 @@
   "CUENTAS_CONTABLES": {
     "arbol_cuentas_contables": "Cuentas Contables",
     "cuentas-contables": "Cuentas-contables",
-    "arbol-contable": "Arbol Contable"
+    "arbol-contable": "Arbol Contable",
+    "form_error": "Porfavor ingrese un dato valido",
+    "form_codigo": "Código",
+    "form_codigo_placeholder": "Código",
+    "form_codigo_hint": "Ingrese un número consecutivo",
+    "form_disponible": "Disponible",
+    "form_nombre": "Nombre",
+    "form_nombre_placeholder": "Nombre",
+    "form_nombre_hint": "Ingrese el nombre de la cuenta",
+    "form_naturaleza": "Naturaleza",
+    "form_tipo_cuenta": "Tipo Cuenta",
+    "form_detalle": "Detalle",
+    "form_requiere_tercero": "Requiere Tercero",
+    "form_ajustable": "Ajustable",
+    "form_nmnc": "NMNC",
+    "form_centro_costo": "Centro de costos",
+    "form_cuenta_bancaria": "Cuenta Bancaria",
+    "form_moneda": "Moneda",
+    "form_confirmar": "Confirmar"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",
