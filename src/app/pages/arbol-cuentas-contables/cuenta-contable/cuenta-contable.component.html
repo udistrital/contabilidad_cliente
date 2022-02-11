@@ -212,9 +212,11 @@
 					</mat-form-field>
 				</mat-grid-tile>
 			</mat-grid-list>
-			<button mat-flat-button
+			<button mat-flat-button 
+					*ngIf="action != 'ver'"
 					color="primary"
 					type="submit">{{ 'CUENTAS_CONTABLES.form_confirmar' | translate }}</button>
 		</form>
 	</nb-card-body>
 </nb-card>
+<ngx-movimientos-cuenta *ngIf="cuenta" [cuenta]="cuenta"></ngx-movimientos-cuenta>
