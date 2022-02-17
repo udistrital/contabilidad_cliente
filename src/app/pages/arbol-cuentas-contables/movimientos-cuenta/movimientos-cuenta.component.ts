@@ -1,6 +1,7 @@
 import { MovimientosHelper } from './../../../@core/helpers/movimientos/movimientosHelper';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'ngx-movimientos-cuenta',
@@ -8,8 +9,6 @@ import { LocalDataSource } from 'ng2-smart-table';
   styleUrls: ['./movimientos-cuenta.component.scss']
 })
 export class MovimientosCuentaComponent implements OnInit {
-
-  @Input() cuenta;
 
   movimientos = [];
 
@@ -34,11 +33,16 @@ export class MovimientosCuentaComponent implements OnInit {
           return new Date(date).toLocaleDateString();
         }
       },
-      Valor: {
-        title: 'Valor',
+      Debito: {
+        title: 'Debito',
         filter: true,
         sort: true,
       },
+      Credito: {
+        title: 'Credito',
+        filter: true,
+        sort: true,
+      }
     },
     actions: {
       add: false,
@@ -50,12 +54,18 @@ export class MovimientosCuentaComponent implements OnInit {
 
   source: LocalDataSource;
 
-  constructor( private movimientosService: MovimientosHelper ) { }
+  constructor( private movimientosService: MovimientosHelper,
+    public dialogRef: MatDialogRef<MovimientosCuentaComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: string,
+ ) { }
 
   ngOnInit() {
-    this.movimientosService.getCuentasBancarias(this.cuenta.CuentaContableID).subscribe((res: any) => {
-      console.log(res);
-      this.movimientos = res.Data || [];
+    this.movimientosService.getCuentasBancarias({} ).subscribe((res: any) => {
+      this.movimientos = res.Data!.map(value => ({
+        ...value,
+        Debito: value.TipoMovimientoId  === 344 ? value.Valor : 0,
+        Credito: value.TipoMovimientoId  === 345 ? value.Valor : 0
+      })) || [];
       this.source = new LocalDataSource(this.movimientos);
     });
   }

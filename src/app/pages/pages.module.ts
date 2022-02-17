@@ -100,7 +100,8 @@ const ENTRY_COMPONENTS = [
     ListComprobanteComponent,
     CuentasContablesComponent,
     EditModalComponent,
-    CuentaContableComponent
+    CuentaContableComponent,
+    MovimientosCuentaComponent,
 ];
 const SERVICES = [
     ConfiguracionService,

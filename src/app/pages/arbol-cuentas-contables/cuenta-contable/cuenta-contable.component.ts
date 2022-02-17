@@ -8,6 +8,8 @@ import { PopUpManager } from '../../../@core/managers/popUpManager';
 import { TesoreriaHelper } from '../../../@core/helpers/tesoreria/tesoreriaHelper';
 import { map, startWith } from 'rxjs/operators';
 import { groupBy } from '../../../@core/utils/general_utility';
+import { MatDialog } from '@angular/material';
+import { MovimientosCuentaComponent } from '../movimientos-cuenta/movimientos-cuenta.component';
 
 export const _filter = (opt: any[], value: string): string[] => {
   const filterValue = value.toLowerCase();
@@ -46,7 +48,8 @@ export class CuentaContableComponent implements OnInit {
   constructor(private builder: FormBuilder,
     private acountService: ArbolHelper,
     private pUpManager: PopUpManager,
-    private bancosService: TesoreriaHelper
+    private bancosService: TesoreriaHelper,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -56,6 +59,16 @@ export class CuentaContableComponent implements OnInit {
       startWith(''),
       map(value => this._filterGroup(value)),
     );
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
+      data: this.cuenta.CuentaContableID || 'sa',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   private _filterGroup(value): any[] {

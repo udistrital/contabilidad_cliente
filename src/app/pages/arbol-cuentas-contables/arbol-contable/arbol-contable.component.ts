@@ -1,8 +1,10 @@
+import { MovimientosCuentaComponent } from './../movimientos-cuenta/movimientos-cuenta.component';
 import { selectAllCuentas } from './../../../@core/_store/selectors';
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NbGetters, NbSortDirection, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbSortRequest } from '@nebular/theme';
 import { EstructuraCuentaContable } from './cuenta-contable.model';
 import { Store, select } from '@ngrx/store';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'ngx-arbol-contable',
@@ -14,7 +16,7 @@ export class ArbolContableComponent implements OnInit {
   @Output() onSelection: EventEmitter<EstructuraCuentaContable> = new EventEmitter();
 
   customColumn = 'Codigo';
-  defaultColumns = ['Nombre', 'Activo'];
+  defaultColumns = ['Nombre', 'Activo', 'Movimientos'];
   allColumns = [this.customColumn, ...this.defaultColumns];
   dataSource: NbTreeGridDataSource < EstructuraCuentaContable > ;
   sortColumn: string;
