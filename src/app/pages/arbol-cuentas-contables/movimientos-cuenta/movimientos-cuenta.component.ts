@@ -2,6 +2,7 @@ import { MovimientosHelper } from './../../../@core/helpers/movimientos/movimien
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { EstructuraCuentaContable } from '../arbol-contable/cuenta-contable.model';
 
 @Component({
   selector: 'ngx-movimientos-cuenta',
@@ -56,11 +57,13 @@ export class MovimientosCuentaComponent implements OnInit {
 
   constructor( private movimientosService: MovimientosHelper,
     public dialogRef: MatDialogRef<MovimientosCuentaComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: string,
+    @Inject(MAT_DIALOG_DATA) public data: EstructuraCuentaContable,
  ) { }
 
   ngOnInit() {
-    this.movimientosService.getCuentasBancarias({} ).subscribe((res: any) => {
+console.log(this.data);
+
+    this.movimientosService.getCuentasBancarias({query: {CuentaId: this.data.Id}} ).subscribe((res: any) => {
       this.movimientos = res.Data!.map(value => ({
         ...value,
         Debito: value.TipoMovimientoId  === 344 ? value.Valor : 0,

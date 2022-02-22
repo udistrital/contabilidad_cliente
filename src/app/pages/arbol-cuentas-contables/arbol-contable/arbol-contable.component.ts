@@ -16,8 +16,10 @@ export class ArbolContableComponent implements OnInit {
   @Output() onSelection: EventEmitter<EstructuraCuentaContable> = new EventEmitter();
 
   customColumn = 'Codigo';
-  defaultColumns = ['Nombre', 'Activo', 'Movimientos'];
-  allColumns = [this.customColumn, ...this.defaultColumns];
+  customMovimientos = 'Movimientos';
+  customDisponible = 'Disponible';
+  defaultColumns = ['Nombre'];
+  allColumns = [this.customColumn, ...this.defaultColumns, this.customDisponible, this.customMovimientos];
   dataSource: NbTreeGridDataSource < EstructuraCuentaContable > ;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
@@ -28,7 +30,8 @@ export class ArbolContableComponent implements OnInit {
 
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable >,
-    private store: Store<any>
+    private store: Store<any>,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -72,5 +75,15 @@ export class ArbolContableComponent implements OnInit {
     const minWithForMultipleColumns = 400;
     const nextColumnStep = 100;
     return minWithForMultipleColumns + nextColumnStep * index;
+  }
+
+  openDialog(row): void {
+    const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
+      data: row,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

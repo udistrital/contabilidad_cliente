@@ -63,7 +63,7 @@ export class CuentaContableComponent implements OnInit {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
-      data: this.cuenta.CuentaContableID || 'sa',
+      data: this.cuenta,
     });
 
     dialogRef.afterClosed().subscribe(result => {
