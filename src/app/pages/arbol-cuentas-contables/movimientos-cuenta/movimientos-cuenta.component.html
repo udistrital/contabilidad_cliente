@@ -6,14 +6,13 @@
         </button>
     </nb-card-header>
     <nb-card-body>
-        <h5>Movimientos</h5>
+        <h5>{{ "CUENTAS_CONTABLES.movimientos" | translate }}</h5>
         <ng2-smart-table [settings]="listSettings" [source]="source">
         </ng2-smart-table>
     </nb-card-body>
     <nb-card-footer class="modal-footer">
         <button mat-button [mat-dialog-close] class="btn btn-primary" cdkFocusInitial>
-            Aceptar
+            {{ "CUENTAS_CONTABLES.form_confirmar" | translate }}
         </button>
     </nb-card-footer>
 </nb-card>
-

@@ -247,7 +247,8 @@
     "form_centro_costo": "Centro de costos",
     "form_cuenta_bancaria": "Cuenta Bancaria",
     "form_moneda": "Moneda",
-    "form_confirmar": "Confirmar"
+    "form_confirmar": "Confirmar",
+    "movimientos": "Movimientos"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

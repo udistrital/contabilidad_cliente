@@ -43,12 +43,12 @@ export class MovimientosCuentaComponent implements OnInit {
       Debito: {
         title: 'Debito',
         filter: false,
-        sort: true,
+        sort: false,
       },
       Credito: {
         title: 'Credito',
         filter: false,
-        sort: true,
+        sort: false,
       },
     },
     actions: {
