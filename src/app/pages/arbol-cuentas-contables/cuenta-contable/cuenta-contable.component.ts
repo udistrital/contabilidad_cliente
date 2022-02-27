@@ -64,10 +64,7 @@ export class CuentaContableComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
       data: this.cuenta,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      width: '95%',
     });
   }
 
