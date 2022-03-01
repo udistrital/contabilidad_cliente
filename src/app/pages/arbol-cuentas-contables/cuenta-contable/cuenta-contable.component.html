@@ -211,10 +211,19 @@
 						</mat-error>
 					</mat-form-field>
 				</mat-grid-tile>
-			</mat-grid-list>
-			<button mat-flat-button
-					color="primary"
-					type="submit">{{ 'CUENTAS_CONTABLES.form_confirmar' | translate }}</button>
-		</form>
+				<mat-grid-tile colspan="6" rowspan="1" *ngIf="action != 'ver'">
+					<button mat-flat-button 						
+						color="primary"
+						type="submit">{{ 'CUENTAS_CONTABLES.form_confirmar' | translate }}</button>				   
+				</mat-grid-tile>
+			</mat-grid-list>			
+		</form>		
+	</nb-card-body>
+</nb-card>
+<nb-card>
+	<nb-card-body>
+			<button mat-flat-button class="btn btn-warning text-white"
+				(click)="openDialog()"
+				type="button">movimientos</button>	
 	</nb-card-body>
 </nb-card>

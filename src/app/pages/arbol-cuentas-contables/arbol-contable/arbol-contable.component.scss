@@ -9,6 +9,14 @@
       &:hover {
         background: #e6e6e6;
       }
+
+      .movimientos-action {
+        cursor: pointer;
+        color: #3f51b5;
+        nb-icon {
+          font-size: 12px;
+        }
+      }
     }
   }
 

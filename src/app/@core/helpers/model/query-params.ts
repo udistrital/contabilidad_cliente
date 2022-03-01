@@ -1,6 +1,6 @@
 interface QueryParams {
   id?: string;
-  query?: string;
+  query?: {[key: string]: any};
   fields?: string[];
   sortby?: string[];
   order?: string[];

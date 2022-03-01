@@ -25,5 +25,30 @@
       </th>
       <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column] || '-'}}</td>
     </ng-container>
+
+    <ng-container [nbTreeGridColumnDef]="customDisponible">
+      <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customDisponible)" *nbTreeGridHeaderCellDef>
+        {{customDisponible}}
+      </th>
+      <td nbTreeGridCell *nbTreeGridCellDef="let row">        
+          <section class="form-group"
+							 appearance="legacy">
+						<mat-checkbox class="example-margin" [ngModel]="row.data['Activo']" [disabled]="true"></mat-checkbox>
+					</section>
+      </td>
+    </ng-container>
+
+    <ng-container [nbTreeGridColumnDef]="customMovimientos">
+      <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customMovimientos)" *nbTreeGridHeaderCellDef>
+        {{customMovimientos}}
+      </th>
+      <td nbTreeGridCell *nbTreeGridCellDef="let row">
+        <span class="movimientos-action" (click)="openDialog(row.data)">
+            <nb-icon [icon]="'list'" aria-hidden="true" pack="fas" status="primary">
+          </nb-icon>
+          {{ "CUENTAS_CONTABLES.movimientos" | translate }}
+        </span>
+      </td>
+    </ng-container>
   </table>
 </div>

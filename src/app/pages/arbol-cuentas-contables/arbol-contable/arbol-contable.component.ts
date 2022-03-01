@@ -1,8 +1,10 @@
+import { MovimientosCuentaComponent } from './../movimientos-cuenta/movimientos-cuenta.component';
 import { selectAllCuentas } from './../../../@core/_store/selectors';
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { NbGetters, NbSortDirection, NbTreeGridDataSource, NbTreeGridDataSourceBuilder, NbSortRequest } from '@nebular/theme';
 import { EstructuraCuentaContable } from './cuenta-contable.model';
 import { Store, select } from '@ngrx/store';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'ngx-arbol-contable',
@@ -14,8 +16,10 @@ export class ArbolContableComponent implements OnInit {
   @Output() onSelection: EventEmitter<EstructuraCuentaContable> = new EventEmitter();
 
   customColumn = 'Codigo';
-  defaultColumns = ['Nombre', 'Activo'];
-  allColumns = [this.customColumn, ...this.defaultColumns];
+  customMovimientos = 'Movimientos';
+  customDisponible = 'Disponible';
+  defaultColumns = ['Nombre'];
+  allColumns = [this.customColumn, ...this.defaultColumns, this.customDisponible, this.customMovimientos];
   dataSource: NbTreeGridDataSource < EstructuraCuentaContable > ;
   sortColumn: string;
   sortDirection: NbSortDirection = NbSortDirection.NONE;
@@ -26,7 +30,8 @@ export class ArbolContableComponent implements OnInit {
 
   constructor(
     private dataSourceBuilder: NbTreeGridDataSourceBuilder < EstructuraCuentaContable >,
-    private store: Store<any>
+    private store: Store<any>,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -70,5 +75,12 @@ export class ArbolContableComponent implements OnInit {
     const minWithForMultipleColumns = 400;
     const nextColumnStep = 100;
     return minWithForMultipleColumns + nextColumnStep * index;
+  }
+
+  openDialog(row): void {
+    const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
+      data: row,
+      width: '95%',
+    });
   }
 }

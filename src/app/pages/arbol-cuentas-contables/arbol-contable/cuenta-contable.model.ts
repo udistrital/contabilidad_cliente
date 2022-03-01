@@ -1,4 +1,5 @@
 export interface EstructuraCuentaContable {
+  Id: string;
   Codigo: string;
   Nombre?: string;
   ValorInicial: number;
