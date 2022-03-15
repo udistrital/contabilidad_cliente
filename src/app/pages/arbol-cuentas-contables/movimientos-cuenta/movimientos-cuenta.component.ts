@@ -4,6 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EstructuraCuentaContable } from '../arbol-contable/cuenta-contable.model';
 import { ServerDataMovimientos } from './server-data-movimientos';
+import { CustomRendererComponent } from './CustomRendererComponent';
 
 @Component({
   selector: 'ngx-movimientos-cuenta',
@@ -14,10 +15,22 @@ export class MovimientosCuentaComponent implements OnInit {
 
   movimientos = [];
 
+  naturaleza = {
+    '344': 'debito',
+    '345': 'credito',
+  };
+
   paginationSettigs = {
     rows: 50,
     offset: 0
   };
+
+  sadoNaturaleza = (cell) => {
+    if ( this.data.NaturalezaCuentaID === this.naturaleza['345'] ) {
+      return -cell;
+    }
+    return cell;
+  }
 
   listSettings = {
     columns: {
@@ -40,6 +53,14 @@ export class MovimientosCuentaComponent implements OnInit {
           return new Date(date).toLocaleDateString();
         },
       },
+      SaldoAnterior: {
+        title: 'Saldo Anterior',
+        filter: false,
+        sort: false,
+        valuePrepareFunction: this.sadoNaturaleza,
+        type: 'custom',
+        renderComponent: CustomRendererComponent,
+      },
       Debito: {
         title: 'Debito',
         filter: false,
@@ -49,6 +70,14 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Credito',
         filter: false,
         sort: false,
+      },
+      NuevoSaldo: {
+        title: 'Nuevo Saldo',
+        filter: false,
+        sort: false,
+        valuePrepareFunction: this.sadoNaturaleza,
+        type: 'custom',
+        renderComponent: CustomRendererComponent,
       },
     },
     actions: {
