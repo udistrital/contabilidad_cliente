@@ -10,9 +10,14 @@ export class MovimientosHelper {
 
     // movimientos_crud
 
-    public getCuentasBancarias(parameters?: QueryParams) {
+    public getMovimientosContables(parameters?: QueryParams) {
         this.rqManager.setPath('MOVIMIENTOS_SERVICE');
         return this.rqManager.getv2('movimiento', parameters);
+    }
+
+    public getSaldosContables(parameters?: QueryParams) {
+        this.rqManager.setPath('MOVIMIENTOS_SERVICE');
+        return this.rqManager.getv2('saldo', parameters);
     }
 
 }

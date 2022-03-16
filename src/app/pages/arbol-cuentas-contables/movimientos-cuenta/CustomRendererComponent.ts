@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ViewCell } from 'ng2-smart-table';
 
 
@@ -7,7 +7,7 @@ import { ViewCell } from 'ng2-smart-table';
     <span [ngStyle]="isRed && {'color': 'red'}">{{ renderValue }}</span>
   `,
 })
-export class CustomRendererComponent implements ViewCell {
+export class CustomRendererComponent implements OnInit, ViewCell {
   constructor() { }
 
   renderValue: number;

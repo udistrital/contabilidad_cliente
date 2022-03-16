@@ -45,7 +45,7 @@ export class ServerDataMovimientos extends ServerDataSource {
         }
 
         return this.movimientosService
-            .getCuentasBancarias({
+            .getMovimientosContables({
                 query: this.query,
                 limit: this.pagingConf.perPage,
                 offset: (this.pagingConf.page - 1) * this.pagingConf.perPage,

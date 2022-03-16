@@ -48,7 +48,7 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Fecha',
         filter: false,
         sort: true,
-        sortDirection: 'desc',
+        sortDirection: 'asc',
         valuePrepareFunction: (date) => {
           return new Date(date).toLocaleDateString();
         },
