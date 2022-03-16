@@ -13,4 +13,5 @@ export interface EstructuraCuentaContable {
   isHighlighted?: boolean;
   data?: EstructuraCuentaContable;
   children?: EstructuraCuentaContable[];
+  NaturalezaCuentaID: string;
 }

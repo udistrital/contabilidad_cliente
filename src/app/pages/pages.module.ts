@@ -47,6 +47,7 @@ import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable
 import { FloatMenuComponent } from './arbol-cuentas-contables/float-menu/float-menu.component';
 import { SelectorContableComponent } from './arbol-cuentas-contables/selector-contable/selector-contable.component';
 import { MovimientosCuentaComponent } from './arbol-cuentas-contables/movimientos-cuenta/movimientos-cuenta.component';
+import { CustomRendererComponent } from './arbol-cuentas-contables/movimientos-cuenta/CustomRendererComponent';
 
 
 const MODULES = [
@@ -93,7 +94,8 @@ const COMPONENTS = [
     ConciliacionesComponent,
     CuentaContableComponent,
     ArbolContableComponent,
-    CuentasContablesComponent
+    CuentasContablesComponent,
+    CustomRendererComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
@@ -102,6 +104,7 @@ const ENTRY_COMPONENTS = [
     EditModalComponent,
     CuentaContableComponent,
     MovimientosCuentaComponent,
+    CustomRendererComponent,
 ];
 const SERVICES = [
     ConfiguracionService,
