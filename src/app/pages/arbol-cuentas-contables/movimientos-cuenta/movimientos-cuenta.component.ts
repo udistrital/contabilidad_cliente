@@ -15,18 +15,13 @@ export class MovimientosCuentaComponent implements OnInit {
 
   movimientos = [];
 
-  naturaleza = {
-    '344': 'debito',
-    '345': 'credito',
-  };
-
   paginationSettigs = {
     rows: 50,
     offset: 0
   };
 
   sadoNaturaleza = (cell) => {
-    if ( this.data.NaturalezaCuentaID === this.naturaleza['345'] ) {
+    if ( this.data.NaturalezaCuentaID === this.movimientosService.CREDITO ) {
       return -cell;
     }
     return cell;

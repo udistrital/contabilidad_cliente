@@ -8,6 +8,11 @@ import { QueryParams } from '../model/query-params';
 export class MovimientosHelper {
     constructor(private rqManager: RequestManager) {}
 
+    public DEBITO = 'debito';
+    public CREDITO = 'credito';
+    public DEBITO_COD = 344;
+    public CREDITO_COD = 345;
+
     // movimientos_crud
 
     public getMovimientosContables(parameters?: QueryParams) {

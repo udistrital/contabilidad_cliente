@@ -57,8 +57,8 @@ export class ServerDataMovimientos extends ServerDataSource {
                     this.data =
                         res.Data!.map((value) => ({
                             ...value,
-                            Debito: value.TipoMovimientoId === 344 ? value.Valor : 0,
-                            Credito: value.TipoMovimientoId === 345 ? value.Valor : 0,
+                            Debito: value.TipoMovimientoId === this.movimientosService.DEBITO_COD ? value.Valor : 0,
+                            Credito: value.TipoMovimientoId === this.movimientosService.CREDITO_COD ? value.Valor : 0,
                         })) || [];
                     this.lastRequestCount =
                         this.data.length === this.pagingConf.perPage && this.pagingConf.page > this.lastPage
