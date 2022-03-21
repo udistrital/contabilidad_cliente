@@ -60,11 +60,15 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Debito',
         filter: false,
         sort: false,
+        type: 'custom',
+        renderComponent: CustomRendererComponent,
       },
       Credito: {
         title: 'Credito',
         filter: false,
         sort: false,
+        type: 'custom',
+        renderComponent: CustomRendererComponent,
       },
       NuevoSaldo: {
         title: 'Nuevo Saldo',
