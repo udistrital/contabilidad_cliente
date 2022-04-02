@@ -4,7 +4,7 @@ import { ViewCell } from 'ng2-smart-table';
 
 @Component({
   template: `
-    <span [ngStyle]="isRed && {'color': 'red'}">{{ renderValue | currency }}</span>
+    <span [ngStyle]="isRed && {'color': 'red'}" style="float: right">{{ renderValue | currency }}</span>
   `,
 })
 export class CustomRendererComponent implements OnInit, ViewCell {

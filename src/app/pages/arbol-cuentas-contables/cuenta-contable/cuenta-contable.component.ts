@@ -43,6 +43,9 @@ export class CuentaContableComponent implements OnInit {
   cuentasBancarias = [];
   bancosFilter: Observable<any[]>;
   code: string;
+  detalleCondicionales = {
+    bancos: false
+  };
 
 
   constructor(private builder: FormBuilder,
@@ -55,6 +58,24 @@ export class CuentaContableComponent implements OnInit {
   ngOnInit() {
     this.buildData();
     this.loadParams();
+    if (this.form.get('DetalleCuentaID')) {
+      this.form.get('DetalleCuentaID').valueChanges.subscribe(value => {
+        switch (value) {
+          case 'bancos':
+            this.detalleCondicionales = {
+              bancos: true
+            };
+            this.form.get('CuentaBancariaID').enable();
+            break;
+          default:
+            this.detalleCondicionales = {
+              bancos: false
+            };
+            this.form.get('CuentaBancariaID').disable();
+            break;
+        }
+      });
+    }
     if (this.form.get('CuentaBancariaID')) {
       this.bancosFilter = this.form.get('CuentaBancariaID').valueChanges.pipe(
         startWith(''),
