@@ -43,6 +43,9 @@ export class CuentaContableComponent implements OnInit {
   cuentasBancarias = [];
   bancosFilter: Observable<any[]>;
   code: string;
+  detalleCondicionales = {
+    bancos: false
+  };
 
 
   constructor(private builder: FormBuilder,
@@ -55,10 +58,30 @@ export class CuentaContableComponent implements OnInit {
   ngOnInit() {
     this.buildData();
     this.loadParams();
-    this.bancosFilter = this.form.get('CuentaBancariaID')!.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterGroup(value)),
-    );
+    if (this.form.get('DetalleCuentaID')) {
+      this.form.get('DetalleCuentaID').valueChanges.subscribe(value => {
+        switch (value) {
+          case 'bancos':
+            this.detalleCondicionales = {
+              bancos: true
+            };
+            this.form.get('CuentaBancariaID').enable();
+            break;
+          default:
+            this.detalleCondicionales = {
+              bancos: false
+            };
+            this.form.get('CuentaBancariaID').disable();
+            break;
+        }
+      });
+    }
+    if (this.form.get('CuentaBancariaID')) {
+      this.bancosFilter = this.form.get('CuentaBancariaID').valueChanges.pipe(
+        startWith(''),
+        map(value => this._filterGroup(value)),
+      );
+    }
   }
 
   openDialog(): void {
@@ -93,7 +116,7 @@ export class CuentaContableComponent implements OnInit {
       this.tipoMonedas = results[2];
       this.centroCostos = results[3];
       this.tipoCuentas = results[4];
-      this.cuentasBancarias = results[5]!.Data;
+      this.cuentasBancarias = results[5] ? results[5].Data : [];
       this.bancos = groupBy(this.cuentasBancarias, 'NombreBanco');
       if (this.cuenta) {
         this.loadAccount();
@@ -117,7 +140,7 @@ export class CuentaContableComponent implements OnInit {
       this.cuenta = res;
       this.form.patchValue({
         ...res,
-        CuentaBancariaID: res.CuentaBancariaID ? this.cuentasBancarias!.find(account => account.Id === res.CuentaBancariaID) : null,
+        CuentaBancariaID: res.CuentaBancariaID ? this.cuentasBancarias.find(account => account.Id === res.CuentaBancariaID) : null,
         Codigo: this.code
       });
       this.form.controls['Codigo'].disable();
@@ -164,7 +187,7 @@ export class CuentaContableComponent implements OnInit {
         ...formData,
         Nivel: code.split('-').length,
         Padre: this.prefix,
-        CuentaBancariaID: formData.CuentaBancariaID!.Id || null,
+        CuentaBancariaID: formData.CuentaBancariaID ? formData.CuentaBancariaID.Id : null,
       };
       this.cuenta ? this.updateNode(newAccount, code) : this.addNode(newAccount);
 
