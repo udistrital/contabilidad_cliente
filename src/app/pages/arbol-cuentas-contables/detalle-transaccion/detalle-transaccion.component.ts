@@ -78,7 +78,6 @@ export class DetalleTransaccionComponent implements OnInit {
     private movimientosService: MovimientosHelper, ) { }
 
   ngOnInit() {
-    console.log(this.data);
     if (this.data && this.data.data && this.data.data.TransaccionId) {
       this.transaction = this.data.data.TransaccionId;
     }
