@@ -16,8 +16,6 @@ export class CustomRendererComponent implements OnInit, ViewCell {
   @Input() value: string | number;
   @Input() rowData: any;
 
-
-
   ngOnInit() {
     this.isRed = this.value < 0;
     this.renderValue = Math.abs(+this.value);

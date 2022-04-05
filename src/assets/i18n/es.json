@@ -248,7 +248,9 @@
     "form_cuenta_bancaria": "Cuenta Bancaria",
     "form_moneda": "Moneda",
     "form_confirmar": "Confirmar",
-    "movimientos": "Movimientos"
+    "movimientos": "Movimientos",
+    "movimientos_cuenta_contable": "MOVIMIENTOS CUENTA CONTABLE",
+    "detalle_transaccion": "DETALLE TRANSACCIÓN"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

@@ -47,7 +47,9 @@ import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable
 import { FloatMenuComponent } from './arbol-cuentas-contables/float-menu/float-menu.component';
 import { SelectorContableComponent } from './arbol-cuentas-contables/selector-contable/selector-contable.component';
 import { MovimientosCuentaComponent } from './arbol-cuentas-contables/movimientos-cuenta/movimientos-cuenta.component';
-import { CustomRendererComponent } from './arbol-cuentas-contables/movimientos-cuenta/CustomRendererComponent';
+import { CustomRendererComponent } from './arbol-cuentas-contables/CustomRendererComponent';
+import { DetalleTransaccionComponent } from './arbol-cuentas-contables/detalle-transaccion/detalle-transaccion.component';
+import { CustomComprobanteComponent } from './arbol-cuentas-contables/CustomComprobanteComponent';
 
 
 const MODULES = [
@@ -96,6 +98,8 @@ const COMPONENTS = [
     ArbolContableComponent,
     CuentasContablesComponent,
     CustomRendererComponent,
+    DetalleTransaccionComponent,
+    CustomComprobanteComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
@@ -105,6 +109,8 @@ const ENTRY_COMPONENTS = [
     CuentaContableComponent,
     MovimientosCuentaComponent,
     CustomRendererComponent,
+    DetalleTransaccionComponent,
+    CustomComprobanteComponent,
 ];
 const SERVICES = [
     ConfiguracionService,

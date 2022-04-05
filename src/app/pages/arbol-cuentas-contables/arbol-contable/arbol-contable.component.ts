@@ -81,6 +81,8 @@ export class ArbolContableComponent implements OnInit {
     const dialogRef = this.dialog.open(MovimientosCuentaComponent, {
       data: row,
       width: '95%',
+      maxWidth: '95%',
+      minWidth: '95%',
     });
   }
 }
