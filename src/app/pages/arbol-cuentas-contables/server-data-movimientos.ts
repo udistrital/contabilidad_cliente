@@ -1,20 +1,18 @@
-import { MovimientosHelper } from './../../../@core/helpers/movimientos/movimientosHelper';
+import { MovimientosHelper } from '../../@core/helpers/movimientos/movimientosHelper';
 import { ServerDataSource } from 'ng2-smart-table';
 import { map } from 'rxjs/operators';
 
 export class ServerDataMovimientos extends ServerDataSource {
     movimientosService: MovimientosHelper;
-    cuentaContable: String;
     lastPage: number = 0;
     query = {};
-    constructor(movimientosService: MovimientosHelper, cuentaContable: String) {
+    constructor(movimientosService: MovimientosHelper, query: any) {
         super(null, {
             endPoint: '_'
         });
-        this.cuentaContable = cuentaContable;
         this.movimientosService = movimientosService;
         this.lastRequestCount = 1;
-        this.query = { CuentaId: this.cuentaContable };
+        this.query = query;
     }
 
     getElements = function () {

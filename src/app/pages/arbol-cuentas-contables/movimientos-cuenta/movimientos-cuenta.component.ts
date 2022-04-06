@@ -1,10 +1,12 @@
+import { DetalleTransaccionComponent } from './../detalle-transaccion/detalle-transaccion.component';
 import { MovimientosHelper } from './../../../@core/helpers/movimientos/movimientosHelper';
 import { Component, Inject, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { EstructuraCuentaContable } from '../arbol-contable/cuenta-contable.model';
-import { ServerDataMovimientos } from './server-data-movimientos';
-import { CustomRendererComponent } from './CustomRendererComponent';
+import { ServerDataMovimientos } from '../server-data-movimientos';
+import { CustomRendererComponent } from '../CustomRendererComponent';
+import { CustomComprobanteComponent } from '../CustomComprobanteComponent';
 
 @Component({
   selector: 'ngx-movimientos-cuenta',
@@ -20,7 +22,7 @@ export class MovimientosCuentaComponent implements OnInit {
     offset: 0
   };
 
-  sadoNaturaleza = (cell) => {
+  saldoNaturaleza = (cell) => {
     if ( this.data.NaturalezaCuentaID === this.movimientosService.CREDITO ) {
       return -cell;
     }
@@ -29,15 +31,19 @@ export class MovimientosCuentaComponent implements OnInit {
 
   listSettings = {
     columns: {
-      Id: {
+      Consecutivo: {
         title: 'Consecutivo',
-        filter: true,
-        sort: true,
+        filter: false,
+        sort: false,
+        type: 'custom',
+        valuePrepareFunction: (cell, row) =>  row.TransaccionId.Etiquetas,
+        renderComponent: CustomComprobanteComponent,
       },
-      Descripcion: {
+      TransaccionId: {
         title: 'Descripcion',
         filter: true,
         sort: true,
+        valuePrepareFunction: (cell) =>  cell.Descripcion,
       },
       FechaModificacion: {
         title: 'Fecha',
@@ -52,7 +58,7 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Saldo Anterior',
         filter: false,
         sort: false,
-        valuePrepareFunction: this.sadoNaturaleza,
+        valuePrepareFunction: this.saldoNaturaleza,
         type: 'custom',
         renderComponent: CustomRendererComponent,
       },
@@ -74,7 +80,7 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Nuevo Saldo',
         filter: false,
         sort: false,
-        valuePrepareFunction: this.sadoNaturaleza,
+        valuePrepareFunction: this.saldoNaturaleza,
         type: 'custom',
         renderComponent: CustomRendererComponent,
       },
@@ -83,7 +89,16 @@ export class MovimientosCuentaComponent implements OnInit {
       add: false,
       edit: false,
       delete: false,
-      position: 'right',
+      position: 'left',
+      columnTitle: 'Abrir',
+      custom: [
+        {
+          name: 'detalleTx',
+          title: '<i class="fa fa-solid fa-receipt"></i>',
+          position: 'start',
+          filter: false,
+        }
+      ],
     },
     pager: {
       display: true,
@@ -96,11 +111,21 @@ export class MovimientosCuentaComponent implements OnInit {
   constructor(
     private movimientosService: MovimientosHelper,
     public dialogRef: MatDialogRef<MovimientosCuentaComponent>,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: EstructuraCuentaContable,
   ) { }
 
   ngOnInit() {
-    this.source = new ServerDataMovimientos(this.movimientosService, this.data.Id);
+    this.source = new ServerDataMovimientos(this.movimientosService, { CuentaId: this.data.Id });
+  }
+
+  openDialog(raw): void {
+    const dialogRef = this.dialog.open(DetalleTransaccionComponent, {
+      data: raw,
+      width: '85%',
+      maxWidth: '85%',
+      minWidth: '85%',
+    });
   }
 
 }
