@@ -249,8 +249,8 @@
     "form_moneda": "Moneda",
     "form_confirmar": "Confirmar",
     "movimientos": "Movimientos",
-    "movimientos_cuenta_contable": "MOVIMIENTOS CUENTA CONTABLE",
-    "detalle_transaccion": "DETALLE TRANSACCIÓN"
+    "movimientos_cuenta_contable": "Movimientos cuenta contable",
+    "detalle_transaccion": "Detalle transacción"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

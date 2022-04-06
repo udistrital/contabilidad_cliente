@@ -26,7 +26,7 @@ export class CustomComprobanteComponent implements OnInit, ViewCell {
     if (comprobante.ComprobanteId) {
         this.comprovanteObs = this.comprobantesService.getComprobantes(comprobante.ComprobanteId).pipe(
             map(value => {
-                return `${value.TipoComprobante.TipoDocumento}${value.Numero} ${value.Comprobante}`;
+                return `${value.TipoComprobante.TipoDocumento}${value.Numero}-${value.Comprobante}`;
             })
         );
     }
