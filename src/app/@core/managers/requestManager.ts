@@ -67,6 +67,7 @@ export class RequestManager {
       if (parameters.fields) params['fields'] = parameters.fields.join(',');
       if (parameters.sortby) params['sortby'] = parameters.sortby.join(',');
       if (parameters.order) params['order'] = parameters.order;
+      if (parameters.detailed) params['detailed'] = parameters.detailed;
       if (parameters.limit !== null && parameters.limit !== undefined) params['limit'] = parameters.limit;
       if (parameters.offset != null && parameters.offset !== undefined) params['offset'] = parameters.offset;
     }

@@ -25,4 +25,8 @@ export class MovimientosHelper {
         return this.rqManager.getv2('saldo', parameters);
     }
 
+    public getTransaccionMovimientosContables(id?: string) {
+        this.rqManager.setPath('MOVIMIENTOS_MID');
+        return this.rqManager.getv2('transaccion_movimientos/transaccion', {id, detailed: true});
+    }
 }

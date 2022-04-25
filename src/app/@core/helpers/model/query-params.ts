@@ -6,6 +6,7 @@ interface QueryParams {
   order?: string[];
   limit?: number;
   offset?: number;
+  detailed?: boolean;
 }
 
 export { QueryParams};
