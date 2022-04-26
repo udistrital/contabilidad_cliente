@@ -7,6 +7,7 @@ import { EstructuraCuentaContable } from '../arbol-contable/cuenta-contable.mode
 import { ServerDataMovimientos } from '../server-data-movimientos';
 import { CustomRendererComponent } from '../CustomRendererComponent';
 import { CustomComprobanteComponent } from '../CustomComprobanteComponent';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-movimientos-cuenta',
@@ -32,21 +33,21 @@ export class MovimientosCuentaComponent implements OnInit {
   listSettings = {
     columns: {
       Consecutivo: {
-        title: 'Consecutivo',
+        title:  this.translate.instant('GLOBAL.consecutivo'),
         filter: false,
         sort: false,
         type: 'custom',
         valuePrepareFunction: (cell, row) =>  row.TransaccionId.Etiquetas,
         renderComponent: CustomComprobanteComponent,
       },
-      TransaccionId: {
-        title: 'Descripcion',
+      TransaccionId__Descripcion: {
+        title: this.translate.instant('GLOBAL.descripcion'),
         filter: true,
         sort: true,
-        valuePrepareFunction: (cell) =>  cell.Descripcion,
+        valuePrepareFunction: (cell, row) =>  row.TransaccionId.Descripcion,
       },
       FechaModificacion: {
-        title: 'Fecha',
+        title: this.translate.instant('GLOBAL.fecha'),
         filter: false,
         sort: true,
         sortDirection: 'desc',
@@ -55,7 +56,7 @@ export class MovimientosCuentaComponent implements OnInit {
         },
       },
       SaldoAnterior: {
-        title: 'Saldo Anterior',
+        title: this.translate.instant('GLOBAL.saldo_anterior'),
         filter: false,
         sort: false,
         valuePrepareFunction: this.saldoNaturaleza,
@@ -63,7 +64,7 @@ export class MovimientosCuentaComponent implements OnInit {
         renderComponent: CustomRendererComponent,
       },
       Debito: {
-        title: 'Debito',
+        title: this.translate.instant('GLOBAL.debito'),
         filter: false,
         sort: false,
         type: 'custom',
@@ -73,7 +74,7 @@ export class MovimientosCuentaComponent implements OnInit {
         },
       },
       Credito: {
-        title: 'Credito',
+        title: this.translate.instant('GLOBAL.credito'),
         filter: false,
         sort: false,
         type: 'custom',
@@ -83,7 +84,7 @@ export class MovimientosCuentaComponent implements OnInit {
         },
       },
       NuevoSaldo: {
-        title: 'Nuevo Saldo',
+        title: this.translate.instant('GLOBAL.nuevo_saldo'),
         filter: false,
         sort: false,
         valuePrepareFunction: this.saldoNaturaleza,
@@ -118,6 +119,7 @@ export class MovimientosCuentaComponent implements OnInit {
     private movimientosService: MovimientosHelper,
     public dialogRef: MatDialogRef<MovimientosCuentaComponent>,
     public dialog: MatDialog,
+    private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: EstructuraCuentaContable,
   ) { }
 

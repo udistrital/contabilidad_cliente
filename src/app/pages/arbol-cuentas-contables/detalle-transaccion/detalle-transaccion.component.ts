@@ -5,6 +5,7 @@ import { CustomRendererComponent } from '../CustomRendererComponent';
 import { MovimientosHelper } from '../../../@core/helpers/movimientos/movimientosHelper';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ServerDataMovimientos } from '../server-data-movimientos';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './detalle-transaccion.component.html',
@@ -26,7 +27,7 @@ export class DetalleTransaccionComponent implements OnInit {
   listSettings = {
     columns: {
       idx: {
-        title: 'Secuencia',
+        title:  this.translate.instant('GLOBAL.secuencia'),
         filter: false,
         sort: true,
         width: '100px',
@@ -35,7 +36,7 @@ export class DetalleTransaccionComponent implements OnInit {
         },
       },
       Cuenta: {
-        title: 'Cuenta',
+        title: this.translate.instant('GLOBAL.cuenta_contable'),
         filter: false,
         sort: true,
         valuePrepareFunction: (cuenta) => {
@@ -43,7 +44,7 @@ export class DetalleTransaccionComponent implements OnInit {
         },
       },
       Tercero: {
-        title: 'Tercero',
+        title: this.translate.instant('GLOBAL.tercero'),
         filter: false,
         sort: true,
         valuePrepareFunction: (tercero) => {
@@ -51,7 +52,7 @@ export class DetalleTransaccionComponent implements OnInit {
         },
       },
       Debito: {
-        title: 'Debito',
+        title: this.translate.instant('GLOBAL.debito'),
         filter: false,
         sort: false,
         type: 'custom',
@@ -61,7 +62,7 @@ export class DetalleTransaccionComponent implements OnInit {
         },
       },
       Credito: {
-        title: 'Credito',
+        title: this.translate.instant('GLOBAL.credito'),
         filter: false,
         sort: false,
         type: 'custom',
@@ -89,6 +90,7 @@ export class DetalleTransaccionComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MovimientosCuentaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private translate: TranslateService,
     private movimientosService: MovimientosHelper, ) { }
 
   ngOnInit() {
