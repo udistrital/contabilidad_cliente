@@ -5,8 +5,10 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </nb-card-header>
-    <nb-card-body>
-        <h5>{{ transaction.Descripcion }}</h5>
+    <nb-card-body class="container">
+        <p><strong>{{ "GLOBAL.consecutivo" | translate }}: </strong>{{consecutivo}}</p>
+        <p><strong>{{ "GLOBAL.fecha_registro" | translate }}: </strong>{{ transaction.FechaTransaccion }}</p>
+        <p><strong>{{ "GLOBAL.detalle" | translate }}: </strong>{{ transaction.Descripcion }}</p>
         <ng2-smart-table [settings]="listSettings" [source]="source">
         </ng2-smart-table>
     </nb-card-body>

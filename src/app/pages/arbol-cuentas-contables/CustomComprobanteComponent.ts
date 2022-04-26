@@ -22,13 +22,15 @@ export class CustomComprobanteComponent implements OnInit, ViewCell {
   comprovanteObs: Observable < String > ;
 
   ngOnInit() {
-    const comprobante = JSON.parse(this.value);
-    if (comprobante.ComprobanteId) {
-        this.comprovanteObs = this.comprobantesService.getComprobantes(comprobante.ComprobanteId).pipe(
-            map(value => {
-                return `${value.TipoComprobante.TipoDocumento}${value.Numero}-${value.Comprobante}`;
-            })
-        );
+    if (this.value) {
+      const comprobante = JSON.parse(this.value);
+      if (comprobante.ComprobanteId) {
+          this.comprovanteObs = this.comprobantesService.getComprobantes(comprobante.ComprobanteId).pipe(
+              map(value => {
+                  return `${value.TipoComprobante.TipoDocumento}${value.Numero}-${value.Comprobante}`;
+              })
+          );
+      }
     }
   }
 

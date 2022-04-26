@@ -197,7 +197,16 @@
     "num_copias":"Número de copias",
     "titulo":"Titulo",
     "numeracion_automatica":"Numeración Automatica",
-    "ver": "Ver"
+    "ver": "Ver",
+    "fecha": "Fecha",
+    "saldo_anterior": "Saldo anterior",
+    "nuevo_saldo": "Nuevo saldo",
+    "saldo_actual": "Saldo actual",
+    "debito": "Débito",
+    "credito": "Crédito",
+    "secuencia": "Secuencia",
+    "cuenta_contable": "Cuenta contable",
+    "tercero": "Tercero"
   },
   "COMPROBANTE":{
     "descripcion": "En esta sección podrá agregar, modificar, eliminar comprobantes, asi como asignarle parametros a este mismo",
