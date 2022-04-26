@@ -42,14 +42,22 @@ export class DetalleTransaccionComponent implements OnInit {
           return `[${cuenta.Codigo}] ${cuenta.Nombre}`;
         },
       },
+      Tercero: {
+        title: 'Tercero',
+        filter: false,
+        sort: true,
+        valuePrepareFunction: (tercero) => {
+          return tercero ? tercero.NombreCompleto : '';
+        },
+      },
       Debito: {
         title: 'Debito',
         filter: false,
         sort: false,
         type: 'custom',
         renderComponent: CustomRendererComponent,
-        valuePrepareFunction: (val, row, cell) => {
-          return row.Valor;
+        valuePrepareFunction: (val, row) => {
+          return row.TipoMovimientoId === this.movimientosService.DEBITO_COD ? row.Valor : 0;
         },
       },
       Credito: {
@@ -58,8 +66,8 @@ export class DetalleTransaccionComponent implements OnInit {
         sort: false,
         type: 'custom',
         renderComponent: CustomRendererComponent,
-        valuePrepareFunction: (val, row, cell) => {
-          return row.Valor;
+        valuePrepareFunction: (val, row, ) => {
+          return row.TipoMovimientoId === this.movimientosService.CREDITO_COD ? row.Valor : 0;
         },
       },
     },

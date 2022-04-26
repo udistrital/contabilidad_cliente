@@ -49,7 +49,7 @@ export class MovimientosCuentaComponent implements OnInit {
         title: 'Fecha',
         filter: false,
         sort: true,
-        sortDirection: 'asc',
+        sortDirection: 'desc',
         valuePrepareFunction: (date) => {
           return new Date(date).toLocaleDateString();
         },
@@ -68,6 +68,9 @@ export class MovimientosCuentaComponent implements OnInit {
         sort: false,
         type: 'custom',
         renderComponent: CustomRendererComponent,
+        valuePrepareFunction: (val, row) => {
+          return row.TipoMovimientoId === this.movimientosService.DEBITO_COD ? row.Valor : 0;
+        },
       },
       Credito: {
         title: 'Credito',
@@ -75,6 +78,9 @@ export class MovimientosCuentaComponent implements OnInit {
         sort: false,
         type: 'custom',
         renderComponent: CustomRendererComponent,
+        valuePrepareFunction: (val, row, ) => {
+          return row.TipoMovimientoId === this.movimientosService.CREDITO_COD ? row.Valor : 0;
+        },
       },
       NuevoSaldo: {
         title: 'Nuevo Saldo',
