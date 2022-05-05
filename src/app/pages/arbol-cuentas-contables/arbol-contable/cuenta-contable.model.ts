@@ -14,4 +14,5 @@ export interface EstructuraCuentaContable {
   data?: EstructuraCuentaContable;
   children?: EstructuraCuentaContable[];
   NaturalezaCuentaID: string;
+  RequiereTercero: boolean;
 }
