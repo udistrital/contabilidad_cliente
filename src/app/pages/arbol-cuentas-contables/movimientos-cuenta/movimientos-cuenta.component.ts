@@ -18,6 +18,8 @@ export class MovimientosCuentaComponent implements OnInit {
 
   movimientos = [];
 
+  tercerohidden = true;
+
   paginationSettigs = {
     rows: 50,
     offset: 0
@@ -53,6 +55,14 @@ export class MovimientosCuentaComponent implements OnInit {
         sortDirection: 'desc',
         valuePrepareFunction: (date) => {
           return new Date(date).toLocaleDateString();
+        },
+      },
+      Tercero: {
+        title: this.translate.instant('GLOBAL.tercero'),
+        filter: false,
+        sort: false,
+        valuePrepareFunction: (value) => {
+          return (value || {}).NombreCompleto || '';
         },
       },
       SaldoAnterior: {
@@ -124,6 +134,9 @@ export class MovimientosCuentaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    if (this.data.RequiereTercero) {
+      this.tercerohidden = false;
+    }
     this.source = new ServerDataMovimientos(this.movimientosService, { CuentaId: this.data.Id });
   }
 
