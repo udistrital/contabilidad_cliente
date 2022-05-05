@@ -7,7 +7,7 @@
     </nb-card-header>
     <nb-card-body>
         <h5>{{data.Codigo}} {{data.Nombre}}</h5>
-        <ng2-smart-table [settings]="listSettings" [source]="source" (custom)="openDialog($event)">
+        <ng2-smart-table [settings]="listSettings" [source]="source" (custom)="openDialog($event)" [ngClass]="{'tercero-display': tercerohidden}">
         </ng2-smart-table>
     </nb-card-body>
     <nb-card-footer class="modal-footer">
