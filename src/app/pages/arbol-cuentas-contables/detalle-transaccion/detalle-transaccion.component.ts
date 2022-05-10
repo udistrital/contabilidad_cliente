@@ -51,6 +51,11 @@ export class DetalleTransaccionComponent implements OnInit {
           return tercero ? tercero.NombreCompleto : '';
         },
       },
+      Descripcion: {
+        title: this.translate.instant('GLOBAL.descripcion'),
+        filter: false,
+        sort: false,
+      },
       Debito: {
         title: this.translate.instant('GLOBAL.debito'),
         filter: false,
