@@ -1,13 +1,18 @@
 .aligned {
-  display: flex;
-  justify-content: center;
+    margin-bottom: 5em;
+    margin-top: -5em;
 }
 
 .floating {
   margin-bottom: 20px;
   position: sticky;
-  top: 50px;
-
+  top: calc(100% - 4em + 1px);
+  display: flex;
+  z-index: 10;
+  width: 100%;
+  background-color: white;
+  border-top: solid 1px #ffc107;
+  justify-content: center;
 }
 
 :host ::ng-deep .mat-tab-label-content {

@@ -44,7 +44,7 @@ export class ArbolCuentasContablesComponent implements OnInit {
   menu = {
     direction: 'row',
     style: 'basic-dark',
-    expanded: true,
+    expanded: false,
     options:  [
       ...this.defaultOptions
     ]
