@@ -1,17 +1,12 @@
-<nb-card status="warning">
-  <nb-card-body class="card border-warning">
-    <div>
-      <div class="floating">
-        <h4 class="card-title text-center text-warning">
-          {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
-        </h4>
-        <ngx-float-menu class="aligned" [menu]="menu" (itemClick)="selectAction($event)"></ngx-float-menu>
-      </div>
-    </div>
-  </nb-card-body>
-</nb-card>
+<nb-card-body>
+      <h4 class="card-title text-center text-warning">
+        {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
+      </h4>
+</nb-card-body>
 
-<div class="card border-warning">
+<ngx-float-menu class="floating" [menu]="menu" (itemClick)="selectAction($event)"></ngx-float-menu>
+
+<div class="card border-warning aligned">
   <mat-tab-group mat-stretch-tabs dynamicHeight [(selectedIndex)]="selected">
     <mat-tab label="Arbol Contable">
       <div style="padding: 20px;">
