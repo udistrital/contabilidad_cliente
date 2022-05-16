@@ -39,6 +39,7 @@ export class CuentaContableComponent implements OnInit {
   tipoMonedas = [];
   centroCostos = [];
   tipoCuentas = [];
+  tipoIvas = [];
   bancos = [];
   cuentasBancarias = [];
   bancosFilter: Observable<any[]>;
@@ -109,14 +110,16 @@ export class CuentaContableComponent implements OnInit {
       this.acountService.getTipoMoneda(),
       this.acountService.getCentroCostos(),
       this.acountService.getTipoCuenta(),
-      this.bancosService.getCuentasBancarias()
+      this.acountService.getTipoRetencion(),
+      this.bancosService.getCuentasBancarias(),
     ]).subscribe(results => {
       this.naturalezas = results[0];
       this.detalleCuentas = results[1];
       this.tipoMonedas = results[2];
       this.centroCostos = results[3];
       this.tipoCuentas = results[4];
-      this.cuentasBancarias = results[5] ? results[5].Data : [];
+      this.tipoIvas = results[5];
+      this.cuentasBancarias = results[6] ? results[6].Data : [];
       this.bancos = groupBy(this.cuentasBancarias, 'NombreBanco');
       if (this.cuenta) {
         this.loadAccount();
