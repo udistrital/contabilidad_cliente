@@ -45,7 +45,8 @@ export class CuentaContableComponent implements OnInit {
   bancosFilter: Observable<any[]>;
   code: string;
   detalleCondicionales = {
-    bancos: false
+    bancos: false,
+    iva: false,
   };
 
 
@@ -64,15 +65,25 @@ export class CuentaContableComponent implements OnInit {
         switch (value) {
           case 'bancos':
             this.detalleCondicionales = {
-              bancos: true
+              bancos: true,
+              iva: false,
             };
             this.form.get('CuentaBancariaID').enable();
             break;
+          case 'iva':
+            this.detalleCondicionales = {
+              bancos: false,
+              iva: true,
+            };
+            this.form.get('TipoRetencionID').enable();
+            break;
           default:
             this.detalleCondicionales = {
-              bancos: false
+              bancos: false,
+              iva: false,
             };
             this.form.get('CuentaBancariaID').disable();
+            this.form.get('TipoRetencionID').disable();
             break;
         }
       });
