@@ -69,6 +69,7 @@ export class CuentaContableComponent implements OnInit {
               iva: false,
             };
             this.form.get('CuentaBancariaID').enable();
+            this.form.get('TipoRetencionID').disable();
             break;
           case 'iva':
             this.detalleCondicionales = {
@@ -76,6 +77,7 @@ export class CuentaContableComponent implements OnInit {
               iva: true,
             };
             this.form.get('TipoRetencionID').enable();
+            this.form.get('CuentaBancariaID').disable();
             break;
           default:
             this.detalleCondicionales = {
