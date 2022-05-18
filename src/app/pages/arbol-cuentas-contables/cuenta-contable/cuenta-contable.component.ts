@@ -39,12 +39,14 @@ export class CuentaContableComponent implements OnInit {
   tipoMonedas = [];
   centroCostos = [];
   tipoCuentas = [];
+  tipoIvas = [];
   bancos = [];
   cuentasBancarias = [];
   bancosFilter: Observable<any[]>;
   code: string;
   detalleCondicionales = {
-    bancos: false
+    bancos: false,
+    iva: false,
   };
 
 
@@ -63,15 +65,27 @@ export class CuentaContableComponent implements OnInit {
         switch (value) {
           case 'bancos':
             this.detalleCondicionales = {
-              bancos: true
+              bancos: true,
+              iva: false,
             };
             this.form.get('CuentaBancariaID').enable();
+            this.form.get('TipoRetencionID').disable();
+            break;
+          case 'iva':
+            this.detalleCondicionales = {
+              bancos: false,
+              iva: true,
+            };
+            this.form.get('TipoRetencionID').enable();
+            this.form.get('CuentaBancariaID').disable();
             break;
           default:
             this.detalleCondicionales = {
-              bancos: false
+              bancos: false,
+              iva: false,
             };
             this.form.get('CuentaBancariaID').disable();
+            this.form.get('TipoRetencionID').disable();
             break;
         }
       });
@@ -109,14 +123,16 @@ export class CuentaContableComponent implements OnInit {
       this.acountService.getTipoMoneda(),
       this.acountService.getCentroCostos(),
       this.acountService.getTipoCuenta(),
-      this.bancosService.getCuentasBancarias()
+      this.acountService.getTipoRetencion(),
+      this.bancosService.getCuentasBancarias(),
     ]).subscribe(results => {
       this.naturalezas = results[0];
       this.detalleCuentas = results[1];
       this.tipoMonedas = results[2];
       this.centroCostos = results[3];
       this.tipoCuentas = results[4];
-      this.cuentasBancarias = results[5] ? results[5].Data : [];
+      this.tipoIvas = results[5];
+      this.cuentasBancarias = results[6] ? results[6].Data : [];
       this.bancos = groupBy(this.cuentasBancarias, 'NombreBanco');
       if (this.cuenta) {
         this.loadAccount();

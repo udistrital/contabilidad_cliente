@@ -16,6 +16,7 @@ export class FormCuentaContable  {
     Ajustable: [false],
     Nmnc: [false],
     MonedaID: ['',  Validators.required],
+    TipoRetencionID: ['', Validators.required],
   });
 
   constructor(private builder: FormBuilder,

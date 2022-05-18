@@ -259,7 +259,8 @@
     "form_confirmar": "Confirmar",
     "movimientos": "Movimientos",
     "movimientos_cuenta_contable": "Movimientos cuenta contable",
-    "detalle_transaccion": "Detalle transacción"
+    "detalle_transaccion": "Detalle transacción",
+    "iva": "Iva"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

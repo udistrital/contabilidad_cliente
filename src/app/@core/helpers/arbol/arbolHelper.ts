@@ -242,4 +242,19 @@ export class ArbolHelper {
     );
   }
 
+  public getTipoRetencion() {
+    this.rqManager.setPath('CUENTAS_CONTABLES_SERVICE');
+    return this.rqManager.get(`tipo_retencion`).pipe(
+      map(
+        (res) => {
+          if (res && res['Type'] === 'error') {
+            this.pUpManager.showErrorAlert('No se pudo consultar la información de tipo cuenta');
+            return undefined;
+          }
+          return res;
+        },
+      ),
+    );
+  }
+
 }
