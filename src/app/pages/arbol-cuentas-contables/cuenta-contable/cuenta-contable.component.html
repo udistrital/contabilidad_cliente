@@ -196,7 +196,24 @@
 					</mat-form-field>
 				</mat-grid-tile>
 
-				<mat-grid-tile colspan="6"
+				<mat-grid-tile colspan="3"
+								*ngIf="detalleCondicionales.iva"
+							   rowspan="1">
+					<mat-form-field class="form-group"
+									appearance="legacy">
+						<mat-label>{{ 'CUENTAS_CONTABLES.iva' | translate }}*</mat-label>
+						<mat-select [formControl]="form.controls['TipoRetencionID']">
+							<mat-option *ngFor="let iva of tipoIvas"
+										[value]="iva.Id">
+								{{ iva.Label }}
+							</mat-option>
+						</mat-select>
+						<mat-error *ngIf="form.controls['TipoRetencionID'].errors">
+							{{ form.controls["TipoRetencionID"].errors.msg || ("CUENTAS_CONTABLES.form_error" | translate) }}
+						</mat-error>
+					</mat-form-field>
+				</mat-grid-tile>
+				<mat-grid-tile colspan="3"
 							   rowspan="1">
 					<mat-form-field class="form-group"
 									appearance="legacy">
