@@ -53,10 +53,10 @@ steps:
 
 # TODO: Pasar a jest y descomentar este step
 # - name: prueba_unitarias
-#   image: node:12.6.0
+#   image: node:14
 #   failure: ignore
 #   commands:
-#   - npm i
+#   - npm ci && node --version && npm --version
 #   - npm run test
 #   when:
 #     branch:
@@ -65,9 +65,9 @@ steps:
 #     - unitest
 
 - name:  pruebas_linter
-  image: node:12.6.0
+  image: node:14
   commands:
-  - npm i
+  - npm ci && node --version && npm --version
   - npm run lint:ci
   when:
     branch:
@@ -93,10 +93,9 @@ steps:
     - push
 
 - name: nodejs_release
-  image: node:12.6.0
+  image: node:14
   commands:
-  - node --version
-  - npm i
+  - npm ci && node --version && npm --version
   - npm run build:test
   when:
     branch:
@@ -108,10 +107,9 @@ steps:
     - push
 
 - name: nodejs_master
-  image: node:12.6.0
+  image: node:14
   commands:
-  - node --version
-  - npm i
+  - npm ci && node --version && npm --version
   - npm run build:prod
   when:
     branch:
