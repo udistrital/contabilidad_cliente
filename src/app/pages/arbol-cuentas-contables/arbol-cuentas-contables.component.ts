@@ -2,6 +2,9 @@ import { EstructuraCuentaContable } from './arbol-contable/cuenta-contable.model
 import { Component, OnInit } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import locales from '@angular/common/locales/es-CO';
+import { ArbolHelper } from '../../@core/helpers/arbol/arbolHelper';
+import { PopUpManager } from '../../@core/managers/popUpManager';
+import { TranslateService } from '@ngx-translate/core';
 
 registerLocaleData(locales, 'co');
 
@@ -56,7 +59,7 @@ export class ArbolCuentasContablesComponent implements OnInit {
   selected: number = 0;
   selectedCoumt: EstructuraCuentaContable;
 
-  constructor() {}
+  constructor(private cuentaService: ArbolHelper, private pUpManager: PopUpManager, private translate: TranslateService) {}
 
   ngOnInit() {
   }
@@ -69,6 +72,9 @@ export class ArbolCuentasContablesComponent implements OnInit {
       case 'crear':
         node = { title: 'Nueva Cuenta', type: action};
         break;
+      case 'eliminar':
+        this.onDeleteNode();
+        return;
       default:
         node = {title: `${this.selectedCoumt.Codigo} ${this.selectedCoumt.Nombre}`, data: this.selectedCoumt, type: action, code: this.selectedCoumt.Codigo};
         break;
@@ -88,6 +94,14 @@ export class ArbolCuentasContablesComponent implements OnInit {
   onSelectNode(e) {
     this.selectedCoumt = e;
     this.menu.options = [...this.defaultOptions, ...this.selectedOptions];
+  }
+
+  onDeleteNode() {
+    this.cuentaService.deleteCuentaContables(this.selectedCoumt.Id).subscribe(res => {
+      if (res) {
+        this.pUpManager.showSuccessAlert(this.translate.instant('CUENTAS_CONTABLES.cuenta_eliminada'), '');
+      }
+    });
   }
 
 }

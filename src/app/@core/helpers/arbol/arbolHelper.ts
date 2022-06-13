@@ -257,4 +257,9 @@ export class ArbolHelper {
     );
   }
 
+  public deleteCuentaContables(id: string) {
+    this.rqManager.setPath('MOVIMIENTOS_MID');
+    return this.rqManager.delete('cuenta_contable', id);
+  }
+
 }
