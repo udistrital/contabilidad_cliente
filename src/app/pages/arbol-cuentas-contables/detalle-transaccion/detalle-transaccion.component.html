@@ -1,0 +1,20 @@
+<nb-card accent="info" status="info">
+    <nb-card-header class="modal-header">
+        <h5 class="modal-title">{{ "CUENTAS_CONTABLES.detalle_transaccion" | translate }}</h5>
+        <button type="button" mat-button [mat-dialog-close] class="close"  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body class="container">
+        <p><strong>{{ "GLOBAL.consecutivo" | translate }}: </strong>{{consecutivo}}</p>
+        <p><strong>{{ "GLOBAL.fecha_registro" | translate }}: </strong>{{ transaction.FechaTransaccion }}</p>
+        <p><strong>{{ "GLOBAL.detalle" | translate }}: </strong>{{ transaction.Descripcion }}</p>
+        <ng2-smart-table [settings]="listSettings" [source]="source">
+        </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer class="modal-footer">
+        <button mat-button [mat-dialog-close] class="btn btn-primary" cdkFocusInitial>
+            {{ "CUENTAS_CONTABLES.form_confirmar" | translate }}
+        </button>
+    </nb-card-footer>
+</nb-card>

@@ -1,0 +1,23 @@
+<mat-grid-list cols="{{dataForm.cols || 4}}" rowHeight="100%">
+  <div [formGroup]="reactiveForm">
+    <div *ngFor="let element of dataForm.controls">
+      <ng-container
+        *ngTemplateOutlet="element.controls ? grouptemplate : controltemplate; context: { element: element, parent: reactiveForm }">
+      </ng-container>
+    </div>
+  </div>
+</mat-grid-list>
+
+<ng-template #grouptemplate let-element="element" let-parent="parent">
+  <div [formGroup]="parent.controls[element.key]">
+    <ng-container *ngFor="let el of element.controls">
+      <ng-container
+        *ngTemplateOutlet="el.controls ? grouptemplate : controltemplate; context: { element: el, parent: parent.controls[element.key] }">
+      </ng-container>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #controltemplate let-element="element" let-parent="parent">
+  <ngx-reactive-control [data]="element" [(control)]="parent.controls[element.key]"></ngx-reactive-control>
+</ng-template>

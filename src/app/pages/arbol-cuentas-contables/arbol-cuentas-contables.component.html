@@ -1,73 +1,34 @@
-<nb-card status="warning">
-  <nb-card-header>
-      {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
-  </nb-card-header>
-  <nb-card-body>
-    <div *ngIf="showTree">
-      <div class="row">
-        <div class="col">
-          <button type="submit" class="btn btn-success btn-block" (click)="cleanInterface();makeFormEditable(false);  showViewTab('group');">
-            {{'GLOBAL.add-grupo' | translate }}
-          </button>
-        </div>
-        <div class="col">
-          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
-            (click)="cleanInterface();makeFormEditable(false);  showViewTab();">
-            {{'GLOBAL.add-nodo' | translate }}
-          </button>
-        </div>
-        <div class="col">
-          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
-            (click)="getTreeInfo(); makeFormEditable(true); showViewTab('group');">
-            {{'GLOBAL.ver' | translate }}
-          </button>
-        </div>
-        <div class="col">
-          <button [disabled]="!selectedNodeData" type="submit" class="btn btn-success btn-block"
-            (click)="getTreeInfo(); makeFormEditable(false, true); showViewTab('group');">
-            {{'GLOBAL.editar' | translate }}
-          </button>
-        </div>
-      </div>
-      <br>
-      <label class="search-label" for="search">{{
-      "GLOBAL.buscar" | translate
-    }}</label>
+<nb-card-body>
+      <h4 class="card-title text-center text-warning">
+        {{ 'CUENTAS_CONTABLES.arbol_cuentas_contables' | translate }}
+      </h4>
+</nb-card-body>
 
-      <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input" [(ngModel)]="searchValue" />
-      <table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
-        <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-        <tr #nebularTree class="table-row" [class.highlight]="validHighlight(row, nebularTree)"
-          (click)="onSelect(row, nebularTree);" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"
-          [attr.data-picker]="row.data.Codigo"></tr>
-        <ng-container [nbTreeGridColumnDef]="customColumn">
-          <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
-            {{ customColumn }}
-          </th>
-          <td class="aligned-code" nbTreeGridCell *nbTreeGridCellDef="let row">
-            <ngx-nb-fs-icon [kind]="row.data.kind" [expanded]="row.expanded"></ngx-nb-fs-icon>
-            <span [ngClass]="{
-                'nb-chevron-down': row.expanded,
-                'nb-chevron-right': !row.expanded
-              }" aria-hidden="true">
-            </span>{{ row.data[customColumn] }}
-          </td>
-        </ng-container>
-        <ng-container *ngFor="let column of defaultColumns; let index = index" [nbTreeGridColumnDef]="column"
-          [showOn]="getShowOn(index)">
-          <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
-            {{ column }}
-          </th>
-          <td nbTreeGridCell *nbTreeGridCellDef="let row">
-            {{ column === "Activo" ? (row.data[column] ? "Si" : "No" ): (row.data[column] || "-") }}
-          </td>
-        </ng-container>
-      </table>
-    </div>
-    <button *ngIf="viewTab" (click)="cleanInterface(); showTreeTab();" class="btn btn-info btn-sm"> <i class="nb-arrow-dropleft"></i>
-      Regresar</button>
-    <ngx-dinamicform *ngIf="viewTab" [normalform]="formData" [modeloData]="nodeData" (result)="validarForm($event)"
-      (resultChanges)="validarCampo($event)" [clean]="cleanForm">
-    </ngx-dinamicform>
-  </nb-card-body>
-</nb-card>
+<ngx-float-menu class="floating" [menu]="menu" (itemClick)="selectAction($event)"></ngx-float-menu>
+
+<div class="card border-warning aligned">
+  <mat-tab-group mat-stretch-tabs dynamicHeight [(selectedIndex)]="selected">
+    <mat-tab label="Arbol Contable">
+      <div style="padding: 20px;">
+        <ngx-arbol-contable (onSelection)="onSelectNode($event)"></ngx-arbol-contable>
+      </div>
+    </mat-tab>
+    <mat-tab [label]="tab.title" *ngFor="let tab of tabs; let index = index">
+      <ng-template mat-tab-label>
+        <div>
+          <nb-icon [icon]="({editar: 'edit', crear: 'plus', ver: 'glasses'})[tab.type]" pack="fas"></nb-icon>
+        </div>
+        <div class="tab-title">
+          {{tab.title}}
+        </div>
+        <div>
+          <nb-icon [icon]="'times'" aria-hidden="true" pack="fas" status="secondary" (click)="removeTab(index)">
+          </nb-icon>
+        </div>
+      </ng-template>
+      <div style="padding: 20px;">
+        <ngx-cuenta-contable [cuenta]="tab.type == 'crear' ? null : selectedCoumt" [action]="tab.type"></ngx-cuenta-contable>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

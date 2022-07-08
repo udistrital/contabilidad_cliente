@@ -1,61 +1,28 @@
-button[nbTreeGridRowToggle] {
-  background: transparent;
-  border: none;
-  padding: 0;
+.aligned {
+    margin-bottom: 5em;
+    margin-top: -5em;
 }
 
-.table-row {
-  &:hover {
-    background: #e6e6e6;
-  }
-
-}
-:host ::ng-deep table tr td {
-  padding: -0.125rem 1.25rem !important;
-  font-size: 12px !important;
-}
-.aligned-code {
-  padding-left: 8px;
-}
-.search-label {
-  display: block;
-}
-.search-input {
-  margin-bottom: 1rem;
-}
-
-.nb-column-name {
+.floating {
+  margin-bottom: 20px;
+  position: sticky;
+  top: calc(100% - 4em + 1px);
+  display: flex;
+  z-index: 10;
   width: 100%;
+  background-color: white;
+  border-top: solid 1px #ffc107;
+  justify-content: center;
 }
 
-@media screen and (min-width: 400px) {
-  .nb-column-name,
-  .nb-column-size {
-    width: 50%;
+:host ::ng-deep .mat-tab-label-content {
+  width: 100%;
+  align-content: space-between;
+  .tab-title {
+    padding: 0 10px;
+    width: 100%;
+    text-align: center;
+    word-break: break-word;
   }
+
 }
-
-@media screen and (min-width: 500px) {
-  .nb-column-name,
-  .nb-column-size,
-  .nb-column-kind {
-    width: 33.333%;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .nb-column-name {
-    width: 31%;
-  }
-  .nb-column-size,
-  .nb-column-kind,
-  .nb-column-items {
-    width: 23%;
-  }
-}
-
-
-.moneyField {
-  text-align: right;
-}
-

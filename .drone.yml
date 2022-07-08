@@ -1,9 +1,15 @@
 kind: pipeline
 name: oas_cliente_ci
 
+trigger:
+  event:
+    exclude:
+      - tag
+
 steps:
 - name: check_readme
   image: jjvargass/qa_develoment:latest
+  failure: ignore
   commands:
   - python /app/check_readme.py
   when:
@@ -17,6 +23,7 @@ steps:
 
 - name: check_branch
   image: jjvargass/qa_develoment:latest
+  failure: ignore
   commands:
   - python /app/check_branch.py -H ${DRONE_GIT_HTTP_URL}
   when:
@@ -28,32 +35,53 @@ steps:
     event:
     - push
 
-# - name: check_commits
-#   image: jjvargass/qa_develoment:latest
-#   commands:
-#   - python /app/check_commits.py
-#   when:
-#     branch:
-#     - develop
-#     - feature/*
-#     - hotfix/*
-#     - release/*
-#     event:
-#     - push
+# STEP NO OBJETIVO! Debe revisarse/ajustarse. Para más información:
+# https://github.com/udistrital/arka_cliente/commit/37e3ece10d52cae1303d837ad0e8a6ca1fb7a549
+- name: check_commits
+  image: jjvargass/qa_develoment:latest
+  failure: ignore
+  commands:
+  - python /app/check_commits.py
+  when:
+    branch:
+    - develop
+    - feature/*
+    - hotfix/*
+    - release/*
+    event:
+    - push
 
+- name: preparar npm
+  image: node:14
+  commands:
+    - npm ci # Instalación limpia
+    - node --version
+    - npm --version
+  when:
+    branch: # Colocar las ramas que requieran npm
+      - dependabot/**
+      - develop
+      - feature/*
+      - hotfix/*
+      - master
+      - release/*
+      - unitest
+
+# TODO: Pasar a jest y descomentar este step
 # - name: prueba_unitarias
-#   image: node:12.6.0
+#   image: node:14
+#   failure: ignore
 #   commands:
-#   - npm i
 #   - npm run test
 #   when:
 #     branch:
+#     - feature/*
+#     - hotfix/*
 #     - unitest
-#
+
 - name:  pruebas_linter
-  image: node:12.6.0
+  image: node:14
   commands:
-  - npm i
   - npm run lint:ci
   when:
     branch:
@@ -79,13 +107,12 @@ steps:
     - push
 
 - name: nodejs_release
-  image: node:12.6.0
+  image: node:14
   commands:
-  - node --version
-  - npm i
   - npm run build:test
   when:
     branch:
+    - dependabot/**
     - develop
     - feature/*
     - release/*
@@ -93,10 +120,8 @@ steps:
     - push
 
 - name: nodejs_master
-  image: node:12.6.0
+  image: node:14
   commands:
-  - node --version
-  - npm i
   - npm run build:prod
   when:
     branch:
@@ -115,7 +140,7 @@ steps:
       from_secret: aws_secret_access_key
     region: us-east-1
     source: dist/**/*
-    target: /pruebas${DRONE_REPO_NAME%%_cliente}.portaloas.udistrital.edu.co
+    target: /${DRONE_REPO_NAME}
     strip_prefix: dist/
   when:
     branch:
@@ -133,7 +158,7 @@ steps:
       from_secret: aws_secret_access_key
     region: us-east-1
     source: dist/**/*
-    target: /${DRONE_REPO_NAME%%_cliente}.portaloas.udistrital.edu.co
+    target: /${DRONE_REPO_NAME}
     strip_prefix: dist/
   when:
     branch:
@@ -142,6 +167,7 @@ steps:
     - push
 
 - name: notify_telegram
+  failure: ignore
   image: appleboy/drone-telegram
   settings:
     token:

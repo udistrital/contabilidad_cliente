@@ -1,0 +1,8 @@
+.form-group {
+    width: 100%;
+    input {
+        &:disabled {
+            color: #111;
+        }
+    }
+}

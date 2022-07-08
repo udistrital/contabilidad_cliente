@@ -10,10 +10,21 @@
   },
   "MENU": {
     "dashboard": "Inicio",
-    "comprobantes": "Comprobantes",
     "tipos_comprobante": "Tipos de comprobantes",
-    "arbol_cuentas_contables":"Árbol de cuentas contables",
     "conceptos": "Conceptos",
+    "plan_cuentas":{
+      "plan_cuentas": "Plan de cuentas",
+      "arbol_cuentas_contables":"Árbol de cuentas contables"
+    },
+    "comprobantes":{
+      "comprobantes": "Comprobantes",
+      "tipos_comprobante": "Tipos de comprobantes",
+      "configuracion_comprobantes":"Configuración de comprobantes"
+    },
+    "provisiones": "Provisiones",
+    "conciliaciones": "Conciliaciones",
+    "registro_nomina": "Registro nómina",
+    "informes_contables": "Informes contables",
     "auth": {
       "auth": "Autenticación",
       "login": "Iniciar sesión",
@@ -186,7 +197,16 @@
     "num_copias":"Número de copias",
     "titulo":"Titulo",
     "numeracion_automatica":"Numeración Automatica",
-    "ver": "Ver"
+    "ver": "Ver",
+    "fecha": "Fecha",
+    "saldo_anterior": "Saldo anterior",
+    "nuevo_saldo": "Nuevo saldo",
+    "saldo_actual": "Saldo actual",
+    "debito": "Débito",
+    "credito": "Crédito",
+    "secuencia": "Secuencia",
+    "cuenta_contable": "Cuenta contable",
+    "tercero": "Tercero"
   },
   "COMPROBANTE":{
     "descripcion": "En esta sección podrá agregar, modificar, eliminar comprobantes, asi como asignarle parametros a este mismo",
@@ -217,7 +237,31 @@
   },
   "CUENTAS_CONTABLES": {
     "arbol_cuentas_contables": "Cuentas Contables",
-    "cuentas-contables": "Cuentas-contables"
+    "cuentas-contables": "Cuentas-contables",
+    "arbol-contable": "Arbol Contable",
+    "form_error": "Porfavor ingrese un dato valido",
+    "form_codigo": "Código",
+    "form_codigo_placeholder": "Código",
+    "form_codigo_hint": "Ingrese un número consecutivo",
+    "form_disponible": "Disponible",
+    "form_nombre": "Nombre",
+    "form_nombre_placeholder": "Nombre",
+    "form_nombre_hint": "Ingrese el nombre de la cuenta",
+    "form_naturaleza": "Naturaleza",
+    "form_tipo_cuenta": "Tipo Cuenta",
+    "form_detalle": "Detalle",
+    "form_requiere_tercero": "Requiere Tercero",
+    "form_ajustable": "Ajustable",
+    "form_nmnc": "NMNC",
+    "form_centro_costo": "Centro de costos",
+    "form_cuenta_bancaria": "Cuenta Bancaria",
+    "form_moneda": "Moneda",
+    "form_confirmar": "Confirmar",
+    "movimientos": "Movimientos",
+    "movimientos_cuenta_contable": "Movimientos cuenta contable",
+    "detalle_transaccion": "Detalle transacción",
+    "iva": "Iva",
+    "cuenta_eliminada": "Cuenta eliminada correctamente"
   },
   "CONCEPTOS":{
     "crear-concepto":"Crear concepto",

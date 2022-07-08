@@ -13,8 +13,11 @@ export const environment = {
   WSO2_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/',
   PLAN_CUENTAS_MONGO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/plan_cuentas_mongo_crud/v1/',
   CUENTAS_CONTABLES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/cuentas_contables_crud/v1/',
+  TESORERIA_MID_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/tesoreria_mid/v1/',
   CONFIGURACION_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/configuracion_crud_api/v1/',
   CONF_MENU_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/configuracion_crud_api/v1/menu_opcion_padre/ArbolMenus/',
+  MOVIMIENTOS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/movimientos_contables_crud/v1/',
+  MOVIMIENTOS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/movimientos_contables_mid/v1/',
   TOKEN: {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
     CLIENTE_ID: 'e36v1MPQk2jbz9KM4SmKhk8Cyw0a',

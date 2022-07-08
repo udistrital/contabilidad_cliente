@@ -1,0 +1,59 @@
+.accounting-tree {
+  table {
+    tr {
+      &.selected,
+      &.selected:hover {
+        background-color: lightblue;
+      }
+
+      &:hover {
+        background: #e6e6e6;
+      }
+
+      .movimientos-action {
+        cursor: pointer;
+        color: #3f51b5;
+        nb-icon {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .search-label {
+    display: block;
+  }
+
+  .search-input {
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (min-width: 400px) {
+
+    .nb-column-name,
+    .nb-column-size {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+
+    .nb-column-name,
+    .nb-column-size,
+    .nb-column-kind {
+      width: 33.333%;
+    }
+  }
+
+  @media screen and (min-width: 600px) {
+    .nb-column-name {
+      width: 31%;
+    }
+
+    .nb-column-size,
+    .nb-column-kind,
+    .nb-column-items {
+      width: 23%;
+    }
+  }
+}

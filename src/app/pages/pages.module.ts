@@ -22,7 +22,7 @@ import { MatStepperModule } from '@angular/material';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
-import { PagesRoutingModule } from './pages-routing.module';
+import { entityResolvers, PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { ConfiguracionService } from '../@core/data/configuracion.service';
 import { MenuService } from '../@core/data/menu.service';
@@ -31,7 +31,7 @@ import { NbIconModule } from '@nebular/theme';
 import { ListTipoComprobanteComponent } from './comprobantes/list-tipo-comprobante/list-tipo-comprobante.component';
 import { ListComprobanteComponent } from './comprobantes/list-comprobante/list-comprobante.component';
 import { ParametrosComprobanteComponent } from './comprobantes/parametros-comprobante/parametros-comprobante.component';
-import { ArbolCuentasContablesComponent, FsIconAComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
+import { ArbolCuentasContablesComponent } from './arbol-cuentas-contables/arbol-cuentas-contables.component';
 import { ConceptosComponent } from './conceptos/conceptos.component';
 import { WizardComponent } from './conceptos/wizard/wizard.component';
 import { CuentasContablesComponent } from './conceptos/cuentas-contables/cuentas-contables.component';
@@ -42,6 +42,14 @@ import { ProvisionesComponent } from './provisiones/provisiones.component';
 import { ConciliacionesComponent } from './conciliaciones/conciliaciones.component';
 import { RegistroNominaComponent } from './registro-nomina/registro-nomina.component';
 import { InformesContablesComponent } from './informes-contables/informes-contables.component';
+import { CuentaContableComponent } from './arbol-cuentas-contables/cuenta-contable/cuenta-contable.component';
+import { ArbolContableComponent } from './arbol-cuentas-contables/arbol-contable/arbol-contable.component';
+import { FloatMenuComponent } from './arbol-cuentas-contables/float-menu/float-menu.component';
+import { SelectorContableComponent } from './arbol-cuentas-contables/selector-contable/selector-contable.component';
+import { MovimientosCuentaComponent } from './arbol-cuentas-contables/movimientos-cuenta/movimientos-cuenta.component';
+import { CustomRendererComponent } from './arbol-cuentas-contables/CustomRendererComponent';
+import { DetalleTransaccionComponent } from './arbol-cuentas-contables/detalle-transaccion/detalle-transaccion.component';
+import { CustomComprobanteComponent } from './arbol-cuentas-contables/CustomComprobanteComponent';
 
 
 const MODULES = [
@@ -79,7 +87,6 @@ const COMPONENTS = [
     ListComprobanteComponent,
     ParametrosComprobanteComponent,
     ArbolCuentasContablesComponent,
-    FsIconAComponent,
     ConceptosComponent,
     WizardComponent,
     CuentasContablesComponent,
@@ -87,12 +94,23 @@ const COMPONENTS = [
     EditModalComponent,
     ProvisionesComponent,
     ConciliacionesComponent,
+    CuentaContableComponent,
+    ArbolContableComponent,
+    CuentasContablesComponent,
+    CustomRendererComponent,
+    DetalleTransaccionComponent,
+    CustomComprobanteComponent,
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
     ListComprobanteComponent,
     CuentasContablesComponent,
-    EditModalComponent
+    EditModalComponent,
+    CuentaContableComponent,
+    MovimientosCuentaComponent,
+    CustomRendererComponent,
+    DetalleTransaccionComponent,
+    CustomComprobanteComponent,
 ];
 const SERVICES = [
     ConfiguracionService,
@@ -108,13 +126,13 @@ const SERVICES = [
     TableComponent,
     RegistroNominaComponent,
     InformesContablesComponent,
-
-
-
-
+    FloatMenuComponent,
+    SelectorContableComponent,
+    MovimientosCuentaComponent,
   ],
   providers: [
     ...SERVICES,
+    entityResolvers
   ],
   entryComponents: [
     ...ENTRY_COMPONENTS,

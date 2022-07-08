@@ -77,6 +77,12 @@ import { CdkTreeModule } from '@angular/cdk/tree';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
+import { appEffects, REDUCER_TOKEN } from './@core/_store';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -166,6 +172,17 @@ export class MaterialModule {}
         deps: [HttpClient],
       },
     }),
+    StoreModule.forRoot(REDUCER_TOKEN),
+    StoreRouterConnectingModule.forRoot(),
+    ...(environment.production
+      ? []
+      : [
+          StoreDevtoolsModule.instrument({
+            name: 'CRUD Application',
+            logOnly: environment.production
+          })
+        ]),
+    EffectsModule.forRoot([...appEffects])
   ],
   bootstrap: [AppComponent],
   providers: [ImplicitAutenticationService,

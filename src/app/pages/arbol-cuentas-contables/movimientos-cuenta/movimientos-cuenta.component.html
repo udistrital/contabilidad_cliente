@@ -1,0 +1,18 @@
+<nb-card accent="warning" status="warning">
+    <nb-card-header class="modal-header">
+        <h5 class="modal-title">{{ "CUENTAS_CONTABLES.movimientos_cuenta_contable" | translate }}</h5>
+        <button type="button" mat-button [mat-dialog-close] class="close"  aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </nb-card-header>
+    <nb-card-body>
+        <h5>{{data.Codigo}} {{data.Nombre}}</h5>
+        <ng2-smart-table [settings]="listSettings" [source]="source" (custom)="openDialog($event)" [ngClass]="{'tercero-display': tercerohidden}">
+        </ng2-smart-table>
+    </nb-card-body>
+    <nb-card-footer class="modal-footer">
+        <button mat-button [mat-dialog-close] class="btn btn-primary" cdkFocusInitial>
+            {{ "CUENTAS_CONTABLES.form_confirmar" | translate }}
+        </button>
+    </nb-card-footer>
+</nb-card>
