@@ -30,7 +30,7 @@ export const initialState: State = adapter.getInitialState({
 const _reducer = createReducer(
   initialState,
   on(fromCuentaActions.loadCuentasSuccess, (state, { data }) => {
-    if (!data) data = []
+    if (!data) data = [];
     return adapter.addMany(data, {
       ...state,
       loaded: true
