@@ -45,7 +45,6 @@ export class ArbolHelper {
             this.pUpManager.showErrorAlert('No se pudo consultar la informacion del arbol');
             return undefined;
           }
-
           return res;
         },
       ),
