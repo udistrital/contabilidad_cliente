@@ -7,6 +7,7 @@ import { ImplicitAutenticationService } from './../@core/utils/implicit_autentic
 import { environment } from '../../environments/environment';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { ConfiguracionService } from '../@core/data/configuracion.service';
 
 @Component({
   selector: 'ngx-pages',
@@ -36,7 +37,8 @@ export class PagesComponent implements OnInit {
   constructor(
     public  menuws: MenuService,
     private translate: TranslateService,
-    private autenticacion: ImplicitAutenticationService
+    private autenticacion: ImplicitAutenticationService,
+    private configuracion: ConfiguracionService,
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class PagesComponent implements OnInit {
           this.dataMenu = <any>data;
           this.mapMenuByObjects(this.dataMenu);
           this.translateMenu();
+          this.configuracion.setAcciones(data);
         },
         (error: HttpErrorResponse) => {
           Swal.fire({
