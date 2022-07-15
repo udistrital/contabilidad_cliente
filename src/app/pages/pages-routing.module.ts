@@ -1,3 +1,4 @@
+import { HomeComponent } from './miscellaneous/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -18,17 +19,16 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: '',
+        component: HomeComponent
+      },
+      {
         path: 'tipos_comprobante',
         component: ListTipoComprobanteComponent
       },
       {
         path: 'comprobantes',
         component: ListComprobanteComponent
-      },
-      {
-        path: '',
-        redirectTo: 'tipos_comprobante',
-        pathMatch: 'full'
       },
       {
         path: 'arbol_cuentas_contables',
