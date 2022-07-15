@@ -50,6 +50,7 @@ import { MovimientosCuentaComponent } from './arbol-cuentas-contables/movimiento
 import { CustomRendererComponent } from './arbol-cuentas-contables/CustomRendererComponent';
 import { DetalleTransaccionComponent } from './arbol-cuentas-contables/detalle-transaccion/detalle-transaccion.component';
 import { CustomComprobanteComponent } from './arbol-cuentas-contables/CustomComprobanteComponent';
+import { HomeComponent } from './miscellaneous/home/home.component';
 
 
 const MODULES = [
@@ -100,6 +101,7 @@ const COMPONENTS = [
     CustomRendererComponent,
     DetalleTransaccionComponent,
     CustomComprobanteComponent,
+    HomeComponent
 ];
 const ENTRY_COMPONENTS = [
     ListTipoComprobanteComponent,
