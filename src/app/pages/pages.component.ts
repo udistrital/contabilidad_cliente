@@ -7,6 +7,7 @@ import { ImplicitAutenticationService } from './../@core/utils/implicit_autentic
 import { environment } from '../../environments/environment';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { ConfiguracionService, TipoOpcion } from '../@core/data/configuracion.service';
 
 @Component({
   selector: 'ngx-pages',
@@ -36,7 +37,8 @@ export class PagesComponent implements OnInit {
   constructor(
     public  menuws: MenuService,
     private translate: TranslateService,
-    private autenticacion: ImplicitAutenticationService
+    private autenticacion: ImplicitAutenticationService,
+    private configuracion: ConfiguracionService,
   ) { }
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class PagesComponent implements OnInit {
           this.dataMenu = <any>data;
           this.mapMenuByObjects(this.dataMenu);
           this.translateMenu();
+          this.configuracion.setAcciones(data);
         },
         (error: HttpErrorResponse) => {
           Swal.fire({
@@ -77,16 +80,18 @@ export class PagesComponent implements OnInit {
    */
   mapMenuByObjects(menuArray) {
     menuArray.map(itemMenu => {
-      const urlNested = this.replaceUrlNested(itemMenu.Url);
-      this.object   = {
-        title: itemMenu.Nombre,
-        icon:  'file-text',
-        link:  `${urlNested}`,
-        home:  true,
-        key:   itemMenu.Nombre,
-        children: this.mapMenuChildrenObject(itemMenu.Opciones)
-      };
-      this.menu.push(this.object);
+      if (itemMenu.TipoOpcion === TipoOpcion.Menu) {
+        const urlNested = this.replaceUrlNested(itemMenu.Url);
+        this.object   = {
+          title: itemMenu.Nombre,
+          icon:  'file-text',
+          link:  `${urlNested}`,
+          home:  true,
+          key:   itemMenu.Nombre,
+          children: this.mapMenuChildrenObject(itemMenu.Opciones)
+        };
+        this.menu.push(this.object);
+      }
     });
   }
 
@@ -98,18 +103,20 @@ export class PagesComponent implements OnInit {
     if (opcionesMenu) {
       const submenu = [];
       opcionesMenu.map(itemChild => {
-        const urlNested = this.replaceUrlNested(itemChild.Url);
-        this.object = {
-          title: itemChild.Nombre,
-          icon:  '',
-          link:  `${urlNested}`,
-          home:  false,
-          key:   itemChild.Nombre,
-          children: this.mapMenuChildrenObject(itemChild.Opciones)
-        };
-        submenu.push(this.object);
+        if (itemChild.TipoOpcion === TipoOpcion.Menu) {
+          const urlNested = this.replaceUrlNested(itemChild.Url);
+          this.object = {
+            title: itemChild.Nombre,
+            icon:  '',
+            link:  `${urlNested}`,
+            home:  false,
+            key:   itemChild.Nombre,
+            children: this.mapMenuChildrenObject(itemChild.Opciones)
+          };
+          submenu.push(this.object);
+        }
       });
-      return submenu;
+      return submenu.length > 0 ? submenu : null;
     }
   }
 

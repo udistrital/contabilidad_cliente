@@ -83,6 +83,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ConfiguracionService } from './@core/data/configuracion.service';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -185,7 +186,7 @@ export class MaterialModule {}
     EffectsModule.forRoot([...appEffects])
   ],
   bootstrap: [AppComponent],
-  providers: [ImplicitAutenticationService,
+  providers: [ImplicitAutenticationService, ConfiguracionService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
