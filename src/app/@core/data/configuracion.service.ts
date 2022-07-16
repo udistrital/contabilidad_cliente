@@ -10,7 +10,7 @@ const httpOptions = {
 
 const path = environment.CONFIGURACION_SERVICE;
 
-enum TipoOpcion {
+export enum TipoOpcion {
   Menu = 'Menú',
   Accion = 'Acción',
   Boton = 'Botón',
@@ -43,7 +43,7 @@ export class ConfiguracionService {
     }
 
     findRoute(any: Partial<any>[], option: string) {
-      return any.find(opt => (opt.TipoOpcion === TipoOpcion.Menu && opt.Url === option) ||
+      return any.find(opt => ((opt.TipoOpcion === TipoOpcion.Menu || opt.TipoOpcion === TipoOpcion.Accion) && opt.Url === option) ||
         (opt.Opciones && opt.Opciones.length && this.findRoute(opt.Opciones, option)));
     }
 
