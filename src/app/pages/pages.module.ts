@@ -115,7 +115,6 @@ const ENTRY_COMPONENTS = [
     CustomComprobanteComponent,
 ];
 const SERVICES = [
-    ConfiguracionService,
     MenuService,
 ];
 

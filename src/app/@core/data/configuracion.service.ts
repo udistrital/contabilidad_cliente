@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { throwError, Subject } from 'rxjs';
 
 import { environment } from './../../../environments/environment';
 const httpOptions = {
@@ -10,12 +10,48 @@ const httpOptions = {
 
 const path = environment.CONFIGURACION_SERVICE;
 
+export enum TipoOpcion {
+  Menu = 'Menú',
+  Accion = 'Acción',
+  Boton = 'Botón',
+}
 
 @Injectable()
 export class ConfiguracionService {
 
+    private configuraciones: any[];
+    private $conf: Subject<Partial<any>[]>;
+
     constructor(private http: HttpClient) {
+      this.configuraciones = [];
+      this.$conf = new Subject<Partial<any>[]>();
     }
+
+    getConfig() {
+      return this.$conf.asObservable();
+    }
+
+    setAcciones(configuraciones: any) {
+      this.configuraciones = configuraciones;
+    }
+    getAccion(accion: string): any {
+      return this.findAccion(this.configuraciones, accion);
+    }
+
+    getRoute(accion: string): any {
+      return this.findRoute(this.configuraciones, accion);
+    }
+
+    findRoute(any: Partial<any>[], option: string) {
+      return any.find(opt => ((opt.TipoOpcion === TipoOpcion.Menu || opt.TipoOpcion === TipoOpcion.Accion) && opt.Url === option) ||
+        (opt.Opciones && opt.Opciones.length && this.findRoute(opt.Opciones, option)));
+    }
+
+    findAccion(any: Partial<any>[], option: string) {
+      return any.find(opt => (opt.TipoOpcion === TipoOpcion.Accion && opt.Nombre === option) ||
+        (opt.Opciones && opt.Opciones.length && this.findAccion(opt.Opciones, option)));
+    }
+
     get(endpoint) {
       return this.http.get(path + endpoint, httpOptions).pipe(
         catchError(this.handleError),
